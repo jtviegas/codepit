@@ -1,0 +1,38 @@
+/*
+ * Module feature styles
+*/
+.quotes_form {
+	width: 275px;
+	border: 5px 5px 5px 5px;
+	border-style: none;
+}
+
+.quoteTable {
+	border-style: solid;
+	border-radius: 5px 5px 5px 5px;
+	border-width: 1px;
+	border-color: grey;
+}
+
+.quoteEntry {
+	font: 13px 'Trebuchet MS', Verdana, Helvetica, Arial, sans-serif;
+}
+
+.quoteEntry>dd {
+	font-style: italic
+}
+
+#x {
+	cursor: pointer;
+	font-weight: 800;
+	color: red;
+	display: inline;
+}
+
+.verifyMessage {
+	color: red;
+	display: none;
+}
+.notShown {
+	display: none;
+}
