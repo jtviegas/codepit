@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Untitled Gantt Project" company="" webLink="http://" view-date="2008-06-18" view-index="0" gantt-divider-location="566" resource-divider-location="301" version="2.0">
+    <description/>
+    <view zooming-state="default:2" id="gantt-chart"/>
+    <view id="resource-table">
+        <field id="0" name="Name" width="55" order="0"/>
+        <field id="1" name="Default role" width="44" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <calendar id="1" name="default">
+                <default-week sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+                <overriden-day-types/>
+                <days/>
+            </calendar>
+        </day-types>
+    </calendars>
+    <tasks color="#8cb6ce">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" name="issues" color="#8cb6ce" meeting="false" start="2008-03-31" duration="72" complete="33" priority="1" expand="true">
+            <task id="118" name="general" color="#8cb6ce" meeting="false" start="2008-03-31" duration="72" complete="12" priority="1" expand="true">
+                <task id="16" name="diff das resources R2" color="#8cb6ce" meeting="false" start="2008-04-16" duration="1" complete="0" priority="1" expand="true"/>
+                <task id="135" name="MMORG - BUG @ message rejection panel no edit" color="#8cb6ce" meeting="false" start="2008-07-08" duration="1" complete="0" priority="1" expand="true"/>
+                <task id="134" name="MMROLE - remover DefaultManagementAuthorisation Section" color="#8cb6ce" meeting="false" start="2008-07-07" duration="1" complete="0" priority="1" expand="true"/>
+                <task id="132" name="TACTConnector-criação de routing descriptors" color="#8cb6ce" meeting="false" start="2008-07-07" duration="1" complete="0" priority="1" expand="true"/>
+                <task id="131" name="alteração em mmrouting" color="#8cb6ce" meeting="false" start="2008-07-01" duration="6" complete="0" priority="1" expand="true"/>
+                <task id="130" name="MMUSR" color="#8cb6ce" meeting="false" start="2008-06-27" duration="1" complete="100" priority="1" expand="true">
+                    <notes><![CDATA[- alteração em MMUsrManagementPanel - feito em R1 e R2
+-alteração para que as acções de user de outro site, em local management não estivessem disponíveis.]]></notes>
+                </task>
+                <task id="127" name="MMDSIC - scope carrega o default na 2ª iteracção" color="#8cb6ce" meeting="false" start="2008-06-26" duration="1" complete="75" priority="1" expand="true">
+                    <notes><![CDATA[É preciso testar com o Nuno
+- o servidor de mensagens grava mal a lista de scope pois eu envio um xml com mais de um elemento e quando o peço a distribuição recebo sempre uma scope list com um elemento]]></notes>
+                </task>
+                <task id="126" name="MMUSER - não aparece site de outros local managers" color="#8cb6ce" meeting="false" start="2008-05-27" duration="1" complete="0" priority="1" expand="true"/>
+                <task id="125" name="implementar icone de certificado revogado nas tabelas de certificados" color="#8cb6ce" meeting="false" start="2008-06-30" duration="1" complete="75" priority="1" expand="true">
+                    <notes><![CDATA[há um método no manager para verificar o estado do certificado, e está já também definido um ícone, tem de se implementar em todas as certificateTables.
+
+30-06-2008 - 0:00:00
+já está implementado em R1
+falta em R2, pois depende aainda da disponibilização
+de método em PKITools no R2]]></notes>
+                </task>
+                <task id="22" name="validação de dn nos orgs, roles e users(fazer depois para todos)" color="#8cb6ce" meeting="false" start="2008-04-16" duration="1" complete="0" priority="1" expand="true"/>
+                <task id="45" name="261 - EditUser TOCHECK" color="#8cb6ce" meeting="false" start="2008-06-10" duration="1" complete="0" priority="1" expand="true">
+                    <notes><![CDATA[Quando se abre a interface de edição a check box "Account is disabled" está com a cor normalmente associada a não permitir edição. Penso que deveria estar a preto para não originar enganos.]]></notes>
+                </task>
+                <task id="3" name="alteração mmfvmoncontroller" color="#8cb6ce" meeting="false" start="2008-04-16" duration="1" complete="0" priority="1" expand="true">
+                    <notes><![CDATA[para que receba o management mode do contexto com a key ContextKeys.Management_Mode_Object]]></notes>
+                </task>
+                <task id="43" name="301 - Menus como ambiente windows" color="#8cb6ce" meeting="false" start="2008-05-19" duration="1" complete="0" priority="1" expand="true"/>
+                <task id="44" name="35 - customize context menus" color="#8cb6ce" meeting="false" start="2008-05-19" duration="1" complete="0" priority="1" expand="true">
+                    <notes><![CDATA[As labels Edit, Remove e Copy da entidade seleccionada não devem ter mais sufixo algum; A opção New deverá ter um segundo nível com o tipo de entidades possíveis de criar; A opção Edit deve ser a primeira a aparecer para todas as entidades e seguida de separador. Depois também as opções de new, copy e remove devem aparecer noutro separador.]]></notes>
+                </task>
+                <task id="46" name="275 - Edit User" color="#8cb6ce" meeting="false" start="2008-03-31" duration="1" complete="0" priority="1" expand="true">
+                    <notes><![CDATA[Não me parece ter sentido que a interface para configurar clearances abra quando o user já tem todas as possíveis definidas. No mínimo se abrir o botão de OK deveria estar disabled.]]></notes>
+                </task>
+                <task id="47" name="70 - Release Authorities" color="#8cb6ce" meeting="false" start="2008-03-31" duration="1" complete="0" priority="1" expand="true">
+                    <notes><![CDATA[Os certificados de assinatura do utilizador não estão a ser publicados nas entradas de release authorities.]]></notes>
+                </task>
+                <task id="52" name="385 - acpgw" color="#8cb6ce" meeting="false" start="2008-03-31" duration="1" complete="0" priority="1" expand="true">
+                    <notes><![CDATA[resolver o workaround feito para que o Update All gateways  funcione com a mesma function mapping do update gateway configuration]]></notes>
+                </task>
+                <task id="49" name="167 - logical rules" color="#8cb6ce" meeting="false" start="2008-03-31" duration="1" complete="0" priority="1" expand="true">
+                    <notes><![CDATA[Criar uma pequena moldura entre o MM base interno e o MM de distributição de regras lógicas.]]></notes>
+                </task>
+                <task id="50" name="291 - dist.sic rules" color="#8cb6ce" meeting="false" start="2008-03-31" duration="1" complete="0" priority="1" expand="true">
+                    <notes><![CDATA[Penso que deveria ser possivel seleccionar e incluir mútiplos roles numa operação.]]></notes>
+                </task>
+                <task id="123" name="corecção nos password validators" color="#8cb6ce" meeting="false" start="2008-06-20" duration="1" complete="100" priority="1" expand="true">
+                    <notes><![CDATA[em  R1 & R2
+musrgeneralpanel
+pkcs11panel
+pkcs12panel]]></notes>
+                </task>
+                <task id="133" name="RoutingDescriptorDirEntry - update no dirc por causa do atributo targetRadioArea" color="#8cb6ce" meeting="false" start="2008-06-18" duration="1" complete="0" priority="1" expand="true"/>
+            </task>
+            <task id="100" name="R2" color="#8cb6ce" meeting="false" start="2008-04-16" duration="51" complete="65" priority="1" expand="true">
+                <task id="120" name="MgmAC" color="#8cb6ce" meeting="false" start="2008-06-05" duration="1" complete="100" priority="1" expand="true">
+                    <notes><![CDATA[#terminar implementação]]></notes>
+                </task>
+                <task id="138" name="MMDSIC - esconder scopes" color="#8cb6ce" meeting="false" start="2008-06-18" duration="1" complete="0" priority="1" expand="true"/>
+                <task id="139" name="MMROLE - remover Default Manag. Authorisations" color="#8cb6ce" meeting="false" start="2008-06-18" duration="1" complete="0" priority="1" expand="true"/>
+                <task id="137" name="RoutingDescriptorDirEntry" color="#8cb6ce" meeting="false" start="2008-06-18" duration="1" complete="0" priority="1" expand="true">
+                    <notes><![CDATA[adicionar atributo mmhsTargetRadioArea no LDAPDataTypeConversions]]></notes>
+                </task>
+                <task id="128" name="TactC" color="#8cb6ce" meeting="false" start="2008-06-20" duration="4" complete="90" priority="1" expand="true">
+                    <notes><![CDATA[- ver do ACPChangeManager nas operações do módulo
+- finalizar a implementação da lista de Multicast addresses]]></notes>
+                </task>
+                <task id="122" name="LockManager" color="#8cb6ce" meeting="false" start="2008-06-12" duration="1" complete="80" priority="1" expand="true">
+                    <notes><![CDATA[#como é a construção do LockManager		done
+#como é o tratamento de erros dos unlocks no lockManager	email enviado ao Paulo Ribeiro]]></notes>
+                </task>
+                <task id="121" name="Alteração ConnectorsManager e MgmAC" color="#8cb6ce" meeting="false" start="2008-06-12" duration="1" complete="100" priority="1" expand="true">
+                    <notes><![CDATA[MgmAC implementado de forma igual ao MsgSC]]></notes>
+                </task>
+                <task id="101" name="mmusr" color="#8cb6ce" meeting="false" start="2008-06-06" duration="1" complete="100" priority="1" expand="true">
+                    <notes><![CDATA[alterações devido a bug em local management:
+	ManagementProfile	done
+	MMUsrMessagingRolesPanel	done
+	MMUsrMessagingUserPanel	done
+	MMUsrManagementPanel	done
+	MMUsrTabbedPane	done
+	MMUsrGeneralPanel	done
+	MMUsrClearancesPanel	done
+	MMUsrCertificatesPanel	done
+	MMUSRCTRL		done]]></notes>
+                </task>
+                <task id="113" name="mmrole" color="#8cb6ce" meeting="false" start="2008-06-06" duration="1" complete="100" priority="1" expand="true">
+                    <notes><![CDATA[#cannot remove a role which is alternate role in a organisation
+
+   changes:
+	mmrolectrl
+   added:
+	DeleteOrganisationAlternateRoleException
+	DeleteRoleAction]]></notes>
+                </task>
+                <task id="112" name="mmal" color="#8cb6ce" meeting="false" start="2008-05-06" duration="1" complete="100" priority="1" expand="true">
+                    <notes><![CDATA[#selector de orgs(ext e int) para addresslist members, só quando estão enabled
+   alterações:
+	MMALGUI
+   criação:
+	MembersBrowserTrialStrategy]]></notes>
+                </task>
+                <task id="111" name="mmrouting" color="#8cb6ce" meeting="false" start="2008-06-11" duration="1" complete="100" priority="1" expand="true">
+                    <notes><![CDATA[#questão do selector de gateways shore-shore:
+   criação:
+	DirBrowserEntryTrialStrategy		done
+	package des.extended		done
+	ExtendedDes			done
+	ExtendedDesPanel		done
+   alterações em:
+	Des			done
+	DesPanel			done
+	DirBrowser			done
+	MMFVROUTCircuitsShorePanel		done
+	SiteType			done
+	GatewayOperationMode		done
+	LDAPDirectory			done	
+	DirC			done
+	DirCInterface			done]]></notes>
+                </task>
+                <task id="110" name="UpdateAllGWAction" color="#0099ff" meeting="false" start="2008-06-11" duration="1" complete="100" priority="1" expand="true">
+                    <notes><![CDATA[#na lista do dialog notifier começar com um icone vazio e passar depois para o icone de 'visto' ou 'x']]></notes>
+                </task>
+                <task id="108" name="monitoring" color="#8cb6ce" meeting="false" start="2008-05-06" duration="1" complete="0" priority="1" expand="true">
+                    <notes><![CDATA[#por swingworker na ida ao servidor]]></notes>
+                </task>
+                <task id="107" name="console" color="#8cb6ce" meeting="false" start="2008-06-11" duration="1" complete="100" priority="1" expand="true">
+                    <notes><![CDATA[#4 novos help menu items
+#alterar o caption da console e do logindialog para que tenha central/local management]]></notes>
+                </task>
+                <task id="102" name="mmspif" color="#8cb6ce" meeting="false" start="2008-05-06" duration="28" complete="100" priority="1" expand="false">
+                    <task id="103" name="tab classif. NATO" color="#8cb6ce" meeting="false" start="2008-05-06" duration="1" complete="100" priority="1" expand="true">
+                        <notes><![CDATA[na tab classifications da spif NATO deverá permitir a edição das cores.
+checkar o hasChanges.]]></notes>
+                    </task>
+                    <task id="104" name="security Categories" color="#8cb6ce" meeting="false" start="2008-06-12" duration="1" complete="100" priority="1" expand="true">
+                        <notes><![CDATA[validação do mark e designator textfields e do applybutton
+   alterações:
+
+	SecurityCategoryMarkDocument
+	SpifCategoryPanel
+	PKIPanel
+	mmsys...tabbedPane]]></notes>
+                    </task>
+                </task>
+                <task id="105" name="mmorg" color="#8cb6ce" meeting="false" start="2008-05-06" duration="1" complete="0" priority="1" expand="true">
+                    <notes><![CDATA[#Na criação o enabled checkbox deve estar disabled e não seleccionado.
+#não se deve tirar o alternate role quando a org está enabled
+
+   changes :
+	MMORGGUI]]></notes>
+                </task>
+                <task id="106" name="mmarea" color="#8cb6ce" meeting="false" start="2008-05-06" duration="1" complete="0" priority="1" expand="true">
+                    <notes><![CDATA[#quando existe um ri associado a uma radio area a sequencia de update deve ser
+	-criar um novo rigroup
+	-alterar o routing de forma a apontar para o novo ri
+	-remover o antigo rigroup
+
+#por validator na textfield do ri(RIValidator)
+#alterar label de ri do plural para singular
+
+   changes:
+	MMAREAGUI]]></notes>
+                </task>
+                <task id="109" name="JXBusyLabel" color="#8cb6ce" meeting="false" start="2008-05-06" duration="1" complete="0" priority="1" expand="true">
+                    <notes><![CDATA[#utilizar o construtor com Dimension()]]></notes>
+                </task>
+                <task id="71" name="11 - DES com SplitterPane" color="#8cb6ce" meeting="false" start="2008-05-19" duration="1" complete="0" priority="1" expand="false"/>
+                <task id="37" name="issues R2-alteração ao Routing Indicator no MMAREA" color="#8cb6ce" meeting="false" start="2008-04-30" duration="1" complete="95" priority="1" expand="true">
+                    <notes><![CDATA[30-04-2008 - 10:39:00
+done but must be tested.]]></notes>
+                </task>
+                <task id="6" name="R2-checkar clones dos DirEntries" color="#8cb6ce" meeting="false" start="2008-04-16" duration="1" complete="0" priority="1" expand="true"/>
+                <task id="5" name="R2-mensagens para excepções dos controllers" color="#8cb6ce" meeting="false" start="2008-04-16" duration="1" complete="0" priority="1" expand="true"/>
+                <task id="4" name="R2-rever queryChanges do mmdsic" color="#8cb6ce" meeting="false" start="2008-04-16" duration="1" complete="0" priority="1" expand="true"/>
+                <task id="78" name="DirC - globalSystemDirEntry" color="#8cb6ce" meeting="false" start="2008-04-21" duration="1" complete="0" priority="1" expand="false">
+                    <notes><![CDATA[Implementer em DirC.getSystemAdminDirEntry,
+o read e write dos atributos de 
+GlobalSystemDirEntry
+
+private Integer organisationKeysRenewalProximity;
+private Integer userKeysRenewalProximity;
+private Integer certificationAuthKeysRenewalProximity;
+private Integer organisationKeysRenewalProximityFraction;
+private Integer userKeysRenewalProximityFraction;
+private Integer certificationAuthKeysRenewalProximityFraction;]]></notes>
+                </task>
+                <task id="21" name="R2-ver botões import e delete certificados no mmorggui" color="#8cb6ce" meeting="false" start="2008-04-16" duration="1" complete="0" priority="1" expand="true"/>
+                <task id="17" name="R2 - estender o MenuBarAreaManInterface e Impl com método AddStaticAction(usa-la no exit action)" color="#8cb6ce" meeting="false" start="2008-04-16" duration="1" complete="0" priority="1" expand="true"/>
+                <task id="27" name="R2-rever mensagem depois da criação/edição do MMARCH" color="#8cb6ce" meeting="false" start="2008-04-16" duration="1" complete="0" priority="1" expand="true"/>
+                <task id="79" name="DES - questão do último nó expandido" color="#8cb6ce" meeting="false" start="2008-05-19" duration="1" complete="0" priority="1" expand="true">
+                    <notes><![CDATA[o 2º nivel de qualquer DES apresenta-se na criação sempre com o último nó expandido]]></notes>
+                </task>
+                <task id="95" name="MMConfigurationDialogLauncher .backgroundMethod() - uncomment" color="#8cb6ce" meeting="false" start="2008-04-21" duration="1" complete="0" priority="1" expand="true">
+                    <notes><![CDATA[must uncomment
+session.lockFunction()]]></notes>
+                </task>
+                <task id="83" name="RenewUserCertificatesAction" color="#8cb6ce" meeting="false" start="2008-05-06" duration="1" complete="80" priority="1" expand="true">
+                    <notes><![CDATA[06-05-2008 - 17:07
+falta descomentar chamada ao MgmCPkiManager
+e testar]]></notes>
+                </task>
+                <task id="86" name="Listener do MgmCPKIManager doing statusbar update" color="#8cb6ce" meeting="false" start="2008-04-17" duration="1" complete="0" priority="1" expand="false"/>
+                <task id="38" name="rever métodos KeysRenewalFraction" color="#8cb6ce" meeting="false" start="2008-04-28" duration="1" complete="0" priority="1" expand="true">
+                    <notes><![CDATA[LDAPDataTypeConversions.getSystemAdminDirEntryAttributes
+e em MCLDirectory
+getUserKeysRenewwalTime, ...]]></notes>
+                </task>
+                <task id="124" name="erro no popup menu &quot;NewUser&quot; apos criar user" color="#8cb6ce" meeting="false" start="2008-05-27" duration="1" complete="0" priority="1" expand="true"/>
+            </task>
+            <task id="55" name="R1" color="#8cb6ce" meeting="false" start="2008-04-21" duration="21" complete="33" priority="1" expand="true">
+                <task id="57" name="11 - DES com SplitterPane" color="#8cb6ce" meeting="false" start="2008-05-19" duration="1" complete="0" priority="1" expand="false"/>
+                <task id="76" name="DirC - globalSystemDirEntry" color="#8cb6ce" meeting="false" start="2008-04-21" duration="1" complete="0" priority="1" expand="true">
+                    <notes><![CDATA[Implementer em DirC.getSystemAdminDirEntry,
+o read e write dos atributos de 
+GlobalSystemDirEntry
+
+private Integer organisationKeysRenewalProximity;
+private Integer userKeysRenewalProximity;
+private Integer certificationAuthKeysRenewalProximity;
+private Integer organisationKeysRenewalProximityFraction;
+private Integer userKeysRenewalProximityFraction;
+private Integer certificationAuthKeysRenewalProximityFraction;]]></notes>
+                </task>
+            </task>
+        </task>
+        <task id="91" name="DONE" color="#8cb6ce" meeting="false" start="2008-03-27" duration="43" complete="83" priority="1" expand="true">
+            <task id="114" name="R2" color="#8cb6ce" meeting="false" start="2008-04-24" duration="10" complete="0" priority="1" expand="false">
+                <task id="88" name="issues R2-BUGS-refresh browser state não carrega módulo" color="#8cb6ce" meeting="false" start="2008-05-07" duration="1" complete="100" priority="1" expand="true"/>
+                <task id="23" name="issues R2-implementar o botão EVLLogger" color="#8cb6ce" meeting="false" start="2008-04-29" duration="1" complete="100" priority="1" expand="true"/>
+                <task id="69" name="issues R2-implementar search Directory no R2" color="#8cb6ce" meeting="false" start="2008-04-30" duration="1" complete="100" priority="1" expand="false"/>
+                <task id="65" name="issues R2-generic CertificatesPanel" color="#8cb6ce" meeting="false" start="2008-04-24" duration="2" complete="100" priority="1" expand="false"/>
+                <task id="29" name="issues R2-implementar alteração do RoutingList para textfield no MMAREA" color="#8cb6ce" meeting="false" start="2008-04-30" duration="1" complete="100" priority="1" expand="true"/>
+                <task id="25" name="issues R2-método getSubTree no DirBrowser para o Carlos" color="#8cb6ce" meeting="false" start="2008-05-05" duration="1" complete="100" priority="1" expand="true"/>
+                <task id="26" name="issues R2-dummy tree node" color="#8cb6ce" meeting="false" start="2008-05-05" duration="1" complete="100" priority="1" expand="true"/>
+                <task id="20" name="issues R2-optimização do DirBrowser,DirBrowserTreeModel,DirBrowserTree,DirBrowserTreeNode" color="#8cb6ce" meeting="false" start="2008-04-30" duration="3" complete="100" priority="1" expand="true"/>
+                <task id="89" name="issues R2-implementar-Management Agent Application" color="#8cb6ce" meeting="false" start="2008-05-07" duration="1" complete="100" priority="1" expand="true"/>
+            </task>
+            <task id="115" name="R1" color="#8cb6ce" meeting="false" start="2008-05-06" duration="1" complete="0" priority="1" expand="true"/>
+            <task id="81" name="RenewUserCertificatesAction" color="#8cb6ce" meeting="false" start="2008-05-06" duration="1" complete="100" priority="1" expand="true">
+                <notes><![CDATA[06-05-2008 - 17:06
+
+falta testar]]></notes>
+            </task>
+            <task id="84" name="Listener do MgmCPKIManager doing statusbar update" color="#8cb6ce" meeting="false" start="2008-05-06" duration="1" complete="100" priority="1" expand="true">
+                <notes><![CDATA[06-05-2008 - 16:52
+falta testar]]></notes>
+            </task>
+            <task id="2" name="logging no chainprogress package" color="#8cb6ce" meeting="false" start="2008-04-29" duration="1" complete="100" priority="1" expand="true"/>
+            <task id="39" name="por logger no ACP127GWAction" color="#8cb6ce" meeting="false" start="2008-04-30" duration="1" complete="100" priority="1" expand="true"/>
+            <task id="35" name="Modal Operations Progress Manager" color="#8cb6ce" meeting="false" start="2008-04-28" duration="1" complete="100" priority="1" expand="true">
+                <notes><![CDATA[feito no R1
+29-04-2008 - 18:56:00
+passado para o R2]]></notes>
+            </task>
+            <task id="40" name="incluir o modal Operations Progress Manager no request certificate(button) do user" color="#8cb6ce" meeting="false" start="2008-04-29" duration="1" complete="100" priority="1" expand="true">
+                <notes><![CDATA[29-04-2008 - 0:00:00
+feito no R1
+29-04-2008 - 18:57:00
+não é necessário no R2, tem uma solução parecida.]]></notes>
+            </task>
+            <task id="19" name="59 - no mmuser a checkbox &quot;user must change pass..&quot; deve estar checked by default" color="#8cb6ce" meeting="false" start="2008-04-30" duration="1" complete="100" priority="1" expand="true"/>
+            <task id="41" name="incluir command dsacls ao criar user, loggando e prosseguindo se ocorrer excepção" color="#8cb6ce" meeting="false" start="2008-04-23" duration="1" complete="100" priority="1" expand="true">
+                <notes><![CDATA[29-04-2008 - 15:39:00
+commando a executar:
+dsacls <user_dn> /G <user@domain>:WP;userCertificate
+
+29-04-2008 - 16:33:00
+criado o método
+giveAdditionalSystemPrivileges(DirectoryName) em mmuserctrl a ser chamado no insert - só em R1
+
+29-04-2008 - 16:43:00
+done on R2 too!]]></notes>
+            </task>
+            <task id="13" name="406 - MMSYS - em PKI conf as textboxes não precisam de ser tão grandes" color="#8cb6ce" meeting="false" start="2008-05-05" duration="3" complete="100" priority="1" expand="true"/>
+            <task id="14" name="407 - MMSYS - em Security Policies a textbox de expiration date deve ser menor" color="#8cb6ce" meeting="false" start="2008-05-07" duration="1" complete="100" priority="1" expand="true"/>
+            <task id="11" name="BugTrack issue 447" color="#8cb6ce" meeting="false" start="2008-04-01" duration="1" complete="100" priority="1" expand="true"/>
+            <task id="10" name="BugTrack issue 445" color="#8cb6ce" meeting="false" start="2008-04-07" duration="2" complete="100" priority="1" expand="true"/>
+            <task id="9" name="BugTrack issue 442" color="#8cb6ce" meeting="false" start="2008-03-27" duration="3" complete="100" priority="1" expand="true"/>
+            <task id="92" name="R2 - implementar - MgmAConnector" color="#8cb6ce" meeting="false" start="2008-05-08" duration="1" complete="100" priority="1" expand="true"/>
+            <task id="24" name="R2-rightclick a mostrar popup e lançar thread para load de módulo" color="#8cb6ce" meeting="false" start="2008-05-09" duration="2" complete="100" priority="1" expand="true"/>
+            <task id="90" name="R2-Por module actions loading no guimanager" color="#8cb6ce" meeting="false" start="2008-05-08" duration="1" complete="100" priority="1" expand="true">
+                <depend id="24" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="51" name="355 - mmsys" color="#8cb6ce" meeting="false" start="2008-05-12" duration="1" complete="100" priority="1" expand="true">
+                <notes><![CDATA[scrollpane a funcionar mal
+
+12-05-2008 - 0:00:00
+não se verifica!]]></notes>
+            </task>
+            <task id="63" name="R1-Certificates panel on MsgS and ArchS" color="#8cb6ce" meeting="false" start="2008-04-28" duration="12" complete="100" priority="1" expand="false">
+                <notes><![CDATA[28-04-2008 - 14:50:00
+Falta em cada panel, ArchSCertificatesPanel e MsgSCertificatesPanel,
+implementar o ArchSCertificateEngine e o MsgSCertificateEngine, de forma a obter os certificates com resurso a um CertificateRequesterFactory.
+Falta também a leitura dos certificados por parte dos objectos dir entry.
+
+i.e.
+
+- Implementar os métodos :
+ArchSCInterface 
+public CertificateRequestState requestArchiveServerCertificate() throws ArchSConnectorException
+MsgSCinterface
+public CertificateRequestState requestMessageServerCertificate() throws MsgSConnectorException
+
+14-05-2008 - 0:00:00
+implementadas as novas operações de request certificates no msgSC  e archSC.]]></notes>
+            </task>
+            <task id="61" name="R2- Certificates panel on MsgS and ArchS" color="#8cb6ce" meeting="false" start="2008-04-28" duration="12" complete="100" priority="1" expand="false">
+                <notes><![CDATA[28-04-2008 - 14:50:00
+Falta em cada panel, ArchSCertificatesPanel e MsgSCertificatesPanel,
+implementar o ArchSCertificateEngine e o MsgSCertificateEngine, de forma a obter os certificates com resurso a um CertificateRequesterFactory.
+Falta também a leitura dos certificados por parte dos objectos dir entry.
+
+
+i.e.
+
+- Implementar os métodos :
+ArchSCInterface 
+public CertificateRequestState requestArchiveServerCertificate() throws ArchSConnectorException
+MsgSCinterface
+public CertificateRequestState requestMessageServerCertificate() throws MsgSConnectorException
+
+
+14-05-2008 - 0:00:00
+implementadas as novas operações de request certificates no msgSC  e archSC.]]></notes>
+            </task>
+            <task id="67" name="R1 - generic CertificatesPanel" color="#8cb6ce" meeting="false" start="2008-04-24" duration="2" complete="100" priority="1" expand="false"/>
+            <task id="96" name="Routing-watch list only available when not ShoreStation Site" color="#8cb6ce" meeting="false" start="2008-05-15" duration="1" complete="100" priority="1" expand="true"/>
+            <task id="48" name="120 - ext org" color="#8cb6ce" meeting="false" start="2008-05-15" duration="1" complete="100" priority="1" expand="true">
+                <notes><![CDATA[Na criação de organização externa a checkbox Enabled deve estar checked por omissão.]]></notes>
+            </task>
+            <task id="53" name="446 - menu manager" color="#8cb6ce" meeting="false" start="2008-04-23" duration="1" complete="100" priority="1" expand="true">
+                <notes><![CDATA[na criação de menus colocar os submenus por cima dos menu items]]></notes>
+            </task>
+            <task id="1" name="R2-setup GUIs na EDT" color="#8cb6ce" meeting="false" start="2008-05-12" duration="1" complete="100" priority="1" expand="true"/>
+            <task id="30" name="R2-Menu Edit Static" color="#8cb6ce" meeting="false" start="2008-05-16" duration="1" complete="100" priority="1" expand="true"/>
+            <task id="18" name="R2-substituir OptionPane's por UserMessageDialog" color="#8cb6ce" meeting="false" start="2008-05-16" duration="1" complete="100" priority="1" expand="true"/>
+            <task id="97" name="Nato SPif must be partially editable" color="#8cb6ce" meeting="false" start="2008-05-19" duration="1" complete="100" priority="1" expand="true"/>
+            <task id="32" name="R2-ao gravar routing dá uma mensagem de erro vazia com caption &quot;ACP127 Connector - save&quot;" color="#8cb6ce" meeting="false" start="2008-05-19" duration="1" complete="100" priority="1" expand="true">
+                <notes><![CDATA[não se verifica]]></notes>
+            </task>
+            <task id="54" name="450 - fv popup menu com accçoes antes do load do módulo" color="#8cb6ce" meeting="false" start="2008-05-19" duration="1" complete="100" priority="1" expand="true">
+                <notes><![CDATA[criar manager de popup que ponha acções antes dos módulos
+
+19-05-2008 - 12:40:00
+Já tinha sido feito noutra issue.]]></notes>
+            </task>
+            <task id="7" name="R2-checkar get e getCase do UserLanguage" color="#8cb6ce" meeting="false" start="2008-05-19" duration="1" complete="100" priority="1" expand="true"/>
+            <task id="8" name="R2-rever queryChanges do System Configuration" color="#8cb6ce" meeting="false" start="2008-05-26" duration="1" complete="100" priority="1" expand="true">
+                <notes><![CDATA[19-05-2008 - 0:00:00
+O problema é a spif list que é composta por strings referentes a streams de xml reflectindo spifs  individuais. As strings são diferentes pois existe um atributo de page alignment da spif que não é contemplado na leitura dos dados do gui e que vem sempre da directoria. E então o equals do GlobalSystemDirEntry falha!
+
+26-05-2008 - 0:00:00
+Com um novo setup este problema pode não se verificar, i.e., os atributos desse page alignment em príncipio não serão escritos, logo não serão retornados para edição e o equals não falhará por causa deles.
+Portanto, esperemos para ver se o bug reincide.]]></notes>
+            </task>
+        </task>
+    </tasks>
+    <resources>
+        <resource id="0" name="jtv" function="Default:1" contacts="" phone=""/>
+    </resources>
+    <allocations/>
+    <vacations/>
+    <taskdisplaycolumns>
+        <displaycolumn property-id="tpd10" order="0" width="32"/>
+        <displaycolumn property-id="tpd3" order="1" width="415"/>
+        <displaycolumn property-id="tpd7" order="2" width="75"/>
+        <displaycolumn property-id="tpd4" order="3" width="118"/>
+        <displaycolumn property-id="tpd5" order="4" width="126"/>
+    </taskdisplaycolumns>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>

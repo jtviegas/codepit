@@ -1,0 +1,1 @@
+mvn clean compile exec:java -Dexec.mainClass="com.chp.tests.cycles.CycleDetection" -Dexec.args="test.data"

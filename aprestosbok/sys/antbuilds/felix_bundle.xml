@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project name="BUNDLE_NAME" default="bundle" basedir=".">
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~USER DEFINED PROPERTIES -->
+  <property name="descriptor" value="BUNDLE_DESCRIPTOR"/>
+  <property name="version" value="0.0.1"/>
+  <property name="vendor" value="aprestos"/>
+  <property name="domain.type" value="org"/>
+  <property name="description" value="BUNDLE_DESCRIPTION"/>
+  <property name="felix.cache.folder" value="../Felix/cache/testing"/>
+  <property name="sys.lib.folder" value="../../lib"/>
+  <property name="junit.jar" value="junit-4.4.jar"/>
+  <property name="felix.jar" value="felix.jar"/>
+  <property name="osgi.core.jar" value="org.osgi.core-1.0.1.jar"/>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~properties -->
+  <property name="dir" location="."/>
+  <property name="manifest" value="manifest.mf"/>
+  <property name="source" value="src"/>
+  <property name="lib" value="lib"/>
+  <property name="build" value="classes"/>
+  <property name="bin" value="bin"/>
+  <property name="package" value="${domain.type}.${vendor}.code.bundles.${ant.project.name}"/>
+  <property name="package.folder" value="${source}/${domain.type}/${vendor}/code/bundles/${ant.project.name}"/>
+  <property name="activator.class" value="${package}.Activator"/>
+  <property name="activator.class.file" value="${package.folder}/Activator.java"/>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		public targets 
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+  <target name="deploy" depends="bundle" description="deploys jar to felix cache folder in order to test the bundle with a felix osgi container project">
+    <echo message="going to deploy bundle to felix project cache..."/>
+    <copy file="${dir}/${bin}/${ant.project.name}-${DSTAMP}.jar" todir="${dir}/${felix.cache.folder}"/>
+    <echo message="...deploy bundle to felix project cache DONE!"/>
+  </target>
+  <target name="start" depends="init" unless="started" description="starts the project creating default folders and files">
+    <echo message="going to start the project ${ant.project.name}..."/>
+    <antcall target="create-manifest"/>
+    <echo message="...project ${ant.project.name} started!"/>
+  </target>
+  <target name="bundle" depends="build, bundle-clean" description="compiles the project and produces the jar">
+    <echo message="going to produce the bundle..."/>
+<!-- setup bin folder and copy libraries into it -->
+    <mkdir dir="${bin}"/>
+    <mkdir dir="${dir}/${bin}/${lib}"/>
+    <copy todir="${dir}/${bin}/${lib}">
+      <fileset dir="${dir}/${lib}">
+        <include name="**/*.jar"/>
+      </fileset>
+    </copy>
+<!-- create the jar in the bin dir -->
+    <jar jarfile="${dir}/${bin}/${ant.project.name}-${DSTAMP}.jar" basedir="${dir}/${build}" manifest="${dir}/${manifest}"/>
+    <echo message="...bundle done!"/>
+  </target>
+  <target name="build" depends="init,build-clean,build-libs" description="compiles the project">
+    <echo message="going to compile ${ant.project.name}..."/>
+<!-- compile into build folder -->
+    <mkdir dir="${dir}/${build}"/>
+    <javac destdir="${dir}/${build}" debug="true" compiler="modern" encoding="UTF-8" deprecation="on" classpathref="build.classpath">
+      <src path="${dir}/${source}"/>
+    </javac>
+    <echo message="...${ant.project.name} compile done!"/>
+  </target>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		private targets 
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+  <target name="create-tree">
+<!-- creates folder tree structure -->
+    <echo message="going to create folder tree structure..."/>
+    <mkdir dir="${dir}/${source}"/>
+    <mkdir dir="${dir}/${lib}"/>
+    <mkdir dir="${dir}/${package.folder}"/>
+    <echo message="...folder tree structure created!"/>
+  </target>
+  <target name="fill-libs" depends="create-tree">
+<!-- fills lib folder with default set of jars -->
+    <echo message="going to fill lib folder with default set of jars..."/>
+    <copy file="${dir}/${sys.lib.folder}/${junit.jar}" todir="${dir}/${lib}"/>
+    <copy file="${dir}/${sys.lib.folder}/${felix.jar}" todir="${dir}/${lib}"/>
+<!-- <copy file="${dir}/${sys.lib.folder}/${osgi.core.jar}" todir="${dir}/${lib}"/> -->
+    <echo message="...lib folder filled!"/>
+  </target>
+  <target name="create-activator" depends="fill-libs">
+<!-- creates default OSGi activator class -->
+    <echo message="going to create default activator class..."/>
+    <touch file="${dir}/${activator.class.file}"/>
+    <echo file="${dir}/${activator.class.file}" message="package ${package};"/>
+    <echo file="${dir}/${activator.class.file}" append="true" message="${line.separator}import org.osgi.framework.BundleActivator;import org.osgi.framework.BundleContext;"/>
+    <echo file="${dir}/${activator.class.file}" append="true" message="${line.separator}import org.osgi.framework.ServiceEvent;import org.osgi.framework.ServiceListener;"/>
+    <echo file="${dir}/${activator.class.file}" append="true" message="${line.separator}public class Activator implements BundleActivator, ServiceListener{}"/>
+    <echo message="...default activator class created!"/>
+  </target>
+  <target name="create-manifest" depends="create-activator">
+<!-- creates default manifest file -->
+    <echo message="going to create default manifest file..."/>
+    <touch file="${dir}/${manifest}"/>
+    <echo file="${dir}/${manifest}" message="Bundle-Name: ${descriptor}"/>
+    <echo file="${dir}/${manifest}" append="true" message="${line.separator}Bundle-Description: ${description}"/>
+    <echo file="${dir}/${manifest}" append="true" message="${line.separator}Bundle-Vendor: ${vendor}"/>
+    <echo file="${dir}/${manifest}" append="true" message="${line.separator}Bundle-Version: ${version}"/>
+    <echo file="${dir}/${manifest}" append="true" message="${line.separator}Bundle-Activator: ${activator.class}"/>
+    <echo file="${dir}/${manifest}" append="true" message="${line.separator}Import-Package: org.osgi.framework${line.separator}"/>
+    <echo message="...default manifest file created!"/>
+  </target>
+  <target name="init">
+    <echo message="going to perform init..."/>
+    <condition property="started">
+<!-- checks if the activator class file exists, 
+					that way we can know if the project has been started 
+					or not and resets instant date and time to be used elsewhere -->
+      <available file="${dir}/${activator.class.file}"/>
+    </condition>
+    <tstamp/>
+    <echo message="...init done!"/>
+  </target>
+  <target name="build-clean">
+<!-- cleans up build -->
+    <echo message="going to perform build-clean..."/>
+    <delete dir="${dir}/${build}"/>
+    <echo message="...build-clean done!"/>
+  </target>
+  <target name="build-libs">
+<!-- defines the build classpath -->
+    <echo message="going to perform build-libs..."/>
+    <path id="build.classpath">
+      <fileset dir="${dir}/${lib}">
+        <include name="**/*.jar"/>
+      </fileset>
+    </path>
+    <echo message="...build-libs done!"/>
+  </target>
+  <target name="bundle-clean">
+<!-- cleans up bin folder -->
+    <echo message="going to perform bundle-clean..."/>
+    <delete dir="${dir}/${bin}"/>
+    <echo message="...bundle-clean done!"/>
+  </target>
+  <target name="deploy-clean">
+<!-- cleans up the felix cache folder where the bundles are deployed -->
+    <echo message="going to perform deploy-clean..."/>
+    <delete dir="${felix.cache.folder}"/>
+    <echo message="...deploy-clean done!"/>
+  </target>
+</project>

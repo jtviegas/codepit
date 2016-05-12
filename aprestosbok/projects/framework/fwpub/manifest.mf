@@ -1,0 +1,8 @@
+Bundle-Name: fwpub
+Bundle-Description: The public face for the application framework based on Felix OSGi's container
+Bundle-Vendor: aprestos
+Bundle-Version: 0.0.1
+Bundle-Activator: org.aprestos.code.fw.pub.Activator
+Import-Package: org.osgi.framework
+Export-Package: org.aprestos.code.fw.pub.commons
+

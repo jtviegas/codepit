@@ -1,0 +1,16 @@
+org.aprestos.code.exceptions
+org.aprestos.code.logger
+org.aprestos.code.logger.factories
+org.aprestos.code.logger.impl
+org.aprestos.code.logger.interfaces
+org.aprestos.code.misc
+org.aprestos.code.rdbms
+org.aprestos.code.rdbms.exceptions
+org.aprestos.code.rdbms.factories
+org.aprestos.code.rdbms.impl
+org.aprestos.code.rdbms.interfaces
+org.aprestos.code.rdbms.utils
+org.aprestos.code.scaleconnector
+org.aprestos.code.scaleconnector.exceptions
+org.aprestos.code.scaleconnector.impl
+org.aprestos.code.scaleconnector.interfaces

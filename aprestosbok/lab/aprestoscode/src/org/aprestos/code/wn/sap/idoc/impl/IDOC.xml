@@ -1,0 +1,258 @@
+<Segment>
+	<!-- IDOC CONTROL RECORD -->
+	<Fields>
+
+		<Field>
+			<startIndex>0</startIndex>
+			<endIndex>10</endIndex>
+			<name>TABNAM</name>
+			<value>EDI_DC40</value>
+		</Field>
+		
+		<Field>
+			<startIndex>10</startIndex>
+			<endIndex>13</endIndex>
+			<name>MANDT</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>13</startIndex>
+			<endIndex>29</endIndex>
+			<name>DOCNUM</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>29</startIndex>
+			<endIndex>33</endIndex>
+			<name>DOCREL</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>33</startIndex>
+			<endIndex>35</endIndex>
+			<name>STATUS</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>35</startIndex>
+			<endIndex>36</endIndex>
+			<name>DIRECT</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>36</startIndex>
+			<endIndex>37</endIndex>
+			<name>OUTMOD</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>37</startIndex>
+			<endIndex>38</endIndex>
+			<name>EXPRSS</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>38</startIndex>
+			<endIndex>39</endIndex>
+			<name>TEST</name>
+			<value></value>
+		</Field>
+				
+		<Field>
+			<startIndex>39</startIndex>
+			<endIndex>69</endIndex>
+			<name>IDOCTYP</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>69</startIndex>
+			<endIndex>99</endIndex>
+			<name>CIMTYP</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>99</startIndex>
+			<endIndex>129</endIndex>
+			<name>MESTYP</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>129</startIndex>
+			<endIndex>132</endIndex>
+			<name>MESCOD</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>132</startIndex>
+			<endIndex>135</endIndex>
+			<name>MESFCT</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>135</startIndex>
+			<endIndex>136</endIndex>
+			<name>STD</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>136</startIndex>
+			<endIndex>142</endIndex>
+			<name>STDVRS</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>142</startIndex>
+			<endIndex>148</endIndex>
+			<name>STDMES</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>148</startIndex>
+			<endIndex>158</endIndex>
+			<name>SNDPOR</name>
+			<value>TPLINUX</value>
+		</Field>
+		
+		<Field>
+			<startIndex>158</startIndex>
+			<endIndex>160</endIndex>
+			<name>SNDPRT</name>
+			<value>KU</value>
+		</Field>
+		
+		<Field>
+			<startIndex>160</startIndex>
+			<endIndex>162</endIndex>
+			<name>SNDPFC</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>162</startIndex>
+			<endIndex>172</endIndex>
+			<name>SNDPRN</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>172</startIndex>
+			<endIndex>193</endIndex>
+			<name>SNDSAD</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>193</startIndex>
+			<endIndex>263</endIndex>
+			<name>SNDLAD</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>263</startIndex>
+			<endIndex>273</endIndex>
+			<name>RCVPOR</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>273</startIndex>
+			<endIndex>275</endIndex>
+			<name>RCVPRT</name>
+			<value>KU</value>
+		</Field>
+		
+		<Field>
+			<startIndex>275</startIndex>
+			<endIndex>277</endIndex>
+			<name>RCVPFC</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>277</startIndex>
+			<endIndex>287</endIndex>
+			<name>RCVPRN</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>287</startIndex>
+			<endIndex>308</endIndex>
+			<name>RCVSAD</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>308</startIndex>
+			<endIndex>378</endIndex>
+			<name>RCVLAD</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>378</startIndex>
+			<endIndex>386</endIndex>
+			<name>CREDAT</name>
+			<value></value>
+		</Field>
+		<Field>
+			<startIndex>386</startIndex>
+			<endIndex>392</endIndex>
+			<name>CRETIM</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>392</startIndex>
+			<endIndex>406</endIndex>
+			<name>REFINT</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>406</startIndex>
+			<endIndex>420</endIndex>
+			<name>REFGRP</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>420</startIndex>
+			<endIndex>434</endIndex>
+			<name>REFMES</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>434</startIndex>
+			<endIndex>504</endIndex>
+			<name>ARCKEY</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>504</startIndex>
+			<endIndex>524</endIndex>
+			<name>SERIAL</name>
+			<value></value>
+		</Field>
+		
+	</Fields>
+	
+</Segment>

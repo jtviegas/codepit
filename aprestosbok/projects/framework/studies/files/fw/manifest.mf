@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.0
+Created-By: 10.0-b22 (Sun Microsystems Inc.)
+Built-By: aprestos
+Title: fw
+Version: 0.0.1
+Vendor: aprestos
+Main-Class: org.aprestos.code.fw.studies.felix.FW
+Class-Path: lib/felix.jar
+

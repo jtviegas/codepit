@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="default.css" />
+	<title>#{msgs.tablesTitle}</title>
+</h:head>
+<body>
+
+	<h2>
+		<h:outputFormat value="#{msgs.dummyMsgWithVar}">
+			
+			<!-- TODO -->
+			<f:param value="3" />
+			
+		</h:outputFormat>
+	</h2>
+	<h:form>
+		<div align="center">
+		<h:dataTable value="#{taskTableGateway.tasks}" var="o" captionClass="table-caption" rowClasses="table-row-odd, table-row-even" 
+		styleClass="table">
+			<f:facet name="caption">#{msgs.tableTasksCaption}</f:facet>
+			
+			<h:column headerClass="table-column-header" footerClass="table-column-footer">
+					<h:selectBooleanCheckbox value="#{o.editable}" onclick="submit()" />
+			</h:column>
+			
+			<h:column headerClass="table-column-header" footerClass="table-column-footer">
+				<f:facet name="header">
+					<h:outputText value="#{msgs.columnHeaderId}" style="font-weight: bold"/>
+				</f:facet>
+				<div style="text-align: right">	
+					<h:outputText value="#{o.id}"/>
+				</div>
+				<!--  <f:facet name="footer">#{msgs.alphanumeric}</f:facet> -->
+			</h:column>
+			
+			<h:column headerClass="table-column-header" footerClass="table-column-footer">
+				<f:facet name="header">
+					<h:outputText value="#{msgs.columnHeaderName}" style="font-weight: bold"/>
+				</f:facet>
+				
+				<h:inputText value="#{o.name}" rendered="#{o.editable}" size="10"/>
+				<h:outputText value="#{o.name}" rendered="#{not o.editable}"/>
+				
+				<!--  <f:facet name="footer">#{msgs.alphanumeric}</f:facet> -->
+			</h:column>
+			
+			<h:column headerClass="table-column-header" footerClass="table-column-footer">
+				<f:facet name="header">
+					<h:outputText value="#{msgs.columnHeaderComplete}" style="font-weight: bold"/>
+				</f:facet>
+				<div style="text-align: right">
+					<h:selectOneMenu value="#{o.complete}" rendered="#{o.editable}">
+						<f:selectItems value="#{constants.completedLevels}"></f:selectItems>
+					</h:selectOneMenu>
+
+					<h:outputText value="#{o.complete}" rendered="#{not o.editable}"/>
+				</div>	
+				<!--  <f:facet name="footer">#{msgs.alphanumeric}</f:facet> -->
+			</h:column>
+			
+			<h:column headerClass="table-column-header" footerClass="table-column-footer">
+				<f:facet name="header">
+					<h:outputText value="#{msgs.columnHeaderPredecessor}" style="font-weight: bold"/>
+				</f:facet>
+				<div style="text-align: right">
+					<h:selectOneMenu value="#{o.predecessor}" rendered="#{o.editable}" style="text-align: right">
+						<f:selectItems value="#{taskTableGateway.retrievePossiblePredecessors(o.id)}" />
+					</h:selectOneMenu>
+					
+					<h:outputText value="#{o.predecessor}" rendered="#{not o.editable}"/>
+				</div>
+				<!--  <f:facet name="footer">#{msgs.alphanumeric}</f:facet> -->
+			</h:column>
+			
+			<h:column headerClass="table-column-header" footerClass="table-column-footer">
+				<f:facet name="header">
+					<h:outputText value="#{msgs.columnHeaderPriority}" style="font-weight: bold"/>
+				</f:facet>
+				<div style="text-align: right">
+
+					<h:selectOneMenu value="#{o.priority}" rendered="#{o.editable}" style="text-align: right">
+						<f:selectItems value="#{constants.priorities}"></f:selectItems>
+					</h:selectOneMenu>
+					
+					<h:outputText value="#{constants.translate2Priority(o.priority)}" rendered="#{not o.editable}"/>
+				</div>
+				<!--  <f:facet name="footer">#{msgs.alphanumeric}</f:facet> -->
+			</h:column>
+	
+	
+		</h:dataTable>
+		<br/>
+		 
+			<h:commandButton value="#{msgs.buttonSave}" action="#{taskTableGateway.save}"/>
+		</div>
+	</h:form>
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+...
+--This line, and those below, will be ignored--
+
+R    reports
+A    reports/validacaoPrecos/pricecheck.js
+A    reports/validacaoPrecos/deliveries
+AM   reports/validacaoPrecos/deliveries/pricecheck20081121.tar.bz2

@@ -1,0 +1,19 @@
+Testsuite: com.sky.dvdstore.Tests
+Tests run: 16, Failures: 0, Errors: 0, Time elapsed: 0,095 sec
+
+Testcase: retrieveDvd_invalidReferenceTest took 0,002 sec
+Testcase: retrieveDvd_nullReferenceTest took 0,001 sec
+Testcase: retrieveDvd_notfoundReferenceTest took 0 sec
+Testcase: retrieveDvd_existentReferenceTest1 took 0 sec
+Testcase: retrieveDvd_existentReferenceTest2 took 0 sec
+Testcase: retrieveDvd_existentReferenceTest3 took 0 sec
+Testcase: getDvdSummary_invalidReferenceTest took 0,001 sec
+Testcase: getDvdSummary_notfoundTest took 0,001 sec
+Testcase: getDvdSummary_good1 took 0,001 sec
+Testcase: getDvdSummary_good2 took 0,001 sec
+Testcase: getDvdSummary_good3 took 0 sec
+Testcase: getDvdSummary_good4 took 0,001 sec
+Testcase: getDvdSummary_good5 took 0,001 sec
+Testcase: getDvdSummary_good6 took 0 sec
+Testcase: getDvdSummary_good7 took 0,001 sec
+Testcase: getDvdSummary_good8 took 0,001 sec

@@ -1,0 +1,35 @@
+
+	~ Backup Procedure Setup ~ 
+1.Files
+	Along with this "README" file you should find two more
+	script files named "backup.sh" and "commons.sh".
+2. Dependencies
+	This script "backup.sh" should run under the root account.
+	You must install the dvd+rw-tools and mkisofs packages
+	in order to run this script.
+3. Setup
+	-Copy "backup.sh" and "commons.sh" scripts into the 
+	"/home/tplinux/text" folder.
+	-Verify if root has run permission on both files.
+	-Edit "/home/tplinux/text/backup.sh", and
+	in section named "USER DEFINED VARIABLES", 
+	edit the "TO_BE_BACKED_UP" and "DEVICE" variables with
+	the values for your system, like:
+		TO_BE_BACKED_UP="/folderX/folderW fileY folderZ"
+		DEVICE="/dev/hdx"
+	-Log in to the root account (~$ su - )
+	-Edit the crontab ( ~# crontab -e ) and you'll be 
+	presented to the vi editor:
+		- press "i" and insert the following line to the list of cronjobs displayed
+			0 2 * * * /home/tplinux/text/backup.sh
+		- press "Escape", type ":wq" and press enter to save changes
+4. Test
+	For testing purposes, load a blank dvd+rw in the dvd drive,
+	log in as root and run the backup script
+		~# ./home/tplinux/text/backup.sh
+	and in another terminal check the log with
+		~# tail -f /home/tplinux/log/backup.log
+	you must check the existence of the two following lines in the
+	log, regardless of the date presented, if the backup process executed normally:
+		<log>20080903160701 - «IN» doBackup
+		<log>20080903161043 - «OUT» doBackup - (0)

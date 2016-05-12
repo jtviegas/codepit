@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE database SYSTEM "http://db.apache.org/torque/dtd/database.dtd">
+<database name="mydb">
+
+  <table name="parent">
+  
+    <column name="id"
+            type="INTEGER"
+            primaryKey="true"
+            required="true"
+            autoIncrement="true"/>
+            
+    <column name="name"
+            type="VARCHAR"
+            size="50"
+            required="true"/>
+            
+    <column name="surname"
+            type="VARCHAR"
+            size="50"
+            required="false"/>
+  </table>
+
+  <table name="son">
+  
+    <column name="id"
+            type="INTEGER"
+            required="true"
+            primaryKey="true"
+            autoIncrement="true" />
+            
+    <column name="n"
+            type="VARCHAR"
+            size="50"
+            required="true" />
+            
+    <column name="parent_id"
+            type="INTEGER"
+            required="true" />
+            
+   
+   	<column name="sn" 
+            type="VARCHAR" 
+            size="50" 
+            required="true" />
+   
+
+    <foreign-key foreignTable="parent">
+      <reference local="parent_id" foreign="id"/>
+    </foreign-key>  
+
+    <index name="parentid">
+      <index-column name="parent_id"/>
+    </index>
+    
+  </table>
+  
+</database>

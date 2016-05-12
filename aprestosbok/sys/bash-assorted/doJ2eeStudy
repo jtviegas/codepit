@@ -1,0 +1,40 @@
+#!/bin/bash
+
+#	doJ2eeStudy
+# Script that loads the sun application server environment
+# for J2EE study, based on j2ee 5 tutorial
+
+
+_flag=$1
+
+if [ -z $_flag ];
+then
+	echo "usage: $0 start|stop";
+	exit 1
+else
+
+	if [ $_flag = 'start' ];
+	then
+		
+		echo "loading study environment"
+		asadmin start-appserv
+		asadmin start-database
+
+	elif [ $_flag = 'stop' ];
+	then
+
+		echo "unloading study environment"
+		asadmin stop-appserv
+		asadmin stop-database
+	
+	else
+	
+		echo "wrong parameter"
+		exit 1
+	fi
+	
+	cd /home/jmv/wx/study/j2ee5Tutorial/myWebModules
+
+fi
+
+

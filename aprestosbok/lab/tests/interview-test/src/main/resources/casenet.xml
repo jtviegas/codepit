@@ -1,0 +1,25 @@
+<health-company>
+    <members>
+        <member>
+            <name>Michal</name>
+        </member>
+        <member>
+            <name>Jarek</name>
+        </member>
+    </members>
+    <addresses>
+        <address>
+            <street>Hybernska</street>
+            <number>24</number>
+        </address>
+        <address>
+            <street>Petyrkova</street>
+            <number>1</number>
+        </address>
+    </addresses>
+    <diagnoses>
+        <diagnosis>color blindness</diagnosis>
+        <diagnosis>fatness</diagnosis>
+        <diagnosis>deafness</diagnosis>
+    </diagnoses>
+</health-company>

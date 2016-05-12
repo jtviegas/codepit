@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="###APP_NAME###" default="build" basedir=".">
+
+	<!-- __________ user defined props __________ -->
+	<property name="TITLE" value="###TITLE###"/>
+	<property name="VERSION" value="0.0.1"/>
+	<property name="HOUSE" value="###SW_HOUSE###"/>
+	<property name="DEFAULT.LIBS.FOLDER" value="###LibsRepositoryFolder###" />
+	<property name="JAVA_PATH" value="###/usr/java/j2sdk1.4.2_07###"/>
+	<property name="PACKAGE" value="###PackageHierarchy###.${ant.project.name}"/>
+	<property name="FOLDER.PACKAGE" value="###PackageHierarchyFolders###/${ant.project.name}"/>
+	
+	<!-- __________ packages and classes __________ -->
+	<property name="class.test" value="MainTest"/>
+	<property name="class.main" value="${PACKAGE}.Main"/>
+	
+	<!-- __________ folders and files __________ -->
+	<property name="dir" location="."/>
+	<property name="folder.source" value="src"/>
+	<property name="folder.build" value="build"/>
+	<property name="folder.bin" value="bin"/>
+	<property name="folder.lib" value="lib"/>
+	<property name="folder.test" value="test"/> <!-- test suites source folder -->
+	<property name="folder.doc" value="doc"/> <!-- javadoc folder -->
+	<property name="folder.spec" value="spec"/> <!-- design specifications folder -->
+	<property name="file.main.class" value="${folder.source}/${FOLDER.PACKAGE}/Main.java"/>
+	<property name="file.properties" value="${ant.project.name}.properties"/>
+	<property name="folder.report" value="report"/>
+	<property name="folder.test.package" value="${folder.test}/${folder.source}/${FOLDER.PACKAGE}"/>
+	<property name="file.test.class" value="${folder.test.package}/${class.test}.java"/>
+	<property name="file.manifest" value="manifest.mf"/>
+	<property name="java.compiler" value="${JAVA_PATH}/bin/javac"/>
+
+	<!-- __________ public targets __________ -->
+	
+	<target name="create" depends="init" unless="already-created" 
+			description="Creates the project with default folder tree and files, provided that user props are defined.">
+		<echo message="@create..."/>
+		<antcall target="create-project-files"/>
+		<!-- copy a set of libraries which are always required in every project -->
+		<antcall target="copy-default-libs"/>
+		<antcall target="create-manifest"/>
+		<echo message="...create@"/>
+	</target>
+	
+	<target name="build" depends="init,build-clean,set-build-stats,set-build-classpath,create-manifest"
+  		description="compiles the project and creates the jar, runs the tests and produces the documentation(javadoc)">
+		<echo message="@build..."/>
+		<javac destdir="${dir}/${folder.build}" debug="true" compiler="modern" encoding="UTF-8" deprecation="on" 
+			classpathref="build.classpath" executable="${java.compiler}">
+			<src path="${dir}/${folder.source}"/>
+		</javac>
+		<antcall target="set-bin-libs"/>
+		<antcall target="set-bin-resources"/>
+		<jar jarfile="${dir}/${folder.bin}/${ant.project.name}.jar" 
+    		manifest="${file.manifest}" basedir="${dir}/${folder.build}"/>
+		<!-- build the tests and javadoc while you're at it -->
+		<antcall target="build-tests"/>
+		<antcall target="doc"/>
+		<echo message="...build@"/>
+	</target>
+	
+	<target name="run" depends="set-run-classpath" description="runs the project executable artifact">
+		<echo message="@run..."/>
+		<!-- we must test without class path depending only on the jars manifest -->
+		<java jar="${dir}/${folder.bin}/${ant.project.name}.jar" fork="true" failonerror="true" maxmemory="128m">
+			<!-- <arg value="" /> -->
+			<classpath>
+				<path refid="run.classpath"/>
+				<pathelement path="${java.class.path}"/>
+			</classpath>
+		</java>
+		<echo message="...run@"/>
+	</target>
+	
+	<target name="test" depends="build,set-test-classpath" description="compiles the project and runs the tests">
+		<echo message="@test..."/>
+		<junit printsummary="yes" haltonfailure="yes">
+			<formatter type="plain"/>
+			<classpath>
+				<pathelement path="${java.class.path}"/>
+				<pathelement path="${dir}/${folder.test}/${folder.build}"/>
+				<path refid="test.classpath"/>
+			</classpath>
+			<batchtest fork="yes" todir="${dir}/${folder.test}/${folder.report}">
+				<fileset dir="${dir}/${folder.test}/${folder.build}">
+					<include name="**/*.class"/>
+				</fileset>
+			</batchtest>
+		</junit>
+		<echo message="...test@"/>
+	</target>
+	
+	<!-- __________ private targets __________ -->
+	
+	<target name="set-run-classpath">
+		<echo message="@set-run-classpath..."/>
+		<path id="run.classpath">
+			<fileset dir="${dir}/${folder.bin}/${folder.lib}">
+				<include name="**/*.jar"/>
+			</fileset>	
+		</path>
+		<echo message="...set-run-classpath@"/>
+	</target>
+	
+	<target name="doc" depends="doc-clean" description="generates source files javadoc">
+		<echo message="@doc..."/>
+		<javadoc destdir="${dir}/${folder.doc}" author="true" version="true" use="true" windowtitle="${ant.project.name} API">
+			<fileset dir="${dir}/${folder.source}" defaultexcludes="yes">
+				<include name="**/*.java"/>
+				<exclude name="**/*.properties"/>
+				<exclude name="**/*.xml"/>
+				<exclude name="**/*.jude"/>
+			</fileset>
+			<doctitle>
+				<![CDATA[<h1>"${ant.project.name} API"</h1>]]>
+			</doctitle>
+		<bottom>
+			<![CDATA[<i>Copyright &#169; 2009 "${HOUSE}" All Rights Reserved.</i>]]></bottom>
+		</javadoc>
+		<echo message="...doc@"/>
+	</target>
+
+	<target name="doc-clean">
+		<echo message="@doc-clean..."/>
+		<delete dir="${dir}/${folder.doc}"/>
+		<mkdir dir="${dir}/${folder.doc}"/>
+		<echo message="...doc-clean@"/>
+	</target>
+	
+	<target name="build-tests" depends="build-test-clean,set-test-classpath">
+		<echo message="@build-tests..."/>
+		<javac destdir="${dir}/${folder.test}/${folder.build}" compiler="modern" encoding="UTF-8" debug="true" deprecation="on" 
+			classpathref="test.classpath" executable="${java.compiler}">
+			<src path="${dir}/${folder.test}/${folder.source}"/>
+		</javac>
+		<copy todir="${dir}/${folder.test}/${folder.build}/${FOLDER.PACKAGE}" file="${file.properties}"/>
+		<echo message="...build-tests@"/>
+	</target>
+
+	<target name="build-test-clean">
+		<echo message="@build-test-clean..."/>
+		<delete dir="${dir}/${folder.test}/${folder.report}"/>
+		<delete dir="${dir}/${folder.test}/${folder.build}"/>
+		<mkdir dir="${dir}/${folder.test}/${folder.build}"/>
+		<mkdir dir="${dir}/${folder.test}/${folder.report}"/>
+		<echo message="...build-test-clean@"/>
+	</target>
+
+	<target name="set-test-classpath">
+		<echo message="@set-test-classpath..."/>
+		<path id="test.classpath">
+			<fileset dir="${dir}/${folder.bin}">
+				<include name="**/*.jar"/>
+			</fileset>
+		</path>
+		<echo message="...set-test-classpath@"/>
+	</target>
+	
+	<target name="set-bin-resources">
+		<echo message="@set-bin-resources..."/>
+		<copy todir="${dir}/${folder.bin}" file="${file.properties}"/>
+		<!-- copy closed(to be jarred) properties and xml files to binary's folder -->
+		<copy todir="${dir}/${folder.build}">
+			<fileset dir="${dir}/${folder.source}" includes="**/*.properties"/>
+			<fileset dir="${dir}/${folder.source}" includes="**/*.xml"/>
+		</copy>
+		<echo message="...set-bin-resources@"/>
+	</target>
+	
+	<target name="set-bin-libs">
+		<echo message="@set-bin-libs..."/>
+		<mkdir dir="${dir}/${folder.bin}/${folder.lib}"/>
+		<copy todir="${dir}/${folder.bin}/${folder.lib}">
+			<fileset dir="${dir}/${folder.lib}">
+				<include name="**/*.jar"/>
+			</fileset>
+		</copy>
+		<echo message="...set-bin-libs@"/>
+	</target>
+	
+	<target name="set-build-classpath">
+		<echo message="@set-build-classpath..."/>
+		<path id="build.classpath">
+			<fileset dir="${dir}/${folder.lib}">
+				<include name="**/*.jar"/>
+			</fileset>
+		</path>
+		<echo message="...set-build-classpath@"/>
+	</target>
+	
+	<target name="set-build-stats">
+		<echo message="@set-build-stats..." />
+		<antcall target="update-build-stats"/>
+		<loadproperties srcFile="${file.properties}">
+			<filterchain>
+				<linecontains>
+					<contains value="build." />
+				</linecontains>
+			</filterchain>
+		</loadproperties>
+		<echo message="...according to ${file.properties} new build number is ${build.number} and build date is ${build.date}" />
+		<echo message="...set-build-stats@" />
+	</target>
+
+	<target name="update-build-stats">
+		<echo message="@update-build-stats..." />
+		<propertyfile file="${file.properties}">
+			<entry key="build.number" default="0" type="int" operation="+" value="1"/>
+			<entry key="build.date" type="date" value="now" pattern="yyyyMMddHHmmss" />
+		</propertyfile>
+		<echo message="...update-build-stats@" />
+	</target>
+	
+	<target name="build-clean">
+		<echo message="@build-clean..."/>
+		<delete dir="${dir}/${folder.build}"/>
+		<delete dir="${dir}/${folder.bin}"/>
+		<mkdir dir="${dir}/${folder.build}"/>
+		<mkdir dir="${dir}/${folder.bin}"/>
+		<echo message="...build-clean@"/>
+	</target>
+	
+	<target name="create-manifest" depends="set-manifest-classpath" >
+		<echo message="@create-manifest..."/>
+		<manifest file="${file.manifest}">
+			<attribute name="Built-By" value="${user.name}"/>
+			<attribute name="Title" value="${TITLE}"/>
+			<attribute name="Version" value="${VERSION}.${build.number}"/>
+			<attribute name="Vendor" value="${HOUSE}"/>
+			<attribute name="Build-Date" value="${build.date}"/>
+			<attribute name="Main-Class" value="${class.main}"/>
+			<attribute name="Class-Path" value="${manifest.classpath}"/>
+		</manifest>
+		<echo message="...create-manifest@" />
+	</target>
+
+	<target name="set-manifest-classpath">
+		<pathconvert property="manifest.classpath" pathsep=" ">
+			<mapper>
+				<chainedmapper>
+					<flattenmapper /> <!-- remove absolute path -->
+					<globmapper from="*" to="${folder.lib}/*" /> <!-- add lib/ prefix -->
+				</chainedmapper>
+			</mapper>
+			<path>
+				<fileset dir="${dir}/${folder.lib}">
+					<include name="**/*.jar"/>
+				</fileset>
+			</path>
+		</pathconvert>
+	</target>
+
+	<target name="copy-default-libs">
+		<!-- fills lib folder with default set of jars -->
+		<echo message="@copy-default-libs..."/>
+		<copy todir="${dir}/${folder.lib}">
+			<fileset dir="${DEFAULT.LIBS.FOLDER}">
+				<include name="**/*.jar"/>
+			</fileset>
+		</copy>
+		<echo message="...copy-default-libs@"/>
+	</target>
+
+	<target name="create-project-files">
+		<echo message="@create-project-files..."/>
+		<antcall target="create-project-folders"/>
+		<antcall target="create-mainfile"/>
+		<antcall target="create-properties-file"/>
+		<antcall target="create-test"/>
+		<echo message="...create-project-files@"/>
+	</target>
+
+	<target name="create-test">
+		<echo message="@create-test..."/>
+		<touch file="${dir}/${file.test.class}"/>
+		<echo file="${dir}/${file.test.class}" message="package ${PACKAGE};"/>
+		<echo file="${dir}/${file.test.class}" append="true" message="${line.separator}import org.junit.Test;"/>
+		<echo file="${dir}/${file.test.class}" append="true" message="${line.separator}import org.junit.Before;"/>
+		<echo file="${dir}/${file.test.class}" append="true" message="${line.separator}import org.junit.After;"/>
+		<echo file="${dir}/${file.test.class}" append="true" message="${line.separator}import static org.junit.Assert.*;"/>
+		<echo file="${dir}/${file.test.class}" append="true" message="${line.separator}public class MainTest"/>
+		<echo file="${dir}/${file.test.class}" append="true" message="${line.separator}{"/>
+		<echo file="${dir}/${file.test.class}" append="true" message="${line.separator}int four = 0;"/>
+		<echo file="${dir}/${file.test.class}" append="true" message="${line.separator}@Test"/>
+		<echo file="${dir}/${file.test.class}" append="true" message="${line.separator}public void exampleTest(){org.junit.Assert.assertEquals(4,four);}"/>
+		<echo file="${dir}/${file.test.class}" append="true" message="${line.separator}@Before"/>
+		<echo file="${dir}/${file.test.class}" append="true" message="${line.separator}public void prepareTest() {four=4;}"/>
+		<echo file="${dir}/${file.test.class}" append="true" message="${line.separator}@After"/>
+		<echo file="${dir}/${file.test.class}" append="true" message="${line.separator}public void cleanupTest() {four=0;}"/>
+		<echo file="${dir}/${file.test.class}" append="true" message="${line.separator}}"/>
+		<echo message="...create-test@"/>
+	</target>
+
+	<target name="create-properties-file">
+		<echo message="@create-properties-file..."/>
+		<touch file="${file.properties}"/>
+		<echo file="${file.properties}" append="true" message="build.number=0${line.separator}"/>
+		<echo file="${file.properties}" append="true" message="build.date=${line.separator}"/>
+		<echo message="...create-properties-file@"/>
+	</target>
+
+	<target name="create-mainfile">
+		<echo message="@create-mainfile..."/>
+		<touch file="${dir}/${file.main.class}"/>
+		<echo file="${dir}/${file.main.class}" message="package ${PACKAGE};"/>
+		<echo file="${dir}/${file.main.class}" append="true" message="${line.separator}public class Main {"/>
+		<echo file="${dir}/${file.main.class}" append="true" message="${line.separator}public static void main(String[] args) {System.out.println(Main.class.getName());}"/>
+		<echo file="${dir}/${file.main.class}" append="true" message="${line.separator}}"/>
+		<echo message="...create-mainfile@"/>
+	</target>
+
+	<target name="create-project-folders">
+		<echo message="@create-project-folders..."/>
+		<mkdir dir="${dir}/${folder.source}"/>
+		<mkdir dir="${dir}/${folder.build}"/>
+		<mkdir dir="${dir}/${folder.bin}"/>
+		<mkdir dir="${dir}/${folder.lib}"/>
+		<mkdir dir="${dir}/${folder.source}/${FOLDER.PACKAGE}"/>
+		<mkdir dir="${dir}/${folder.spec}"/>
+		<mkdir dir="${dir}/${folder.doc}"/>
+		<mkdir dir="${dir}/${folder.test}"/>
+		<mkdir dir="${dir}/${folder.test}/${folder.report}"/>
+		<mkdir dir="${dir}/${folder.test.package}"/>
+		<echo message="...create-project-folders@"/>
+	</target>
+
+	<target name="init">
+		<!-- checks if the default Main class file exists, 
+		that way we can know if the project has been properly created or not -->
+		<echo message="@init..."/>
+		<condition property="already-created">
+			<available file="${dir}/${folder.source}/${FOLDER.PACKAGE}"/>
+		</condition>
+		<!-- resets instant date and time to be used elsewhere -->
+		<tstamp/>
+		<echo message="...init@"/>
+	</target>
+	
+</project>
+	

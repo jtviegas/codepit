@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : distribution.xml.xml
+    Created on : 8 de Janeiro de 2008, 15:13
+    Author     : jtviegas
+    Description:
+        Purpose of the document follows.
+-->
+<distribution>
+    <organizationId>F123C765-D1F8-48c3-B787-A80741E00E14</organizationId> 
+     <list>
+         <sicDsc> 
+             <sicBegin>CCC</sicBegin>
+             <sicEnd>CCC</sicEnd> 
+             <action>
+                <id>D69AAC8C-FACC-4433-B2B7-FA6C19A822FC</id>
+                <id>E7A4F32B-7F67-49b3-B728-D1FD3C453E9E</id>
+             </action>
+         </sicDsc>
+        <sicDsc> 
+            <sicBegin>***</sicBegin> 
+            <sicEnd>***</sicEnd> 
+            <action>
+                <id>1C1F6FDD-4C36-41d5-9275-DDE25611782F</id> 
+            </action> 
+        </sicDsc>
+     </list> 
+</distribution>

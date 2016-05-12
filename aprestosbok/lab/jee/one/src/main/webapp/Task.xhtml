@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head></h:head> 
+<body> 
+
+
+
+<h:form>
+	<h:panelGrid columns="2">
+	<f:facet name="header">
+			<h:outputText value="#{task.formLabel}" />
+	</f:facet>
+
+	<h:outputLabel for="id" value="#{task.idLabel}">
+	</h:outputLabel>
+	<h:outputText value="#{task.id}" id="id">
+	</h:outputText>
+	
+	<h:outputLabel value="#{task.nameLabel}" for="taskName">
+	</h:outputLabel>
+	<h:inputText id="taskName" value="#{task.name}" label="task name" size="50" required="true" requiredMessage="#{task.requireNameMsg}">
+	
+	</h:inputText>
+	 
+	<h:outputLabel value="#{task.notesLabel}" for="taskNotes">
+	</h:outputLabel>
+	<h:inputTextarea id="taskNotes" cols="40" value="#{task.notes}" label="task notes" rows="10">
+
+	</h:inputTextarea>
+	 
+	<h:outputLabel value="#{task.completeLabel}" for="taskComplete">
+	</h:outputLabel>
+	<h:inputText id="taskComplete" value="#{task.complete}" label="task complete" size="3"  required="true" requiredMessage="#{task.requireCompleteMsg}">
+
+	</h:inputText>
+	 
+	<h:outputLabel value="#{task.predecessorLabel}" for="taskPredecessor">
+	</h:outputLabel>
+	<h:selectOneMenu id="taskPredecessor" value="#{task.predecessor}" label="task predecessor" >
+		<f:selectItems value="#{task.taskItems}"/>
+	</h:selectOneMenu>
+	
+	<h:outputLabel value="#{task.priorityLabel}" for="taskPriority">
+	</h:outputLabel>
+	<h:selectOneRadio id="taskPriority" label="task priority" value="#{task.priority}">
+		<f:selectItems value="#{task.priorities}"/>
+	</h:selectOneRadio>
+
+	<f:facet name="footer">
+			<h:commandButton value="#{task.submitLabel}" action="taskdisplay.xhtml" />
+	</f:facet>
+	
+	</h:panelGrid>
+</h:form>
+</body> 
+</html>
+

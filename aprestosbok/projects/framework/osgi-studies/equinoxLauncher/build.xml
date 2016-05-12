@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="fw" default="run" basedir=".">
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~USER DEFINED PROPERTIES -->
+  <property name="vendor" value="aprestos"/>
+  <property name="domain.type" value="org"/>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~properties -->
+  <property name="dir" location="."/>
+  <property name="manifest" value="files/fw/manifest.mf"/>
+  <property name="source" value="src-fw"/>
+  <property name="lib" value="lib/fw"/>
+  <property name="build" value="build/fw"/>
+  <property name="dist" value="dist/fw"/>
+
+  <property name="package" value="${domain.type}.${vendor}.code.${ant.project.name}.studies.felix"/>
+  <property name="package.folder" value="${source}/${domain.type}/${vendor}/code/${ant.project.name}/studies/felix"/>
+  
+	
+		 
+
+	
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		public targets 
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+	
+  
+	<target name="run" description="runs the project executable artifact">
+
+
+			 <!--  get path to equinox jar inside ${eclipse.home} folder (copy/rename actual jar) -->
+			 <copy tofile="${dir}/plugins/org.eclipse.equinox.launcher.jar">
+			   <fileset dir="${dir}/plugins"
+			     includes="**/org.eclipse.equinox.launcher_*.jar"/>
+			 </copy>
+
+			 <!-- start Eclipse w/ java 
+			 <java classpath="${dir}/plugins/org.eclipse.equinox.launcher.jar"
+			-->
+		
+		
+		<java jar="${dir}/${dist}/${ant.project.name}-${DSTAMP}.jar" fork="true" failonerror="true">
+    	<!-- we must test without class path depending only on the jars manifest -->
+	    	<classpath>
+	        	<path refid="run.classpath"/>
+	    		<pathelement path="${java.class.path}"/>
+	      	</classpath>
+
+	    </java>
+	    
+	    <echo message="run done!"/>
+	  </target>
+
+
+  
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		private targets 
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+
+			
+
+  
+	<target name="run-classpath">
+	    <!-- defines the classpath for run -->
+	    <path id="run.classpath">
+	      <fileset dir="${dir}/${dist}">
+	        <include name="**/*.jar"/>
+	      </fileset>
+	    	
+	    </path>
+	    <echo message="run-classpath done!"/>
+	  </target>
+	
+		
+
+
+
+  <target name="build-clean">
+<!-- cleans up build -->
+    <echo message="going to perform build-clean..."/>
+    <delete dir="${dir}/${build}"/>
+  	<delete dir="${dir}/${dist}"/>
+    <echo message="...build-clean done!"/>
+  </target>
+  
+  <target name="build-claspath">
+<!-- defines the build classpath -->
+    <echo message="going to perform build-claspath..."/>
+    <path id="build.classpath">
+      <fileset dir="${dir}/${lib}">
+        <include name="**/*.jar"/>
+      </fileset>
+    </path>
+    <echo message="...build-claspath done!"/>
+  </target>
+
+	<target name="create-manifest" depends="resolve-app-classpath">
+	    <!-- creates the manifest file populating it with the set of jars present in the lib folder -->
+	    <manifest file="${manifest}">
+	      <attribute name="Built-By" value="${vendor}"/>
+	      <attribute name="Title" value="${ant.project.name}"/>
+	      <attribute name="Version" value="0.0.1"/>
+	      <attribute name="Vendor" value="${vendor}"/>
+	      <attribute name="Main-Class" value="${package}.FW"/>
+	      <attribute name="Class-Path" value="${app.classpath}"/>
+	    </manifest>
+	  </target>
+	
+	<target name="resolve-app-classpath">
+	    <!-- finds and generates the app.classpath property to be used in the manifest file as the value for Class-Path attribute -->
+
+		<!--
+	    <path id="basedir2escape" path="${basedir}/lib/fw"/>
+	    <pathconvert property="escapedBasedir" refid="basedir2escape">
+	        <filtermapper>
+	          <replacestring from="${file.separator}" to="${file.separator}${file.separator}"/>
+	        </filtermapper>
+	    </pathconvert>
+	    <echo message="escapedBasedir is ${escapedBasedir}" />
+	    -->            
+	    <fileset dir="${dir}/${lib}" id="libjars">
+	      <include name="*.jar"/>
+	    </fileset>
+		
+	    <pathconvert pathsep=" " property="app.classpath" refid="libjars">
+	      <mapper type="regexp" from="^(${dir}/${lib})/(.*)$$" to="lib/\2"/>
+	      <!-- <mapper type="regexp" from="^(${basedir})/(.*)$$" to="\2"/> -->
+	    </pathconvert>
+
+
+	    <echo message="application classpath is ${app.classpath}"/>
+	  </target>
+
+	
+</project>
+

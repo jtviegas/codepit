@@ -1,0 +1,22 @@
+Usage
+
+* see run.bat to invoke with maven or ... 
+* to run the tests invoke "mvn test" at the command line;
+
+
+Assumptions
+
+* only integer numbers;
+
+Improvement Suggestions
+
+* implement logging;
+* IoC/Dependency injection for the implementation objects, as an example the Challenge
+	implementation is coded, should be resolved in runtime context - Spring should do it;
+* Also printing in the Challenge interface could be done using some kind of Strategy pattern;
+	
+	
+joao tiago viegas
+jtviegas.js@gmail.com
+20130327
+ 

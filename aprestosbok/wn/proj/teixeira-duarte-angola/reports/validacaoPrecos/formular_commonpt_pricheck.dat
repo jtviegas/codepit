@@ -1,0 +1,34 @@
+15046939|:pricecheck:|format|\N|\N|\N|0|\N|:50:50:|\N|\N|\N|\N
+15046966|:pricecheck:|totalplu|\N|i18n:Records||1|text|select count(*) from pricecheck where pricechecked='0'|\N|\N|l1:l1|
+15046948|:pricecheck:|number|\N|\N|hidden|5|\N|select case when (select count(*) from pricecheck where pricechecked='0') < '20' then (select count(*) from pricecheck where pricechecked='0') else '20' end|\N|\N|\N|\N
+15046935|:pricecheck:|button|b|\N||6|button|i18n:Validate all prices|\N|action:Cpricecheckall.html|c1|\N
+15046936|:pricecheck:|button|c|\N||7|button|i18n:Ignore all prices|\N|action:Cignoreallpricecheck.html|c1|\N
+15046940|:pricecheck:|format|\N|\N||10|\N|:70:100:55:55:45:40:40:40|\N|\N|\N|\N
+15046953|:pricecheck:|plunmbrtitle|\N|i18n:Item Number||12|text|\N|\N|\N|l0:c1|\N
+15046952|:pricecheck:|pludesctitle|\N|i18n:Item Description||13|text|\N|\N|\N|l0:c1|\N
+15046962|:pricecheck:|qtyunittitle|\N|i18n:Qty Unit||14|text|\N|\N|\N|l0:c1|\N
+15046950|:pricecheck:|origpricetitle|\N|i18n:Actual Price||15|text|\N|\N|\N|l0:c1|\N
+15046947|:pricecheck:|newpricetitle|\N|i18n:New Price||16|text|\N|\N|\N|l0:c1|\N
+15046957|:pricecheck:|pricecheckedtitle|\N|i18n:Validated Price||17|text|\N|\N|\N|l0:c1|\N
+15046960|:pricecheck:|priceignoredtitle|\N|i18n:Ignored Price|\N|18|text|\N|\N|\N|l0:c1|\N
+15046964|:pricecheck:|shelftitle|\N|i18n:pluflag27||19|text|\N|\N|\N|l0:c1|\N
+15046941|:pricecheck:|format|\N|\N|\N|20|\N|::|\N|\N|\N|\N
+15046933|:pricecheck:|<hr>|\N|\N||21|\N|\N|\N|\N|\N|\N
+15046942|:pricecheck:|format|\N|\N|\N|22|\N|:100:200:60:60:60:60:60:60|\N|\N|\N|\N
+15046954|:pricecheck:|plunmbr{8,$number$}|\N|\N|\N|50|text|com.+.formular|\N|\N|c1|\N
+15046951|:pricecheck:|pludesc|\N|\N|\N|51|text:noParam|com.+.formular|\N|\N|c1|\N
+15046961|:pricecheck:|qtyunitdesc|\N|\N|\N|52|text:noParam|com.+.formular|\N|\N|c1|\N
+15046949|:pricecheck:|origprice|\N|\N|\N|53|text:price:noParam|com.+.formular|\N|\N|c1|\N
+15046946|:pricecheck:|newprice|\N|\N|\N|54|+:price:save|com.+.formular|\N|\N|c1|com.+.formular
+15046955|:pricecheck:|pricechecked|\N|\N|\N|55|CHECKBOX:save|com.+.formular|\N|<onChange>javascript:pricechecked(this.name);</onChange>|c1|com.+.formular
+15046958|:pricecheck:|priceignored|\N|\N|\N|56|CHECKBOX:save|com.+.formular|\N|<onChange>javascript:priceignored(this.name);</onChange>|c1|com.+.formular
+15046963|:pricecheck:|shelf|\N|\N|\N|57|CHECKBOX:save|com.+.formular|\N|\N|c1|com.+.formular
+15046943|:pricecheck:|format|\N|\N|\N|130|\N|::|\N|\N|\N|\N
+15046934|:pricecheck:|<hr>|\N|\N||140|\N|\N|\N|\N|\N|\N
+15046944|:pricecheck:|format|\N|\N|\N|150|\N|::::::20:20:|\N|\N|\N|\N
+15046956|:pricecheck:|pricecheckedall|\N|i18n:Validate all prices||161|CHECKBOX|\N|\N|<onChange>javascript:allpricechecked();</onChange>|l3:r4|\N
+15046959|:pricecheck:|priceignoredall|\N|i18n:Ignore all prices|'|162|CHECKBOX|\N|\N|<onChange>javascript:allpriceignored();</onChange>|l3:r4|\N
+15046938|:pricecheck:|check_test|\N|\N|hidden|163|CHECKBOX|\N|\N|<onClick>javascript:jstest();</onClick>|l3:r4|\N
+15046965|:pricecheck:|test_button|\N|\N|hidden|164|button|test_include_javascript|\N|<onClick>javascript:jstest();</onClick>|c2|\N
+15046945|:pricecheck:|format|\N|\N|\N|190|\N|::::|\N|\N|\N|\N
+15046937|:pricecheck:|button|\N|||200|button|i18n:Save||action:pricecheckSave.html|c2|

@@ -1,0 +1,1 @@
+mvn clean compile exec:java -Dexec.mainClass="org.tests.calculator.App" -Dexec.args="test.data"

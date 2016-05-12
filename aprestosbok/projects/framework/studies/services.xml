@@ -1,0 +1,72 @@
+<project name="services" default="build" basedir=".">
+    
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~properties -->
+
+	<property name="dir" location="."/>
+	
+	<property name="title"  value="..."/>
+	<property name="version"  value="0.0.1"/>
+	<property name="vendor"  value="aprestos"/>
+	<property name="domain.type"  value="org"/>
+
+	<property name="package"  value="${domain.type}.${vendor}.code.fw.studies.felix.${ant.project.name}"/>
+	<property name="package.folder"  value="${domain.type}/${vendor}/code/fw/studies/felix/${ant.project.name}"/>
+
+  	<property name="manifest" value="files/service-interfaces/manifest.mf"/>
+	<property name="source" value="src-service-interfaces"/>
+  	<property name="build" value="build/service-interfaces"/>
+  	<property name="dist"  value="dist/service-interfaces"/>
+	<property name="lib"  value="lib/service-interfaces"/>
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~public targets -->
+	
+
+	<target name="build" depends="build-clean,build-libs" description="compiles the project">
+
+		<tstamp/>
+		<!-- compile into build folder -->
+		<mkdir dir="${dir}/${build}" />		
+		<javac destdir="${dir}/${build}" 
+			debug="true" deprecation="on" classpathref="build.classpath" >
+			<src path="${dir}/${source}" />
+		</javac>
+
+		<!-- setup dist folder -->
+		<mkdir dir="${dist}" />
+    		
+		<!-- create the jar in the bin dir -->
+		<jar jarfile="${dir}/${dist}/${ant.project.name}-${DSTAMP}.jar" basedir="${dir}/${build}" manifest="${dir}/${manifest}"/>
+
+		<echo message="build done!" />
+		
+  	</target>
+
+
+
+
+
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~private targets -->
+
+	<target name="build-libs">
+	<!-- defines the build classpath -->
+	    <echo message="going to perform build-libs..."/>
+	    <path id="build.classpath">
+	      <fileset dir="${dir}/${lib}">
+	        <include name="**/*.jar"/>
+	      </fileset>
+	    </path>
+	    <echo message="...build-libs done!"/>
+	  </target>
+	
+	<target name="build-clean">
+	<!-- cleans up build -->
+		<delete dir="${dir}/${build}"/>
+		<delete dir="${dir}/${dist}" />
+		<echo message="build-clean done!" />
+  	</target>
+
+
+</project>

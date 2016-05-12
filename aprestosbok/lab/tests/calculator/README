@@ -1,0 +1,22 @@
+Usage
+
+* see run.bat to invoke with maven or...;
+* java -jar <calculator-1.0-SNAPSHOT.jar location> <expressions file>
+
+
+Assumptions
+
+* only integer numbers;
+* input files are correct, won't implement specific exception handling;
+
+Improvement Suggestions
+
+* implement logging;
+* IoC/Dependency injection for the implementation objects, as an example the Calculator
+	implementation is coded, should be resolved in runtime context - Spring should do it;
+	
+	
+joao tiago viegas
+jtviegas.js@gmail.com
+20130324
+ 

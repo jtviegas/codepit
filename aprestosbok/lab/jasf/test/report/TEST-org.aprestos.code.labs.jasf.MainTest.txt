@@ -1,0 +1,4 @@
+Testsuite: org.aprestos.code.labs.jasf.MainTest
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.213 sec
+
+Testcase: BootTestOne took 0.189 sec

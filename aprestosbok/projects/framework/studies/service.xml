@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project name="service" default="build" basedir=".">
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~USER DEFINED PROPERTIES -->
+  <property name="vendor" value="aprestos"/>
+  <property name="domain.type" value="org"/>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~properties -->
+  <property name="dir" location="."/>
+  <property name="manifest" value="files/service/manifest.mf"/>
+  <property name="source" value="src-service"/>
+  <property name="lib" value="lib/service"/>
+  <property name="build" value="build/service"/>
+  <property name="dist" value="dist/service"/>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		public targets 
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+  <target name="build" depends="build-clean,build-libs" description="compiles the project">
+    <echo message="going to compile ${ant.project.name}..."/>
+  	
+  	<tstamp/>
+	
+  	<!-- compile into build folder -->
+    <mkdir dir="${dir}/${build}"/>
+  	<mkdir dir="${dir}/${dist}"/>
+    <javac destdir="${dir}/${build}" debug="true" deprecation="on" classpathref="build.classpath">
+      <src path="${dir}/${source}"/>
+    </javac>
+  	
+  	<!-- create the jar in the bin dir -->
+  	<jar jarfile="${dir}/${dist}/${ant.project.name}-${DSTAMP}.jar" basedir="${dir}/${build}" manifest="${dir}/${manifest}"/>
+  	
+    <echo message="...${ant.project.name} compile done!"/>
+  </target>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		private targets 
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	
+
+	
+  <target name="build-clean">
+<!-- cleans up build -->
+    <echo message="going to perform build-clean..."/>
+    <delete dir="${dir}/${build}"/>
+  	<delete dir="${dir}/${dist}"/>
+    <echo message="...build-clean done!"/>
+  </target>
+	
+  <target name="build-libs">
+<!-- defines the build classpath -->
+    <echo message="going to perform build-libs..."/>
+    <path id="build.classpath">
+      <fileset dir="${dir}/${lib}">
+        <include name="**/*.jar"/>
+      </fileset>
+    </path>
+    <echo message="...build-libs done!"/>
+  </target>
+	
+
+
+</project>

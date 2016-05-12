@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="commonpt" default="build" basedir=".">
+  <!-- ========== USER DEFINED PROPERTIES ========== -->
+  <property name="TITLE" value="Common PT TPLinux package"/>
+  <property name="VERSION" value="0.0.1"/>
+  <property name="VENDOR" value="Wincor Nixdorf"/>
+  <property name="MAIN.PACKAGE" value="com.wincor_nixdorf.tplinux.webapp"/>
+
+  <property name="jar.name" value="TPLWcommonpt.jar"/>
+  <!-- ========== CONSTANT PROPERTIES ========== -->
+  <property name="dir" location="."/>
+  <property name="sealed" value="false"/>
+  <!-- packages -->
+  <property name="package" value="${MAIN.PACKAGE}.${ant.project.name}"/>
+  <property name="package.test" value="${package}"/>
+  <!-- folders -->
+  <property name="folder.source" value="src"/>
+  <property name="folder.build" value="build"/>
+  <property name="folder.bin" value="dist"/>
+  <property name="folder.webinf.lib" value="/home/tplinux/webapp/WEB-INF/lib"/>
+  <property name="folder.webinf.classes" value="/home/tplinux/webapp/WEB-INF/classes"/>
+  
+  <property name="folder.package" value="com/wincor_nixdorf/tplinux/webapp/${ant.project.name}"/>
+  <property name="folder.test" value="test"/>
+  <property name="folder.report" value="report"/>
+  <property name="folder.test.package" value="${folder.test}/${folder.source}/${folder.package}"/>
+  <property name="folder.doc" value="doc"/>
+  <!-- files -->
+  <property name="file.manifest" value="manifest.mf"/>
+  <property name="java.compiler" value="/opt/java/j2sdk1.4.2_17/bin/javac"/>
+
+  <!-- ========== PUBLIC TARGETS ========== -->
+ 
+  <target name="build" depends="build-clean,build-classpath,create-manifest" description="compiles the project and produces the jar and deploys it to the WEB-INF/lib folder">
+    <mkdir dir="${dir}/${folder.build}"/>
+    <mkdir dir="${dir}/${folder.bin}"/>
+    <javac destdir="${dir}/${folder.build}" debug="true" compiler="modern" encoding="UTF-8" deprecation="on" classpathref="build.classpath" executable="${java.compiler}" source="1.4" target="1.4">
+      <src path="${dir}/${folder.source}"/>
+    </javac>
+    <jar jarfile="${dir}/${folder.bin}/${jar.name}" manifest="${file.manifest}" basedir="${dir}/${folder.build}"/>
+   <copy file="${dir}/${folder.bin}/${jar.name}" todir="${folder.webinf.lib}" />
+    <echo message="build done!"/>
+  </target>
+  
+  <target name="doc" depends="doc-clean" description="generates source files javadoc">
+    <mkdir dir="${dir}/${folder.doc}"/>
+    <javadoc destdir="${dir}/${folder.doc}" author="true" version="true" use="true" windowtitle="API">
+      <fileset dir="${dir}/${folder.source}" defaultexcludes="yes">
+        <include name="**/*.java"/>
+        <exclude name="**/*.properties"/>
+        <exclude name="**/*.jude"/>
+      </fileset>
+      <doctitle><![CDATA[<h1>"${ant.project.name}"</h1>]]></doctitle>
+      <bottom><![CDATA[<i>Copyright &#169; 2008 "${VENDOR}" All Rights Reserved.</i>]]></bottom>
+    </javadoc>
+    <echo message="doc done!"/>
+  </target>
+  
+  <target name="test" depends="build-tests" description="runs the tests">
+    <junit printsummary="yes" haltonfailure="yes">
+      <formatter type="plain"/>
+      <classpath>
+        <pathelement path="${java.class.path}"/>
+        <pathelement path="${dir}/${folder.test}/${folder.build}"/>
+        <path refid="test.build.classpath"/>
+      </classpath>
+      <batchtest fork="yes" todir="${dir}/${folder.test}/${folder.report}">
+        <fileset dir="${dir}/${folder.test}/${folder.build}">
+          <include name="**/*.class"/>
+        </fileset>
+      </batchtest>
+    </junit>
+    <echo message="test done!"/>
+  </target>
+  
+  <!-- ========== PRIVATE TARGETS ========== -->
+  
+  <target name="build-classpath">
+    <!-- defines the build classpath -->
+    <echo message="going to perform build-libs..."/>
+    <path id="build.classpath">
+      <fileset dir="${folder.webinf.lib}">
+        <include name="**/*.jar" />
+	<exclude name="${jar.name}" />
+      </fileset>
+      <fileset dir="${folder.webinf.classes}">
+        <include name="**/*"/>
+      </fileset>
+    </path>
+    <echo message="...build.classpath done!"/>
+  </target>
+
+  <target name="build-clean">
+    <!-- cleans up build -->
+    <delete dir="${dir}/${folder.build}"/>
+    <delete dir="${dir}/${folder.bin}"/>
+    <echo message="build-clean done!"/>
+  </target>
+  
+  
+  <target name="create-manifest">
+    <!-- <target name="create-manifest" depends="resolve-app-classpath" > -->
+    <!-- creates the manifest file populating it with the set of jars present in the lib folder -->
+    <echo message="goint to create manuifest file"/>
+    <manifest file="${file.manifest}">
+      <attribute name="Built-By" value="${user.name}"/>
+      <attribute name="Title" value="${TITLE}"/>
+      <attribute name="Version" value="${VERSION}"/>
+      <attribute name="Vendor" value="${VENDOR}"/>
+      <attribute name="Sealed" value="${sealed}"/>
+      <!--
+      <attribute name="Main-Class" value="${class.main}"/>
+      <attribute name="Class-Path" value="${app.classpath}"/>
+      -->
+    </manifest>
+    <echo message="create-manifest done!"/>
+  </target>
+
+
+  <target name="build-tests" depends="test-clean,test-build-classpath">
+    <!-- compiles the project test source-->
+    <mkdir dir="${dir}/${folder.test}/${folder.build}"/>
+    <mkdir dir="${dir}/${folder.test}/${folder.report}"/>
+    <javac destdir="${dir}/${folder.test}/${folder.build}" debug="true" compiler="modern" encoding="UTF-8" deprecation="on" classpathref="test.build.classpath">
+      <src path="${dir}/${folder.test}/${folder.source}"/>
+    </javac>
+    <echo message="test-build done!"/>
+  </target>
+  <target name="test-clean">
+    <!-- cleans the test build folder -->
+    <delete dir="${dir}/${folder.test}/${folder.report}"/>
+    <delete dir="${dir}/${folder.test}/${folder.build}"/>
+    <echo message="test-clean done!"/>
+  </target>
+  <target name="test-build-classpath" depends="build">
+    <!-- defines the classpath for test build -->
+    <path id="test.build.classpath">
+      <fileset dir="${dir}/${folder.bin}">
+        <include name="**/*.jar"/>
+      </fileset>
+    </path>
+    <echo message="test-libs done!"/>
+  </target>
+
+
+  <target name="doc-clean">
+    <!-- cleans the doc folder -->
+    <delete dir="${dir}/${folder.doc}"/>
+    <echo message="doc-clean done!"/>
+  </target>
+  
+</project>

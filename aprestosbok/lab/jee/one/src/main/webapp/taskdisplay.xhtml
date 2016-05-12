@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head></h:head> 
+<body> 
+<h:form>
+        <h:graphicImage value="#{resource['images:wave.med.gif']}"/>
+    <h2>
+        <h:outputText id="id" value="#{task.id}"/>
+    </h2>
+    <h2>
+        <h:outputText id="name" value="#{task.name}"/>
+    </h2>
+    <h2>
+        <h:outputText id="notes" value="#{task.notes}"/>
+    </h2>
+    <h2>
+        <h:outputText id="predecessor" value="#{task.predecessor}"/>
+    </h2>
+    <h2>
+        <h:outputText id="priority" value="#{task.priority}"/>
+    </h2>
+    
+        <h:commandButton id="back" value="Back" action="Task.xhtml"/>
+    </h:form>
+</body> 
+</html>

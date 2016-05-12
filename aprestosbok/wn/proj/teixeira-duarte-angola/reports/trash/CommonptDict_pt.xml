@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalogue>
+	<message key="Sales per Client and Article between dates">Vendas por cliente e artigo entre datas</message>
+	<message key="Article Number">Nº de artigo</message>
+	<message key="Customer Number">Nº de cliente</message>
+	<message key="Dept Number">Nº de Família</message>
+	<message key="Dept Name">Família</message>
+	<message key="qtysold">Qtd</message>
+	<message key="amtsold">Valor Bruto</message>
+	<message key="amtdisc">Descontos</message>
+	<message key="amtsoldcost">Custo</message>
+	<message key="netamtsold">Valor Líquido</message>
+	<message key="amtmargin">Margem</message>
+	<message key="percmargin">% Margem</message>
+</catalogue>

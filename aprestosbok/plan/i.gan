@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="I" company="" webLink="http://" view-date="2008-04-27" view-index="0" gantt-divider-location="703" resource-divider-location="301" version="2.0">
+    <description><![CDATA[i]]></description>
+    <view zooming-state="default:5" id="gantt-chart"/>
+    <view id="resource-table">
+        <field id="0" name="Name" width="55" order="0"/>
+        <field id="1" name="Default role" width="44" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <calendar id="1" name="default">
+                <default-week sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+                <overriden-day-types/>
+                <days/>
+            </calendar>
+        </day-types>
+    </calendars>
+    <tasks color="#8cb6ce">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+            <taskproperty id="tpc0" name="work" type="custom" valuetype="text" defaultvalue=""/>
+        </taskproperties>
+        <task id="9" name="Master Bolonha" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="false" start="2008-09-01" duration="1" complete="50" priority="0" expand="true">
+            <customproperty taskproperty-id="tpc0" value=""/>
+            <task id="11" name="checkar site da fct e Luís Duarte sobre info" meeting="false" start="2008-09-01" duration="1" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value=""/>
+            </task>
+        </task>
+        <task id="18" name="SS-pagar" color="#99cc00" meeting="false" start="2008-05-05" duration="1" complete="100" priority="1" expand="true">
+            <customproperty taskproperty-id="tpc0" value=""/>
+        </task>
+        <task id="29" name="Bricolage e Casa" meeting="false" start="2008-05-05" duration="74" complete="39" priority="1" expand="true">
+            <customproperty taskproperty-id="tpc0" value=""/>
+            <task id="30" name="obras casa de banho de dentro" meeting="false" start="2008-05-05" duration="1" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value=""/>
+            </task>
+            <task id="31" name="arrumar arrecadação e por prateleiras" meeting="false" start="2008-05-05" duration="1" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value=""/>
+            </task>
+            <task id="32" name="solução ferramentas despensa" meeting="false" start="2008-05-05" duration="1" complete="100" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value=""/>
+            </task>
+            <task id="33" name="obras na sala" meeting="false" start="2008-05-05" duration="74" complete="97" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value=""/>
+                <task id="34" name="rodapés" meeting="false" start="2008-05-05" duration="74" complete="100" priority="1" expand="true">
+                    <customproperty taskproperty-id="tpc0" value=""/>
+                </task>
+                <task id="36" name="alisar parede junto a tv" meeting="false" start="2008-05-05" duration="1" complete="0" priority="1" expand="true">
+                    <customproperty taskproperty-id="tpc0" value=""/>
+                </task>
+                <task id="35" name="alisar tecto" meeting="false" start="2008-05-05" duration="1" complete="0" priority="1" expand="true">
+                    <customproperty taskproperty-id="tpc0" value=""/>
+                </task>
+            </task>
+            <task id="37" name="obras no corredor" meeting="false" start="2008-05-05" duration="1" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value=""/>
+                <task id="38" name="alisar parede junto wc" meeting="false" start="2008-05-05" duration="1" complete="0" priority="1" expand="true">
+                    <customproperty taskproperty-id="tpc0" value=""/>
+                </task>
+            </task>
+        </task>
+        <task id="44" name="carro" meeting="false" start="2008-05-05" duration="1" complete="0" priority="1" expand="true">
+            <customproperty taskproperty-id="tpc0" value=""/>
+            <task id="45" name="ver das peças" meeting="false" start="2008-05-05" duration="1" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value=""/>
+            </task>
+            <task id="46" name="tratar da roda" meeting="false" start="2008-05-05" duration="1" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value=""/>
+            </task>
+            <task id="52" name="analisar relatório da precision" color="#8cb6ce" meeting="false" start="2008-05-05" duration="1" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value=""/>
+            </task>
+        </task>
+        <task id="41" name="dentista Isabel" meeting="false" start="2008-05-05" duration="1" complete="0" priority="1" expand="true">
+            <customproperty taskproperty-id="tpc0" value=""/>
+            <task id="42" name="saber da placa" meeting="false" start="2008-05-05" duration="1" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value=""/>
+            </task>
+            <task id="43" name="ir fazer orçamento" meeting="false" start="2008-05-05" duration="1" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value=""/>
+            </task>
+        </task>
+        <task id="48" name="mota" meeting="false" start="2008-05-05" duration="1" complete="0" priority="1" expand="true">
+            <customproperty taskproperty-id="tpc0" value=""/>
+            <task id="49" name="arranjar (~600€)" meeting="false" start="2008-05-05" duration="1" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value=""/>
+            </task>
+        </task>
+        <task id="59" name="study" color="#8cb6ce" meeting="false" start="2008-04-28" duration="200" complete="0" priority="1" expand="true">
+            <customproperty taskproperty-id="tpc0" value=""/>
+            <task id="60" name="gwt" color="#8cb6ce" meeting="false" start="2008-04-28" duration="27" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value="554pages=28days"/>
+            </task>
+            <task id="64" name="glassfish" color="#8cb6ce" meeting="false" start="2008-06-05" duration="21" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value="424pages=22days"/>
+            </task>
+            <task id="72" name="effective 2ª+4ª" color="#8cb6ce" meeting="false" start="2008-04-28" duration="33" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value="272pages=14days"/>
+            </task>
+            <task id="73" name="certification 3ª+6ª" color="#8cb6ce" meeting="false" start="2008-04-29" duration="38" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value="312pages=16days"/>
+            </task>
+            <task id="74" name="design patterns 4ª + Sáb" color="#8cb6ce" meeting="false" start="2008-04-30" duration="125" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value="51"/>
+            </task>
+            <task id="75" name="algorithms" color="#8cb6ce" meeting="false" start="2008-10-27" duration="23" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value=""/>
+            </task>
+            <task id="76" name="electronics Sáb+Dom" color="#8cb6ce" meeting="false" start="2008-05-05" duration="195" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value=""/>
+            </task>
+            <task id="77" name="concurrency 2ª+4ª" color="#8cb6ce" meeting="false" start="2008-06-16" duration="47" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value="384pages=20days"/>
+            </task>
+            <task id="78" name="linux prog" color="#8cb6ce" meeting="false" start="2008-05-05" duration="1" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value=""/>
+            </task>
+            <task id="90" name="lean" color="#8cb6ce" meeting="false" start="2008-04-28" duration="1" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value=""/>
+            </task>
+        </task>
+        <task id="80" name="do work" color="#8cb6ce" meeting="false" start="2008-04-28" duration="1" complete="0" priority="1" expand="true">
+            <customproperty taskproperty-id="tpc0" value=""/>
+            <task id="81" name="personal repository" color="#8cb6ce" meeting="false" start="2008-04-28" duration="1" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value=""/>
+                <task id="83" name="create disk images" color="#8cb6ce" meeting="false" start="2008-04-28" duration="1" complete="0" priority="1" expand="true">
+                    <customproperty taskproperty-id="tpc0" value=""/>
+                </task>
+                <task id="82" name="create backup scripts" color="#8cb6ce" meeting="false" start="2008-04-28" duration="1" complete="0" priority="1" expand="true">
+                    <customproperty taskproperty-id="tpc0" value=""/>
+                </task>
+            </task>
+            <task id="85" name="SGP" color="#8cb6ce" meeting="false" start="2008-04-28" duration="1" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value=""/>
+                <task id="84" name="redefine processes" color="#8cb6ce" meeting="false" start="2008-04-28" duration="1" complete="0" priority="1" expand="true">
+                    <customproperty taskproperty-id="tpc0" value=""/>
+                </task>
+                <task id="87" name="define software requirements" color="#8cb6ce" meeting="false" start="2008-04-28" duration="1" complete="0" priority="1" expand="true">
+                    <customproperty taskproperty-id="tpc0" value=""/>
+                </task>
+            </task>
+            <task id="88" name="framework" color="#8cb6ce" meeting="false" start="2008-04-28" duration="1" complete="0" priority="1" expand="true">
+                <customproperty taskproperty-id="tpc0" value=""/>
+                <task id="89" name="study eclipse/netbeans/osgi/jpf" color="#8cb6ce" meeting="false" start="2008-04-28" duration="1" complete="0" priority="1" expand="true">
+                    <customproperty taskproperty-id="tpc0" value=""/>
+                </task>
+            </task>
+        </task>
+    </tasks>
+    <resources>
+        <resource id="0" name="I" function="Default:0" contacts="" phone=""/>
+    </resources>
+    <allocations>
+        <allocation task-id="60" resource-id="0" function="Default:1" responsible="false" load="100.0"/>
+    </allocations>
+    <vacations/>
+    <taskdisplaycolumns>
+        <displaycolumn property-id="tpd3" order="0" width="328"/>
+        <displaycolumn property-id="tpd4" order="1" width="42"/>
+        <displaycolumn property-id="tpd5" order="2" width="31"/>
+        <displaycolumn property-id="tpd7" order="3" width="25"/>
+        <displaycolumn property-id="tpc0" order="4" width="66"/>
+    </taskdisplaycolumns>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>

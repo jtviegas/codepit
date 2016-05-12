@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.0
+Created-By: 10.0-b23 (Sun Microsystems Inc.)
+Built-By: joao.viegas
+Title: Patterns Studies
+Version: 0.0.1.14
+Vendor: aprestos
+Sealed: false
+Build-Date: 20090426144958
+

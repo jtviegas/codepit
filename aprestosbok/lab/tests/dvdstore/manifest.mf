@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.8.2
+Created-By: 1.6.0_25-b06 (Sun Microsystems Inc.)
+Built-By: joao.viegas
+Title: dvdstore
+Version: 0.0.1.0.74
+Vendor: sky
+Build-Date: 20130505093654
+Main-Class: com.sky.dvdstore.Main
+Class-Path: lib/junit-4.7.jar
+

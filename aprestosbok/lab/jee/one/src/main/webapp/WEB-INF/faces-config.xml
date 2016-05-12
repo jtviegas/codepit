@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    version="2.0"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xsi:schemaLocation="
+      http://java.sun.com/xml/ns/javaee
+      http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd" >
+
+    <application>
+        <resource-bundle>
+            <base-name>org.aprestos.labs.studies.j2ee.messages</base-name>
+            <var>msgs</var>
+        </resource-bundle>
+        
+        <locale-config>
+			<default-locale>en</default-locale>
+			<supported-locale>pt</supported-locale>
+		</locale-config>
+
+    </application>
+
+</faces-config>

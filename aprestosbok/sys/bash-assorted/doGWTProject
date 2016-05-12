@@ -1,0 +1,46 @@
+#!/bin/bash
+
+#	doGWTProject
+#
+# creates a google web toolkit project with 
+# eclipse and ant settings
+#
+# version 0.1
+# date 20080220
+# author jtviegas
+
+###### user defined variables ##########
+gwt_path=/opt/lib/gwt/gwt-linux-1.4.61
+junit_path=/opt/lib/junit/junit-4.4.jar
+parent_package=org.aprestos.webdev
+########################################
+
+
+if [ "$1" = "" ];then
+	echo "The project name is missing, you must supply it!!!"	
+	echo "usage : $0 <project name>"
+	exit 1
+fi
+
+echo ...goint to start creating gwt project... 
+
+name=$1
+
+package=`echo $name | dd conv=lcase 2>/dev/null`
+class=$parent_package.$package.client.$name
+module=$parent_package.$package.$name
+test_class=$parent_package.$package.client.tests.${name}Test
+messages_class=$parent_package.$package.client.${name}Messages
+
+
+mkdir $name
+cd $name
+$gwt_path/projectCreator -eclipse $name -ant $name
+$gwt_path/applicationCreator -eclipse $name $class
+$gwt_path/junitCreator -junit $junit_path -module $module -eclipse $name $test_class
+$gwt_path/i18nCreator -eclipse $name -createMessages $messages_class
+
+
+
+echo ...done creating gwt project!
+exit 0

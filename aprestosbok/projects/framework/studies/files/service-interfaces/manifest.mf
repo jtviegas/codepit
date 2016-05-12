@@ -1,0 +1,10 @@
+Bundle-Name: services
+Bundle-Description: testing
+Bundle-Vendor: aprestos
+Bundle-Version: 0.0.1
+Bundle-Activator: org.aprestos.code.fw.studies.felix.services.interfaces.Activator
+Import-Package: org.osgi.framework
+Export-Package: org.aprestos.code.fw.studies.felix.services.interfaces
+
+
+

@@ -1,0 +1,17 @@
+org.aprestos.code.bok.common.impl
+org.aprestos.code.bok.common.interfaces
+org.aprestos.code.bok.common.misc
+org.aprestos.code.bok.exceptions
+org.aprestos.code.bok.gui.components.busynotifier
+org.aprestos.code.bok.gui.components.customdialog
+org.aprestos.code.bok.gui.components.customdialog.factory
+org.aprestos.code.bok.gui.components.customdialog.impl
+org.aprestos.code.bok.gui.components.customdialog.interfaces
+org.aprestos.code.bok.gui.components.customdialog.misc
+org.aprestos.code.bok.gui.misc
+org.aprestos.code.bok.gui.utils.MnemonicAndAcceleratorManager
+org.aprestos.code.bok.logger
+org.aprestos.code.bok.logger.exceptions
+org.aprestos.code.bok.logger.factories
+org.aprestos.code.bok.logger.impl
+org.aprestos.code.bok.logger.interfaces

@@ -1,0 +1,4 @@
+SUBSYSTEM=="block", ATTRS{start}=="63",	ATTRS{size}=="78156162", SYMLINK+="external-hd1"
+
+
+

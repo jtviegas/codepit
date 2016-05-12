@@ -1,0 +1,87 @@
+EJ MEDIA:
+
+      Column      |         Type          | From
+------------------+-----------------------+-----------
+ termnmbr         | smallint              | 15
+ transnmbr        | integer               | Novo numero (sequencial por POS 15)
+ linenmbr         | integer               | Sequencial por transaccao
+ rectype          | smallint              | 40
+ dcf              | bit(8)                | Header
+ posgrpnmbr       | smallint              | Header
+ functype         | smallint              | Header
+ saletype         | smallint              | 5
+ rsvdhdr          | smallint              | 0
+ datetime         | bigint                | Header
+ date             | character varying(16) | Header
+ time             | character varying(16) | Header
+ bdate            | integer               | A da tabela (ultima)
+ cshrnmbr         | bigint                | Header
+ seq              | integer               | Sequencial
+ mngrovnmbr       | bigint                | 0
+ funcsetovr       | smallint              | 0
+ mediakeybits     | bit(8)                | 00000000
+ mdesc            | character varying(21) | NUMERARIO ou CREDITO
+ mediaamnt        | bigint                | Trailer -> netsale
+ mediatype        | smallint              | 1 ou 8
+ changefrom       | smallint              | 1
+ accountnmbr      | numchar               | 0
+ accountstat      | character varying(20) | ''
+ accountaprovl    | character varying(20) | ''
+ rejmngrnmbr      | bigint                | 0
+ rejfuncsetovr    | smallint              | 0
+ creditflags      | bit(8)                | 00000000
+ entrytype        | smallint              | 2
+ medianmbr        | smallint              | 1 ou 222
+ expdate          | bigint                | 0
+ storemedia       | smallint              | 49
+ medgrpused       | smallint              | 1 ou 7
+ decpos           | smallint              | 2
+ drateexchg       | double precision      | 1
+ medcurrflag      | smallint              | 1
+ altcurrtend      | bigint                | Trailer -> netsale
+ discountgrpident | character varying(21) | '0'
+ flag             | bit(8)                | 00000000
+ meddisclinenmbr  | integer               | 0
+
+
+
+EJ SUBTOTAL:
+
+    Column    |         Type          | From
+--------------+-----------------------+-----------
+ termnmbr     | smallint              | 15 
+ transnmbr    | integer               | Novo numero (sequencial por POS 15)
+ linenmbr     | integer               | Sequencial por transaccao
+ rectype      | smallint              | 55
+ dcf          | bit(8)                | Header
+ posgrpnmbr   | smallint              | Header
+ functype     | smallint              | Header
+ saletype     | smallint              | 5
+ rsvdhdr      | smallint              | 0
+ datetime     | bigint                | Header
+ date         | character varying(16) | Header
+ time         | character varying(16) | Header
+ bdate        | integer               | A da tabela (ultima)
+ cshrnmbr     | bigint                | Header
+ seq          | integer               | Sequencial
+ amnt         | bigint                | Trailer -> netsale
+ print1contxt | smallint              | 7
+ print1text   | character varying(20) | 'SUBTOTAL'
+ print2contxt | smallint              | 0
+ print2text   | character varying(20) | ''
+
+
+
+
+
+Table "public.list_stored_notrecalled"
+   Column    |   Type   | Modifiers
+-------------+----------+-----------
+ termnmbrs   | smallint |
+ transnmbrs  | integer  |
+ bdates      | integer  |
+ storedamnts | bigint   |
+ custnmbr    | numchar  |
+
+* Acrescentar media
+

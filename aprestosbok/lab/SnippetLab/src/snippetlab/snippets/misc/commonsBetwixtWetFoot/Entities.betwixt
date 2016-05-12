@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<info>
+    <element name='class-entities'>
+       	<element name='role' property='roles' class='snippetlab.snippets.misc.commonsBetwixtWetFoot.Role'/>
+        <addDefaults/>
+    </element>
+</info>
+
+

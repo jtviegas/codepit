@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE database SYSTEM "http://db.apache.org/torque/dtd/database.dtd">
+<database name="transactionscript">
+
+  <table name="products">
+  
+    <column name="id"
+            type="INTEGER"
+            primaryKey="true"
+            required="true" />
+            
+    <column name="name"
+            type="VARCHAR"
+            size="50"
+            required="true"/>
+            
+    <column name="type"
+            type="VARCHAR"
+            size="50"
+            required="false"/>
+  </table>
+
+  <table name="contracts">
+  
+    <column name="id"
+            type="INTEGER"
+            required="true"
+            primaryKey="true"  />
+    
+    <column name="product"
+            type="INTEGER"
+            required="true" />
+                    
+    <column name="revenue"
+            type="DOUBLE"/>
+            
+    <column name="dateSigned"
+            type="DATE"/>
+            
+    <foreign-key foreignTable="products">
+      <reference local="product" foreign="id"/>
+    </foreign-key>  
+
+    <index name="product_idx">
+      <index-column name="product"/>
+    </index>
+    
+  </table>
+  
+  <table name="revenueRecognitions">
+  
+    <column name="contract"
+            type="INTEGER"
+            required="true"
+            primaryKey="true" />
+    
+    <column name="amount"
+            type="DOUBLE" />
+    
+    <column name="recognizedOn"
+            type="DATE"
+            primaryKey="true" />
+                            
+            
+    <foreign-key foreignTable="contracts">
+      <reference local="contract" foreign="id"/>
+    </foreign-key>  
+
+    <index name="contract_idx">
+      <index-column name="contract"/>
+    </index>
+    
+  </table>
+  
+</database>

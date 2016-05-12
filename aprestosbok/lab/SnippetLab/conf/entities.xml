@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : entities.xml.xml
+    Created on : 8 de Janeiro de 2008, 16:46
+    Author     : jtviegas
+    Description:
+        Purpose of the document follows.
+-->
+
+<entities>
+    <role id="213232" name="a" />
+    <role id="4353400765" name="e" />
+    
+</entities>

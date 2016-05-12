@@ -1,0 +1,241 @@
+﻿<project name="lamp" default="presentation" basedir="." >
+
+
+<!--   
+_____________________________
+	PROPERTIES 
+_____________________________
+-->
+
+   <property name="subtitle" value="Lamp server configuration on linux debian 3.0r1" />
+   <property name="notes" value="Dependencies that must be provided:${line.separator}Ant, with its binary accessible from the PATH environment variable;${line.separator}JRE, with the JAVA_HOME environment.${line.separator}Run ant with the -p switch to get acquainted with the public targets available."/>
+
+   <property name="server_root" location="/etc/apache2/sites-available" />
+   <property name="doc_root" location="/var/www" />
+   
+   <property name="publicFolder" value="public" />
+   <property name="logsFolder" value="logs" />
+   <property name="backupFolder" value="backup" />
+   <property name="privateFolder" value="private" />
+   <property name="cgiFolder" value="cgi-bin" />
+
+   <property name="defaultPage" value="index.html" />
+
+   <property name="certificate_file" value="/etc/apache2/ssl/apache.pem" />
+
+   <property name="certificate_length" value="365" />
+
+<!--   
+_____________________________
+	TARGETS 
+_____________________________
+-->
+
+<!--  TODO
+
+<target name="certificate" description="issues a self-signed certificate for the server">
+
+      <echo message="going to issue a self-signed server certificate..."/>
+      <exec executable="openssl" spawn="true" >
+         <arg line="req -new -x509 -days ${certificate_length} -nodes -out ${certificate_file} -keyout ${certificate_file}" />
+      </exec>
+      <echo message="...issued a self-signed server certificate!"/>
+
+</target>
+
+-->
+
+
+<target name="presentation" description="presents this build file">
+
+   <echo message="${subtitle}${line.separator}${notes}"/>
+
+</target>
+
+<target name="list_sites" description="list the sites at the server">
+      <echo message="sites at this server:"/>
+      <exec executable="ls">
+         <arg line="${doc_root}" />
+      </exec>
+</target>
+
+
+
+   <target name="create_site" depends="enable_site" description="creates a default site structure">
+      
+      <echo message="going to create site ${siteName}..."/>
+      <antcall target="restart_server"/>
+      <echo message="...created site ${siteName}!"/>
+
+   </target>
+
+<target name="restart_server">
+
+      <exec executable="/etc/init.d/apache2">
+         <arg line="restart" />
+      </exec>
+
+</target>
+
+   <target name="delete_site" depends="delete_site_folders" description="removes a site configuration and files">
+
+      <echo message="going to delete site ${siteName}..."/>
+      <antcall target="restart_server"/>
+      <echo message="...deleted site ${siteName}!"/>
+
+   </target>
+
+   <target name="disable_site" depends="getSiteName">
+
+      
+      <echo message="going to disable site ${siteName}..."/>
+      <exec executable="a2dissite">
+         <arg line="${siteName}" />
+      </exec>
+
+      <echo message="...disabled site ${siteName}!"/>
+   </target>
+
+   <target name="delete_site_config" depends="disable_site">
+
+      <echo message="going to delete site ${siteName} conf..."/>
+      <delete file="${server_root}/${siteName}"/>
+
+      <echo message="...deleted site ${siteName} conf!"/>
+   </target>
+
+   <target name="delete_site_folders" depends="delete_site_config">
+
+      <echo message="going to delete site ${siteName} folders..."/>
+      <delete dir="${doc_root}/${siteName}"/>
+
+      <echo message="...deleted site folders!"/>
+   </target>
+
+<target name="enable_site" depends="create_site_config">
+
+      <echo message="going to enable site ${siteName}..."/>
+   
+      <exec executable="a2ensite">
+         <arg line="${siteName}" />
+      </exec>
+
+      <echo message="...enabled site ${siteName}!"/>
+
+</target>
+
+<target name="create_site_config" depends="create_site_page">
+
+   
+      <echo message="going to create site conf..."/>
+      <echo file="${server_root}/${siteName}" message="&lt;VirtualHost *&gt;${line.separator}ServerAdmin ${webmaster_email}${line.separator}ServerName ${siteName}${line.separator}ServerAlias www.${siteName}${line.separator}DirectoryIndex ${defaultPage}${line.separator}DocumentRoot ${doc_root}/${siteName}/${publicFolder}${line.separator}ErrorLog ${doc_root}/${siteName}/${logsFolder}/error.log${line.separator}CustomLog ${doc_root}/${siteName}/${logsFolder}/access.log combined${line.separator}&lt;/VirtualHost&gt;" />
+
+      <echo message="..created site conf!"/>
+</target>
+
+
+   <target name="create_site_page" depends="create_site_folders">
+
+      <echo message="going to create site page..."/>
+      <touch file="${doc_root}/${siteName}/${publicFolder}/${defaultPage}"/>
+      <echo file="${doc_root}/${siteName}/${publicFolder}/${defaultPage}" message="&lt;html&gt;${line.separator}&lt;head&gt;${line.separator}&lt;title&gt;${siteName}&lt;/title&gt;${line.separator}&lt;/head&gt;${line.separator}&lt;body&gt;${line.separator}&lt;h1&gt;${siteName}&lt;/h1&gt;${line.separator}&lt;/body&gt;${line.separator}&lt;/html&gt;" />
+
+      <echo message="...created site page!"/>
+
+   </target>
+
+
+   <target name="create_site_folders" depends="getSiteName">
+
+      <echo message="going to create site folders..."/>
+      <exec executable="mkdir">
+         <arg line="-p ${doc_root}/${siteName}" />
+      </exec>
+
+      <exec executable="mkdir">
+         <arg line="-p ${doc_root}/${siteName}/${publicFolder}" />
+      </exec>
+      <exec executable="mkdir">
+         <arg line="-p ${doc_root}/${siteName}/${privateFolder}" />
+      </exec>
+      <exec executable="mkdir">
+         <arg line="-p ${doc_root}/${siteName}/${logsFolder}" />
+      </exec>
+      <exec executable="mkdir">
+         <arg line="-p ${doc_root}/${siteName}/${backupFolder}" />
+      </exec>
+      <exec executable="mkdir">
+         <arg line="-p ${doc_root}/${siteName}/${cgiFolder}" />
+      </exec>
+      <echo message="...created site folders!"/>
+   </target>
+
+   <target name="getSiteName">
+      
+      <echo message="going to get site name..."/>
+
+      <input message="please supply the site name:" addproperty="siteName"/>
+      <condition property="abort">
+         
+	    <equals arg1="" arg2="${siteName}"/>
+	 
+      </condition>
+
+      <fail if="abort">Aborted!Must supply site name!Bye.</fail>
+
+
+      <echo message="...got site named ${siteName}!"/>
+
+   </target>
+
+
+   <target name="config_server" depends="phpDebs" description="Starts the lamp server configuration">
+
+      <echo message="going to perform the configuration of the lamp..."/>
+
+      <echo message="...lamp configuration finished!"/>
+
+   </target>
+
+
+
+   <target name="phpDebs" depends="setSslPort">
+
+
+      <echo message="going to install php debs..."/>
+
+      <exec executable="apt-get">
+         <arg line="install -y libapache2-mod-php5 php5 php5-common php5-curl php5-dev php5-gd php5-imagick php5-mcrypt php5-memcache php5-mhash php5-mysql php5-pspell php5-snmp php5-sqlite php5-xmlrpc php5-xsl" />
+      </exec>
+
+      <echo message="...installed php debs!"/>
+   </target>
+
+   <target name="setSslPort" depends="apacheDebs">
+      <echo message="going to set apache to listen to ssl port..."/>
+      <echo file="/etc/apache2/ports.conf" append="true">Listen 443</echo>
+      <echo message="...apache will listen to ssl port now!"/>
+   </target>
+
+
+   <target name="apacheDebs" depends="defaultDebs">
+      
+      <echo message="going to install apache debs..."/>
+      <exec executable="apt-get">
+         <arg line="install -y apache2 apache2-mpm-prefork apache2-utils libexpat1 ssl-cert"/>
+      </exec>
+
+      <echo message="...installed apache debs!"/>
+   </target>
+
+   <target name="defaultDebs" depends="">
+      <echo message="going to install default debs..."/>
+      <exec executable="apt-get">
+         <arg line="install -y ssh vim less bzip2"/>
+      </exec>
+
+      <echo message="...installed default debs!"/>
+   </target>
+
+
+</project>

@@ -1,0 +1,35 @@
+#!/bin/bash
+
+#	doJ2eeAssemblyRoot
+#	Creates a web module structured directory,
+#	for a j2ee 5 application development.
+#	
+#	version 0.1
+#	date 20070819
+#	author jtviegas
+
+
+_flag=$1
+
+if [ -z $_flag ];
+then
+	echo "usage: $0 <assembly-name>";
+	exit 1
+else
+
+	
+
+	if [ -e $_flag ];
+	then
+		if [ -d $_flag ];
+		then
+			echo "$_flag : the directory already exists.Going to quit!"
+		fi
+	else
+		
+		mkdir $_flag && mkdir $_flag/WEB-INF && mkdir $_flag/WEB-INF/lib && mkdir $_flag/WEB-INF/classes && mkdir $_flag/WEB-INF/tags
+
+	fi
+
+
+fi

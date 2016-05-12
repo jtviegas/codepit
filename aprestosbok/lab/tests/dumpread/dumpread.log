@@ -1,0 +1,358 @@
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Finished creating instance of bean 'log4jInitialization'
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'dbconnection'
+20130323155005|main|DEBUG|org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor: Autowiring by type from bean name 'recordgw' to bean named 'dbconnection'
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Finished creating instance of bean 'recordgw'
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Creating shared instance of singleton bean 'dumpreader'
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Creating instance of bean 'dumpreader'
+20130323155005|main|DEBUG|org.springframework.beans.factory.annotation.InjectionMetadata: Found injected element on class [org.tests.dumpread.DumpReadImpl]: AutowiredFieldElement for private org.tests.dumpread.parsers.interfaces.DumpFileParser org.tests.dumpread.DumpReadImpl.fileParser
+20130323155005|main|DEBUG|org.springframework.beans.factory.annotation.InjectionMetadata: Found injected element on class [org.tests.dumpread.DumpReadImpl]: AutowiredFieldElement for private org.tests.dumpread.parsers.interfaces.DumpRecordFieldParser org.tests.dumpread.DumpReadImpl.recordFieldParser
+20130323155005|main|DEBUG|org.springframework.beans.factory.annotation.InjectionMetadata: Found injected element on class [org.tests.dumpread.DumpReadImpl]: AutowiredFieldElement for private org.tests.dumpread.data.interfaces.RecordGW org.tests.dumpread.DumpReadImpl.recordTableGW
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Eagerly caching bean 'dumpreader' to allow for resolving potential circular references
+20130323155005|main|DEBUG|org.springframework.beans.factory.annotation.InjectionMetadata: Processing injected method of bean 'dumpreader': AutowiredFieldElement for private org.tests.dumpread.parsers.interfaces.DumpFileParser org.tests.dumpread.DumpReadImpl.fileParser
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Creating shared instance of singleton bean 'fileParser'
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Creating instance of bean 'fileParser'
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Eagerly caching bean 'fileParser' to allow for resolving potential circular references
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Finished creating instance of bean 'fileParser'
+20130323155005|main|DEBUG|org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor: Autowiring by type from bean name 'dumpreader' to bean named 'fileParser'
+20130323155005|main|DEBUG|org.springframework.beans.factory.annotation.InjectionMetadata: Processing injected method of bean 'dumpreader': AutowiredFieldElement for private org.tests.dumpread.parsers.interfaces.DumpRecordFieldParser org.tests.dumpread.DumpReadImpl.recordFieldParser
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Creating shared instance of singleton bean 'recordfieldparser'
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Creating instance of bean 'recordfieldparser'
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Eagerly caching bean 'recordfieldparser' to allow for resolving potential circular references
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Finished creating instance of bean 'recordfieldparser'
+20130323155005|main|DEBUG|org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor: Autowiring by type from bean name 'dumpreader' to bean named 'recordfieldparser'
+20130323155005|main|DEBUG|org.springframework.beans.factory.annotation.InjectionMetadata: Processing injected method of bean 'dumpreader': AutowiredFieldElement for private org.tests.dumpread.data.interfaces.RecordGW org.tests.dumpread.DumpReadImpl.recordTableGW
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'recordgw'
+20130323155005|main|DEBUG|org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor: Autowiring by type from bean name 'dumpreader' to bean named 'recordgw'
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Finished creating instance of bean 'dumpreader'
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'fileParser'
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'recordfieldparser'
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'org.springframework.beans.factory.config.PropertyPlaceholderConfigurer#0'
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'log4jInitialization'
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor'
+20130323155005|main|DEBUG|org.springframework.context.support.ClassPathXmlApplicationContext: Unable to locate LifecycleProcessor with name 'lifecycleProcessor': using default [org.springframework.context.support.DefaultLifecycleProcessor@47ad6b4b]
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'lifecycleProcessor'
+20130323155005|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'dbconnection'
+20130323155005|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: @open
+20130323155007|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'recordgw'
+20130323155007|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'dumpreader'
+20130323155007|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'recordfieldparser'
+20130323155007|main|DEBUG|org.tests.dumpread.parsers.impl.DumpRecordFieldParserImpl: @parseRecord
+20130323155007|main|DEBUG|org.tests.dumpread.parsers.impl.DumpRecordFieldParserImpl: parseRecord@
+20130323155007|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'dumpreader'
+20130323155007|main|DEBUG|org.tests.dumpread.DumpReadImpl: @readDumpIn
+20130323155007|main|DEBUG|org.tests.dumpread.data.impl.RecordGWImpl: @init
+20130323155007|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: @open
+20130323155008|main|DEBUG|org.tests.dumpread.data.impl.RecordGWImpl: @rollbackTransaction
+20130323155008|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: @getConnection
+20130323155008|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: getConnection@
+20130323155008|main|ERROR|org.tests.dumpread.DumpReadImpl: org.tests.dumpread.exceptions.GWException: java.lang.NullPointerException
+	at org.tests.dumpread.data.impl.RecordGWImpl.rollbackTransaction(RecordGWImpl.java:98)
+	at org.tests.dumpread.DumpReadImpl.readDumpIn(DumpReadImpl.java:60)
+	at org.tests.dumpread.AppTest.testDumpReader(AppTest.java:79)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:44)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:41)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.BlockJUnit4ClassRunner.runNotIgnored(BlockJUnit4ClassRunner.java:79)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:71)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:49)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:193)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:52)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:191)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:42)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:184)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:31)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:236)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+Caused by: java.lang.NullPointerException
+	at org.tests.dumpread.data.impl.RecordGWImpl.rollbackTransaction(RecordGWImpl.java:95)
+	... 33 more
+
+20130323155008|main|DEBUG|org.tests.dumpread.data.impl.RecordGWImpl: @deinit
+20130323155008|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: @close
+20130323155008|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: close@
+20130323155008|main|DEBUG|org.tests.dumpread.data.impl.RecordGWImpl: deinit@
+20130323155008|main|DEBUG|org.tests.dumpread.parsers.impl.DumpFileParserImpl: @close
+20130323155008|main|DEBUG|org.tests.dumpread.parsers.impl.DumpFileParserImpl: close@
+20130323155008|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'dumpreader'
+20130323155008|main|DEBUG|org.tests.dumpread.DumpReadImpl: @readDumpIn
+20130323155008|main|DEBUG|org.tests.dumpread.data.impl.RecordGWImpl: @init
+20130323155008|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: @open
+20130323155009|main|DEBUG|org.tests.dumpread.data.impl.RecordGWImpl: @rollbackTransaction
+20130323155009|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: @getConnection
+20130323155009|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: getConnection@
+20130323155009|main|ERROR|org.tests.dumpread.DumpReadImpl: org.tests.dumpread.exceptions.GWException: java.lang.NullPointerException
+	at org.tests.dumpread.data.impl.RecordGWImpl.rollbackTransaction(RecordGWImpl.java:98)
+	at org.tests.dumpread.DumpReadImpl.readDumpIn(DumpReadImpl.java:60)
+	at org.tests.dumpread.AppTest.test2DumpReader(AppTest.java:88)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:44)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:41)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:21)
+	at org.junit.runners.BlockJUnit4ClassRunner.runNotIgnored(BlockJUnit4ClassRunner.java:79)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:71)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:49)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:193)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:52)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:191)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:42)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:184)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:31)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:236)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+Caused by: java.lang.NullPointerException
+	at org.tests.dumpread.data.impl.RecordGWImpl.rollbackTransaction(RecordGWImpl.java:95)
+	... 34 more
+
+20130323155009|main|DEBUG|org.tests.dumpread.data.impl.RecordGWImpl: @deinit
+20130323155009|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: @close
+20130323155009|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: close@
+20130323155009|main|DEBUG|org.tests.dumpread.data.impl.RecordGWImpl: deinit@
+20130323155009|main|ERROR|org.tests.dumpread.DumpReadImpl: java.lang.NullPointerException
+	at org.tests.dumpread.DumpReadImpl.readDumpIn(DumpReadImpl.java:74)
+	at org.tests.dumpread.AppTest.test2DumpReader(AppTest.java:88)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:44)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:41)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:21)
+	at org.junit.runners.BlockJUnit4ClassRunner.runNotIgnored(BlockJUnit4ClassRunner.java:79)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:71)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:49)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:193)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:52)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:191)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:42)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:184)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:31)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:236)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Finished creating instance of bean 'log4jInitialization'
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'dbconnection'
+20130323155022|main|DEBUG|org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor: Autowiring by type from bean name 'recordgw' to bean named 'dbconnection'
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Finished creating instance of bean 'recordgw'
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Creating shared instance of singleton bean 'dumpreader'
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Creating instance of bean 'dumpreader'
+20130323155022|main|DEBUG|org.springframework.beans.factory.annotation.InjectionMetadata: Found injected element on class [org.tests.dumpread.DumpReadImpl]: AutowiredFieldElement for private org.tests.dumpread.parsers.interfaces.DumpFileParser org.tests.dumpread.DumpReadImpl.fileParser
+20130323155022|main|DEBUG|org.springframework.beans.factory.annotation.InjectionMetadata: Found injected element on class [org.tests.dumpread.DumpReadImpl]: AutowiredFieldElement for private org.tests.dumpread.parsers.interfaces.DumpRecordFieldParser org.tests.dumpread.DumpReadImpl.recordFieldParser
+20130323155022|main|DEBUG|org.springframework.beans.factory.annotation.InjectionMetadata: Found injected element on class [org.tests.dumpread.DumpReadImpl]: AutowiredFieldElement for private org.tests.dumpread.data.interfaces.RecordGW org.tests.dumpread.DumpReadImpl.recordTableGW
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Eagerly caching bean 'dumpreader' to allow for resolving potential circular references
+20130323155022|main|DEBUG|org.springframework.beans.factory.annotation.InjectionMetadata: Processing injected method of bean 'dumpreader': AutowiredFieldElement for private org.tests.dumpread.parsers.interfaces.DumpFileParser org.tests.dumpread.DumpReadImpl.fileParser
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Creating shared instance of singleton bean 'fileParser'
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Creating instance of bean 'fileParser'
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Eagerly caching bean 'fileParser' to allow for resolving potential circular references
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Finished creating instance of bean 'fileParser'
+20130323155022|main|DEBUG|org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor: Autowiring by type from bean name 'dumpreader' to bean named 'fileParser'
+20130323155022|main|DEBUG|org.springframework.beans.factory.annotation.InjectionMetadata: Processing injected method of bean 'dumpreader': AutowiredFieldElement for private org.tests.dumpread.parsers.interfaces.DumpRecordFieldParser org.tests.dumpread.DumpReadImpl.recordFieldParser
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Creating shared instance of singleton bean 'recordfieldparser'
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Creating instance of bean 'recordfieldparser'
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Eagerly caching bean 'recordfieldparser' to allow for resolving potential circular references
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Finished creating instance of bean 'recordfieldparser'
+20130323155022|main|DEBUG|org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor: Autowiring by type from bean name 'dumpreader' to bean named 'recordfieldparser'
+20130323155022|main|DEBUG|org.springframework.beans.factory.annotation.InjectionMetadata: Processing injected method of bean 'dumpreader': AutowiredFieldElement for private org.tests.dumpread.data.interfaces.RecordGW org.tests.dumpread.DumpReadImpl.recordTableGW
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'recordgw'
+20130323155022|main|DEBUG|org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor: Autowiring by type from bean name 'dumpreader' to bean named 'recordgw'
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Finished creating instance of bean 'dumpreader'
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'fileParser'
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'recordfieldparser'
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'org.springframework.beans.factory.config.PropertyPlaceholderConfigurer#0'
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'log4jInitialization'
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor'
+20130323155022|main|DEBUG|org.springframework.context.support.ClassPathXmlApplicationContext: Unable to locate LifecycleProcessor with name 'lifecycleProcessor': using default [org.springframework.context.support.DefaultLifecycleProcessor@68302e67]
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'lifecycleProcessor'
+20130323155022|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'dbconnection'
+20130323155022|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: @open
+20130323155024|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'recordgw'
+20130323155024|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'dumpreader'
+20130323155024|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'recordfieldparser'
+20130323155024|main|DEBUG|org.tests.dumpread.parsers.impl.DumpRecordFieldParserImpl: @parseRecord
+20130323155024|main|DEBUG|org.tests.dumpread.parsers.impl.DumpRecordFieldParserImpl: parseRecord@
+20130323155024|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'dumpreader'
+20130323155024|main|DEBUG|org.tests.dumpread.DumpReadImpl: @readDumpIn
+20130323155024|main|DEBUG|org.tests.dumpread.data.impl.RecordGWImpl: @init
+20130323155024|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: @open
+20130323155025|main|DEBUG|org.tests.dumpread.data.impl.RecordGWImpl: @rollbackTransaction
+20130323155025|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: @getConnection
+20130323155025|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: getConnection@
+20130323155025|main|ERROR|org.tests.dumpread.DumpReadImpl: org.tests.dumpread.exceptions.GWException: java.lang.NullPointerException
+	at org.tests.dumpread.data.impl.RecordGWImpl.rollbackTransaction(RecordGWImpl.java:98)
+	at org.tests.dumpread.DumpReadImpl.readDumpIn(DumpReadImpl.java:60)
+	at org.tests.dumpread.AppTest.testDumpReader(AppTest.java:79)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:44)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:41)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.BlockJUnit4ClassRunner.runNotIgnored(BlockJUnit4ClassRunner.java:79)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:71)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:49)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:193)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:52)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:191)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:42)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:184)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:31)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:236)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+Caused by: java.lang.NullPointerException
+	at org.tests.dumpread.data.impl.RecordGWImpl.rollbackTransaction(RecordGWImpl.java:95)
+	... 33 more
+
+20130323155025|main|DEBUG|org.tests.dumpread.data.impl.RecordGWImpl: @deinit
+20130323155025|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: @close
+20130323155025|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: close@
+20130323155025|main|DEBUG|org.tests.dumpread.data.impl.RecordGWImpl: deinit@
+20130323155025|main|DEBUG|org.tests.dumpread.parsers.impl.DumpFileParserImpl: @close
+20130323155025|main|DEBUG|org.tests.dumpread.parsers.impl.DumpFileParserImpl: close@
+20130323155025|main|DEBUG|org.springframework.beans.factory.support.DefaultListableBeanFactory: Returning cached instance of singleton bean 'dumpreader'
+20130323155025|main|DEBUG|org.tests.dumpread.DumpReadImpl: @readDumpIn
+20130323155025|main|DEBUG|org.tests.dumpread.data.impl.RecordGWImpl: @init
+20130323155025|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: @open
+20130323155026|main|DEBUG|org.tests.dumpread.data.impl.RecordGWImpl: @rollbackTransaction
+20130323155026|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: @getConnection
+20130323155026|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: getConnection@
+20130323155026|main|ERROR|org.tests.dumpread.DumpReadImpl: org.tests.dumpread.exceptions.GWException: java.lang.NullPointerException
+	at org.tests.dumpread.data.impl.RecordGWImpl.rollbackTransaction(RecordGWImpl.java:98)
+	at org.tests.dumpread.DumpReadImpl.readDumpIn(DumpReadImpl.java:60)
+	at org.tests.dumpread.AppTest.test2DumpReader(AppTest.java:88)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:44)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:41)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:21)
+	at org.junit.runners.BlockJUnit4ClassRunner.runNotIgnored(BlockJUnit4ClassRunner.java:79)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:71)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:49)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:193)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:52)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:191)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:42)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:184)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:31)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:236)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+Caused by: java.lang.NullPointerException
+	at org.tests.dumpread.data.impl.RecordGWImpl.rollbackTransaction(RecordGWImpl.java:95)
+	... 34 more
+
+20130323155026|main|DEBUG|org.tests.dumpread.data.impl.RecordGWImpl: @deinit
+20130323155026|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: @close
+20130323155026|main|DEBUG|org.tests.dumpread.data.impl.DBConnectionImpl: close@
+20130323155026|main|DEBUG|org.tests.dumpread.data.impl.RecordGWImpl: deinit@
+20130323155026|main|ERROR|org.tests.dumpread.DumpReadImpl: java.lang.NullPointerException
+	at org.tests.dumpread.DumpReadImpl.readDumpIn(DumpReadImpl.java:74)
+	at org.tests.dumpread.AppTest.test2DumpReader(AppTest.java:88)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:44)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:41)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.ExpectException.evaluate(ExpectException.java:21)
+	at org.junit.runners.BlockJUnit4ClassRunner.runNotIgnored(BlockJUnit4ClassRunner.java:79)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:71)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:49)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:193)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:52)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:191)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:42)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:184)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:31)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:236)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+

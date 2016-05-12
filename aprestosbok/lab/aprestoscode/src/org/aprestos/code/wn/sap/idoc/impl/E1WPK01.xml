@@ -1,0 +1,67 @@
+<Segment>
+	
+	<Fields>
+	
+		<!-- START OF SEGMENT HEADER -->
+	
+		<Field>
+			<startIndex>0</startIndex>
+			<endIndex>30</endIndex>
+			<name>SEGNAME</name>
+			<value>E2WPK01</value>
+		</Field>
+		
+		<Field>
+			<startIndex>30</startIndex>
+			<endIndex>33</endIndex>
+			<name>MANDT</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>33</startIndex>
+			<endIndex>49</endIndex>
+			<name>DOCNUM</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>49</startIndex>
+			<endIndex>55</endIndex>
+			<name>SEGNUM</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>55</startIndex>
+			<endIndex>61</endIndex>
+			<name>PSGNUM</name>
+			<value>000000</value>
+		</Field>
+		
+		<Field>
+			<startIndex>61</startIndex>
+			<endIndex>63</endIndex>
+			<name>HLEVEL</name>
+			<value>00</value>
+		</Field>
+		
+		<!-- ENF OF SEGMENT HEADER -->
+				
+		<Field>
+			<startIndex>63</startIndex>
+			<endIndex>93</endIndex>
+			<name>VORGDATUM</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>93</startIndex>
+			<endIndex>96</endIndex>
+			<name>STAFO</name>
+			<value>000800</value>
+		</Field>
+				
+	</Fields>
+	
+</Segment>

@@ -1,0 +1,36 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.0
+Created-By: 10.0-b22 (Sun Microsystems Inc.)
+Built-By: jmv
+Title: Just Another Swing Framework
+Version: 0.0.1.4
+Vendor: Aprestos
+Build-Date: 20100425014734
+Class-Path: lib/DdlUtils-1.0.jar lib/antlr-2.7.6.jar lib/aopalliance-1
+ .0.jar lib/asm-1.5.3.jar lib/asm-attrs-1.5.3.jar lib/cglib-2.1_3.jar 
+ lib/commons-beanutils-1.8.0.jar lib/commons-betwixt-0.8.jar lib/commo
+ ns-chain-1.1.jar lib/commons-collections-2.1.jar lib/commons-collecti
+ ons-3.2.1.jar lib/commons-digester-1.8.jar lib/commons-lang-1.0.1.jar
+  lib/commons-lang-2.1.jar lib/commons-logging-1.0.3.jar lib/commons-l
+ ogging-1.1.1.jar lib/derby.jar lib/dom4j-1.6.1.jar lib/ehcache-1.2.3.
+ jar lib/ejb3-persistence-1.0.2.GA.jar lib/forms-1.2.1.jar lib/glazedl
+ ists_java15-1.8.0.jar lib/hibernate-3.2.1.ga.jar lib/hibernate-annota
+ tions-3.4.0.GA.jar lib/hibernate-commons-annotations-3.3.0.ga.jar lib
+ /hibernate-core-3.3.0.SP1.jar lib/hibernate-validator-3.0.0.ga.jar li
+ b/jdic-shared-0.9.3.jar lib/jhelp-2.0.jar lib/jta-1.1.jar lib/junit-4
+ .4.jar lib/l2fprod-common-all-7.3.jar lib/log4j-1.2.9.jar lib/looks-2
+ .2.0.jar lib/ognl-2.6.9.jar lib/persistence-api-1.0.jar lib/pg74.213.
+ jdbc3.jar lib/slf4j-api-1.4.2.jar lib/spring-beans-2.5.5.jar lib/spri
+ ng-binding-1.0.5.jar lib/spring-context-2.5.5.jar lib/spring-core-2.5
+ .5.jar lib/spring-richclient-core-1.1.0.jar lib/spring-richclient-jdk
+ 6-1.1.0.jar lib/spring-richclient-resources-1.1.0.jar lib/spring-rich
+ client-samples-dataeditor-1.1.0.jar lib/spring-richclient-samples-sho
+ wcase-1.1.0.jar lib/spring-richclient-samples-simple-1.1.0.jar lib/sp
+ ring-richclient-samples-swingdocking-1.1.0.jar lib/spring-richclient-
+ samples-vldocking-1.1.0.jar lib/spring-richclient-sandbox-1.1.0.jar l
+ ib/spring-richclient-swingdocking-1.1.0.jar lib/spring-richclient-vld
+ ocking-1.1.0.jar lib/spring-web-2.5.5.jar lib/sqljdbc4.jar lib/swing-
+ worker-1.1.jar lib/swingdocking-core-1.0.0.jar lib/swingdocking-musta
+ ng-1.0.0.jar lib/swingx-0.9.3.jar lib/vldocking-2.1.4.jar lib/wncommo
+ ns.jar lib/xml-apis-1.0.b2.jar
+

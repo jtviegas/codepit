@@ -1,0 +1,8 @@
+1. add missing maven dependency for google guava
+2. fix N:1 mapping for Member-Diagnosis relation (one member has multiple diagnoses)
+3. implement method findMembersByDiagnosis in MemberRepository class
+4. write unit test for MemberRepository class
+5. implement XmlParser class (use JDK or any external library you wish)
+6. write unit test for XmlParser class
+7. implement method findMembersByDiagnosesFromXml in CasenetService class
+8. write unit test for CasenetService class

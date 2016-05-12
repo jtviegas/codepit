@@ -1,0 +1,10 @@
+Bundle-Name: service
+Bundle-Description: testing
+Bundle-Vendor: aprestos
+Bundle-Version: 0.0.1
+Bundle-Activator: 
+org.aprestos.code.fw.studies.felix.services.impl.StdoutAWriter
+Require-Bundle: services
+Import-Package: org.osgi.framework, 
+	org.aprestos.code.fw.studies.felix.services.interfaces
+Export-Package: org.aprestos.code.fw.studies.felix.services.impl

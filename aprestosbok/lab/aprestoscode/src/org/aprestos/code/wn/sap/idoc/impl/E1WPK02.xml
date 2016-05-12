@@ -1,0 +1,348 @@
+<Segment>
+	
+	<Fields>
+	
+		<!-- START OF SEGMENT HEADER -->
+	
+		<Field>
+			<startIndex>0</startIndex>
+			<endIndex>30</endIndex>
+			<name>SEGNAME</name>
+			<value>E2WPK02001</value>
+		</Field>
+		
+		<Field>
+			<startIndex>30</startIndex>
+			<endIndex>33</endIndex>
+			<name>MANDT</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>33</startIndex>
+			<endIndex>49</endIndex>
+			<name>DOCNUM</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>49</startIndex>
+			<endIndex>55</endIndex>
+			<name>SEGNUM</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>55</startIndex>
+			<endIndex>61</endIndex>
+			<name>PSGNUM</name>
+			<value>000000</value>
+		</Field>
+		
+		<Field>
+			<startIndex>61</startIndex>
+			<endIndex>63</endIndex>
+			<name>HLEVEL</name>
+			<value>00</value>
+		</Field>
+		
+		<!-- ENF OF SEGMENT HEADER -->
+				
+		<Field>
+			<startIndex>63</startIndex>
+			<endIndex>68</endIndex>
+			<name>POSKREIS</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>68</startIndex>
+			<endIndex>93</endIndex>
+			<name>KASSID</name>
+			<value></value>
+		</Field>
+			
+		<Field>
+			<startIndex>93</startIndex>
+			<endIndex>99</endIndex>
+			<name>VORGZEIT</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>99</startIndex>
+			<endIndex>109</endIndex>
+			<name>KASSIERER</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>109</startIndex>
+			<endIndex>113</endIndex>
+			<name>ZAHLART</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>113</startIndex>
+			<endIndex>117</endIndex>
+			<name>WAEHRUNG</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>117</startIndex>
+			<endIndex>125</endIndex>
+			<name>AZABS</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>125</startIndex>
+			<endIndex>145</endIndex>
+			<name>UMABS</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>145</startIndex>
+			<endIndex>165</endIndex>
+			<name>KBSOL</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>165</startIndex>
+			<endIndex>185</endIndex>
+			<name>KBIST</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>185</startIndex>
+			<endIndex>205</endIndex>
+			<name>KDPOS</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>205</startIndex>
+			<endIndex>225</endIndex>
+			<name>KDNEG</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>225</startIndex>
+			<endIndex>233</endIndex>
+			<name>AZSUL</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>233</startIndex>
+			<endIndex>253</endIndex>
+			<name>WRSUL</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>253</startIndex>
+			<endIndex>261</endIndex>
+			<name>AZSST</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>261</startIndex>
+			<endIndex>281</endIndex>
+			<name>WRSST</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>281</startIndex>
+			<endIndex>289</endIndex>
+			<name>AZZST</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>289</startIndex>
+			<endIndex>309</endIndex>
+			<name>WRZST</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>309</startIndex>
+			<endIndex>317</endIndex>
+			<name>AZBST</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>317</startIndex>
+			<endIndex>337</endIndex>
+			<name>WRBST</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>337</startIndex>
+			<endIndex>345</endIndex>
+			<name>AZABB</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>345</startIndex>
+			<endIndex>365</endIndex>
+			<name>WRABB</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>365</startIndex>
+			<endIndex>371</endIndex>
+			<name>AMDZT</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>371</startIndex>
+			<endIndex>377</endIndex>
+			<name>REGZT</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>377</startIndex>
+			<endIndex>385</endIndex>
+			<name>AZBRT</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>385</startIndex>
+			<endIndex>405</endIndex>
+			<name>WRUMS</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>405</startIndex>
+			<endIndex>415</endIndex>
+			<name>AZUMS</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>415</startIndex>
+			<endIndex>435</endIndex>
+			<name>WRSCA</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>435</startIndex>
+			<endIndex>443</endIndex>
+			<name>AZSCA</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>443</startIndex>
+			<endIndex>463</endIndex>
+			<name>WRWGV</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>463</startIndex>
+			<endIndex>471</endIndex>
+			<name>AZKSB</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>471</startIndex>
+			<endIndex>479</endIndex>
+			<name>AZFAV</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>479</startIndex>
+			<endIndex>489</endIndex>
+			<name>AZBON</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>489</startIndex>
+			<endIndex>493</endIndex>
+			<name>KONDITION</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>493</startIndex>
+			<endIndex>503</endIndex>
+			<name>AZCOND</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>503</startIndex>
+			<endIndex>523</endIndex>
+			<name>WRCOND</name>
+			<value></value>
+		</Field>
+		
+		
+		<Field>
+			<startIndex>523</startIndex>
+			<endIndex>527</endIndex>
+			<name>WORGANGART</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>527</startIndex>
+			<endIndex>547</endIndex>
+			<name>WRUMSO</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>547</startIndex>
+			<endIndex>567</endIndex>
+			<name>UMSBANK</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>567</startIndex>
+			<endIndex>577</endIndex>
+			<name>MWSKZ</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>577</startIndex>
+			<endIndex>612</endIndex>
+			<name>CSHNAME</name>
+			<value></value>
+		</Field>
+		
+		<Field>
+			<startIndex>612</startIndex>
+			<endIndex>620</endIndex>
+			<name>AZWGV</name>
+			<value></value>
+		</Field>
+		
+	</Fields>
+	
+</Segment>

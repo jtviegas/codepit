@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#	doPhotoShrink
+# For every jpg file in this directory creates a copy 
+# and shrinks it to 30% moving it afterwards to the SHRINKED_PHOTOS
+# directory also created in the process.
+#
+# version 0.1
+# date 20070819
+# author jtviegas
+
+temp_folder=SHRINKED_PHOTOS
+echo 'going to shrink photos...'
+mkdir $temp_folder
+for file in `ls *.jpg *.JPG`; do
+	echo shrinking $file ...
+	convert -scale 30% $file $temp_folder/$file
+done
+
+echo ...done!
+exit 0
+

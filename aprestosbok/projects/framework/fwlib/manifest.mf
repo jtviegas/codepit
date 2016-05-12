@@ -1,0 +1,7 @@
+Bundle-Name: fwlib
+Bundle-Description: An application framework library based on Felix OSGi's container
+Bundle-Vendor: aprestos
+Bundle-Version: 0.0.1
+Bundle-Activator: org.aprestos.code.fw.lib.Activator
+Import-Package: org.osgi.framework, org.aprestos.code.fw.pub.commons
+Export-Package: org.aprestos.code.fw.lib.impl

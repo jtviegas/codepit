@@ -1,0 +1,114 @@
+-> certificar da existência da criação de logger:
+
+...
+private static final Logger logger = Logger.getLogger(ReportTool.class);
+...
+
+-> adicionar as seguintes constantes no topo da classe:
+
+...
+private static final String SUBAPP = "commonpt";
+private static final String TABLES_WITH_BUSINESS_DATES_CONFIGURATION_KEY="TablesWithBusinessDates";
+...
+
+
+-> adicionar as seguintes funções:
+
+    /**
+     * Retrieves the sql query string ,
+     * inspects the tables associated with business dates to process and 
+     * substitutes it with an inline view
+     * reflecting the available business dates tables.
+     */
+    
+    public String[] doTablesBusinessDatesResolution_HandleQuery(ContentHandler contentHandler, AttributesImpl xspAttr,
+            String report, ResultSetMetaData resmd, Connection conn, String queryCond,
+            String[] column, double[] sumAllDouble, double[][] sumPartDouble, Object[] obj)
+    		throws SQLException 
+	{
+    	do_debug_enter("doTablesBusinessDatesResolution_HandleQuery");
+    	String result[] = new String[2];
+    	String query = new String((String)obj[queryN]);
+    	
+    	String[] tables2handle = 
+    			BASE.getStoreOption(conn, TABLES_WITH_BUSINESS_DATES_CONFIGURATION_KEY, SUBAPP).split(",");
+    	
+    	do_debug("tables to be handled with available business dates are " + tables2handle.toString());
+    	do_debug("query condition is " + queryCond);
+    	
+    	List availableBusinessDates = findAvailableBusinessDates(conn);
+    	do_debug("available business dates found are " + availableBusinessDates.toArray().toString());
+    	
+    	String table = null;
+		String searchedTerm = null;
+		String replacementTerm = null;
+		
+    	for(int i = 0; i < tables2handle.length ; i++)
+    	{
+    		
+    		table = tables2handle[i];
+    		//get the strategy to build the sql sentence which is going to retrieve all bdate data
+    		BDateTableUnionStrategyFactory strategy = BDateTableUnionStrategyFactory.getStrategy(table);
+    		
+    		do_debug("going to handle busssiness dated table " + table);
+    		searchedTerm = "from " + table + "";
+    		if(query.indexOf(searchedTerm) > -1)
+    		{
+    			replacementTerm = "from (" + strategy.getSentence(availableBusinessDates) + ")" + table + " ";
+    			do_debug("replacement term is " + replacementTerm);
+    			query = query.replaceAll(searchedTerm, replacementTerm);
+    		}
+    		
+    	}
+    		
+    	result[0] = query;
+    	result[1] = "select 0";
+
+    	do_debug_leave("doTablesBusinessDatesResolution_HandleQuery", query);
+        return result;
+    }
+    
+
+    
+   
+    /**
+     * Finds available business dates, e.g., 
+     * available business date table data retrieval.
+     * @param conn
+     * @return
+     * @throws SQLException
+     */
+    protected List findAvailableBusinessDates(Connection conn) throws SQLException
+    {
+    	do_debug_enter("findAvailableBusinessDates");
+    	
+    	List result = new LinkedList();
+    	
+   		Statement statement = conn.createStatement();
+   		ResultSet rs = statement.executeQuery("select bdate from businessdate where deleted is null");
+            
+        while(rs.next())
+        {
+           	result.add(rs.getString(1));
+        }	
+
+        do_debug_leave("findAvailableBusinessDates", result);
+        return result;
+    }
+    
+    private static void do_debug(String message)
+    {
+    	if(logger.isDebugEnabled())
+    		logger.debug(message);	
+    }
+    
+    private static void do_debug_enter(String message)
+    {
+    	do_debug("entering " + message);
+    }
+    
+    private static void do_debug_leave(String message, Object result)
+    {
+    	do_debug("leaving " + message + " with result:" + System.getProperty("line.separator")  + 
+    			(null != result ? result.toString() : "null"));
+    }

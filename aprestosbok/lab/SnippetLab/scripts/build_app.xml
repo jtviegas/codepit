@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="APP_NAME" default="build" basedir=".">
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~USER DEFINED PROPERTIES -->	
+		<property name="title"  value="APP_TITLE"/>
+		<property name="version"  value="0.0.1"/>
+		<property name="vendor"  value="aprestos"/>
+		<property name="domain.type"  value="org"/>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PROPERTIES -->
+		<property name="dir" location="."/>
+		<property name="package"  value="${domain.type}.${vendor}.code.${ant.project.name}"/>
+		<property name="package.folder"  value="${domain.type}/${vendor}/code/${ant.project.name}"/>
+		<property name="main.class.file"  value="${package.folder}/main/Main.java"/>
+		<property name="main.class"  value="${package}.main.Main"/>
+		<property name="manifest" value="manifest.mf"/>
+		<property name="source" value="src"/>
+	  	<property name="build" value="build"/>
+	  	<property name="bin"  value="bin"/>
+		<property name="lib"  value="lib"/>
+		<property name="doc"  value="doc"/>
+		<property name="test"  value="test"/>
+		<property name="report"  value="report"/>
+		<property name="test.package.folder"  value="${test}/${source}/${package.folder}"/>
+		<property name="test.class.file"  value="${test.package.folder}/ATestClass.java"/>
+		<property name="sealed"  value="false"/>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			public targets 
+			~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<target name="start" depends="init" unless="started" description="starts the project creating default folders and files">
+	    	<echo message="going to start the project ${ant.project.name}..."/>
+	    	<antcall target="create-manifest"/>
+	    	<echo message="...project ${ant.project.name} started!"/>
+		</target>
+	
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			private targets 
+			~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<target name="create-manifest" depends="create-main">
+			<!-- creates default manifest file -->
+		    <echo message="going to create default manifest file..."/>
+		    <touch file="${dir}/${manifest}"/>
+		    <echo file="${dir}/${manifest}" message="Manifest-Version: 1.0"/>
+			
+		    <echo file="${dir}/${manifest}" append="true" message="${line.separator}Main-Class: ${description}"/>
+			<echo file="${dir}/${manifest}" append="true" message="${line.separator}Class-Path: ${description}"/>
+			
+		    <echo message="...default manifest file created!"/>
+	 	</target>
+
+	
+		<target name="init">
+	    	<echo message="going to perform init..."/>
+	    	<condition property="started">
+			<!-- checks if the main class file exists, 
+						that way we can know if the project has been started 
+						or not and resets instant date and time to be used elsewhere -->
+	      	<available file="${dir}/${main.class.file}"/>
+	    	</condition>
+	    	<tstamp/>
+	    	<echo message="...init done!"/>
+	  	</target>
+	
+		
+		<fileset dir="${src.dir}" id="src.files">
+	      <include name="**/*.java"/>
+	    </fileset>
+	  
+	    <pathconvert pathsep="," property="javafiles" refid="src.files"/>
+	
+	
+	
+	
+	
+	<target name="start" depends="init" unless="started" description="creates tree structure and main class for the project">
+		<mkdir dir="${dir}/${test}" />
+		<mkdir dir="${dir}/${test}/${source}" />
+		<mkdir dir="${dir}/${source}" />
+		<mkdir dir="${dir}/${lib}" />
+		<mkdir dir="${dir}/${test.package.folder}" />
+
+		<touch file="${dir}/${test.class.file}" />
+		<echo file="${dir}/${test.class.file}" message="package ${package};import org.junit.Test;import org.junit.Before;
+			import org.junit.After;import static org.junit.Assert.*;public class DefaultTest{int four = 0;
+				@Test public void example(){assertEquals(4,four);}@Before public void prepareTestData() {
+				four=4;} @After public void cleanupTestData() {four=0;}}" />
+
+		<echo message="project started!" />
+	</target>
+
+	<target name="build" depends="init,build-clean,build-libs" description="compiles the project">
+
+		<!-- compile into build folder -->
+		<mkdir dir="${dir}/${build}" />		
+		<javac destdir="${dir}/${build}" 
+			debug="true" deprecation="on" classpathref="build.classpath">
+			<src path="${dir}/${source}" />
+		</javac>
+
+		<!-- setup bin folder and copy libraries into it -->
+		<mkdir dir="${bin}" />
+		<mkdir dir="${dir}/${bin}/${lib}" />
+  		<copy todir="${dir}/${bin}/${lib}">
+			<fileset dir="${dir}/${lib}">
+				<include name="**/*.jar"/>
+			</fileset>
+		</copy>
+    		
+		<!-- create the jar in the bin dir -->
+		<jar jarfile="${dir}/${bin}/${ant.project.name}-${DSTAMP}${TSTAMP}.jar" basedir="${dir}/${build}"/>
+
+		<echo message="build done!" />
+		
+  	</target>
+
+	<target name="run" depends="build,run-libs" description="runs the project executable artifact">
+		<!-- we must test without class path depending only on the jars manifest -->
+		<java jar="${dir}/${bin}/${ant.project.name}-${DSTAMP}${TSTAMP}.jar"
+           		fork="true"
+           		failonerror="true"
+           		maxmemory="128m"
+           		>
+
+		        <classpath>
+				<path refid="run.classpath"/>
+           			<pathelement path="${java.class.path}"/>
+         		</classpath>
+       		</java>
+		<echo message="run done!" />
+	</target>
+
+	<target name="doc" depends="doc-clean" description="generates source files javadoc">
+		<mkdir dir="${doc}" />
+		<javadoc
+           		destdir="${dir}/${doc}"
+           		author="true"
+           		version="true"
+           		use="true"
+           		windowtitle="API">
+
+   			<fileset dir="${dir}/${source}" defaultexcludes="yes" />
+
+    			<doctitle><![CDATA[<h1>"${ant.project.name}"</h1>]]></doctitle>
+    			<bottom><![CDATA[<i>Copyright &#169; 2008 Aprestos All Rights Reserved.</i>]]></bottom>
+
+  		</javadoc>
+	  	<echo message="doc done!" />
+	</target>
+
+	<target name="test" depends="test-build" description="runs the tests">
+		<mkdir dir="${dir}/${test}/${report}" />
+		<junit printsummary="yes" haltonfailure="yes">
+			<formatter type="plain"/>
+
+			<classpath>
+    				<pathelement path="${java.class.path}"/>
+				<pathelement path="${dir}/${test}/${build}"/>
+				<path refid="test.build.classpath"/>
+  			</classpath>
+
+			<batchtest fork="yes" todir="${dir}/${test}/${report}">
+    				<fileset dir="${dir}/${test}/${build}">
+      					<include name="**/*.class"/>
+				</fileset>
+			</batchtest>
+		</junit>
+		<echo message="test done!" />
+	</target>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~private targets -->
+	<target name="init">
+		<condition property="started">
+			<!-- checks if the main test class file exists, 
+				that way we can know if the project has been started -->
+	       		<available file="${dir}/${test.class.file}"/>
+    		</condition>
+		<tstamp/>
+		<echo message="init done!" />
+	</target>
+
+	<target name="build-clean">
+	<!-- cleans up build -->
+		<delete dir="${dir}/${build}"/>
+		<delete dir="${dir}/${bin}" />
+		<echo message="build-clean done!" />
+  	</target>
+
+	<target name="build-libs">
+		<!-- defines the build classpath -->
+		<path id="build.classpath">
+			<fileset dir="${dir}/${lib}">
+				<include name="**/*.jar" />
+			</fileset>
+		</path>
+		<echo message="build-libs done!" />
+	</target>
+	
+	<target name="run-libs" depends="build">
+		<!-- defines the classpath for run -->
+		<path id="run.classpath">
+			<fileset dir="${dir}/${lib}">
+				<include name="**/*.jar" />
+			</fileset>
+		</path>
+		<echo message="run-libs done!" />
+	</target>
+	
+	<target name="doc-clean">
+		<!-- cleans the doc folder -->
+		<delete dir="${dir}/${doc}" />
+ 		<echo message="doc-clean done!" />
+  	</target>
+
+	<target name="test-build" depends="test-clean,test-libs">
+		<!-- compiles the project test source-->
+		<mkdir dir="${dir}/${test}/${build}" />		
+		<javac destdir="${dir}/${test}/${build}" 
+			debug="true" deprecation="on" classpathref="test.build.classpath">
+			<src path="${dir}/${test}/${source}" />
+		</javac>
+		<echo message="test-build done!" />
+  	</target>
+
+	<target name="test-clean" >
+		<!-- cleans the test build folder -->
+		<delete dir="${dir}/${test}/${report}" />
+		<delete dir="${dir}/${test}/${build}" />
+		<echo message="test-clean done!" />
+  	</target>
+	
+	<target name="test-libs" depends="build">
+		<!-- defines the classpath for test build -->
+		<path id="test.build.classpath">
+			<fileset dir="${dir}/${bin}">
+				<include name="**/*.jar" />
+			</fileset>
+		</path>
+		<echo message="test-libs done!" />
+	</target>
+
+
+</project>

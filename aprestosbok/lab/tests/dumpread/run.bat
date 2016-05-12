@@ -1,0 +1,1 @@
+mvn clean compile exec:java -Dexec.mainClass="org.tests.dumpread.App" -Dexec.args="test.csv"
