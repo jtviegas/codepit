@@ -1,0 +1,224 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.aprestos.labs.ee</groupId>
+	<artifactId>dataservices</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>dataservices</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<scripts.path>${basedir}/scripts</scripts.path>
+	</properties>
+	
+	<profiles>
+		<profile>
+			<id>windows-properties</id>
+			<activation>
+				<os>
+					<family>Windows</family>
+				</os>
+			</activation>
+			<properties>
+				<run.command>cmd</run.command>
+				<run.command.start>cmd start-mongodb.bat</run.command.start>
+				<run.command.stop>cmd stop-mongodb.bat</run.command.stop>
+				<run.command.additionnal.arg>/c</run.command.additionnal.arg>
+				<mongodb.start.script>start-mongodb.bat</mongodb.start.script>
+				<mongodb.stop.script>stop-mongodb.bat</mongodb.stop.script>
+			</properties>
+		</profile>
+		<profile>
+			<id>linux-properties</id>
+			<activation>
+				<os>
+					<family>unix</family>
+				</os>
+			</activation>
+			<properties>
+				<run.command>sh</run.command>
+				<run.command.start>./start_mongodb.sh</run.command.start>
+				<run.command.stop>./stop_mongodb.sh</run.command.stop>
+				<run.command.additionnal.arg> </run.command.additionnal.arg>
+				<mongodb.start.script>start-mongodb.sh</mongodb.start.script>
+				<mongodb.stop.script>stop-mongodb.sh</mongodb.stop.script>
+			</properties>
+		</profile>
+	</profiles>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+		<dependency>
+		   <groupId>ma.glasnost.orika</groupId>
+		   <artifactId>orika-core</artifactId>
+		   <version>1.4.2</version><!-- or latest version -->
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>3.2.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>3.2.2.RELEASE</version>
+		</dependency>
+		<!-- <dependency> <groupId>org.apache.derby</groupId> <artifactId>derbyclient</artifactId> 
+			<version>10.8.2.2</version> <scope>test</scope> </dependency> -->
+
+
+
+
+		<dependency>
+			<groupId>org.aprestos.labs.ee</groupId>
+			<artifactId>domainmodel</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>3.2.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aprestos.labs.ee</groupId>
+			<artifactId>datarepositories</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+
+	<repositories>
+		<repository>
+			<id>spring-maven-release</id>
+			<name>Spring Maven Release Repository</name>
+			<url>http://maven.springframework.org/release</url>
+		</repository>
+		<repository>
+			<id>spring-maven-milestone</id>
+			<name>Spring Maven Milestone Repository</name>
+			<url>http://maven.springframework.org/milestone</url>
+		</repository>
+	</repositories>
+
+	<build>
+		<finalName>dataservices</finalName>
+		<plugins>
+			<!-- Force Java 6 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<!-- Surefire plugin before 2.9 version is buggy -->
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.12</version>
+				<configuration>
+					<excludes>
+						<exclude>**/*IntegrationTest.java</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.12.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+						<configuration>
+							<includes>
+								<include>**/*IntegrationTest.java</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<id>start-third-parties</id>
+						<phase>pre-integration-test</phase>
+						<configuration>
+							<target>
+								<exec executable="${run.command.start}" dir="${scripts.path}"
+									spawn="false">
+									<!--  
+									<arg value="${run.command.additionnal.arg}" />
+									<arg value="${scripts.path}/${mongodb.start.script}" />
+									-->
+								</exec>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>stop-third-parties</id>
+						<phase>post-integration-test</phase>
+						<configuration>
+							<target>
+								<exec executable="${run.command.stop}" dir="${scripts.path}"
+									spawn="false">
+									<!--  
+									<arg value="${run.command.additionnal.arg}" />
+									<arg value="${scripts.path}/${mongodb.stop.script}" />
+									-->
+								</exec>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id> <!-- this is used for inheritance merges -->
+						<phase>package</phase> <!-- bind to the packaging phase -->
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>onejar-maven-plugin.googlecode.com</id>
+			<url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
+		</pluginRepository>
+	</pluginRepositories>
+</project>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cloud="http://schema.cloudfoundry.org/spring"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xmlns:util="http://www.springframework.org/schema/util"
+	default-destroy-method="destroy" default-init-method="init"
+	xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+							http://www.springframework.org/schema/context
+							http://www.springframework.org/schema/context/spring-context-3.2.xsd
+							http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+							http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd 
+							http://schema.cloudfoundry.org/spring http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.8.xsd">
+							
+	<!--  ######################################################################  -->
+	<context:annotation-config />
+	
+	<!--  ######################    data mongo config    #######################  -->
+	<mongo:repositories base-package="org.aprestos.labs.ee.datarepositories.mongo" />
+	
+	<!--  <cloud:mongo-db-factory id="mongoDbFactory" /> -->
+	<mongo:db-factory host="198.11.234.78" port="10122" dbname="db" username="b7f16b89-d7d7-480c-bda2-4c7210f728f3" password="a5082bfb-6850-45ee-9636-6cc5cb96222b" />
+	
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+	</bean>
+
+</beans>
+
+<!-- 
+
+	<util:properties id="datarepositories" location="classpath:datarepositories.properties"/>
+	<cloud:service-properties id="cloudProperties"/>
+
+	local
+	<mongo:db-factory host="localhost" port="27017" dbname="test" />
+	?
+	<mongo:db-factory host="127.11.145.2" port="27017" dbname="labs" username="admin" password="lRW9gUS7mtmX" />
+	openshift
+	<mongo:db-factory host="127.9.154.130" port="27017" dbname="weblabs" username="admin" password="lRW9gUS7mtmX" />
+	"${some.param : your-default-value}"
+	#{ #{datarepositories['mongodb.host']} != #null ? ${some.param} : #{datarepositories['mongodb.host']} }
+	<mongo:db-factory host="#{ #{cloudProperties['mongodb01.hostname']} != #null ? #{cloudProperties['mongodb01.hostname']} : #{datarepositories['mongodb.host']} }" 
+		port="#{ #{cloudProperties['mongodb01.port']} != #null ? #{cloudProperties['mongodb01.port']} : #{datarepositories['mongodb.port']} }" 
+		dbname="#{ #{cloudProperties['mongodb01.db']} != #null ? #{cloudProperties['mongodb01.db']} : #{datarepositories['mongodb.dbname']} }" 
+		username="#{ #{cloudProperties['mongodb01.username']} != #null ? #{cloudProperties['mongodb01.username']} : #{datarepositories['mongodb.username']} }" 
+		password="#{ #{cloudProperties['mongodb01.password']} != #null ? #{cloudProperties['mongodb01.password']} : #{datarepositories['mongodb.password']} }" />
+
+ -->
