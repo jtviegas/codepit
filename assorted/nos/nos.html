@@ -1,0 +1,36 @@
+<!doctype html>
+<!--
+  spa.html
+  spa browser document
+-->
+
+<html>
+<head>
+  <!-- ie9+ rendering support for latest standards -->
+  <meta http-equiv="Content-Type" content="text/html; 
+    charset=ISO-8859-1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>NOS</title>
+
+  <!-- third-party stylesheets -->
+
+  <!-- our stylesheets -->
+  <link rel="stylesheet" href="css/nos.css"       type="text/css"/>
+  <link rel="stylesheet" href="css/nos.shell.css" type="text/css"/>
+
+  <!-- third-party javascript -->
+  <script src="js/jq/jquery-1.9.1.js"          ></script>
+  <script src="js/jq/jquery.uriAnchor-1.1.3.js"></script>
+
+  <!-- our javascript -->
+  <script src="js/nos.js"      ></script>
+  <script src="js/nos.shell.js"></script>
+  <script>
+    $(function () { nos.initModule( $('#nos') ); });
+  </script>
+
+</head>
+<body>
+<div id="nos"></div>
+</body>
+</html>

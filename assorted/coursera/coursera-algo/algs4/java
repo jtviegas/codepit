@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# *************************************************
+# Wrapper for using DrJava
+# Last edited: September 18, 2011
+# *************************************************
+
+/usr/lib/jvm/java-7-openjdk-amd64/bin/java $@

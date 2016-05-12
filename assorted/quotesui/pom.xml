@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.jtvatdsi.studies.struts</groupId>
+	<artifactId>quotesui</artifactId>
+	<packaging>war</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>quotesui</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<alternate.deployment.folder>../../labs/lib</alternate.deployment.folder>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>struts</groupId>
+			<artifactId>struts</artifactId>
+			<version>1.2.9</version>
+		</dependency>
+
+		<dependency>
+			<groupId>struts</groupId>
+			<artifactId>struts-el</artifactId>
+			<version>1.2.9</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1-b07</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>quotesui</finalName>
+		<plugins>
+			<!-- Force Java 6 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<!-- Surefire plugin before 2.9 version is buggy -->
+
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.12</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jboss.as.plugins</groupId>
+				<artifactId>jboss-as-maven-plugin</artifactId>
+				<version>7.1.1.Final</version>
+				<!-- ADD A DATASOURCE -->
+				<executions>
+					<!-- <execution> <id>deploy-derby</id> <phase>package</phase> <goals> 
+						<goal>deploy-artifact</goal> </goals> <configuration> <groupId>org.apache.derby</groupId> 
+						<artifactId>derbyclient</artifactId> <name>derbyclient.jar</name> </configuration> 
+						</execution> <execution> <id>add-datasource</id> <phase>package</phase> <goals> 
+						<goal>add-resource</goal> </goals> <configuration> <address>subsystem=datasources,data-source=java:jboss/vwparts/ds</address> 
+						<resource> <enable-resource>true</enable-resource> <properties> <jndi-name>java:jboss/datasources/vwparts</jndi-name> 
+						<enabled>true</enabled> <connection-url>jdbc:derby://localhost:1527/default;create=true;</connection-url> 
+						<driver-class>org.apache.derby.jdbc.ClientDriver</driver-class> <driver-name>derbyclient.jar</driver-name> 
+						<security.user-name>APP</security.user-name> <security.password>APP</security.password> 
+						<pool-name>vwpartsdbpool</pool-name> </properties> </resource> </configuration> 
+						</execution> -->
+				</executions>
+			</plugin>
+
+			<!-- <plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<configuration>
+							<tasks>
+								<copy file="target/${artifactId}.jar" todir="${alternate.deployment.folder}" />
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin> -->
+
+		</plugins>
+	</build>
+
+</project>

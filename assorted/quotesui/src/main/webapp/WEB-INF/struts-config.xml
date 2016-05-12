@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+    <display-name></display-name>
+    <description></description>
+    <data-sources></data-sources>
+    
+    
+	<form-beans>
+		<form-bean name="submitForm" type="org.jtvatdsi.studies.struts.quotesui.forms.SubmitForm"/>
+	</form-beans>
+
+	<global-exceptions>
+	    
+	</global-exceptions>
+	
+	<global-forwards>
+		<forward name="home" path="/home.do" />
+		<forward name="result" path="/result.do" />
+	</global-forwards>
+
+	<action-mappings>
+		<action path="/home" type="org.apache.struts.actions.ForwardAction"
+			parameter="home" />
+		<action path="/result" type="org.apache.struts.actions.ForwardAction"
+			parameter="result" />
+		
+		<action path="/lang" type="org.jtvatdsi.studies.struts.quotesui.actions.LangAction"
+		    scope="request"
+			validate="false"
+			/>
+		
+		<action path="/submit" 
+		    type="org.jtvatdsi.studies.struts.quotesui.actions.SubmitAction"  
+			name="submitForm"
+			scope="request"
+			validate="true"
+			input="home" />
+	</action-mappings>
+	
+	
+	<message-resources parameter="application" null="false" />
+	
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+		<set-property property="definitions-config" value="/WEB-INF/tiles-config.xml" />
+		<set-property property="definitions-parser-validate" value="true" />
+		<set-property property="moduleAware" value="true" />
+	</plug-in>
+
+</struts-config>

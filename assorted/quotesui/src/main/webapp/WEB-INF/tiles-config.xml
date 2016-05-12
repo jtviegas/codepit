@@ -1,0 +1,20 @@
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration//EN" "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+<tiles-definitions>
+    
+	<definition name="main" page="/jsp/layouts/main.jsp">
+	    <put name="header" value="/jsp/common/header.jsp" />
+
+		<put name="center" value="" />
+
+		<put name="footer" value="/jsp/common/footer.jsp" />
+	</definition>
+
+	<definition name="home" extends="main">
+		<put name="center" value="/jsp/center.jsp" />
+	</definition>
+	
+	<definition name="result" extends="main">
+		<put name="center" value="/jsp/result.jsp" />
+	</definition>
+	
+</tiles-definitions>

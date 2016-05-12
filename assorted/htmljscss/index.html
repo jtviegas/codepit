@@ -1,0 +1,98 @@
+<html>
+<head>
+<!-- ie9+ rendering support for latest standards -->
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>htmljscss</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/custom.css" type="text/css" />
+</head>
+
+<body id="main">
+
+	<div class="container" id="header">
+	  <div class="masthead clearfix" id="header">
+            <div class="inner">
+              <h3 class="masthead-brand">htmljscss</h3>
+            </div>
+    </div>
+	</div>
+
+	<div class="site-wrapper"> 
+    <div class="site-wrapper-inner">
+      <div class="container" id="body">
+
+  	    <div class="row">
+
+	        <div class="col-md-2" id="leftPanel" style="min-height:100px;min-width:50px;">
+            side panel
+          </div>
+
+          <div class="col-md-10" id="mailPanel" style="min-height:100px;min-width:50px;">
+			      Basic panel example
+					</div>
+		            
+		    </div>
+        <div class="row">
+
+          <div class="col-md-12 pull-left">
+            <input type="submit" id="submitWgt">
+          </div>
+
+        </div>
+
+		  </div>
+          
+
+    </div>
+
+
+  </div>
+
+    <footer class="footer">
+      <div class="container" id="footer">
+        <p class="text-muted">Place sticky footer content here.</p>
+      </div>
+    </footer>
+
+  <!-- scripts -->
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://dimplejs.org/dist/dimple.v2.1.6.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="js/throbber.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      var on = false;
+
+      var submitWgt = $("#submitWgt");
+
+      var showThrobber = function(o){
+        var panel = $("#leftPanel")[0];
+
+        if(!on){
+          var throbber = Throbber(20);
+          throbber.appendTo( panel ).start();
+          on = true;
+        }
+        else {
+          panel.empty();
+          on = false;
+        }
+
+      };
+
+
+
+      var submitAction = showThrobber;
+      submitWgt.on('click',submitAction);
+
+
+  });
+
+  </script>
+</body>
+
+
+</html>

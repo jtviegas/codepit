@@ -1,0 +1,123 @@
+<!doctype html>
+
+<html>
+<head>
+  <!-- ie9+ rendering support for latest standards -->
+  <meta http-equiv="Content-Type" content="text/html; 
+    charset=ISO-8859-1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>websnippets</title>
+
+  <!-- third-party stylesheets -->
+
+  <!-- our stylesheets -->
+  <link rel="stylesheet" href="css/test.css"       type="text/css"/>
+
+  <!-- third-party javascript -->
+  <script src="js/jq/jquery-1.9.1.js"          ></script>
+  <script src="js/jq/jquery.uriAnchor-1.1.3.js"></script>
+
+</head>
+<body>
+
+<div id="nos">
+    <div class="h">
+    
+      <div class="m" id="aa"> 
+      	
+      	<div class="mh">ads</div>
+      	<div class="mb">
+      		<div class="mbc">
+	      		<p>
+	      		The JMX client needs a notification handler, to listen for and to process 
+	      		any notifications that might be sent by the MBeans that are registered in 
+	      		the JMX agent's MBean server. The JMX client's notification handler is an 
+	      		instance of the NotificationListener interface, as shown below.
+	      		The JMX client's notification handler is an 
+	      		instance of the NotificationListener interface, as shown below.
+	      		</p>
+	      		<p>The JMX client's notification handler is an 
+	      		instance of the NotificationListener interface, as shown below.
+	      		</p>
+      		</div>
+      		<div class="mbf">
+      			text 2 add:
+      			<input type="text" id="text2add"/><br/>
+      			<a href="#" id="link2add">add</a>
+      		</div>
+      	</div>
+      </div>
+      <div class="m" id="aa"> 
+      	
+      	<div class="mh">ads</div>
+      	<div class="mb">
+      		<div class="mbc">
+	      		<p>
+	      		The JMX client needs a notification handler, to listen for and to process 
+	      		any notifications that might be sent by the MBeans that are registered in 
+	      		the JMX agent's MBean server. The JMX client's notification handler is an 
+	      		instance of the NotificationListener interface, as shown below.
+	      		The JMX client's notification handler is an 
+	      		instance of the NotificationListener interface, as shown below.
+	      		</p>
+	      		<p>The JMX client's notification handler is an 
+	      		instance of the NotificationListener interface, as shown below.
+	      		</p>
+      		</div>
+      		<div class="mbf">
+      			text 2 add:
+      			<input type="text" id="text2add"/><br/>
+      			<a href="#" id="link2add">add</a>
+      		</div>
+      	</div>
+      </div>
+     </div>
+  
+    <div class="b"></div>
+    <div class="f"></div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		
+		$('.mb').slideUp();
+		
+		$('.mh').click(
+				function(){
+					
+					var header = $(this);
+					var body = header.next('.mb');
+					
+
+					if ( body.is(':visible') ){
+						var fn= function(obj){
+							obj.css("border-radius", "5px 5px 5px 5px");
+						};
+					}
+					else
+						var fn= function(obj){
+							obj.css("border-radius", "5px 5px 0px 0px");
+						};
+			
+					
+					body.slideToggle(700,fn(header));
+					
+				}	
+		);
+		$('#link2add').click(
+			function(event){
+				event.preventDefault();
+				var text2add=$('#text2add')[0];
+				var textPanel=$('.mbc').children().last().after("<p>" + text2add.value + "</p>");
+				
+					
+				
+			}	
+		);
+
+
+	});
+</script>
+
+</body>
+</html>

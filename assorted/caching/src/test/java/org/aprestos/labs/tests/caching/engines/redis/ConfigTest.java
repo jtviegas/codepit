@@ -1,0 +1,26 @@
+package org.aprestos.labs.tests.caching.engines.redis;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
+
+import org.aprestos.labs.tests.caching.engines.redis.conf.LocalRedisConfig;
+import org.aprestos.labs.tests.caching.engines.redis.repositories.KeyValueService;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+
+public class ConfigTest {
+
+	@Test
+	public void bootstrapAppFromJavaConfig() {
+
+		ApplicationContext context = new AnnotationConfigApplicationContext(LocalRedisConfig.class);
+		assertThat(context, is(notNullValue()));
+		assertThat(context.getBean(KeyValueService.class), is(notNullValue()));
+	}
+	
+	
+
+}

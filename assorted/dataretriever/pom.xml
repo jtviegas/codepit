@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.aprestos.labs.bluemix</groupId>
+	<artifactId>dataretriever</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>dataretriever</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>WASdev</id>
+			<name>WASdev Repository</name>
+			<url>http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/wasdev/maven/repository/</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache</groupId>
+			<artifactId>wink</artifactId>
+			<version>1.2.1-incubating</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/wink-1.2.1-incubating.jar</systemPath>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>twaclient</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/twaclient.jar</systemPath>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>tdwcsimpleui_public</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/tdwcsimpleui_public.jar</systemPath>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>tdwccronparser</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/tdwccronparser.jar</systemPath>
+		</dependency>
+		
+
+
+
+	</dependencies>
+</project>

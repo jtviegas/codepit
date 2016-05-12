@@ -1,0 +1,189 @@
+<BES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="BES.xsd">
+	<SingleAction>
+		<Title>Accept License for Mobile Device Management</Title>
+		<Relevance>true</Relevance>
+		<ActionScript MIMEType="application/x-Fixlet-Windows-Shell">
+			if {name of operating system starts with "Win"} parameter
+			"serverFolder" = "{folder ((it as string) of value
+			"EnterpriseServerFolder" of key "HKLM\Software\Bigfix\Enterprise
+			Server" of registry)}" parameter "wwwRootFolder" = "{folder ((it as
+			string) of value "wwwRootFolder" of key
+			"HKLM\Software\BigFix\Enterprise Server" of registry)}" parameter
+			"bfemapFile" = "{folder ((it as string) of value "StoragePath" of key
+			"HKLM\Software\BigFix\Enterprise Server\GlobalOptions" of
+			registry)}/Mirror Server/Inbox/bfemapfile.xml" else parameter
+			"serverFolder" = "{folder ((it as string) of key
+			"EnterpriseServerFolder" of section "Software\BigFix\Enterprise
+			Server" of file "/var/opt/BESServer/besserver.config")}/bin"
+			parameter "wwwRootFolder" = "{folder ((it as string) of key
+			"wwwRootFolder" of section "Software\BigFix\Enterprise Server" of
+			file "/var/opt/BESServer/besserver.config")}" parameter "bfemapFile"
+			= "{folder ((it as string) of key "StoragePath" of section
+			"Software\BigFix\Enterprise Server\GlobalOptions" of file
+			"/var/opt/BESServer/besserver.config")}/Mirror
+			Server/inbox/bfemapfile.xml" endif parameter "siteId" = "{preceding
+			text of first "%22" of following text of first "ID=%22" of line whose
+			(it contains "http://sync.bigfix.com/cgi-bin/bfgather/bessupport") of
+			file (parameter "bfemapFile")}" parameter "siteVersion" = "1170"
+			parameter "besSupportFolder" = "{parameter
+			"wwwRootFolder"}/bfmirror/bfsites/enterprisemirror_{parameter
+			"siteId"}_{parameter "siteVersion"}" parameter "eulaFolder" =
+			"{parameter "serverFolder"}/License" folder create "{parameter
+			"eulaFolder"}" delete "{parameter "eulaFolder"}/EULA_Mobile Device
+			Management_9.1_ENU.html" copy "{parameter
+			"besSupportFolder"}/EULA_Mobile Device Management_9.1_ENU.html"
+			"{parameter "eulaFolder"}/EULA_Mobile Device Management_9.1_ENU.html"
+			delete "{parameter "eulaFolder"}/EULA_Mobile Device
+			Management_9.1_CES.html" copy "{parameter
+			"besSupportFolder"}/EULA_Mobile Device Management_9.1_CES.html"
+			"{parameter "eulaFolder"}/EULA_Mobile Device Management_9.1_CES.html"
+			delete "{parameter "eulaFolder"}/EULA_Mobile Device
+			Management_9.1_CHS.html" copy "{parameter
+			"besSupportFolder"}/EULA_Mobile Device Management_9.1_CHS.html"
+			"{parameter "eulaFolder"}/EULA_Mobile Device Management_9.1_CHS.html"
+			delete "{parameter "eulaFolder"}/EULA_Mobile Device
+			Management_9.1_CHT.html" copy "{parameter
+			"besSupportFolder"}/EULA_Mobile Device Management_9.1_CHT.html"
+			"{parameter "eulaFolder"}/EULA_Mobile Device Management_9.1_CHT.html"
+			delete "{parameter "eulaFolder"}/EULA_Mobile Device
+			Management_9.1_DEU.html" copy "{parameter
+			"besSupportFolder"}/EULA_Mobile Device Management_9.1_DEU.html"
+			"{parameter "eulaFolder"}/EULA_Mobile Device Management_9.1_DEU.html"
+			delete "{parameter "eulaFolder"}/EULA_Mobile Device
+			Management_9.1_ELL.html" copy "{parameter
+			"besSupportFolder"}/EULA_Mobile Device Management_9.1_ELL.html"
+			"{parameter "eulaFolder"}/EULA_Mobile Device Management_9.1_ELL.html"
+			delete "{parameter "eulaFolder"}/EULA_Mobile Device
+			Management_9.1_ESN.html" copy "{parameter
+			"besSupportFolder"}/EULA_Mobile Device Management_9.1_ESN.html"
+			"{parameter "eulaFolder"}/EULA_Mobile Device Management_9.1_ESN.html"
+			delete "{parameter "eulaFolder"}/EULA_Mobile Device
+			Management_9.1_FRA.html" copy "{parameter
+			"besSupportFolder"}/EULA_Mobile Device Management_9.1_FRA.html"
+			"{parameter "eulaFolder"}/EULA_Mobile Device Management_9.1_FRA.html"
+			delete "{parameter "eulaFolder"}/EULA_Mobile Device
+			Management_9.1_IND.html" copy "{parameter
+			"besSupportFolder"}/EULA_Mobile Device Management_9.1_IND.html"
+			"{parameter "eulaFolder"}/EULA_Mobile Device Management_9.1_IND.html"
+			delete "{parameter "eulaFolder"}/EULA_Mobile Device
+			Management_9.1_ITA.html" copy "{parameter
+			"besSupportFolder"}/EULA_Mobile Device Management_9.1_ITA.html"
+			"{parameter "eulaFolder"}/EULA_Mobile Device Management_9.1_ITA.html"
+			delete "{parameter "eulaFolder"}/EULA_Mobile Device
+			Management_9.1_JPN.html" copy "{parameter
+			"besSupportFolder"}/EULA_Mobile Device Management_9.1_JPN.html"
+			"{parameter "eulaFolder"}/EULA_Mobile Device Management_9.1_JPN.html"
+			delete "{parameter "eulaFolder"}/EULA_Mobile Device
+			Management_9.1_KOR.html" copy "{parameter
+			"besSupportFolder"}/EULA_Mobile Device Management_9.1_KOR.html"
+			"{parameter "eulaFolder"}/EULA_Mobile Device Management_9.1_KOR.html"
+			delete "{parameter "eulaFolder"}/EULA_Mobile Device
+			Management_9.1_LIT.html" copy "{parameter
+			"besSupportFolder"}/EULA_Mobile Device Management_9.1_LIT.html"
+			"{parameter "eulaFolder"}/EULA_Mobile Device Management_9.1_LIT.html"
+			delete "{parameter "eulaFolder"}/EULA_Mobile Device
+			Management_9.1_POL.html" copy "{parameter
+			"besSupportFolder"}/EULA_Mobile Device Management_9.1_POL.html"
+			"{parameter "eulaFolder"}/EULA_Mobile Device Management_9.1_POL.html"
+			delete "{parameter "eulaFolder"}/EULA_Mobile Device
+			Management_9.1_PTB.html" copy "{parameter
+			"besSupportFolder"}/EULA_Mobile Device Management_9.1_PTB.html"
+			"{parameter "eulaFolder"}/EULA_Mobile Device Management_9.1_PTB.html"
+			delete "{parameter "eulaFolder"}/EULA_Mobile Device
+			Management_9.1_RUS.html" copy "{parameter
+			"besSupportFolder"}/EULA_Mobile Device Management_9.1_RUS.html"
+			"{parameter "eulaFolder"}/EULA_Mobile Device Management_9.1_RUS.html"
+			delete "{parameter "eulaFolder"}/EULA_Mobile Device
+			Management_9.1_SLV.html" copy "{parameter
+			"besSupportFolder"}/EULA_Mobile Device Management_9.1_SLV.html"
+			"{parameter "eulaFolder"}/EULA_Mobile Device Management_9.1_SLV.html"
+			delete "{parameter "eulaFolder"}/EULA_Mobile Device
+			Management_9.1_TUR.html" copy "{parameter
+			"besSupportFolder"}/EULA_Mobile Device Management_9.1_TUR.html"
+			"{parameter "eulaFolder"}/EULA_Mobile Device Management_9.1_TUR.html"
+			delete "{parameter "eulaFolder"}/EULA_Mobile Device
+			Management_9.1_notices.html" copy "{parameter
+			"besSupportFolder"}/EULA_Mobile Device Management_9.1_notices.html"
+			"{parameter "eulaFolder"}/EULA_Mobile Device
+			Management_9.1_notices.html" parameter "swtagsFolder" = "{parameter
+			"serverFolder"}/properties/version" folder create "{parameter
+			"swtagsFolder"}" delete "__Download/SwTags_Mobile Device
+			Management_9.1" copy "{parameter "besSupportFolder"}/SwTags_Mobile
+			Device Management_9.1" "__Download/SwTags_Mobile Device
+			Management_9.1" extract "SwTags_Mobile Device Management_9.1"
+			"{parameter "swtagsFolder"}"
+		</ActionScript>
+		<SuccessCriteria Option="RunToCompletion" />
+		<Settings>
+			<PreActionShowUI>false</PreActionShowUI>
+			<HasRunningMessage>false</HasRunningMessage>
+			<HasTimeRange>false</HasTimeRange>
+			<HasStartTime>false</HasStartTime>
+			<HasEndTime>true</HasEndTime>
+			<EndDateTimeLocalOffset>P2D</EndDateTimeLocalOffset>
+			<HasDayOfWeekConstraint>false</HasDayOfWeekConstraint>
+			<UseUTCTime>false</UseUTCTime>
+			<ActiveUserRequirement>NoRequirement</ActiveUserRequirement>
+			<ActiveUserType>AllUsers</ActiveUserType>
+			<HasWhose>false</HasWhose>
+			<PreActionCacheDownload>false</PreActionCacheDownload>
+			<Reapply>false</Reapply>
+			<HasReapplyLimit>true</HasReapplyLimit>
+			<ReapplyLimit>3</ReapplyLimit>
+			<HasReapplyInterval>false</HasReapplyInterval>
+			<HasRetry>true</HasRetry>
+			<RetryCount>3</RetryCount>
+			<RetryWait Behavior="WaitForInterval">PT10M</RetryWait>
+			<HasTemporalDistribution>false</HasTemporalDistribution>
+			<ContinueOnErrors>true</ContinueOnErrors>
+			<PostActionBehavior Behavior="Nothing" />
+			<IsOffer>false</IsOffer>
+		</Settings>
+		<SettingsLocks>
+			<ActionUITitle>false</ActionUITitle>
+			<PreActionShowUI>false</PreActionShowUI>
+			<PreAction>
+				<Text>false</Text>
+				<AskToSaveWork>false</AskToSaveWork>
+				<ShowActionButton>false</ShowActionButton>
+				<ShowCancelButton>false</ShowCancelButton>
+				<DeadlineBehavior>false</DeadlineBehavior>
+				<ShowConfirmation>false</ShowConfirmation>
+			</PreAction>
+			<HasRunningMessage>false</HasRunningMessage>
+			<RunningMessage>
+				<Text>false</Text>
+			</RunningMessage>
+			<TimeRange>false</TimeRange>
+			<StartDateTimeOffset>false</StartDateTimeOffset>
+			<EndDateTimeOffset>false</EndDateTimeOffset>
+			<DayOfWeekConstraint>false</DayOfWeekConstraint>
+			<ActiveUserRequirement>false</ActiveUserRequirement>
+			<ActiveUserType>false</ActiveUserType>
+			<Whose>false</Whose>
+			<PreActionCacheDownload>false</PreActionCacheDownload>
+			<Reapply>false</Reapply>
+			<ReapplyLimit>false</ReapplyLimit>
+			<RetryCount>false</RetryCount>
+			<RetryWait>false</RetryWait>
+			<TemporalDistribution>false</TemporalDistribution>
+			<ContinueOnErrors>false</ContinueOnErrors>
+			<PostActionBehavior>
+				<Behavior>false</Behavior>
+				<AllowCancel>false</AllowCancel>
+				<Deadline>false</Deadline>
+				<Title>false</Title>
+				<Text>false</Text>
+			</PostActionBehavior>
+			<IsOffer>false</IsOffer>
+			<AnnounceOffer>false</AnnounceOffer>
+			<OfferCategory>false</OfferCategory>
+			<OfferDescriptionHTML>false</OfferDescriptionHTML>
+		</SettingsLocks>
+		<IsUrgent>false</IsUrgent>
+		<Target>
+			<AllComputers>1</AllComputers>
+		</Target>
+	</SingleAction>
+</BES>

@@ -1,0 +1,35 @@
+<FindBugsFilter>
+     <!-- Match all violations. -->
+     <!-- But ignore: generating a random integer using Math.random(),
+                      string buffer instead of string concatenation.
+                      comparator should be serializable
+       -->
+     <Match classregex=".*" >
+       <BugPattern name="DM_NEXTINT_VIA_NEXTDOUBLE, SBSC_USE_STRINGBUFFER_CONCATENATION, SE_COMPARATOR_SHOULD_BE_SERIALIZABLE, SE_BAD_FIELD, SIC_INNER_SHOULD_BE_STATIC SIC" />
+     </Match>
+
+     <!-- Exclude Gaussian.Phi() uppercase method name and test for floating point equality. -->
+     <Match class="Gaussian" >
+       <BugPattern name="NM_METHOD_NAMING_CONVENTION, FE_FLOATING_POINT_EQUALITY" />
+     </Match>
+
+     <!-- Exclude these classes -->
+     <Match class = "Bug" />
+     <Match class = "Bug1" />
+     <Match class = "Bug2" />
+     <Match class = "PassByValue" />
+     <Match class = "NoBaseCase" />
+     <Match class = "Confusion" />
+     <Match class = "StdDraw" />
+
+
+
+     <!-- Exclude these files -->
+     <Match classregex="javazoom.*" />
+     <Match classregex="javazoom.jl.player.*" />
+     <Match classregex="Hanoi11.*" />
+     <Match classregex="EpsGraphics2D.*" />
+     <Match classregex="drasys.*" />
+     <Match classregex="Jama.*" />
+
+</FindBugsFilter>

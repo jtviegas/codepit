@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# *************************************************
+# Wrapper for using DrJava
+# Last edited: September 18, 2011
+# *************************************************
+
+jar=~/workspace/github/assorted/coursera-algo/algs4/drjava.jar
+/usr/lib/jvm/java-7-openjdk-amd64/bin/java -jar ${jar}
