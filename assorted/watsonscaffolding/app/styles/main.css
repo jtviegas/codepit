@@ -1,0 +1,39 @@
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  padding: 10%;
+}
+
+.panel-watson {
+  min-width: 400px;
+  min-height: 200px;
+  
+}
+
+.panel-body div {
+  padding: 10px;
+}
+
+.watson-btn {
+  color: #337ab7;
+  border-color: transparent;
+  margin-left:0px;
+}
+
+.watson-txt {
+  padding: 6px;
+  margin: 0px;
+}
+
+.watson-btn > img { 
+    width:auto;
+    height:auto;
+    max-height: 1.3em;
+}
+

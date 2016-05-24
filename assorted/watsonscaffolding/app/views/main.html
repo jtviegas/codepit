@@ -1,0 +1,42 @@
+
+    <div class="panel panel-primary panel-watson">
+
+      <div class="panel-heading">
+          <div class="row">
+              <h3 class="panel-title col-xs-12 col-sm-8">Watson for ITSM</h3>
+              <ul class="list-inline col-xs-12 col-sm-4 pull-right">
+                <li class="col-xs-12 col-sm-2 pull-right">User</li>
+                <li class="col-xs-12 col-sm-2 pull-right">Info</li>
+              </ul>
+          </div>
+      </div>
+      <div class="panel-body">
+
+        <form name="askWatson" novalidate>
+
+          <div class="row"> 
+
+            <div class="form-group" ng-class="{'has-error': !askWatson.questionText.$valid}">
+            
+            <input id="questionText" type="text" class="col-xs-12 col-sm-8 watson-txt" placeholder="Search for solutions..." ng-model='question.text' required>
+            <span class="col-xs-12 col-sm-4">
+                    <button class="btn btn-default watson-btn pull-left" type="button" ng-click="submit()">
+                      <img src="images/watson.gif"> Ask Watson!
+                    </button> 
+            </span>
+
+            </div>
+
+          </div>
+
+        </form>
+
+    </div>
+ 
+
+  </div>
+
+
+<div id="container">
+
+</div>
