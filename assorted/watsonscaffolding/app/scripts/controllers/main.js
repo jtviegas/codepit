@@ -8,22 +8,58 @@
  * Controller of the watsonscaffoldingApp
  */
 angular.module('watsonscaffoldingApp')
-  .controller('MainCtrl', function ($scope, $alert) {
-  	if(!$scope.question)
+  .controller('MainCtrl', function ($scope, answers, $alert) {
+  	
+    if(!$scope.question)
   		$scope.question = {};
 
-  	var alert = $alert(
-  		{	title: 'Holy guacamole!', 
-  			content: 'Best check yo self, you\'re not looking too good.', 
-  			placement: 'top', 
+    $scope.feedbackToggles = [];
+    $scope.answers = [];
+    $scope.validQuestion = true;
+    $scope.ratingMax=5;
+    $scope.ratingAverage=3;
+
+  	var noQuestionAlert = $alert(
+  		{	title: 'no data', 
+  			content: 'Please provide a question!', 
+  			container: '#alertContainer',
   			type: 'info', 
   			show: false
   		}
   	);
 
   	$scope.submit = function(){
-  		console.log($scope.askWatson.$valid);
-  		alert.show();
+      //clear state
+      $scope.answers = [];
+      $scope.feedbackToggles = [];
+      //hide alert message
+      noQuestionAlert.hide();
+      
+      if(!$scope.question.text){
+        $scope.validQuestion = false;
+        noQuestionAlert.show();
+        return;
+      }
+      
+      $scope.validQuestion = true;
+      var promise = answers.get('');
+      promise.then(function(o) {
+        console.log('success');
+        $scope.feedbackToggles = new Array(o.length);
+        $scope.feedbackToggles.fill(false);
+        $scope.answers = o;
+      }, function(reason) {
+         console.log('fail:' + reason);
+      });
     }
 
+    $scope.submitFeedback = function(){
+
+    };
+
+
+    
+
   });
+
+

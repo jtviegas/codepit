@@ -1,42 +1,102 @@
 
-    <div class="panel panel-primary panel-watson">
 
+<script type="text/ng-template" id="group-template.html">
+    <div class="panel {{panelClass || 'panel-default'}}">
       <div class="panel-heading">
-          <div class="row">
-              <h3 class="panel-title col-xs-12 col-sm-8">Watson for ITSM</h3>
-              <ul class="list-inline col-xs-12 col-sm-4 pull-right">
-                <li class="col-xs-12 col-sm-2 pull-right">User</li>
-                <li class="col-xs-12 col-sm-2 pull-right">Info</li>
-              </ul>
-          </div>
+        <h4 class="panel-title">
+          <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading">
+            <span uib-accordion-header ng-class="{'text-muted': isDisabled}">
+              {{heading}}
+            </span>
+          </a>
+        </h4>
       </div>
-      <div class="panel-body">
+      <div class="panel-collapse collapse" uib-collapse="!isOpen">
+        <div class="panel-body" ng-transclude></div>
+      </div>
+    </div>
+  </script>
 
-        <form name="askWatson" novalidate>
+<div class="container">
+<div class="row">
+    <form class="center-block" novalidate >
 
-          <div class="row"> 
-
-            <div class="form-group" ng-class="{'has-error': !askWatson.questionText.$valid}">
-            
-            <input id="questionText" type="text" class="col-xs-12 col-sm-8 watson-txt" placeholder="Search for solutions..." ng-model='question.text' required>
-            <span class="col-xs-12 col-sm-4">
-                    <button class="btn btn-default watson-btn pull-left" type="button" ng-click="submit()">
+        <div class="form-group" ng-class="{'has-error': !validQuestion}">
+          
+            <input type="text" class="col-xs-12 col-sm-9 watson-txt" placeholder="Search for solutions..." ng-model='question.text'>
+            <span class="col-xs-12 col-sm-3 watson-btn-span">
+                    <button class="btn btn-default watson-btn pull-right" type="button" ng-click="submit()">
                       <img src="images/watson.gif"> Ask Watson!
                     </button> 
-            </span>
+            </span>    
+      
+        </div>
 
+    </form>
+    </div>
+</div>
+
+
+<div class="container watson-answers">
+
+  <div class="row">
+
+    <uib-accordion close-others="true">
+        <uib-accordion-group template-url="group-template.html" ng-repeat="o in answers">
+          <uib-accordion-heading>
+            <div class="row">
+              <div class="col-xs-8 col-sm-8">
+                {{$index+1}}. {{o.title}}
+              </div>
+              <div class="col-xs-4 col-sm-4 pull-right">
+                confidence: {{o.confidence}}
+              </div>
+            </div>
+          </uib-accordion-heading>
+
+        <div class="row col-xs-12 col-sm-12">
+          <a href="{{o.link}}">{{o.link}}</a>
+        </div>
+        <div class="row col-xs-12 col-sm-12 x-description">
+        <textarea readonly="true" ng-model="answers[$index].description" class="col-xs-12 col-sm-12"></textarea>
+        </div>
+        <div class="row col-xs-12 col-sm-12">
+
+              <div class="panel panel-default">
+                <div class="panel-heading" ng-click="feedbackToggles[$index] = !feedbackToggles[$index]">
+                  <h3 class="panel-title">feedback & ratings</h3>
+                </div>
+
+                <div uib-collapse="!feedbackToggles[$index]">
+                  <div class="panel-body">
+                    <div class="row col-xs-12 col-sm-12">
+                    <label for="rating" class="col-xs-5 col-sm-5 control-label pull-left">what's your rating?</label>
+                    <uib-rating  name="rating" ng-model="answers[$index].rating" max="ratingMax" read-only="isReadonly" on-hover="hoveringOver(value)" class="col-xs-7 col-sm-7 pull-left" on-leave="overStar = null" aria-labelledby="default-rating"></uib-rating>
+                    </div>
+                    <div class="row col-xs-12 col-sm-12">
+                      <textarea placeholder="Add your comment here" ng-model="answers[$index].comments" class="col-xs-12 col-sm-12"></textarea>
+                    </div>
+                    <div class="row col-xs-12 col-sm-12">
+                      <button type="button" class="btn btn-default" ng-click="feedbackToggles[$index] = !feedbackToggles[$index]">cancel</button>
+                      <button type="button" class="btn btn-primary" ng-click="submitFeedback()">submit</button>
+                    </div>
+
+                  </div>
+              </div>
             </div>
 
-          </div>
 
-        </form>
-
-    </div>
- 
-
+        </div>
+      </uib-accordion-group>
+    </uib-accordion>
   </div>
-
-
-<div id="container">
-
+  <div class="row">
+    <div class="col-sm-12 ">
+      <div id="alertContainer"></div>
+    </div>
+  </div>
 </div>
+
+
+
+    

@@ -19,8 +19,29 @@
   </head>
   <body ng-app="watsonscaffoldingApp" ng-controller="AppCtrl">
 
+  <nav class="navbar navbar-default navbar-static-top navbar-watson">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Watson for ITSM</a>
+      </div>
+      <div class="collapse navbar-collapse" id="js-navbar-collapse">
+              <ul class="nav navbar-nav navbar-right">
+                <li ng-class="pageClass('/user')"><a ng-href="/user">User</a></li>
+                <li ng-class="pageClass('/info')"><a ng-href="/info">Info</a></li>
+              </ul>
+            </div>
+    </div>
+</nav>
 
-    <div class="container-fluid" ng-view></div>
+   
+
+    <div class="container" ng-view></div>
 
 
 

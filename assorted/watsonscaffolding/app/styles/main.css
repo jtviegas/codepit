@@ -6,34 +6,60 @@ html {
   box-sizing: inherit;
 }
 
-body {
-  padding: 10%;
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+div {
+  margin-bottom: 2px;
 }
 
-.panel-watson {
-  min-width: 400px;
-  min-height: 200px;
-  
+.navbar-watson {
+    background-color: #337ab7;
+    border-color: #e7e7e7;
+    color: white;
 }
 
-.panel-body div {
-  padding: 10px;
+.navbar-default 
+.navbar-nav > li > a {
+    color: white;
+}
+
+.navbar-default
+.navbar-brand {
+  color: white;
+}
+
+.watson-form {
+  margin-bottom: 2em;
 }
 
 .watson-btn {
   color: #337ab7;
   border-color: transparent;
-  margin-left:0px;
+  margin: 0px;
+
+}
+
+.watson-btn-span {
+  padding: 0px;
 }
 
 .watson-txt {
-  padding: 6px;
-  margin: 0px;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
 .watson-btn > img { 
     width:auto;
     height:auto;
     max-height: 1.3em;
+
+}
+
+.watson-answers { 
+  margin-top: 15px;
+}
+
+.watson-answers { 
+  margin-top: 15px;
 }
 
