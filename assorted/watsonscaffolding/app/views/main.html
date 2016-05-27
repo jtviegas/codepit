@@ -19,13 +19,13 @@
 
 <div class="container">
 <div class="row">
-    <form class="center-block" novalidate >
+    <form  ng-submit="submit()" class="center-block" novalidate >
 
         <div class="form-group" ng-class="{'has-error': !validQuestion}">
           
             <input type="text" class="col-xs-12 col-sm-9 watson-txt" placeholder="Search for solutions..." ng-model='question.text'>
             <span class="col-xs-12 col-sm-3 watson-btn-span">
-                    <button class="btn btn-default watson-btn pull-right" type="button" ng-click="submit()">
+                    <button class="btn btn-default watson-btn pull-right" type="submit">
                       <img src="images/watson.gif"> Ask Watson!
                     </button> 
             </span>    
