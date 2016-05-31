@@ -42,23 +42,21 @@
   <div class="row">
 
     <uib-accordion close-others="true">
-        <uib-accordion-group template-url="group-template.html" ng-repeat="o in answers">
+        <uib-accordion-group template-url="group-template.html" ng-repeat="o in queryOutcome.matches">
           <uib-accordion-heading>
             <div class="row">
-              <div class="col-xs-8 col-sm-8">
-                {{$index+1}}. {{o.title}}
-              </div>
-              <div class="col-xs-4 col-sm-4 pull-right">
-                confidence: {{o.confidence}}
+              <div class="col-xs-12 col-sm-12">
+                  <a href="{{o.doc.link}}" target="_blank" class="pull-left" ng-click="$event.stopPropagation();followLink($index)">{{$index+1}}. {{o.doc.title}}</a>
               </div>
             </div>
-          </uib-accordion-heading>
 
-        <div class="row col-xs-12 col-sm-12">
-          <a href="{{o.link}}">{{o.link}}</a>
-        </div>
+            
+          </uib-accordion-heading>
+          <div class="row col-xs-12 col-sm-12" ng-if="o.confidence" ng-class="{'text-danger': o.confidence<50, 'text-warning': o.confidence >= 50 && o.confidence < 80, 'text-success': o.confidence >= 80}">
+              <i>confidence</i>: {{o.confidence}} %
+          </div>  
         <div class="row col-xs-12 col-sm-12 x-description">
-        <textarea readonly="true" ng-model="answers[$index].description" class="col-xs-12 col-sm-12"></textarea>
+          <textarea readonly="true" ng-model="queryOutcome.matches[$index].doc.description" class="col-xs-12 col-sm-12"></textarea>
         </div>
         <div class="row col-xs-12 col-sm-12">
 
@@ -71,10 +69,10 @@
                   <div class="panel-body">
                     <div class="row col-xs-12 col-sm-12">
                     <label for="rating" class="col-xs-5 col-sm-5 control-label pull-left">what's your rating?</label>
-                    <uib-rating  name="rating" ng-model="answers[$index].rating" max="ratingMax" read-only="isReadonly" on-hover="hoveringOver(value)" class="col-xs-7 col-sm-7 pull-left" on-leave="overStar = null" aria-labelledby="default-rating"></uib-rating>
+                    <uib-rating  name="rating" ng-model="queryOutcome.matches[$index].feedback.rating" max="ratingMax" read-only="isReadonly" on-hover="hoveringOver(value)" class="col-xs-7 col-sm-7 pull-left" on-leave="overStar = null" aria-labelledby="default-rating"></uib-rating>
                     </div>
                     <div class="row col-xs-12 col-sm-12">
-                      <textarea placeholder="Add your comment here" ng-model="answers[$index].comments" class="col-xs-12 col-sm-12"></textarea>
+                      <textarea placeholder="Add your comment here" ng-model="queryOutcome.matches[$index].feedback.comments" class="col-xs-12 col-sm-12"></textarea>
                     </div>
                     <div class="row col-xs-12 col-sm-12">
                       <button type="button" class="btn btn-default" ng-click="feedbackToggles[$index] = !feedbackToggles[$index]">cancel</button>
@@ -96,7 +94,5 @@
     </div>
   </div>
 </div>
-
-
 
     

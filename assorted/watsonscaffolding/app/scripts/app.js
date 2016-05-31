@@ -25,11 +25,9 @@ angular
   .controller(
     'AppCtrl', 
     function($scope, $location){
-
       $scope.pageClass = function(path){
         return (path == $location.path()) ? 'active' : '';
       };
-
     }
   )
   .config(function ($routeProvider, $locationProvider) {
@@ -73,40 +71,7 @@ angular
 
     } 
   )
-  .service( 'answers', function (utils, $q, $resource){
-
-      var inget = function(query){
-          var os = [];
-          for(var i = 0; i < 16; i++){
-            var o = {};
-
-            o.title = utils.randomString(12);
-            o.link = 'http://' + utils.randomString(16);
-            o.description = utils.randomString(64);
-            o.confidence = (Math.round(Math.random()*10000)/100);
-            o.rating = 1;
-            o.comments = utils.randomString(32);
-            os.push(o);
-          }
-          return os;
-      };
-      
-      var asyncGet = function(query) {
-        // perform some asynchronous operation, resolve or reject the promise when appropriate.
-        return $q(function(resolve, reject) {
-          setTimeout(function() {
-            var objs = inget(name);
-            if (true) {
-              resolve(objs);
-            } else {
-              reject('exception');
-            }
-          }, 1000);
-        });
-      }
-
-        return { get: asyncGet };
-
-    } 
-  )
+  .constant("APP_CONSTANTS", {
+    RATING_MAX: 5
+  })
   ;
