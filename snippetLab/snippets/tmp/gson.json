@@ -1,0 +1,24 @@
+{
+
+	"cron_1" : 	{
+				// 28th of every month 
+				"expression": "* * * 28 * ?"
+				// optional config from here on 
+				, "strictlyOnWeekdayStrategy": "go_forward"
+				, "warmingFactorInDays": 1
+				, "recurrenceMsg" : "recurrenceMsg 28th of every month"
+			}
+	, "cron_2" : 	{
+				// 28th of every month 
+				"expression": "* * * 28 * ?"
+				// optional config from here on 
+				, "strictlyOnWeekdayStrategy": "go_forward"
+				, "warmingFactorInDays": "1"
+				, "recurrenceMsg" : "recurrenceMsg 28th of every month"
+			}
+	,"tod": {
+		"warmingFactorInDays": 3
+		, "recurrenceMsg" : "recurrenceMsg for tod"
+	}
+		
+}
