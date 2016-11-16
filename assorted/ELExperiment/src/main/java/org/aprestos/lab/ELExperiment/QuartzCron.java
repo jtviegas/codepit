@@ -30,10 +30,10 @@ public class QuartzCron {
 		
 	}
 	
-	public boolean match(Date date){
+	public boolean match(long date){
 		boolean result = false;
 		
-		MutableDateTime d = new MutableDateTime(date.getTime(), DateTimeZone.UTC);
+		MutableDateTime d = new MutableDateTime(date, DateTimeZone.UTC);
 		
 		
 		if(weekendStrategy.equals(StrictlyOnWeekdayStrategy.DO_NOTHING))
@@ -74,23 +74,23 @@ public class QuartzCron {
 		return result;
 	}
 	
-	public int getOccurrences(Date start, Date end){
+	public int getOccurrences(long start, long end){
 		int result = 0;
 		
-		MutableDateTime ds = new MutableDateTime(start.getTime(), DateTimeZone.UTC);
+		MutableDateTime ds = new MutableDateTime(start, DateTimeZone.UTC);
 		ds.setTime(0, 0, 0, 0);
-		MutableDateTime de = new MutableDateTime(end.getTime(), DateTimeZone.UTC);
+		MutableDateTime de = new MutableDateTime(end, DateTimeZone.UTC);
 		de.setTime(0, 0, 0, 0);
 		
 		while(ds.isBefore(de)){
-			if(match(ds.toDate()))
+			if(match(ds.getMillis()))
 				result++;
 
 			ds.addDays(1);
 		}
 		
 		//test the last one
-		if(match(ds.toDate()))
+		if(match(ds.getMillis()))
 			result++;
 
 		return result;

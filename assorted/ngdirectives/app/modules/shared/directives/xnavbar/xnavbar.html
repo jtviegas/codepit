@@ -1,0 +1,10 @@
+<ul class="nav navbar-nav navbar-right">
+<li ng-class="pageClass('{{entry.url}}')" ng-repeat='entry in entries' ng-class="{dropdown-menu: null != entry.children}">
+  <a ng-href="entry.url">
+    <figure>
+      <img ng-if='entry.image' alt="" style="width:32px">
+    </figure>
+    <figcaption ng-if='entry.shortText'>Hello <em>{{ entry.shortText }}</figcaption>
+  </a> 
+</li>
+</ul>

@@ -21,6 +21,39 @@ public class QuartzCronTests {
 		4.2 dynamic holidays (Thanksgiving: fourth Thursday of November)  */
 	
 	/**
+	 * 5 Quarterly activities.
+
+  			Such as end of quarter like they have in finance.  This means increased activity 
+  			certainly in the last week of the quarter (including saturdays and sundays) 
+  			with probably mental things happening on the very last day.
+	 * 
+	 * @throws ParseException
+	 */
+	@Test
+	public void test_pattern_5() throws ParseException {
+		
+		String expression = "* * * ? 3 1-7L";
+		QuartzCron cron = new QuartzCron(expression);
+
+		// Fri, 25 Mar 2016 08:23:45 GMT
+		long t1 = 1458894225000l
+		// Thu, 31 Mar 2016 08:23:45 GMT
+		, t2 =  1459412625000l
+		// Thu, 19 Nov 2015 08:23:45 GMT
+		, t3 = 1447921425000l
+		// Thu, 03 Mar 2016 08:23:45 GMT
+		, t4 = 1456993425000l 
+		;
+		
+		Assert.assertTrue(cron.match(t1));
+		Assert.assertTrue(cron.match(t2));
+		Assert.assertFalse(cron.match(t3));
+			//Assert.assertFalse(cron.match(new Date(t4)));
+
+		
+	}
+	
+	/**
 	 * 4.2 dynamic holidays (Thanksgiving: fourth Thursday of November)
 	 * 
 	 * @throws ParseException
@@ -39,12 +72,12 @@ public class QuartzCronTests {
 		, t3 = 1479975825000l
 		;
 		
-		Assert.assertTrue(cron.match(new Date(t1)));
-		Assert.assertFalse(cron.match(new Date(t2)));
-		Assert.assertTrue(cron.match(new Date(t3)));
+		Assert.assertTrue(cron.match(t1));
+		Assert.assertFalse(cron.match(t2));
+		Assert.assertTrue(cron.match(t3));
 		
-		Assert.assertEquals(3, cron.getOccurrences(new Date(t1), new Date(t2)));
-		Assert.assertEquals(5, cron.getOccurrences(new Date(t1), new Date(t3)));
+		Assert.assertEquals(3, cron.getOccurrences(t1,t2));
+		Assert.assertEquals(5, cron.getOccurrences(t1,t3));
 		
 	}
 	
@@ -67,12 +100,12 @@ public class QuartzCronTests {
 		, t3 = 1451636625000l
 		;
 		
-		Assert.assertTrue(cron.match(new Date(t1)));
-		Assert.assertFalse(cron.match(new Date(t2)));
-		Assert.assertTrue(cron.match(new Date(t3)));
+		Assert.assertTrue(cron.match(t1));
+		Assert.assertFalse(cron.match(t2));
+		Assert.assertTrue(cron.match(t3));
 		
-		Assert.assertEquals(4, cron.getOccurrences(new Date(t1), new Date(t2)));
-		Assert.assertEquals(5, cron.getOccurrences(new Date(t1), new Date(t3)));
+		Assert.assertEquals(4, cron.getOccurrences(t1, t2));
+		Assert.assertEquals(5, cron.getOccurrences(t1, t3));
 		
 	}
 	
@@ -96,12 +129,12 @@ public class QuartzCronTests {
 			;
 				
 		
-		Assert.assertTrue(cron.match(new Date(t1)));
-		Assert.assertFalse(cron.match(new Date(t2)));
-		Assert.assertTrue(cron.match(new Date(t3)));
+		Assert.assertTrue(cron.match(t1));
+		Assert.assertFalse(cron.match(t2));
+		Assert.assertTrue(cron.match(t3));
 		
-		Assert.assertEquals(3, cron.getOccurrences(new Date(t1), new Date(t2)));
-		Assert.assertEquals(5, cron.getOccurrences(new Date(t1), new Date(t3)));
+		Assert.assertEquals(3, cron.getOccurrences(t1, t2));
+		Assert.assertEquals(5, cron.getOccurrences(t1, t3));
 		
 	}
 	
@@ -124,12 +157,12 @@ public class QuartzCronTests {
 		, t3 = 1458894225000l
 		;
 		
-		Assert.assertTrue(cron.match(new Date(t1)));
-		Assert.assertFalse(cron.match(new Date(t2)));
-		Assert.assertTrue(cron.match(new Date(t3)));
+		Assert.assertTrue(cron.match(t1));
+		Assert.assertFalse(cron.match(t2));
+		Assert.assertTrue(cron.match(t3));
 		
-		Assert.assertEquals(2, cron.getOccurrences(new Date(t1), new Date(t2)));
-		Assert.assertEquals(5, cron.getOccurrences(new Date(t1), new Date(t3)));
+		Assert.assertEquals(2, cron.getOccurrences(t1, t2));
+		Assert.assertEquals(5, cron.getOccurrences(t1,t3));
 		
 	}
 	/**
@@ -156,33 +189,33 @@ public class QuartzCronTests {
 		
 		QuartzCron cron = new QuartzCron(expression,StrictlyOnWeekdayStrategy.GO_BACKWARD);
 		
-		Assert.assertFalse(cron.match(new Date(t1)));
-		Assert.assertFalse(cron.match(new Date(t2)));
-		Assert.assertTrue(cron.match(new Date(t3)));
-		Assert.assertTrue(cron.match(new Date(t4)));
-		Assert.assertFalse(cron.match(new Date(t5)));
-		Assert.assertTrue(cron.match(new Date(t6)));
+		Assert.assertFalse(cron.match(t1));
+		Assert.assertFalse(cron.match(t2));
+		Assert.assertTrue(cron.match(t3));
+		Assert.assertTrue(cron.match(t4));
+		Assert.assertFalse(cron.match(t5));
+		Assert.assertTrue(cron.match(t6));
 		
-		Assert.assertEquals(0, cron.getOccurrences(new Date(t1), new Date(t2)));
-		Assert.assertEquals(4, cron.getOccurrences(new Date(t1), new Date(t3)));
-		Assert.assertEquals(5, cron.getOccurrences(new Date(t1), new Date(t4)));
-		Assert.assertEquals(5, cron.getOccurrences(new Date(t1), new Date(t5)));
-		Assert.assertEquals(12, cron.getOccurrences(new Date(t1), new Date(t6)));
+		Assert.assertEquals(0, cron.getOccurrences(t1, t2));
+		Assert.assertEquals(4, cron.getOccurrences(t1, t3));
+		Assert.assertEquals(5, cron.getOccurrences(t1, t4));
+		Assert.assertEquals(5, cron.getOccurrences(t1, t5));
+		Assert.assertEquals(12, cron.getOccurrences(t1, t6));
 		
 		cron = new QuartzCron(expression,StrictlyOnWeekdayStrategy.GO_FORWARD);
 		
-		Assert.assertFalse(cron.match(new Date(t1)));
-		Assert.assertTrue(cron.match(new Date(t2)));
-		Assert.assertTrue(cron.match(new Date(t3)));
-		Assert.assertFalse(cron.match(new Date(t4)));
-		Assert.assertFalse(cron.match(new Date(t5)));
-		Assert.assertTrue(cron.match(new Date(t6)));
+		Assert.assertFalse(cron.match(t1));
+		Assert.assertTrue(cron.match(t2));
+		Assert.assertTrue(cron.match(t3));
+		Assert.assertFalse(cron.match(t4));
+		Assert.assertFalse(cron.match(t5));
+		Assert.assertTrue(cron.match(t6));
 		
-		Assert.assertEquals(1, cron.getOccurrences(new Date(t1), new Date(t2)));
-		Assert.assertEquals(5, cron.getOccurrences(new Date(t1), new Date(t3)));
-		Assert.assertEquals(5, cron.getOccurrences(new Date(t1), new Date(t4)));
-		Assert.assertEquals(5, cron.getOccurrences(new Date(t1), new Date(t5)));
-		Assert.assertEquals(13, cron.getOccurrences(new Date(t1), new Date(t6)));
+		Assert.assertEquals(1, cron.getOccurrences(t1, t2));
+		Assert.assertEquals(5, cron.getOccurrences(t1, t3));
+		Assert.assertEquals(5, cron.getOccurrences(t1, t4));
+		Assert.assertEquals(5, cron.getOccurrences(t1, t5));
+		Assert.assertEquals(13, cron.getOccurrences(t1, t6));
 			
 	}
 	

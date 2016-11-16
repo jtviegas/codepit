@@ -1,0 +1,6 @@
+APP_NAME=ssoexp
+IMG=$APP_NAME
+CONTAINER=$IMG
+BX_REGISTRY=registry.ng.bluemix.net/mynodeappbue
+BX_IMG=$BX_REGISTRY/$IMG
+BX_CONTAINER_MEMORY=128

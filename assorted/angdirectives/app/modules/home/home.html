@@ -1,0 +1,17 @@
+<div class="container">
+	<br>
+	<div class="well text-center">
+		<h1>{{ vm.title }}</h1>
+	</div>
+
+	<hr>
+	<button ng-click='toggleModal()'>Open Modal</button>
+	<hr>	
+	<input type="text" ng-model="colorName" placeholder="Insert a color name"/>
+    <link-function></link-function>
+    
+	<simple-modal show='modalShown' width='400px' height='60%'>
+		<p>Hello Simple Modal Window with External Template<p>
+	</simple-modal>
+	
+</div>

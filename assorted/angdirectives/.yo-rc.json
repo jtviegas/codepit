@@ -1,0 +1,20 @@
+{
+  "generator-angm": {
+    "appName": "angdirectives",
+    "angularCookies": true,
+    "angularAnimate": true,
+    "angularSanitize": true,
+    "angularBootstrap": true,
+    "directives": [
+      {
+        "name": "simplemodal"
+      },
+      {
+        "name": "linkfunction"
+      },
+      {
+        "name": "simplenavbar"
+      }
+    ]
+  }
+}
