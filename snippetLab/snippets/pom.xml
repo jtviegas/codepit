@@ -147,13 +147,6 @@
 		  <version>2.9.1</version>
 		</dependency>
 		
-		<dependency>
-		  <groupId>org.coursera.algs</groupId>
-		  <artifactId>algs4</artifactId>
-		  <version>1.0.0</version>
-		  <scope>system</scope>
-		  <systemPath>${local.lib.dir}/algs4.jar</systemPath>
-		</dependency>
 
 	</dependencies>
 

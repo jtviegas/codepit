@@ -46,8 +46,10 @@ public class GsonTest {
 	    // Convert JSON to Java Object
 	    //FEConf staff = gson.fromJson(reader, FEConf.class);
 	    @SuppressWarnings("unchecked")
-	    Map<String, Map<String, Object>> staff  = (Map<String, Map<String, Object>>) gson.fromJson(reader,  Map.class);
-	    staff.get("cron_2").get("warmingFactorInDays");
+	    Map<String, Map<String, String>> staff  = (Map<String, Map<String, String>>) gson.fromJson(reader,  Map.class);
+	    
+	    System.out.println(staff.get("cron_2").get("warmingFactorInDays"));
+	    System.out.println(staff.get("cron_1").get("warmingFactorInDays"));
 	    System.out.println(staff);
 
 	    // Convert JSON to JsonElement, and later to String
