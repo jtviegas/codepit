@@ -1,16 +1,37 @@
 package org.aprestos.lab.ELExperiment;
 
 import java.text.ParseException;
-import java.util.Date;
 
 import org.aprestos.lab.ELExperiment.QuartzCron.StrictlyOnWeekdayStrategy;
+import org.junit.Before;
 import org.junit.Test;
+
+import com.cronutils.model.definition.CronDefinition;
+import com.cronutils.model.definition.CronDefinitionBuilder;
+import com.cronutils.parser.CronParser;
 
 import junit.framework.Assert;
 
 
 public class QuartzCronTests {
 
+	private CronParser cronUtilsQuartz,cronUtilsCron4j, cronUtilsUnix;
+	
+	@Before
+	public void setup(){
+		//get a predefined instance
+		CronDefinition cronDefinition = CronDefinitionBuilder.instanceDefinitionFor(com.cronutils.model.CronType.QUARTZ);
+		cronUtilsQuartz = new CronParser(cronDefinition);
+		
+		CronDefinition cronDefinition2 = CronDefinitionBuilder.instanceDefinitionFor(com.cronutils.model.CronType.CRON4J);
+		cronUtilsCron4j = new CronParser(cronDefinition2);
+		
+		CronDefinition cronDefinition3 = CronDefinitionBuilder.instanceDefinitionFor(com.cronutils.model.CronType.UNIX);
+		cronUtilsUnix = new CronParser(cronDefinition3);
+				
+	}
+	
+	
 	
 /*	patterns 
 	1. payday 23rd, back off to previous working day 
@@ -33,6 +54,8 @@ public class QuartzCronTests {
 	public void test_pattern_5() throws ParseException {
 		
 		String expression = "* * * ? 3 1-7L";
+		String expression_withNoSecondsField = "* * ? 3 1-7L";
+		
 		QuartzCron cron = new QuartzCron(expression);
 
 		// Fri, 25 Mar 2016 08:23:45 GMT
@@ -51,6 +74,9 @@ public class QuartzCronTests {
 			//Assert.assertFalse(cron.match(new Date(t4)));
 
 		
+		//cronUtilsQuartz.parse(expression); // -> java.lang.IllegalArgumentException: Invalid chars in expression! Expression: 7L Invalid chars
+		//cronUtilsCron4j.parse(expression_withNoSecondsField); // -> java.lang.IllegalArgumentException: Invalid chars in expression! Expression: 7L Invalid chars: L
+		//cronUtilsUnix.parse(expression_withNoSecondsField); // -> java.lang.IllegalArgumentException: Invalid chars in expression! Expression: 7L Invalid chars: L
 	}
 	
 	/**
