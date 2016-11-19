@@ -41,6 +41,50 @@ public class QuartzCronTests {
 		4.1 fixed holidays 25th Dec 
 		4.2 dynamic holidays (Thanksgiving: fourth Thursday of November)  */
 	
+	
+	/**
+	 * 6 major US holidays matching with unix cron parser
+	 * 
+	 * @throws ParseException
+	 */
+	@Test
+	public void test_pattern_6() throws ParseException {
+		
+		// January 1 - New Year's Day | February 2 - Groundhog Day | First Sunday of Feb - Super Bowl Sunday | February 14 - Valentine's Day | March 17 - St. Patrick's Day
+		// April 1 - April Fool's Day |
+		
+		String[] expression = {
+				"* * 1 1 *",  "* * 2 2 *", "* * 1,2,3,4,5,6,7 2 0", "* * 14 2 *", "* * 17 3 *"
+				, "* * 1 4 *"
+		};
+		long[] tss = {
+				1451613722000l, 1454378522000l, 1454810522000l, 1455415322000l,1458180122000l
+				, 1459476122000l
+		};
+		
+		QuartzCron cron = new QuartzCron(expression);
+
+		// Fri, 25 Mar 2016 08:23:45 GMT
+		long t1 = 1458894225000l
+		// Thu, 31 Mar 2016 08:23:45 GMT
+		, t2 =  1459412625000l
+		// Thu, 19 Nov 2015 08:23:45 GMT
+		, t3 = 1447921425000l
+		// Thu, 03 Mar 2016 08:23:45 GMT
+		, t4 = 1456993425000l 
+		;
+		
+		Assert.assertTrue(cron.match(t1));
+		Assert.assertTrue(cron.match(t2));
+		Assert.assertFalse(cron.match(t3));
+			//Assert.assertFalse(cron.match(new Date(t4)));
+
+		
+		//cronUtilsQuartz.parse(expression); // -> java.lang.IllegalArgumentException: Invalid chars in expression! Expression: 7L Invalid chars
+		//cronUtilsCron4j.parse(expression_withNoSecondsField); // -> java.lang.IllegalArgumentException: Invalid chars in expression! Expression: 7L Invalid chars: L
+		//cronUtilsUnix.parse(expression_withNoSecondsField); // -> java.lang.IllegalArgumentException: Invalid chars in expression! Expression: 7L Invalid chars: L
+	}
+	
 	/**
 	 * 5 Quarterly activities.
 
