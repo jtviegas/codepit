@@ -18,43 +18,112 @@ consumes:
 produces:
   - application/json
 paths:
-  /hello:
-    # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
+  /{id}:
+    x-swagger-router-controller: hello
     get:
-      description: Returns 'Hello' to the caller
-      # used as the method name of the controller
-      operationId: hello
+      description: Returns a specific message to the caller
+      operationId: getOne
       parameters:
-        - name: name
+        - name: id
+          in: path
+          description: The msg id
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+      description: delete a message
+      operationId: del
+      parameters:
+        - name: id
+          in: path
+          description: The msg id
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /:
+    x-swagger-router-controller: hello
+    get:
+      description: Returns messages or message, if id provided, to the caller
+      operationId: getTwo
+      parameters:
+        - name: id
           in: query
-          description: The name of the person to whom to say hello
+          description: The id of the msg to echo
           required: false
           type: string
       responses:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
-            $ref: "#/definitions/HelloWorldResponse"
-        # responses may fall through to errors
+            $ref: "#/definitions/GeneralResponse"
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+    post:
+      description: persists message
+      operationId: post
+      parameters:
+        - name: msg
+          description: msg to be persisted
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Msg"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
 definitions:
-  HelloWorldResponse:
+  Msg:
+    type: object
     required:
       - message
     properties:
       message:
         type: string
+      ts:
+        type: number
   ErrorResponse:
     required:
       - message
     properties:
       message:
         type: string
+  GeneralResponse:
+    type: object
+    properties:
+      ok:
+        type: boolean
+        description: text message to be echoed
+      result:
+        type: object
+        description: result wrapping the outcome
+    required:
+      - ok
+      - result
