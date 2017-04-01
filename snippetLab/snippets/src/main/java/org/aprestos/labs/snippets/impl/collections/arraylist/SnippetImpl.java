@@ -1,4 +1,4 @@
-package org.aprestos.labs.snippets.impl.Collections.ArrayList;
+package org.aprestos.labs.snippets.impl.collections.arraylist;
 
 import java.util.ArrayList;
 
