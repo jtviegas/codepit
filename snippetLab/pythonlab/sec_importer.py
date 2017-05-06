@@ -6,29 +6,18 @@ import zipfile
 import datetime as dt
 import pandas as pd
 
-SUBMISSION_FILE='sub.txt'
-RESOURCES_FOLDER='resources'
+FILES = {
+    "sub": 'sub.txt'
+    #, "tag": 'tag.txt'
+    #, "pre": 'pre.txt'
+    , "num": 'num.txt'
+}
 
-def getRegistrantIds(year, quarter, registrant):
-    result = None
-    filename = "{year}q{quarter}.zip".format(year=year, quarter=quarter)
-    if os.path.exists(RESOURCES_FOLDER):
-        folder = RESOURCES_FOLDER + "/" + "{year}q{quarter}".format(year=year, quarter=quarter)
-    else:
-        folder = getFile(year, quarter)
-        if None == folder:
-            print('something wrong')
-
-    df = pd.DataFrame.from_csv(folder + '/' + SUBMISSION_FILE, sep='\t', header=0, index_col=None)
-    result = df[df['name'] == registrant ]['adsh'][0]
-    return result
-
-
-def getFile(year, quarter):
+def downloadFiles(year, quarter, folder):
     filename = "{year}q{quarter}.zip".format(year=year, quarter=quarter)
     url = "http://www.sec.gov/data/financial-statements/{filename}".format(filename=filename)
     file = os.getenv("TMP", "/tmp") + "/" +  filename
-    folder = "{rootpath}/sec_importer_{ts}".format(rootpath=os.getenv("TMP", "/tmp"), ts=dt.datetime.now().strftime("%s"))
+    #folder = "{rootpath}/sec_importer_{ts}".format(rootpath=os.getenv("TMP", "/tmp"), ts=dt.datetime.now().strftime("%s"))
     try:
         w.download(url, file)
         zip_ref = zipfile.ZipFile(file, 'r')
@@ -40,54 +29,81 @@ def getFile(year, quarter):
     else:
         return folder
 
+def loadData(year, quarter, folder):
+    #downloadFiles(year, quarter, folder)
+    result = {
+        'sub': None
+        , 'pre': None
+        , 'num': None
+        , 'tag': None
+    }
+    for k, v in FILES.items():
+        result[k] = pd.DataFrame.from_csv(folder + '/' + v, sep='\t', header=0, index_col=None)
+    return result
+
+def getTags():
+    result = []
+    result.append('Revenues')
+    return result
+
+def collectMetrics(data):
+    entries=[]
+    tags = getTags()
+    for index, sub in data['sub'].iterrows():
+        entry = {}
+        id = sub['adsh']
+        print('processing metrics for id: {id}, name:{name}'.format(id=id, name=sub['name']))
+
+        numbers = data['num'][data['num']['adsh'] == id]
+        for i, num in numbers.iterrows():
+            if num['tag'] in tags:
+                entry = {}
+                entry['submission_id'] = id
+                entry['registrant_id'] = sub['cik']
+                entry['registrant'] = sub['name']
+                entry['industry_class'] = sub['sic']
+                entry['balancesheet_date'] = sub['period']
+                entry['fiscal_period'] = sub['fp']
+                entry['tag'] = num['tag']
+                entry['enddate'] = num['ddate']
+                entry['quarters'] = num['qtrs']
+                entry['unit'] = num['uom']
+                entry['value'] = num['value']
+                entries.append(entry)
+
+        if index == 6:
+            break
+    return pd.DataFrame(entries)
+
+def applyRules(metrics):
+    pass
+
+def showOutcomes(data):
+    pass
 
 
-class PresentationOfStatements(object):
+def main(args):
+    if 4 != len(args):
+        sys.exit("must provide 3 arguments: year, quarter and folder")
 
-    def __init__(self, adsh_submissionId, report_reportGrouping, line
-                 , stmt_statementLocation, inpth_parentheticallyPresented,
-                 tag, version, plabel_preferredLabel):
-        self.submissionId = adsh_submissionId
-        self.reportGrouping = report_reportGrouping
-        self.line = line
-        self.statementLocation = stmt_statementLocation
-        self.parentheticallyPresented = inpth_parentheticallyPresented
-        self.tag = tag
-        self.version = version
-        self.preferredLabel = plabel_preferredLabel
+    year = args[1]
+    quarter = args[2]
+    folder = args[3]
 
+    #get fillings file from sec
+    data = loadData(year, quarter, folder)
 
-class NumericData(object):
+    # collect wanted metrics
+    metrics = collectMetrics(data)
+    print(metrics)
 
-    def __init__(self, adsh_submissionId, tag, version, coreg_coRegistrant,
-                 ddate_dataEndDate, qtrs_dataQuarters, uom_unitOfMeasure, value):
-        self.submissionId = adsh_submissionId
-        self.tag = tag
-        self.version = version
-        self.coRegistrant = coreg_coRegistrant
-        self.dataEndDate = ddate_dataEndDate
-        self.dataQuarters = qtrs_dataQuarters
-        self.unitOfMeasure = uom_unitOfMeasure
-        self.value = float(value)
+    # apply rules
+    outcomes = applyRules(metrics)
 
-class Submission(object):
+    # show outcomes
+    showOutcomes(outcomes)
 
-    def __init__(self, adsh_id, clk_registrantId, name_registrant,
-                 sic_stdIndustrialClassification, countryInc_country, afs_filerStatus
-                 , fye_fiscalYearEnd, form_submissionType, period_balanceSheetDate
-                 , fy_fiscalYearFocus, fp_fiscalPeriodFocus):
-        self.id = adsh_id
-        self.registrantId = clk_registrantId
-        self.registrant = name_registrant
-        self.stdIndustrialClassification = sic_stdIndustrialClassification
-        self.country = countryInc_country
-        self.filerStatus = afs_filerStatus
-        self.fiscalYearEnd = fye_fiscalYearEnd
-        self.type = form_submissionType
-        self.balanceSheetDate = period_balanceSheetDate
-        self.fiscalYearFocus = fy_fiscalYearFocus
-        self.fiscalPeriodFocus = fp_fiscalPeriodFocus
+if __name__ == "__main__":
+    main(sys.argv)
 
 
-#    def roll(self):
-#        return randint(1, self.n_sides)
