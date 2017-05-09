@@ -284,7 +284,7 @@ def files():
 
     countries = []
     print("...reading countries file...")
-    f = open("countries.tsv", "r")
+    f = open("resources/countries.tsv", "r")
     for line in f:
         line = line.strip()
         countries.append(line.split("|")[1])
@@ -293,16 +293,16 @@ def files():
     print("num of countries", len(countries))
 
     print("...saving another countries file...")
-    f = open("countries_b.tsv", "w")
+    f = open("resources/countries_b.tsv", "w")
     for country in countries:
         f.write(country + "\n")
     f.close()
 
-    with open("pi.txt") as fptr:
+    with open("resources/pi.txt") as fptr:
         cont = fptr.read().rstrip()
         print(cont)
 
-    with open("pi.txt") as fptr:
+    with open("resources/pi.txt") as fptr:
         lines = fptr.readlines()
 
     for l in lines:
@@ -393,7 +393,7 @@ def storing_data():
     header("storing_data")
 
     numbers = [2,3,4,5,6,0]
-    fname = "numbers.json"
+    fname = "resources/numbers.json"
     with open(fname,"w") as f:
         json.dump(numbers, f)
 
@@ -635,7 +635,7 @@ def numpy():
     print('c has {columns} columns'.format(columns=len(c[0])))
 
     # reading data from file
-    fileDataArray = np.genfromtxt('countries.tsv', delimiter='\t')
+    fileDataArray = np.genfromtxt('resources/countries.tsv', delimiter='\t')
     print('fileDataArray has {rows} rows'.format(rows=len(fileDataArray)))
 
     # saving a file
@@ -714,6 +714,7 @@ def numpy():
     print( v[0]  )
     print(v[0][np.array([True, False])])
 
+    # logical operations in multidimensional arrays
     a1 = np.array([10, 20, 30], float)
     print( a1 > 12 )
     print('logical', np.logical_and(a1>12,a1<30))
@@ -724,6 +725,288 @@ def numpy():
     print(a1)
     print(a1[0,:]>12)
     print('first row with higher than 12', a1[a1[0,:]>12])
+
+    a1 = np.array([[10, 20], [30, 40]], float)
+    a2 = np.array([[30, 10], [55, 33]], float)
+    print(np.where(a1 > a2, a1, a2))
+
+
+#--------------------------------------------------
+import matplotlib.pyplot as plt
+import scipy.optimize as opt
+import scipy.stats as stats
+
+def func(x):
+    return x**2 + 10*np.sin(x)
+
+def scipy():
+    header("scipy")
+    coords = np.arange(-20,20, 0.1)
+    #plt.plot(coords, func(coords))
+    #plt.show()
+
+    # gradient descent
+    print(opt.fmin_bfgs(func, 20))
+
+    # linear regression
+    x = np.array([1,2,5,7,10,15,4,6,14,14])
+    y = np.array([2,6,7,9,14,19,6,10,12,13])
+    #plt.plot(x,y,'ro')
+    #plt.axis([0,30,0,30])
+    #plt.show()
+
+    slope, intercept, r_value, p_value, slope_std_err = stats.linregress(x,y)
+    predict_y= intercept+ slope * x
+    #plt.plot(x, y, 'o')
+    #plt.plot(x, predict_y, 'k-')
+    #plt.show()
+
+#--------------------------------------------------
+import pandas as pd
+def pandas():
+    header("pandas")
+
+    # --- Series
+    s1 = pd.Series(np.random.randn(5))
+    s2 = pd.Series(np.random.randn(5), index=['a','b','c','d','e'])
+
+    print (s1)
+    print (s2)
+    '''
+    As with NumPy, relational operators
+    return a separate copy of the data. The
+    original series and the one returned by
+    the relational operator don’t refer to
+    the same copy of the same data. 
+    '''
+    s2 = pd.Series({'a': 12, 'b': 16})
+    print(s2)
+    print(s2['a'])
+    print(s2[['a','b']])
+    print(s2[s2>14])
+    # series operations
+    print(s2*2)
+    print(np.square(s2))
+    print(pd.unique(s2))
+
+    # --- DataFrame
+    '''
+    To create a DataFrame out of common Python data structures, we can
+    pass a dictionary of lists to the DataFrame constructor.
+    • We can also easily create a dataframe by passing it a 2D NumPy array.
+    • The syntax for creating a data frame is as follows:
+    – DataFrame(data, columns=listOfColumns)
+    '''
+    data = {'student': ['jim', 'pat', 'peter'],
+            'grade': [67,44,56]
+            , 'dept': ['C', 'S', 'C']}
+    students = pd.DataFrame(data)
+    print(students)
+
+    s1 = pd.Series(np.random.randn(3), index=['a', 'b', 'c'])
+    s2 = pd.Series(np.random.randn(4), index=['a', 'b', 'c', 'd'])
+    df = pd.DataFrame({'one': s1, 'two':s2})
+    print(df)
+
+    arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]], float)
+    df = pd.DataFrame(arr)
+    print(df)
+
+    arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]], float)
+    df = pd.DataFrame(arr, columns=['colA', 'colB', 'colC'])
+    print(df)
+
+    # reading data into a dataframe
+    '''
+    There are a number of ways of doing this
+    read_csv,read_excel,read_hdf,read_sql,read_json,read_sas …
+    '''
+    df = pd.read_csv('resources/titanic.csv')
+    print(df.describe())
+
+    #accessing data in the Dataframe
+    print(df['Age'])
+    print(df[:5])
+    print( df[['Age', 'Fare']] )
+    print(df['Age'].tail())
+
+    # number of occurrences
+    print(df['Age'].value_counts())
+
+    # operations
+    print(df['Age'].head())
+    print(df['Age'].head() + 5)
+
+    survivals = df['Name'][df['Survived']==1]
+    print(survivals)
+
+    # all that survived and were under 10
+    print(df[['Name','Age']][df['Survived'] == 1][df['Age']<10])
+
+    # pclass and men and women breakdown of survived
+    pclasses = pd.unique(df['Pclass'])
+    grouped = df[['Pclass','Sex', 'Survived']].groupby('Pclass', sort=True)
+    for pc in pclasses:
+        g = grouped.get_group(pc)
+        print(pc)
+        print(g['Sex'][g['Survived']==1].value_counts())
+
+    # condition combination
+    c1 = df['Pclass']  == 1
+    c2 = df['Embarked'] == 'S'
+    c3 = df['Age'] > 55
+    print(df[ c1 & c2 | c3 ])
+
+    # converting series to numpy arrays
+    '''
+    We already mentioned that Dataframe is composed on multiple Series object.
+    • However, a Series object is internally a NumPy array.
+    • If you add values to the end of any Series, you'll get its internal numpy array
+    • We can also add .values to a dataframe to produce a 2D numpy array
+    • To do this you need to ensure there are only numerical contents in all columns
+    '''
+
+    allPassengers = df['Pclass'].value_counts()
+    died = df[df['Survived']==0]
+    diedFrq = died['Pclass'].value_counts()
+    print(diedFrq/allPassengers)
+    print(allPassengers / len(df['Pclass']))
+
+#--------------------------------------------------
+def matplotlib():
+    header("matplotlib")
+    '''
+    matplotlib.pyplot is a collection of command style functions.
+    – Each pyplot function makes some change to a figure:
+    • Create a figure
+    • Create a plotting area in a figure
+    • Plot some lines in a plotting area
+    • Format the plot with labels
+    '''
+    #plt.plot([1,2,3], [3,5,8])
+    #plt.show()
+
+    a1 = np.array([1,2,3])
+    a2 = np.array([3,5,8])
+    #plt.plot(a1,a2)
+    #plt.show()
+
+    #2d arrays
+    a1 = np.array([[1,2,3], [3,5,8]])
+    a2 = np.array([[3, 5, 6], [13, 15, 18]])
+    #plt.plot(a1, a2)
+    #plt.show()
+
+    # plot multiple lines
+    #plt.plot([1,2,3,4],[5,10,15,20])
+    #plt.plot([4, 50], [60, 89])
+    #plt.show()
+
+    # set viewable area of the graph
+    #plt.plot([1, 2, 3, 4], [5, 10, 15, 20])
+    #plt.axis([0,10,0,25])
+    #plt.show()
+
+    # pandas DataFrame
+    a = pd.DataFrame(np.random.rand(4,5), columns=list('abcde'))
+    #plt.plot(a)
+    #plt.show()
+
+    d = {
+        'one': np.random.randn(10)
+        , 'two': np.random.randn(10)
+    }
+
+    df = pd.DataFrame(d)
+    #df.plot()
+    #plt.show()
+
+    s2 = pd.Series(np.random.randn(5), index=['a', 'b', 'c', 'd', 'e'])
+    #s2.plot()
+    #plt.show()
+
+    # plotting multiple lines
+    t = np.arange(0., 5., 0.2)
+    #red dashes, blue squares and green triangles
+    #plt.plot(t, t, 'r--', t, t**2, 'bs', t, t**3, 'g^')
+    #plt.show()
+
+    # creating a Bar graph
+    data = pd.read_csv('resources/titanic.csv')
+    died = data[data['Survived'] == 0]
+    males_died = died[died['Sex'] == 'male']
+    females_died = died[died['Sex'] == 'female']
+
+    pclass_males_died = males_died.groupby('Pclass')
+    pclass_females_died = females_died.groupby('Pclass')
+    y = pclass_males_died['Survived'].count()
+    y2 = pclass_females_died['Survived'].count()
+
+    labels = ['class 1','class 2','class 3']
+    index = np.arange(1,4)
+    #plt.bar(index, y)
+    #plt.xticks(index+0.5, labels)
+    #plt.show()
+
+    bar_width = 0.35
+    #plt.bar(index, y, bar_width, color='g')
+    #plt.bar(index+bar_width, y2, bar_width, color='b')
+    #plt.xticks(index+bar_width, labels)
+    #plt.show()
+
+    # Scatter plot
+    '''
+    Scatter Plots can be created using matplotlib.pyplot.scatter
+    – Input data x, y (arrays), s : scalar size or array, optional, default: 20
+    – c : color
+    '''
+    n=100
+    x = np.random.rand(n)
+    y = np.random.rand(n)
+    area = np.pi * (np.random.rand(n))
+
+    x2 = np.random.rand(n)
+    y2 = np.random.rand(n)
+    area2 = np.pi * (np.random.rand(n))
+
+    #plt.scatter(x,y,s=area, color='r')
+    #plt.scatter(x2, y2, s=area2, color='g')
+    #plt.show()
+
+    # Histograms
+    '''
+    Taking a list of numbers
+    – Binning those numbers within a number of ranges
+    – And counting the number of occurrences in each bin.
+    '''
+    numbers = np.random.normal(size=1000)
+    #plt.hist(numbers)
+    #plt.hist(numbers, bins=40)
+    #defining bin edges
+    #plt.hist(numbers, bins=[-5,-4,-3,-2,-1,0,1,2,3,4,5])
+
+    #plt.title("gaussian numbers")
+    #plt.xlabel('value')
+    #plt.ylabel('frequency')
+    #plt.show()
+
+    # Pie charts
+    '''
+    The following are various arguments for the pie function
+    • explode: [ None | list of sections to explode]
+    • colors: [color sequence for each segment]
+    • labels: [A sequence of strings providing the labels for each wedge
+    • autopct: [ None | format string | format function ]
+    • shadow: [ False | True ] Draw a shadow beneath the pie.
+    • radius: [ None | scalar ] The radius of the pie, if radius is None it will be set to 1
+    '''
+    labels = ['FF', 'FG', 'Labour', 'Sin Fein']
+    popularity = [23,34,244,76]
+    section2explode=[0,0.05,0,0]
+    plt.pie(popularity, explode = section2explode, labels=labels,
+            autopct='%1.1f%%', shadow=True, startangle=90)
+    plt.title('political parties')
+    plt.show()
 
 
 #--------------------------------------------------
@@ -752,3 +1035,6 @@ pygal()
 #downloading_data()
 #apis()
 numpy()
+scipy()
+pandas()
+matplotlib()
