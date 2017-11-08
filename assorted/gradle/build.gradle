@@ -1,0 +1,79 @@
+
+ext.person = 'dolly'
+
+apply plugin: 'java'
+
+// application plugin
+apply plugin: 'application'
+mainClassName = "Main"
+ 
+//plugins {
+//	id 'java'
+//	id 'application'
+//}
+
+
+
+sourceCompatibility = 1.8
+version = '1.0'
+jar {
+	manifest {
+		attributes 'Implementation-Title': 'gradle tests',
+					'Implementation-Version': version
+	}
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    
+    compile 'org.slf4j:slf4j-api:1.7.21'
+    
+    testCompile 'junit:junit:4.12'
+}
+
+
+// apply an external plugin
+// extend the buildscript
+buildscript{
+	repositories{
+		jcenter()
+	}
+	dependencies{
+		classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:0.4.1"
+	}
+}
+apply plugin: "com.jfrog.bintray"
+//or without the need of the buildscript block:
+//plugins {
+//	id "com.jfrog.bintray" version: "0.4.1"
+//}
+
+task hello {
+	description 'doing stuff' 
+	doLast{
+		println "hello, $person"
+	}
+}
+
+hello.dependsOn 'compileJava'
+
+task hi(dependsOn: 'hello') << {
+	println 'hello, world!'
+}
+
+build.dependsOn 'hi'
+
+task copyJars(type:Copy){
+	description 'copying jars'
+	from configurations.testRuntime
+	into "$buildDir/jars"
+}
+
+hi.onlyIf { project.hasProperty('dohi') }
+// we can: gradle hi -Pdohi
+
+
+

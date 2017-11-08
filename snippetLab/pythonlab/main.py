@@ -332,6 +332,41 @@ def stdlib():
         print(k, v)
 
 
+class BankAccount:
+    # class variable(static)
+    accountID = 0
+
+    def __init__(self):
+        BankAccount.accountID += 1
+        self.__id = BankAccount.accountID
+        self.__balance = 0
+
+    def deposit(self, value):
+        self.__balance += value
+
+    def withdraw(self, value):
+        self.__balance -= value
+
+    def getBalance(self):
+        return self.__balance;
+
+    def getID(self):
+        return self.__id;
+
+    '''
+    __str__ method: displays the object’s state
+    '''
+
+    def __str__(self):
+        pass
+
+
+
+
+# copying an object
+import copy
+
+o3 = copy.deepcopy(o2)
 
 
 def classes():
@@ -357,7 +392,18 @@ def classes():
             ...
 
     '''
+
     print(m)
+
+    o1 = BankAccount()
+    o2 = BankAccount()
+    o1.deposit(123)
+
+    for o in [o1, o2]:
+        o.deposit(23)
+        o.withdraw(5)
+        print('balance:', o.getBalance())
+        print('accountID', o.getID())
 
 def exceptions():
     header("exceptions")

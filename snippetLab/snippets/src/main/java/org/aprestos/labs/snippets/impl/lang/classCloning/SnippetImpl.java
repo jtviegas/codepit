@@ -1,8 +1,5 @@
 package org.aprestos.labs.snippets.impl.lang.classCloning;
 
-import org.springframework.stereotype.Component;
-
-
 //@Component("snippet")
 public class SnippetImpl implements org.aprestos.labs.snippets.interfaces.Snippet 
 {

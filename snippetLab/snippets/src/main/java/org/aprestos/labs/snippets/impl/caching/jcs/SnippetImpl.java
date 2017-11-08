@@ -10,7 +10,6 @@ import java.util.HashMap;
 import org.apache.jcs.JCS;
 import org.apache.jcs.access.exception.CacheException;
 import org.apache.jcs.engine.control.CompositeCacheManager;
-import org.springframework.stereotype.Component;
 
 //@Component("snippet")
 public class SnippetImpl implements org.aprestos.labs.snippets.interfaces.Snippet {

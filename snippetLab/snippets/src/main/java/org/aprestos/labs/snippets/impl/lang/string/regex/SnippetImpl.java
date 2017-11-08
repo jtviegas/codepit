@@ -4,7 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.aprestos.labs.snippets.interfaces.Snippet;
-import org.springframework.stereotype.Component;
 
 //@Component("snippet")
 public class SnippetImpl implements Snippet {

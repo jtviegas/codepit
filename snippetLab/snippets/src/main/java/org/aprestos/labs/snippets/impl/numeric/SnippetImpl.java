@@ -2,8 +2,6 @@ package org.aprestos.labs.snippets.impl.numeric;
 
 import java.nio.ByteBuffer;
 
-import org.springframework.stereotype.Component;
-
 //@Component("snippet")
 public class SnippetImpl implements org.aprestos.labs.snippets.interfaces.Snippet {
 

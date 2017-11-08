@@ -33,18 +33,24 @@
 
 	<dependencies>
 		<dependency>
-	  <groupId>com.google.guava</groupId>
-	  <artifactId>guava</artifactId>
-	  <version>21.0</version>
-	</dependency>
-
-	<dependency>
-        <groupId>com.javamex</groupId>
-        <artifactId>classmexer</artifactId>
-        <version>1.0</version>
-        <scope>system</scope>
-        <systemPath>${project.basedir}/lib/classmexer.jar</systemPath>
-    </dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>21.0</version>
+		</dependency>
+		<dependency>
+			<groupId>edu.princeton.cs</groupId>
+			<artifactId>algs4</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/algs4.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.javamex</groupId>
+			<artifactId>classmexer</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/classmexer.jar</systemPath>
+		</dependency>
 		<dependency>
 			<groupId>org.twitter4j</groupId>
 			<artifactId>twitter4j-core</artifactId>
@@ -73,7 +79,7 @@
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
-			<version>20030203.000129</version>
+			<version>2.6</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -145,14 +151,25 @@
 			<groupId>com.esotericsoftware</groupId>
 			<artifactId>kryo</artifactId>
 			<version>3.0.1</version>
-			
 		</dependency>
 		<dependency>
-		  <groupId>joda-time</groupId>
-		  <artifactId>joda-time</artifactId>
-		  <version>2.9.1</version>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.9.1</version>
 		</dependency>
-		
+		<!-- https://mvnrepository.com/artifact/org.carrot2/carrot2-core -->
+		<dependency>
+			<groupId>org.carrot2</groupId>
+			<artifactId>carrot2-core</artifactId>
+			<version>3.15.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.solr/solr-solrj -->
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-solrj</artifactId>
+			<version>6.6.0</version>
+		</dependency>
+
 
 	</dependencies>
 
@@ -201,7 +218,7 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-			
+
 
 		</plugins>
 	</build>

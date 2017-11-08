@@ -29,7 +29,7 @@ def downloadFiles(year, quarter, folder):
     else:
         return folder
 
-def loadData(year, quarter, folder):
+def loadDataFromFiles(year, quarter, folder):
     #downloadFiles(year, quarter, folder)
     result = {
         'sub': None
@@ -91,7 +91,7 @@ def main(args):
     folder = args[3]
 
     #get fillings file from sec
-    data = loadData(year, quarter, folder)
+    data = loadDataFromFiles(year, quarter, folder)
 
     # collect wanted metrics
     metrics = collectMetrics(data)

@@ -1,7 +1,6 @@
 package org.aprestos.labs.snippets.impl.serialization.proxies;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -10,8 +9,6 @@ import java.util.Random;
 import java.util.Set;
 
 import org.apache.commons.lang.RandomStringUtils;
-import org.junit.Assert;
-import org.junit.Test;
 
 public class Comparisons {
 

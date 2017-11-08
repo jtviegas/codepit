@@ -1,7 +1,5 @@
 package org.aprestos.labs.snippets.impl.jmx.simple;
 
-import java.io.IOException;
-
 import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
