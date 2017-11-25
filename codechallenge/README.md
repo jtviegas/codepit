@@ -1,2 +1,0 @@
-# codechallenge
-pretty much it
