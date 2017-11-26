@@ -1,0 +1,202 @@
+swagger: '2.0'
+info:
+  description: ...
+  version: 0.0.1
+  title: ...
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: localhost
+basePath: /api/v1
+tags:
+  - name: item
+    description: just about anything
+schemes:
+  - http
+paths:
+  /items:
+    get:
+      tags:
+        - item
+      summary: get items eventually using category and/or subcategory
+      operationId: findItems
+      produces:
+        - application/json
+      parameters:
+        - name: cat
+          in: query
+          description: category value that need to be considered for filter
+          required: true
+          type: string
+        - name: subcat
+          in: query
+          description: subcategory value that need to be considered for filter
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Item'
+        '400':
+          description: Invalid status value
+          schema:
+            $ref: "#/definitions/Error"
+    post:
+      tags:
+        - item
+      summary: Add a new item to the store
+      description: ''
+      operationId: addItem
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: api_key
+          in: header
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: item object that needs to be added to the store
+          required: true
+          schema:
+            $ref: '#/definitions/Item'
+      responses:
+        '405':
+          description: Invalid input
+          schema:
+            $ref: "#/definitions/Error"
+  /items/{id}
+    get:
+      tags:
+        - item
+      summary: Find item by ID
+      description: Returns a single item
+      operationId: getItemById
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of item to return
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Item'
+        '400':
+          description: Invalid ID supplied
+          schema:
+            $ref: "#/definitions/Error"
+        '404':
+          description: Item not found
+          schema:
+            $ref: "#/definitions/Error"
+    put:
+      tags:
+        - item
+      summary: Update an existing item
+      description: ''
+      operationId: updateItem
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: api_key
+          in: header
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: item object that needs to be added to the store
+          required: true
+          schema:
+            $ref: '#/definitions/Item'
+      responses:
+        '400':
+          description: Invalid ID supplied
+          schema:
+            $ref: "#/definitions/Error"
+        '404':
+          description: Item not found
+          schema:
+            $ref: "#/definitions/Error"
+        '405':
+          description: Validation exception
+          schema:
+            $ref: "#/definitions/Error"
+    delete:
+      tags:
+        - item
+      summary: Deletes an item
+      description: ''
+      operationId: deleteItem
+      produces:
+        - application/json
+      parameters:
+        - name: api_key
+          in: header
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: Item id to delete
+          required: true
+          type: string
+      responses:
+        '400':
+          description: Invalid ID supplied
+          schema:
+            $ref: "#/definitions/Error"
+        '404':
+          description: Item not found
+          schema:
+            $ref: "#/definitions/Error"
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+definitions:
+  Item:
+    type: object
+    required:
+      - id
+      - name
+      - price
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+        example: doggie
+      price:
+        type: number
+      category:
+        type: string
+        example: shafts
+      subcategory:
+        type: string
+        example: alternators
+      notes:
+        type: string
+      images:
+        type: array
+        items:
+          type: string
+  Error:
+    type: object
+    properties:
+      code:
+        type: string
+      message:
+        type: string
