@@ -1,0 +1,130 @@
+#%RAML 1.0
+title: proj1
+version: v1
+baseUri: http://localhost
+types:
+  song:
+    type: object
+    properties:
+      id:
+        type: "string"
+        description: ""
+      name:
+        type: "string"
+        description: ""
+  album:
+    type: object
+    properties:
+      id:
+        type: "string"
+        description: ""
+      name:
+        type: "string"
+        description: ""
+      artist:
+        type: "string"
+        description: ""
+      songs:
+        type: song[]
+        description: ""
+traits:
+  searchable:
+      queryParameters:
+        query:
+          description: |
+            JSON array [{"field1","value1","operator1"},{"field2","value2","operator2"},...,{"fieldN","valueN","operatorN"}] <<description>>
+          example: |
+            <<example>>
+resourceTypes:
+  collection:
+    description: Collection of available <<resourcePathName>>
+    get:
+      description: Get a list of <<resourcePathName>>
+      responses:
+        200:
+          body:
+            application/json:
+    post:
+      description: |
+        Add a new <<resourcePathName|!singularize>>
+      queryParameters:
+        access_token:
+          description: "The access token provided by the authentication application"
+          example: AABBCCDD
+          required: true
+          type: string
+      body:
+        application/json:
+          type: <<resourcePathName|!singularize>>
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                { "message": "The <<resourcePathName|!singularize>> has been properly entered" }
+  collection-item:
+    description: Entity representing a <<resourcePathName|!singularize>>
+    get:
+      description: |
+        Get the <<resourcePathName|!singularize>>
+        with <<resourcePathName|!singularize>>Id =
+        {<<resourcePathName|!singularize>>Id}
+      responses:
+        200:
+          body:
+            application/json:
+        404:
+          body:
+            application/json:
+              example: |
+                {"message": "<<resourcePathName|!singularize>> not found" }
+    put:
+      description: |
+        Add or update a <<resourcePathName|!singularize>>
+      queryParameters:
+        access_token:
+          description: "The access token provided by the authentication application"
+          example: AABBCCDD
+          required: true
+          type: string
+      body:
+        application/json:
+          type: <<resourcePathName|!singularize>>
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                { "message": "The <<resourcePathName|!singularize>> has been properly entered" }
+        404:
+          body:
+            application/json:
+              example: |
+                {"message": "<<resourcePathName|!singularize>> not found" }
+    delete:
+      description: |
+        delete a <<resourcePathName|!singularize>>
+      queryParameters:
+        access_token:
+          description: "The access token provided by the authentication application"
+          example: AABBCCDD
+          required: true
+          type: string
+      responses:
+        204:
+        404:
+          body:
+            application/json:
+              example: |
+                {"message": "<<resourcePathName|!singularize>> not found" }
+/{albumId}:
+  type:
+    collection-item:
+      exampleItem: !include examples/album.sample
+/albums:
+  type:
+    collection:
+      exampleCollection: !include examples/albums.sample
+      exampleItem: !include examples/album.sample
+  get:
+    is: [searchable: {description: "with valid searchable fields: name", example: "[\"name\", \"Ah you thought that?\", \"like\"]"}]

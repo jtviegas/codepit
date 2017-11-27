@@ -1,0 +1,29 @@
+#%RAML 1.0 DataType
+uses:
+  Basic: ../library/basicTypes.raml
+
+example: !include ../examples/updateablePhoneContact.json
+type: object
+properties:
+  Type:
+    enum: [P, E, A, F]
+    description: P', 'E' , 'A',  'F' , for Primary, emergency, after hours and fax contact.
+    required: false
+  CountryCode:
+    type: Basic.CountryCode
+    required: false
+  CityCode:
+    type: Basic.PhoneCode
+    required: false
+  AreaCode:
+    type: Basic.PhoneCode
+    required: false
+  AccessCode:
+    type: Basic.PhoneCode
+    required: false
+  Number:
+    type: Basic.PhoneCode
+    required: false
+  Extension:
+    type: Basic.PhoneCode
+    required: false

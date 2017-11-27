@@ -1,0 +1,29 @@
+#%RAML 1.0 DataType
+uses:
+  Basic: ../library/basicTypes.raml
+type: object
+example: !include ../examples/updateableCarrier.json
+properties:
+  ClearCarrierNo:
+    type: integer
+    description: Uniquely identifies the carrier within the "Clear" system.
+    required: false
+  Description:
+    type: string:
+    description: A descriptive name for the carrier.
+    required: false
+  Effective:
+    type: Basic.EffectivePeriod
+    required: false
+  ContactName:
+    type: string
+    description: The name of a contact person for the carrier.
+    required: false
+  Manager:
+    type: string
+    description: The name of the person managing this account
+    required: false
+  Comments:
+    type: string
+    description: Any useful comments on the carrier.
+    required: false

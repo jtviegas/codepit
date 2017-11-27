@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.aprestos.labs.lang.java8.testutils.Person;
+import org.aprestos.labs.lang.java8.testutils.TestUtils;
+import org.aprestos.labs.lang.java8.testutils.Wrapper;
 import org.junit.Test;
 
 public class LambdaExpressions {
@@ -31,6 +34,11 @@ public class LambdaExpressions {
         .forEach(System.out::println);
 
     Stream.of("abaner", "bivnr", "cv", "fudf").map(String::length).forEach(System.out::println);
+
+    TestUtils.getWrappers(12).stream().map(Wrapper::getId).collect(Collectors.toList()).forEach(System.out::println);
+    Stream.of("abaner", "bivnr", "cv", "fudf").map(Person::new).forEach(System.out::println);
+
+    Person[] ps = Stream.of("abaner", "bivnr", "cv", "fudf").map(Person::new).toArray(Person[]::new);
 
   }
 

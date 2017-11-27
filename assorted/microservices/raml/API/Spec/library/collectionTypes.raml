@@ -1,0 +1,187 @@
+#%RAML 1.0 Library
+usage: Used to specify basic minimal result entity defintions.
+uses:
+  Basic: basicTypes.raml
+types:
+
+  NetworkClinicProvider: !include ../dataTypes/networkClinicProvider.raml
+  UpdateableNetworkClinicProvider: !include ../dataTypes/updateableNetworkClinicProvider.raml
+
+  Relationship:
+    type: object
+    description: Base type for any existing relationship.
+    properties:
+      Effective:
+        type: Basic.EffectivePeriod
+        description: the effective period for the relationship to this entity.
+        required: true
+      Link:
+        type: Basic.Link
+        description: Hyperlink to entity details and any other related sub-entites.
+        required: true
+
+  NewRelationship:
+    type: object
+    description: Base type for creating any new relationship.
+    properties:
+      Effective:
+        type: Basic.EffectivePeriod
+        description: the effective period for the relationship to this entity.
+        required: true
+
+  UpdateableRelationship:
+    type: object
+    description: represents a relationship to an entity
+    properties:
+      Effective:
+        type: Basic.EffectivePeriod
+        description: the effective period for the relationship to this entity.
+        required: false
+
+  RelatedCarrier:
+    type: Relationship
+    example: !include ../examples/relatedCarrier.json
+    description: Represents a relationship to a Carrier.
+    properties:
+      Carrier:
+        type: string
+        description: Carrier descriptive name.
+      OfficeNumber:
+        type: string
+        required: false
+
+  NewCarrierRelationship:
+    type: NewRelationship
+    example: !include ../examples/newCarrierRelationship.json
+    description: Used when creating a new Carrier relationship for a Network.
+    properties:
+      Carrier:
+        type: object
+        properties:
+          Id: integer
+      OfficeNumber:
+        type: string
+        required: false
+
+  UpdateableCarrierRelationship:
+    type: UpdateableRelationship
+    example: !include ../examples/updateableCarrierRelationship.json
+    description: Used to make changes to an existing carrier to network relationship.
+    properties:
+      OfficeNumber:
+        type: string
+        required: false
+
+  RelatedNetwork:
+    type: Relationship
+    example: !include ../examples/relatedNetwork.json
+    description: represents a relationship to a Network instance
+    properties:
+      Network:
+        type: string
+        description: The short description name for the network.
+        required: true
+
+  NewNetworkRelationship:
+    type: NewRelationship
+    description: Used to create a new relationship to an existing Network
+    example: !include ../examples/newNetworkRelationship.json
+    properties:
+      Network:
+        type: object
+        properties:
+          Id: integer
+
+  NewW9Relationship:
+    type: NewRelationship
+    example: !include ../examples/newW9Relationship.json
+    description: used to create a new relationship to an existing W9 business
+    properties:
+      W9:
+        type: object
+        properties:
+          Id: integer
+
+  RelatedClinic:
+    type: Relationship
+    description: represents a relationship to a Clinic instance
+    example: !include ../examples/relatedClinic.json
+    properties:
+      CommonName:
+        type: string
+        description: The common name for the clinic.
+
+  NewClinicRelationship:
+    type: NewRelationship
+    example: !include ../examples/newClinicProvider.json
+    description: Used to create a new relationship to an existing Clinic
+    properties:
+      Clinic:
+        type: object
+        properties:
+          Id: integer
+
+  UpdateableClinicRelationship:
+    type: UpdateableRelationship
+    example: !include ../examples/updateableClinicRelationship.json
+    description: Used to make changes to an existing clinic to provider
+      relationship for a network.
+
+  RelatedProvider:
+    description: represents a relationship to a Provider instance
+    type: Relationship
+    example: !include ../examples/relatedProvider.json
+    properties:
+      Name:
+        type: string
+        description: The provider's display name.
+        required: true
+
+  NewProviderRelationship:
+    type: NewRelationship
+    example: !include ../examples/newProviderRelationship.json
+    description: Used to create a new relationship to an existing Provider
+    properties:
+      Provider:
+        type: object
+        properties:
+          Id: integer
+
+  UpdateableProviderRelationship:
+    type: UpdateableRelationship
+    example: !include ../examples/updateableProviderRelationship.json
+    description: Used to make changes to an existing provider to clinic
+      relationship for a network.
+
+  NewNetworkProviderRelationship:
+    type: [NewProviderRelationship, NetworkClinicProvider]
+    example: !include ../examples/newNetworkProvider.json
+    description: used for creating a new relationship for a network to an
+      existing Provider at a clinic.
+
+  NetworkProviderRelationship:
+    type: [RelatedProvider, NetworkClinicProvider]
+    example: !include ../examples/networkProvider.json
+    description: represents a relationship for a network to an existing Provider
+
+  UpdateableNetworkProviderRelationship:
+    type: [UpdateableProviderRelationship, UpdateableNetworkClinicProvider]
+    example: !include ../examples/updateableNetworkProvider.json
+    description: represents chnages to a relationship from a network to an existing
+      provider.
+
+  NewNetworkClinicRelationship:
+    type: [NewClinicRelationship, NetworkClinicProvider]
+    example: !include ../examples/newClinicRelationship.json
+    description: Used to create a new relationship for a network to an existing clinic
+
+  NetworkClinicRelationship:
+    type: [RelatedClinic, NetworkClinicProvider]
+    example: !include ../examples/networkClinic.json
+    description: represents a relationship for a network to an existing clinic
+
+  UpdateableNetworkClinicRelationship:
+    type: [UpdateableClinicRelationship, UpdateableNetworkClinicProvider]
+    example: !include ../examples/updateableNetworkClinic.json
+    description: represents changes to a relationship from a network to an
+      existing clinic

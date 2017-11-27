@@ -1,0 +1,828 @@
+#%RAML 1.0
+title: Provider Master Data
+baseUri: /api
+mediaType: application/json
+protocols: [ HTTPS ]
+version: v0.6
+securitySchemes:
+  basic:
+    description: This API supports Basic Authentication.
+    type: Basic Authentication
+securedBy: [basic]
+
+documentation:
+  - title: RESTful updates
+    content: !include documentation/updates.md
+  - title: API Guidelines on Entity types
+    content: !include documentation/entities.md
+
+uses:
+  Basic: library/basicTypes.raml
+  ResourceTypes: library/resourceTypes.raml
+  Collections: library/collectionTypes.raml
+  Entity: library/entityTypes.raml
+
+traits:
+  Secured: !include traits/secured.raml
+  Searchable: !include traits/searchable.raml
+
+/providers:
+  description: API root for provider related functions.
+  type: {ResourceTypes.collection: {"type": "Entity.RelatedProvider", "newType": "Entity.NewProvider" }}
+  get:
+    description: Used to search for matching providers.
+    is: [Searchable: {description : "with valid searchable fields: FirstName, lastName", example : "[\"FirstName\", \"Fred\", \"equals\"]"}]
+    responses:
+      200:
+        description: Return a list of all providers matching search criteria
+        body:
+          example: !include examples/RelatedProvidersArray.json
+  post:
+    body:
+      example: !include examples/newProvider.json
+
+  /{provider-id}:
+    uriParameters:
+      provider-id:
+        description: Uniquely identifies the provider instance.
+    type: {ResourceTypes.collectionItem: {"type": "Entity.Provider", "updateableType": "Entity.UpdateableProvider" }}
+    get:
+      responses:
+        200:
+          body:
+            example: !include examples/provider.json
+    patch:
+
+    /clinics:
+      displayName: ProviderClinics
+      type: {ResourceTypes.collection: {"type": "Entity.ClinicProvider", "newType": "Entity.NewClinicProvider" }}
+      get:
+        description: List all clinics associated with the provider.
+        responses:
+          200:
+            body:
+              example: !include examples/clinicProvidersArray.json
+      post:
+        description: Add new associations with a clinic for the provider.
+
+      /{clinic-id}:
+        uriParameters:
+          clinic-id:
+            description: Uniquely identifies this provider's clinic instance.
+        displayName: ProviderClinic
+        type: {ResourceTypes.collectionItem: {"type": "Entity.ClinicProvider", "updateableType": "Entity.UpdateableClinicProvider" }}
+        description: Relates to functions specific to a provider-to-clinic relationship.
+        patch:
+          body:
+            example: !include examples/updateableClinicProvider.json
+          description: |
+            Change some data on the association between the provider and clinic
+        delete:
+          description: |
+            Permanently remove any association between the provider and the clinic.
+            Note: This is not "terming" a relationship.  That's achieved with
+            a patch.
+
+        /documents:
+          type: {ResourceTypes.collection: {"type": "Entity.Document", "newType": "Entity.NewDocument" }}
+          get:
+            description: |
+              Any links to documents that might be simultaneously associated with
+              both the provider and the clinic.
+            responses:
+              200:
+                body:
+                  example: !include examples/documentControlArray.json
+          post:
+            description: Adds a new reference to a document for the provider at the clinic.
+            body:
+              example: !include examples/newDocumentControl.json
+
+          /{document-control-number}:
+            type: ResourceTypes.collectionItem
+            description: |
+              Identifies a specific document instance within the document control
+              store.
+            uriParameters:
+              document-control-number:
+                description: Uniquely identifies this document instance.
+            delete:
+              description: used to remove a reference to a document for this provider.
+
+    /networks:
+      displayName: ProviderNetworks
+      type: {ResourceTypes.collection: {"type": "Entity.RelatedNetwork", "newType": "Collections.NewNetworkRelationship" }}
+      description: Any network associations the provider has had.
+      get:
+        description: List all networks associated with the provider.
+        responses:
+          200:
+            body:
+              example: !include examples/relatedNetworksArray.json
+
+    /sanctions:
+      type: {ResourceTypes.collection: {"type": "Entity.Sanction", "newType": "Entity.NewSanction" }}
+      get:
+        description: List any sanctions associated with the provider.
+        responses:
+          200:
+            body:
+              example: !include examples/providerSanctionArray.json
+      post:
+        description: Used to create a new provider sanction instance.
+        body:
+          example: !include examples/newProviderSanction.json
+
+    /credentials:
+      type: {ResourceTypes.collection: {"type": "Entity.ProviderCredentials", "newType": "Entity.NewProviderCredentials" }}
+      description: The credentials associated with the provider.
+      get:
+        description: list the result of every credentialling exercise for this
+          provider.
+        responses:
+          200:
+            body:
+              example: !include examples/providerCredentialsArray.json
+      post:
+        description: Creates a new provider credential record.
+
+    /specialties:
+      type: {ResourceTypes.collection: {"type": "Entity.ProviderSpecialty", "newType": "Entity.NewProviderSpecialty" }}
+      get:
+        description: Any specialties associated with the provider
+        responses:
+          200:
+            body:
+              example: !include examples/providerSpecialtyArray.json
+      post:
+        description: Used to create a new provider specialty assignment.
+
+      /{specialty-code}:
+        uriParameters:
+          specialty-code:
+            description: An ADA code to reference a specific provider specialty.
+        delete:
+          description: removes this specialty instance from the provider.
+
+    /languages:
+      type: {ResourceTypes.collection: {"type": "Entity.Language", "newType": "Entity.NewLanguage" }}
+      get:
+        description: Any extra languages the provider has.
+        responses:
+          200:
+            body:
+              example: !include examples/languageArray.json
+      post:
+        description: Used to create a new provider language association.
+
+      /{language-id}:
+        uriParameters:
+          language-id:
+            description: Uniquely identifies a language the provider can support.
+        type: ResourceTypes.collectionItem
+        description: Selects a specific language assigned to a provider.
+        delete:
+          description: Removes a reference to the language for the provider.
+
+    /documents:
+      type: {ResourceTypes.collection: {"type": "Entity.Document", "newType": "Entity.NewDocument" }}
+      get:
+        description: Any links to documents that might be associated with the provider.
+        responses:
+          200:
+            body:
+              example: !include examples/documentControlArray.json
+      post:
+        description: Adds a new reference to a document for a provider.
+        body:
+          example: !include examples/newDocumentControl.json
+
+      /{document-control-number}:
+        type: ResourceTypes.collectionItem
+        description: |
+          Identifies a specific document instance within the document control store.
+        uriParameters:
+          document-control-number:
+            description: Uniquely identifies this document instance.
+        delete:
+          description: used to remove a reference to a document for this provider.
+
+    /disciplinaryActions:
+      type: {ResourceTypes.collection: {"type": "Entity.DisciplinaryAction", "newType": "Entity.NewDisciplinaryAction" }}
+      get:
+        description: Any disciplinary actions that have been applied to the provider.
+        responses:
+          200:
+            body:
+              example: !include examples/disciplinaryActionsArray.json
+      post:
+        description: Creates a new disciplinary action record for this provider.
+
+      /{disciplinary-action-id}:
+        uriParameters:
+          disciplinary-action-id:
+            description: Uniquely identifies this disciplanry action instance.
+        type: {ResourceTypes.collectionItem: {"newType": "Entity.NewDisciplinaryAction", "updateableType": "Entity.UpdatebaleDisciplinaryAction" }}
+        patch:
+          description: allows a disciplinary action to be termed.
+        delete:
+          description: |
+            Archives any reference to this disciplinary action record for this provider.
+
+    /licenses:
+      type: {ResourceTypes.collection: {"type": "Entity.License", "newType": "Entity.NewLicense" }}
+      get:
+        description: Any provider licenses associated with the provider.
+        responses:
+          200:
+            body:
+              example: !include examples/licenseArray.json
+      post:
+        description: Adds a license for this provider.
+
+      /{license-number}:
+        type: {ResourceTypes.collectionItem: {"newType": "Entity.NewLicense", "updateableType": "Entity.UpdateableLicense" }}
+        description: UI specific to a single provider license instance.
+        uriParameters:
+          license-number:
+            description: Selects this License for this Provider.
+        delete:
+          description: |
+            Used to archive the relationship for a provider to this license.
+            This is not terminating the relationship, but a permanent removal.
+        patch:
+          description: Used to term a relationship.
+        put:
+          description: Replaces a license instance with a new one.
+
+    /medicaid:
+      type: {ResourceTypes.collection: {"type": "Entity.Medicaid", "newType": "Entity.Medicaid" }}
+      get:
+        description: Returns any medicaid details that may be associated
+          with the provider.
+        responses:
+          200:
+            body:
+              example: !include examples/providerMedicaidArray.json
+      post:
+        description: Adds the medicaid number for provider within a state.
+        body:
+          example: !include examples/providerMedicaid.json
+
+      /{medicaid-number}:
+        type: {ResourceTypes.collectionItem: {"newType": "Entity.Medicaid" }}
+        description: Selects a specific Medcicaid number assigned to this provider.
+        uriParameters:
+          medicaid-number:
+            description: uniquely identifies the assigned medicaid number.
+        delete:
+          description: |
+            Used to permanently remove this medicaid number for this provider.
+            The relationship is archived.
+        put:
+          description: Used to change the assigned medicaid number.
+
+    /focusReviews:
+      type: {ResourceTypes.collection: {"type": "Entity.FocusReview", "newType": "Entity.NewFocusReview" }}
+      get:
+        description: Any focus reviews associated with the provider.
+        responses:
+          200:
+            body:
+              example: !include examples/focusReviewArray.json
+      post:
+        description: Adds the details of a focus review for this provider.
+
+      /{focus-review-id}:
+        uriParameters:
+          focus-review-id:
+            description: Uniquely identifies a focus review instance
+        type: { ResourceTypes.collectionItem: {updateableType : Entity.UpdateableFocusReview} }
+        patch:
+          description: Used to alter the focus review details.
+        delete:
+          description: Permanently archives the focus review record.
+
+/clinics:
+  description: API root for clinic related functions.
+  type: {ResourceTypes.collection: {"type": "Entity.RelatedClinic", "newType": "Entity.NewClinic" }}
+  get:
+    description: Used to search for matching clinics.
+    is: [Searchable: {description : "with valid searchable fields: CommonName, Zip, etc.", example : "[\"CommonName\", \"St. Jude\", \"startsWith\"]"}]
+    responses:
+      200:
+        description: return a list of all clinics matching search criteria
+        body:
+          example: !include examples/clinicsArray.json
+  post:
+    description: creates a new clinic instance
+
+  /{clinic-id}:
+    uriParameters:
+      clinic-id:
+        description: Uniquely identifies this clinic instance.
+    type: {ResourceTypes.collectionItem: {"type": "Entity.Clinic", "updateableType": "Entity.UpdateableClinic" }}
+    get:
+      responses:
+        200:
+          body:
+            example: !include examples/clinic.json
+    patch:
+
+    /addresses:
+      description: Root of functionality related to clinic addresses
+      type: {ResourceTypes.collection: {"type": "Entity.Address", "newType": "Entity.NewAddress" }}
+      get:
+        description: Returns a a list aof all of the addresses associated with
+          this clinic.
+        responses:
+          200:
+            body:
+              example: !include examples/addressesArray.json
+      post:
+        description: Used to add a new address for the clinic.
+          Should term the prior current address for this clinic if
+          one exists with the effective date of the new address.
+
+      /{address-id}:
+        uriParameters:
+          address-id:
+            description: Uniquely identifies this clinic address instance.
+        type: {ResourceTypes.collectionItem: {"type": "Entity.Address", "updateableType": "Entity.UpdateableAddress" }}
+        get:
+          description: returns the details for this specific clinic address.
+          responses:
+            200:
+              description: |
+                Return a list of all W9 legal entities associated with this clinic.
+              body:
+                example: !include examples/address.json
+        patch:
+        delete:
+
+    /w9:
+      description: URI root for functions related to a clinic's W9 relationships
+      type: {ResourceTypes.collection: {"type": "Entity.RelatedW9", "newType": "Collections.NewW9Relationship" }}
+      get:
+        description: |
+          Used to list all the W9 businesses associated with this clinic.
+        responses:
+          200:
+            description: |
+              Return a list of all W9 legal entities associated with this clinic.
+            body:
+              example: !include examples/relatedW9sArray.json
+      post:
+        body:
+          application/json:
+            type: Entity.W9
+            example: !include examples/w9.json
+
+      /{w9-id}:
+        uriParameters:
+          w9-id:
+            description: Uniquely identifies this W9 business instance instance.
+        type: {ResourceTypes.collectionItem: {"type": "Entity.RelatedW9"}}
+        #put: # Note to self: must check how this will work in practice.
+        delete:
+
+    /phoneContacts:
+      description: URI root for functions related to a clinic's Phone contacts
+      type: {ResourceTypes.collection: {"type": "Entity.PhoneContact", "newType": "Entity.NewPhoneContact" }}
+      get:
+        description: returns all the phone number contact details associated with
+          this clinic.
+      post:
+        description: Creates a new phone contact instance for this clinic.
+
+      /{phone-contact-id}:
+        uriParameters:
+          phone-contact-id:
+            description: Uniquely identifies this phone contact for the tenant.
+        type: {ResourceTypes.collectionItem: {"type": "Entity.PhoneContact", "updateableType": "Entity.UpdateablePhoneContact"}}
+        patch:
+        delete:
+
+    /credentials:
+      type: {ResourceTypes.collection: {"type": "Entity.ClinicCredentials", "newType": "Entity.NewClinicCredentials" }}
+      description: The credentials associated with the clinic.
+      get:
+        description: list the result of every credentialling exercise for this
+          clinic.
+        responses:
+          200:
+            body:
+              example: !include examples/clinicCredentialsArray.json
+      post:
+        description: Creates a new clinic credential record.
+
+    /languages:
+      type: {ResourceTypes.collection: {"type": "Entity.Language", "newType": "Entity.NewLanguage" }}
+      description: resource URI for languages associated to this clinic
+      get:
+        description: Any extra languages the clinic supports.
+        responses:
+          200:
+            body:
+              example: !include examples/languageArray.json
+      post:
+        description: Used to create a new clinic language association.
+
+      /{language-id}:
+        uriParameters:
+          language-id:
+            description: Uniquely identifies a language the clinic can support.
+        type: ResourceTypes.collectionItem
+        description: Selects a specific language assigned to a clinic.
+        delete:
+          description: Removes a reference to the language for the clinic.
+
+    /focusReviews:
+      type: {ResourceTypes.collection: {"type": "Entity.FocusReview", "newType": "Entity.NewFocusReview" }}
+      get:
+        description: Any focus reviews associated with the clinic.
+        responses:
+          200:
+            body:
+              example: !include examples/focusReviewArray.json
+      post:
+        description: Adds the details of a focus review for this clinic.
+
+      /{focus-review-id}:
+        uriParameters:
+          focus-review-id:
+            description: Uni2quely identifies a focus review instance
+        type: { ResourceTypes.collectionItem: {updateableType : Entity.UpdateableFocusReview} }
+        patch:
+          description: Used to alter the focus review details.
+        delete:
+          description: Permanently archives the focus review record.
+
+/carriers:
+  description: root URI for insurance carrier related functions
+  type: {ResourceTypes.collection: {"type": "Entity.Carrier", "newType": "Entity.NewCarrier" }}
+  get:
+    description: returns a list of all carriers supported for user's data owners
+    is: [Searchable: {description : "with valid searchable fields: LegalName, Zip, etc.", example : "[\"Description\", \"Helping Hands\", \"startsWith\"]"}]
+    responses:
+      200:
+        body:
+          example: !include examples/carrierArray.json
+  post:
+    description: used to add a new carrier instance
+
+  /{carrier-id}:
+    uriParameters:
+      carrier-id:
+        description: Uniquely identifies a carrier instance for a tenatn
+    type: { ResourceTypes.collectionItem: {updateableType : Entity.UpdateableCarrier} }
+    patch:
+      description: Used to alter the carrier's details.
+    delete:
+      description: Permanently archives the carrier's record.
+
+    /networks:
+      displayName: CarrierNetworks
+      type: {ResourceTypes.collection: {"type": "Entity.RelatedNetwork", "newType": "Collections.NewNetworkRelationship" }}
+      description: Any network associations the carrier has had.
+      get:
+        description: List all networks associated with the carrier.
+        responses:
+          200:
+            body:
+              example: !include examples/relatedNetworksArray.json
+
+    /phoneContacts:
+      description: URI root for functions related to a carrier's Phone contacts
+      type: {ResourceTypes.collection: {"type": "Entity.PhoneContact", "newType": "Entity.NewPhoneContact" }}
+      get:
+        description: returns all the phone number contact details associated with
+          this carrier.
+      post:
+        description: Creates a new phone contact instance for this carrier.
+
+      /{phone-contact-id}:
+        uriParameters:
+          phone-contact-id:
+            description: Uniquely identifies this phone contact for the tenant.
+        type: {ResourceTypes.collectionItem: {"type": "Entity.PhoneContact", "updateableType": "Entity.UpdateablePhoneContact"}}
+        patch:
+        delete:
+
+/networks:
+  description: API root for network related functions.
+  type: {ResourceTypes.collection: {"type": "Entity.RelatedNetwork", "newType": "Entity.NewNetwork" }}
+  get:
+    description: Used to search for matching networks.
+    is: [Searchable: {description : "with valid searchable fields: Network", example : "[\"Network\", \"First national\", \"equals\"]"}]
+    responses:
+      200:
+        description: Return a list of all networks matching search criteria
+        body:
+          example: !include examples/relatedNetworksArray.json
+  post:
+    description: Creates a new network.
+
+  /{network-id}:
+    uriParameters:
+      network-id:
+        description: Uniquely identifies the network instance.
+    type: {ResourceTypes.collectionItem: {"type": "Entity.Network", "updateableType": "Entity.UpdateableNetwork" }}
+    get:
+    patch:
+
+    /carriers:
+      description: API root for functions related to the network's current carrier.
+      type: {ResourceTypes.collection: {"type": "Entity.RelatedCarrier", "newType": "Collections.NewCarrierRelationship" }}
+      get:
+        description: Returns a a list aof all of the addresses associated with
+          this W9 business.
+        responses:
+          200:
+            body:
+              example: !include examples/relatedCarrierArray.json
+      post:
+        description: creates a new instance of a carrier for a network.
+
+      /{carrier-id}:
+        type: {ResourceTypes.collectionItem: {"type": "Entity.RelatedCarrier", "updateableType": "Collections.UpdateableCarrierRelationship" }}
+        get:
+        patch:
+        delete:
+
+    /clinics:
+      displayName: NetworkClinics
+      type: {ResourceTypes.collection: {"type": "Collections.RelatedClinic", "newType": "Entity.NewNetworkClinicRelationship" }}
+      get:
+        description: List all clinics associated with the network.
+        responses:
+          200:
+            body:
+              example: !include examples/relatedClinicsArray.json
+      post:
+        description: Add new associations with a clinic for the network.
+          Only for use where the relationship to the clinic does not already
+          exist for the network
+
+      /{clinic-id}:
+        uriParameters:
+          clinic-id:
+            description: Uniquely identifies this network's clinic relationship.
+        displayName: NetworkClinics
+        type: {ResourceTypes.collectionItem: {"type": "Entity.NetworkClinicRelationship", "newType": "Entity.NewNetworkClinicRelationship"}}
+        description: Relates to functions specific to a network-to-clinic relationship.
+        put:
+          body:
+            example: !include examples/newNetworkClinicRelationship.json
+          description: |
+            Completely replace the provider relationships for the network and clinic
+        delete:
+          description: |
+            Permanently remove any association between the network and the clinic.
+            Note: This is not "terming" a relationship.  That's achieved with
+            a patch.
+
+        /providers:
+          displayName: NetworkClinicProviders
+          type: {ResourceTypes.collection: {"type": "Collections.RelatedProvider", "newType": "Collections.NewNetworkProviderRelationship" }}
+          get:
+            description: List all providers associated with the network at this clinic.
+            responses:
+              200:
+                body:
+                  example: !include examples/relatedProvidersArray.json
+          post:
+            description: Add new provider relationship at the established clinic for this network.
+
+          /{provider-id}:
+            uriParameters:
+              provider-id:
+                description: Uniquely identifies this network's provider-to-clinic relationship.
+            displayName: NetworkClinicProvider
+            type: {ResourceTypes.collectionItem: {"type": "Collections.NetworkProviderRelationship", "updateableType": "Collections.UpdateableNetworkProviderRelationship" }}
+            description: Relates to functions specific to a network-to-provider relationship.
+            patch:
+              description: |
+                Used to correct a provider relationship to a clinic for a network
+            delete:
+              description: |
+                Permanently remove any association between the network and the
+                provider at this clinic.  Note: This is not "terming" a relationship,
+                that's achieved with a patch.
+
+    /providers:
+      displayName: NetworkProviders
+      type: {ResourceTypes.collection: {"type": "Collections.RelatedProvider", "newType": "Entity.NewNetworkProviderRelationship" }}
+      get:
+        description: List all clinics associated with the network.
+        responses:
+          200:
+            body:
+              example: !include examples/relatedProvidersArray.json
+      post:
+        description: Add new associations with a provider for the network.
+          Only for use where the relationship to the provider does not already
+          exist.
+
+      /{provider-id}:
+        uriParameters:
+          provider-id:
+            description: Uniquely identifies this network's provider relationship.
+        displayName: NetworkProviders
+        type: {ResourceTypes.collectionItem: {"type": "Entity.NetworkProviderRelationship", "newType": "Entity.NewNetworkProviderRelationship"}}
+        description: Relates to functions specific to a network-to-provider relationship.
+        put:
+          body:
+            example: !include examples/newNetworkProviderRelationship.json
+          description: |
+            Completely replace the clinic relationships for the network and provider
+        delete:
+          description: |
+            Permanently remove any association between the network and the provider.
+            Note: This is not "terming" a relationship.  That's achieved with
+            a patch.
+
+        /clinics:
+          displayName: NetworkProviderClinics
+          type: {ResourceTypes.collection: {"type": "Collections.RelatedClinic", "newType": "Collections.NewNetworkClinicRelationship" }}
+          get:
+            description: List all clinics associated with the network for this provider.
+            responses:
+              200:
+                body:
+                  example: !include examples/relatedClinicsArray.json
+          post:
+            description: Add new clinic relationship at the established provider for this network.
+
+          /{clinic-id}:
+            uriParameters:
+              clinic-id:
+                description: Uniquely identifies this network's clinic-to-provider relationship.
+            displayName: NetworkProviderClinic
+            type: {ResourceTypes.collectionItem: {"type": "Collections.NetworkClinicRelationship", "updateableType": "Collections.UpdateableNetworkClinicRelationship" }}
+            description: Relates to functions specific to a network-to-clinic relationship.
+            patch:
+              description: |
+                Used to correct a clinic relationship to a provider for a network
+            delete:
+              description: |
+                Permanently remove any association between the network and the
+                provider at this clinic.  Note: This is not "terming" a relationship,
+                that's achieved with a patch.
+
+/w9:
+  description: root URI for W9 related operations on Provider businesses.
+  type: {ResourceTypes.collection: {"type": "Entity.W9", "newType": "Entity.NewW9" }}
+  get:
+    description: Used to search for matching W9 businesses.
+    is: [Searchable: {description : "with valid searchable fields: LegalName, Zip, etc.", example : "[\"CommonName\", \"St. Jude\", \"startsWith\"]"}]
+    responses:
+      200:
+        description: return a list of all W9 legal entities matching search criteria
+        body:
+          example: !include examples/w9Array.json
+  post:
+    description: Creates a new W9 Business instance
+    body:
+      example: !include examples/newW9.json
+
+  /{w9-id}:
+    uriParameters:
+      w9-id:
+        description: Uniquely identifies this W9 business instance instance.
+    type: {ResourceTypes.collectionItem: {"type": "Entity.W9", "updateableType": "Entity.UpdateableW9" }}
+    get:
+      description: |
+        Returns a single W9 businesses details.
+      responses:
+        200:
+          body:
+            example: !include examples/w9.json
+    patch: # Note to self: must check how this will work in practice.
+    delete:
+
+    /legalAddresses:
+      description: Root of functionality related to W9 legal addresses.
+      type: {ResourceTypes.collection: {"type": "Entity.LegalAddress", "newType": "Entity.NewLegalAddress" }}
+      get:
+        description: Returns a a list aof all of the addresses associated with
+          this W9 business.
+        responses:
+          200:
+            body:
+              example: !include examples/legalAddressesArray.json
+      post:
+        description: creates a new instance of a legal address for a W9 business entity.
+
+      /{legal-address-id}:
+        type: {ResourceTypes.collectionItem: {"type": "Entity.LegalAddress", "newType": "Entity.NewLegalAddress" }}
+        get:
+        put:
+        delete:
+
+/metadata:
+  description: |
+    root URI for metadata related functionality.  Think semi-static lists and categories...
+  get:
+    description: returns a static set of links to all supported sub-resource types.
+    responses:
+      200:
+        body:
+          type: Basic.Link[]
+          example: !include ./examples/metadataResourceLinks.json
+
+  /terminationLevels:
+    type: {ResourceTypes.collection: {"type": "Entity.TerminationLevel"}}
+    get:
+      description: |
+        Returns the entire list of currently supported termination reason
+        codes for providers.
+      responses:
+        200:
+          body:
+            example: !include examples/terminationLevelsArray.json
+
+  /dataOwners:
+    type: {ResourceTypes.collection: {"type": "Entity.DataOwner"}}
+    get:
+      description: |
+        Returns the entire list of currently supported data owners.
+        Includes vendor-only data owners too.
+      responses:
+        200:
+          body:
+            example: !include examples/dataOwnerArray.json
+
+    /{data-owner-id}:
+      type: {ResourceTypes.collectionItem: {"type": "Entity.DataOwner"}}
+      get:
+        description: |
+          Returns the details for a supported data owner with the supplied
+          {data-owner-id} value.  Note: each owner is associated with a
+          single data Tenant, which represents where the owner's data
+          logically resides within the database.
+        responses:
+          200:
+            body:
+              example: !include examples/dataOwner.json
+
+  /tenants:
+    type: {ResourceTypes.collection: {"type": "Entity.Tenant"}}
+    get:
+      description: |
+        Returns the entire list of currently supported data Tenants
+        (with unique isolated data schema).  Each Tenant has an associated
+        default data owner.
+      responses:
+        200:
+          body:
+            example: !include examples/tenantArray.json
+
+    /{tenant-id}:
+      type: {ResourceTypes.collectionItem: {"type": "Entity.Tenant"}}
+      get:
+        description: Returns the complete details for a single Tenant instance.
+        responses:
+          200:
+            body:
+              example: !include examples/tenant.json
+
+  /specialties:
+    type: {ResourceTypes.collection: {"type": "Entity.Specialty"}}
+    get:
+      description: |
+        Returns the entire list of currently supported provider specialties.
+      responses:
+        200:
+          body:
+            example: !include examples/specialtyArray.json
+
+  /procedureCodes:
+    type: {ResourceTypes.collection: {"type": "Entity.ProcedureCode"}}
+    get:
+      description: |
+        Returns the entire list of currently supported procedure codes.
+      responses:
+        200:
+          body:
+            example: !include examples/procedureCodesArray.json
+
+  /languages:
+    type: {ResourceTypes.collection: {"type": "Entity.Language"}}
+    get:
+      description: |
+        Returns the entire list of currently supported provider languages.
+      responses:
+        200:
+          body:
+            example: !include examples/languageArray.json
+
+  /businessSegments:
+    type: {ResourceTypes.collection: {"type": "Entity.BusinessSegment"}}
+    get:
+      description: |
+        Returns the entire list of currently supported business segments.
+      responses:
+        200:
+          body:
+            example: !include examples/businessSegmentsArray.json

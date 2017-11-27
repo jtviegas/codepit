@@ -1,0 +1,1 @@
+{"AuditNumber":9999,"ProcedureCodes":{"RangeStart":"00120","RangeEnd":"00140"},"Commenced":"2009-01-01","Terminated":"2009-10-01","Reason":"Arbitrary","Comments":"Blah blah blah","Links":[{"rel":"clinic","href":"/api/clinics/234534"},{"rel":"networkgroup","href":"/api/networksgroups/8"}]}

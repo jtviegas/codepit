@@ -1,0 +1,31 @@
+#%RAML 1.0 DataType
+type: object
+displayName: Item
+properties:
+  id:
+    required: false
+    type: string
+  name:
+      required: true
+      type: string
+  price:
+      required: true
+      type: number
+  category:
+    required: false
+    type: array
+    items:
+      type: string
+  subcategory:
+    required: false
+    type: array
+    items:
+      type: string
+  notes:
+      required: false
+      type: string
+  images:
+    required: false
+    type: array
+    items:
+      type: string

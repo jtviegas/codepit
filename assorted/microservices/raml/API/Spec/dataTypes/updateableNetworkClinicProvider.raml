@@ -1,0 +1,43 @@
+#%RAML 1.0 DataType
+type: object
+description:  base type for properties common to all network-clinic-provider relationships
+properties:
+  IsFrozen:
+    type: boolean
+    required: false
+    description: Indicates the contract is in a frozen state
+  FrozenFrom:
+    type: date-only
+    required: false
+    description: The operative date from which the contract is frozen
+  OfficeNumber:
+    type: string
+    required: false
+    description: Optionally indicates the operative office number for the contract
+  InDirectory:
+    type: boolean
+    required: false
+    description: Indicates if the clinic/provider relationship is a member of the directory.
+  HoldCodeApplied:
+    type: boolean
+    required: false
+    description: indicates if a hold code has been applied to the contract
+  Termination:
+    type: object
+    required: false
+    description: Populated in the case of an early manual termination
+    properties:
+      Terminated:
+        type: date-only
+        description: Indicates the operative date of termination
+      TerminationLevel:
+        type: !include ../dataTypes/terminationLevel.raml
+        description: Indicates a reason for the termination
+      TerminationReceived:
+        type: date-only
+        required: false
+        description: The date of receipt of notice of termination
+      TerminationClauseFrom:
+        type: date-only
+        required: false
+        description: Indicates the point of contractual termination

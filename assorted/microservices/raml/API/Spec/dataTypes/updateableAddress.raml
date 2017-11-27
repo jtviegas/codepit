@@ -1,0 +1,42 @@
+#%RAML 1.0 DataType
+uses:
+  Basic: ../library/basicTypes.raml
+
+description: represents the changes to make to an existing postal address for
+  a physical location such as a clinic or a business.
+example: !include ../examples/updateAddress.json
+type: object
+properties:
+  Line1:
+    type: string
+    required: false
+  Line2:
+    type: string?
+    required: false
+  Line3:
+    type: string?
+    required: false
+  City:
+    type: string?
+    required: false
+  State:
+    type: Basic.State?
+    required: false
+  ZIPCode:
+    type: Basic.ZIP?
+    required: false
+  County:
+    type: string?
+    required: false
+  Country:
+    type: Basic.Country?
+    required: false
+  Province:
+    type: string?
+    required: false
+  Latitude:
+    type: number?
+    required: false
+  Longitude:
+    type: number?
+    required: false

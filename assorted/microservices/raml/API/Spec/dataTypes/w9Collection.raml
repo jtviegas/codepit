@@ -1,0 +1,10 @@
+#%RAML 1.0 DataType
+uses:
+  Basic: ../library/basicTypes.raml
+
+type: !include newW9.raml
+properties:
+  Effective: Basic.EffectivePeriod
+  OfficeNumber:
+    type: integer
+    required: false

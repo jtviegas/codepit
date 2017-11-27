@@ -1,0 +1,36 @@
+#%RAML 1.0 DataType
+uses:
+  Basic: ../library/basicTypes.raml
+type: object
+example: !include ../examples/updateableNetwork.json
+properties:
+  Description:
+    type: string
+    description: A textual description of the purpose and context of the
+      provider network.
+    required: false
+  ShortDescription:
+    type: string
+    description: A friendly display name for the network.
+    required: false
+  Manager:
+    type: string
+    description: The name of the manager for this network.
+    required: false
+  Comments:
+    type: string
+    description: Any comments related to the operation of this network.
+    required: false
+  CapitationPayment:
+    type: boolean
+    description: True indicates that this network is intended for captitation
+      payments and not FFS.
+    required: false
+  CustomerServiceDisplayed:
+    type: boolean
+    description: True indicates this network will appear in custromer service
+      related searches.
+    required: false
+  Effective:
+    type: Basic.EffectivePeriod
+    required: false

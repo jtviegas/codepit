@@ -1,0 +1,106 @@
+#%RAML 1.0 Library
+uses:
+  Basic: basicTypes.raml
+  ResourceTypes: resourceTypes.raml
+  Collections: collectionTypes.raml
+
+types:
+  NewProvider: !include ../dataTypes/newProvider.raml
+  UpdateableProvider: !include ../dataTypes/updateableProvider.raml
+  Provider:
+    type: [ Basic.DataEntity, NewProvider ]
+    example: !include ../examples/provider.json
+  RelatedProvider: !include ../dataTypes/providerCollection.raml
+  NewClinic: !include ../dataTypes/newClinic.raml
+  UpdateableClinic: !include ../dataTypes/updateableClinic.raml
+  Clinic:
+    type: [ Basic.DataEntity, NewClinic ]
+    example: !include ../examples/clinic.json
+  RelatedClinic: !include ../dataTypes/clinicCollection.raml
+  NewClinicProvider: !include ../dataTypes/newClinicProvider.raml
+  UpdateableClinicProvider: !include ../datatypes/updateableClinicProvider.raml
+  ClinicProvider: !include ../datatypes/clinicProvider.raml
+  NewNetwork: !include ../dataTypes/newNetwork.raml
+  UpdateableNetwork: !include ../dataTypes/updateableNetwork.raml
+  Network:
+    type: [ Basic.DataEntity, NewNetwork ]
+    example: !include ../examples/network.json
+  RelatedNetwork: !include ../dataTypes/networkCollection.raml
+  NewW9: !include ../dataTypes/newW9.raml
+  UpdateableW9: !include ../dataTypes/updateableW9.raml
+  W9:
+    type: [Basic.DataEntity, NewW9]
+    example: !include ../examples/w9.json
+  RelatedW9: !include ../dataTypes/w9Collection.raml
+  NewSanction: !include ../dataTypes/newSanction.raml
+  Sanction:
+    type: [ Basic.DataEntity, NewSanction ]
+    example: !include ../examples/providerSanction.json
+  Specialty: !include ../dataTypes/specialty.raml
+  NewProviderSpecialty: !include ../dataTypes/newProviderSpecialty.raml
+  ProviderSpecialty:
+    type: [ Basic.DataEntity, NewProviderSpecialty ]
+    example: !include ../examples/providerSpecialty.json
+  NewDocument: !include ../dataTypes/newDocument.raml
+  Document:
+    type:  [ Basic.DataEntity, NewDocument ]
+    example: !include ../examples/documentControl.json
+  NewLanguage: !include ../dataTypes/newLanguage.raml
+  Language:
+    type: [ Basic.DataEntity, NewLanguage ]
+    example: !include ../examples/language.json
+  NewDisciplinaryAction: !include  ../dataTypes/newDisciplinaryAction.raml
+  UpdatebaleDisciplinaryAction: !include ../dataTypes/updateableDisciplinaryAction.raml
+  DisciplinaryAction:
+    type: [Basic.DataEntity, NewDisciplinaryAction]
+    example: !include ../examples/disciplinaryAction.json
+  NewFocusReview: !include ../dataTypes/newFocusReview.raml
+  UpdateableFocusReview: !include ../dataTypes/updateableFocusReview.raml
+  FocusReview:
+    type: [ Basic.DataEntity, NewFocusReview ]
+    example: !include ../examples/focusReview.json
+  NewLicense: !include ../dataTypes/newLicense.raml
+  UpdateableLicense: !include ../dataTypes/updateableLicense.raml
+  License:
+    type: [Basic.DataEntity, NewLicense]
+    example: !include ../examples/license.json
+  DataOwner: !include ../dataTypes/dataOwner.raml
+  Tenant: !include ../dataTypes/tenant.raml
+  Medicaid: !include ../dataTypes/medicaid.raml
+  TerminationLevel: !include ../dataTypes/terminationLevel.raml
+  BusinessSegment: !include ../dataTypes/businessSegment.raml
+  ProcedureCode: !include ../dataTypes/procedureCode.raml
+  NewLegalAddress: !include ../dataTypes/newLegalAddress.raml
+  LegalAddress:
+    type: [Basic.DataEntity, NewLegalAddress]
+    example: !include ../examples/legalAddress.json
+  NewAddress: !include ../dataTypes/newAddress.raml
+  UpdateableAddress: !include ../dataTypes/updateableAddress.raml
+  Address:
+    type: [Basic.DataEntity, NewAddress ]
+    example: !include ../examples/address.json
+  NewPhoneContact: !include ../dataTypes/newPhoneContact.raml
+  UpdateablePhoneContact: !include  ../dataTypes/updateablePhoneContact.raml
+  PhoneContact:
+    type: [Basic.DataEntity, NewPhoneContact]
+    example: !include ../examples/phoneContact.json
+  NewProviderCredentials: !include ../dataTypes/newProviderCredentials.raml
+  ProviderCredentials:
+    type: [Basic.DataEntity, NewProviderCredentials]
+    example: !include ../examples/providerCredentials.json
+  UpdateableProviderCredentials: !include ../dataTypes/updateableProviderCredentials.raml
+  NewClinicCredentials: !include ../dataTypes/newClinicCredentials.raml
+  ClinicCredentials:
+    type: [Basic.DataEntity, NewClinicCredentials]
+    example: !include ../examples/clinicCredentials.json
+  UpdateableClinicCredentials: !include ../dataTypes/updateableClinicCredentials.raml
+  NewCarrier: !include ../dataTypes/newCarrier.raml
+  Carrier:
+    type: [Basic.DataEntity, NewCarrier]
+    example: !include ../examples/carrier.json
+  UpdateableCarrier: !include ../dataTypes/updateableCarrier.raml
+  RelatedCarrier: !include ../dataTypes/carrierCollection.raml
+  NewNetworkClinicRelationship: !include ../dataTypes/newNetworkClinicRelationship.raml
+  NetworkClinicRelationship: !include ../dataTypes/networkClinicRelationship.raml
+  NewNetworkProviderRelationship: !include ../dataTypes/newNetworkProviderRelationship.raml
+  NetworkProviderRelationship: !include ../dataTypes/networkProviderRelationship.raml

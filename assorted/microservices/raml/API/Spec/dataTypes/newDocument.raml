@@ -1,0 +1,16 @@
+#%RAML 1.0 DataType
+uses:
+  Basic: ../library/basicTypes.raml
+
+type: object
+example: !include ../examples/newDocumentControl.json
+properties:
+  ControlNumber:
+    type: integer
+    description: |
+      A unique code identifying a specific document within the document repository.
+    example: 10323115064
+  Type:
+    type: !include documentType.raml
+    description: A description of attached document type or purpose.
+    example: !include ../examples/DocumentType.json

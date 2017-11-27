@@ -1,0 +1,245 @@
+#%RAML 1.0 DataType
+uses:
+  Basic: ../library/basicTypes.raml
+type: object
+example: !include ../examples/newClinic.json
+properties:
+  StateMedicaidNo:
+    type: string
+    required: false
+  CommonName: string
+  Comments:
+    type: string
+    required: false
+  ContactName:
+    type: string
+    required: false
+  PaymentContactName:
+    type: string
+    required: false
+  UcrRegionCode:
+    type: boolean
+    required: false
+    default: false
+  GeneralInsurance:
+    type: object
+    required: false
+    properties:
+      Insurer:
+        type: string
+        required: true
+      Limit:
+        type: number
+        required: false
+      RenewalDate:
+        type: date-only
+        required: false
+      Policy:
+        type: string
+        required: false
+  Services:
+    type: object
+    required: false
+    properties:
+      DiagnosicService:
+        type: boolean
+        required: false
+        default: false
+      PreventiveService:
+        type: boolean
+        required: false
+        default: false
+      RestorativeService:
+        type: boolean
+        required: false
+        default: false
+      PeriodonticService:
+        type: boolean
+        required: false
+        default: false
+      PedodonticService:
+        type: boolean
+        required: false
+        default: false
+      EndodonticService:
+        type: boolean
+        required: false
+        default: false
+      OrthodonticService:
+        type: boolean
+        required: false
+        default: false
+      OralSurgeryService:
+        type: boolean
+        required: false
+        default: false
+      ProsthodonticService:
+        type: boolean
+        required: false
+        default: false
+      TmjService:
+        type: boolean
+        required: false
+        default: false
+      Vision:
+        type: object
+        required: false
+        properties:
+          VisionServicesType: string
+      Hearing:
+        type: object
+        required: false
+        properties:
+          HearingServicesType: string
+      IntensiveTherapyUnit:
+        type: object
+        required: false
+        properties:
+          ITUClinicType: string
+      MobilityServices:
+        type: boolean
+        required: false
+        default: false
+      HIVServices:
+        type: boolean
+        required: false
+        default: false
+      DevelopmentallyDisabledServices:
+        type: boolean
+        required: false
+        default: false
+      NursingHomeVisits:
+        type: boolean
+        required: false
+        default: false
+        description: If nursing home visits are made by this practice or not.
+      ChildDisabilitySupported:
+        type: boolean
+        required: false
+        default: false
+      AdultDisabilitySupported:
+        type: boolean
+        required: false
+        default: false
+      SpecialAccommodations:
+        type: string
+        required: false
+        description: A text description of any special accomodations available
+  Staffing:
+    type: object
+    required: false
+    properties:
+      ProviderCount:
+        type: integer
+        required: false
+      HygienistCount:
+        type: integer
+        required: false
+      AssistantCount:
+        type: integer
+        required: false
+      SpecialistCount:
+        type: integer
+        required: false
+      CollaborativeHygienistCount:
+        type: integer
+        required: false
+      DentalTherapistCount:
+        type: integer
+        required: false
+      AdvancedDentalTherapistCount:
+        type: integer
+        required: false
+      AdvancedDentalHygienistCount:
+        type: integer
+        required: false
+  ReimburseContinuedEducation:
+    type: boolean
+    required: false
+  PracticeManagementSoftware:
+    type: string
+    required: false
+    description: Practice management software package employed by the clinic
+  ElectronicClaimsSubmissionSupported:
+    type: boolean
+    required: false
+    default: false
+  AlphabeticalSortBy:
+    type: string
+    required: false
+    description: |
+      Optional alternative version of common name for alphabetical sorting purposes
+  MARating:
+    type: string
+    required: false
+  EmailAddress:
+    type: Basic.EmailAddress
+    required: false
+  MemberEmailAddress:
+    type: Basic.EmailAddress
+    required: false
+  WebAddress:
+    type: Basic.SimpleURL
+    required: false
+  EssentialCommunityProvider:
+    type: object
+    required: false
+    properties:
+      ECPType: string
+  Patients:
+    type: object
+    required: false
+    properties:
+      AcceptsNewPatients:
+        type: boolean
+        required: false
+        default: true
+      AcceptsNewMedicaidPatients:
+        type: boolean
+        required: false
+        description: If new medicaid patients are accepted
+      MedicaidPatientsConverted:
+        type: boolean
+        required: false
+      MedicaidMonthlyPatients:
+        type: boolean
+        required: false
+      UnderThrees:
+        type: boolean
+        required: false
+      UnderEighteens:
+        type: boolean
+        required: false
+      ProviderMonthlyPatients:
+        type: integer
+        required: false
+      HygienistMonthlyPatients:
+        type: integer
+        required: false
+      NewMedicaidPatientPolicy:
+        type: string
+        required: false
+  VisitedNursingHomes:
+    type: string
+    required: false
+    description: A list of nursing homes visited
+    example: St. Lukes (Blue Earth, MN)
+  EmergencyInstructions:
+    type: boolean
+    required: false
+    default: false
+  WheelchairAccessible:
+    type: boolean
+    required: false
+    default: false
+  ProfessionalReviewUnderway:
+    type: string
+    required: false
+  Effective:
+    type: Basic.EffectivePeriod
+  Hours:
+    type: Basic.OpeningHours[]
+    minItems: 1
+    maxItems: 7
+    description: The hours for which this clinic operates for this relationship.
+    required: false

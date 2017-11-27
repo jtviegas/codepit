@@ -1,0 +1,33 @@
+#%RAML 1.0 DataType
+uses:
+  Basic: ../library/basicTypes.raml
+type: object
+example: !include ../examples/dataOwner.json
+properties:
+  Id :
+    type: integer
+    example: 1
+  Name:
+    type: string
+    example: "Anthem"
+  DefaultOwnerForTenant:
+    type: boolean
+    description: |
+      Indicates if this data owner represents tenent-wide data.  If true, rows
+      with this owner id will be visible to a role for any owner within this
+      tenant's data. i.e. rows visible to any roles for the tenant.
+  Vendor:
+    type: boolean
+    description: |
+      True if this data owner is contained within another tenent's schema.
+      Typically operator's require a specific role for data for this owner to be
+      visible.  i.e. One of a tenant's vendors.
+  Tenant:
+    type: object
+    properties:
+      Name:
+        type: string
+        description: The name of the operative Tenant for this data owner.
+      Link:
+        type: Basic.Link
+        description: Links to full data for the data owner's tenant.

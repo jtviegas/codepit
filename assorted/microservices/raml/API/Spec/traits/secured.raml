@@ -1,0 +1,32 @@
+#%RAML 1.0 Trait
+headers:
+  Authentication:
+    description: |
+      Used to declare the security token encapsulating the client's credentials
+      See https://www.ietf.org/rfc/rfc2617.txt
+    type: string
+responses:
+  401:
+    description: |
+      For authentication failure only. i.e. bad or missing credentials header.
+      Only use this where we don't know valid credentials for the service client.
+      403 is used in the case where the client is authenticated but not authorized
+      to do the operation.
+    headers:
+      WWW-Authenticate:
+        description: |
+          Standard authentication failure challenge response.  Must quote a security realm.
+        type: string
+        example: realm="Videos"
+    body:
+      application/json:
+        example: !include ../examples/401.json
+  403:
+    description: |
+      For authorization failure only. i.e. Attempting a forbidden action for the user,
+      such as deleting a provider or some other function without the appropriate
+      role assigned to the database user.  Usually in response to an SQL authorization
+      failure resulting in an Oracle exception.
+    body:
+      application/json:
+        example: !include ../examples/403.json

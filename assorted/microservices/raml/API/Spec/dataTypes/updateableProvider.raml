@@ -1,0 +1,172 @@
+#%RAML 1.0 DataType
+uses:
+  Basic: ../library/basicTypes.raml
+type: object
+example: !include ../examples/updateableProvider.json
+properties:
+  Tin:
+    type: Basic.Tin
+    required: false
+  StateProviderNo:
+    type: string
+    required: false
+    description: A US state specific identifier for the provider.
+    example: T61370
+  NamePrefix:
+    type: string
+    required: false
+    example: "Mr."
+  FirstName:
+    type: string
+    required: false
+    example: James
+  MiddleName:
+    type: string
+    required: false
+    example: T.
+  LastName:
+    type: string
+    example: Smith
+    required: false
+  NameSuffix:
+    type: string
+    required: false
+    examples:
+      Esquire : "Esq."
+      Junior : "Jr."
+  Gender:
+    enum: [M, F]
+    required: false
+    description: M is Male, F is Female (somewhat basic at this time).
+  BirthDate:
+    type: date-only
+    required: false
+    example: "1980-04-23"
+    description: Date of birth for the provider.
+  SchoolOfDentistry:
+    type: string
+    required: false
+    example: "Medical College VA"
+    description: identifies the instituion where the provider obtained their training.
+  GraduationYear:
+    type: integer
+    required: false
+    minimum: 1950
+    maximum: 9999
+    description: When the provider graduated.
+  PracticeEffectiveFrom:
+    type: integer
+    required: false
+    minimum: 1950
+    maximum: 9999
+    description: When the provider commenced practicing.
+  Comments:
+    type: string
+    required: false
+    description: Free-form field containing any relevant notes on the provider.
+  Terminated:
+    type: date-only # notation of RFC 3339,  yyyy-mm-dd
+    required: false
+    description: |
+      Date supplied when interaction with the provider is explicitly terminated.
+  TerminationLevel:
+    type: integer
+    required: false
+    description: |
+      Indicates the reason for terminating the provider.
+      See metadata resource for full list.
+  Retired:
+    type: date-only
+    required: false
+    description: The verified date of retirement for the provider.
+  Deceased:
+    type: date-only
+    required: false
+    description: The verified date of death for the provider.
+  Effective:
+    type: Basic.EffectivePeriod
+    required: false
+  MedicareNo:
+    type: string
+    required: false
+    description: Identifies the provider within the medicare system.
+  FirstBNotice:
+    type: date-only
+    required: false
+    description: Issued if TIN on record doesn’t match what the IRS has on file
+  SecondBNotice:
+    type: date-only
+    required: false
+    description: |
+      Indicates the IRS has sent B Notices twice within a three-year timeframe.
+  MalpracticeInsurance:
+    type: object
+    required: false
+    description: Preseence of this field implies malpractice insurance is present.
+    properties:
+      Insurer:
+        type: string
+        required: false
+        description: Identifies the firm underwriting the provider's malpractice insurance.
+      InsuredLimit:
+        enum: [A, B, C, D]
+        required: false
+      Renewal:
+        type: date-only
+        required: false
+        description: The date of policy renewal.  Assume it's annually.
+      PolicyNo:
+        type: string
+        required: false
+        description: Identifies the policy instance applicable for this provider.
+  ConsentFormSigned:
+    type: boolean
+    required: false
+  ConsentSignatureDate:
+    type: date-only
+    required: false
+  NoDeaNumberReason:
+    enum: ["1", "2", "3"]
+    required: false
+  SpecialtySchool:
+    type: string
+    required: false
+    example:  U of Southern CA
+    description: |
+      The institution where the provider obntained their speciality training.
+  AnesthesiaCertificateExpiry:
+    type: date-only
+    required: false
+    description: When the provider's Anesthesia certification is expected to expire.
+  EmailAddress:
+    type: Basic.EmailAddress
+    required: false
+  CollaberationAgreement:
+    type: boolean
+    required: false
+    default: false
+    description: |
+      Used for hygienists, dental therapists, and advanced dental therapists
+  ParaLicenseNumber:
+    type: string
+    required: false
+  ParaLicenseState:
+    type: Basic.State
+    required: false
+  SpecialtyGradYear:
+    type: integer
+    required: false
+    minimum: 1950
+    maximum: 9999
+    description: The year of graduating specialty training.
+  FWAComplianceDate:
+    type: date-only
+    required: false
+    description: Fraud, Waste and Abuse certification date.
+  Degree1:
+    type: string
+    required: false
+    description: Education credentials.
+  Degree2:
+    type: string
+    required: false

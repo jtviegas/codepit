@@ -1,0 +1,62 @@
+#%RAML 1.0 DataType
+uses:
+  Basic: ../library/basicTypes.raml
+  Collection: ../library/collectionTypes.raml
+
+example: !include ../examples/updateableClinicProvider.json
+type: Collection.UpdateableRelationship
+description: represents a relationship for a provider to a clinic
+properties:
+  Hours:
+    type: Basic.OpeningHours[]
+    minItems: 1
+    maxItems: 7
+    description: The hours for which this clinic operates for this relationship.
+    required: false
+  Comments:
+    type: string
+    required: false
+  ClearLicenseNumber:
+    type: boolean
+    required: false
+  ProviderSpecialistClinic:
+    type: boolean
+    required: false
+  ProviderRelationship:
+    enum: [A, O, P]
+    description: A means Associate, O means Owner and P means Partner.
+    required: false
+  PayClinicOrProvider:
+    enum: [P, C]
+    description: |
+      P means make the payment to the provider directly, C the default, means
+      to pay the clinic instead.
+    required: false
+  DeltaPrecertified:
+    type: boolean
+    required: false
+  CorporatePayment:
+    type: boolean
+    required: false
+  WitholdPayments:
+    type: boolean
+    required: false
+  ProviderCOB:
+    type: boolean
+    required: false
+  BCI:
+    type: object
+    required: false
+    properties:
+      Billed:
+        type: string
+        required: false
+      Id:
+        type: string
+        required: false
+  ProviderClaimInReview:
+    type: boolean
+    required: false
+  ProfessionalReviewUnderway:
+    type: boolean
+    required: false

@@ -1,0 +1,45 @@
+#%RAML 1.0 DataType
+uses:
+  Basic: ../library/basicTypes.raml
+
+type: object
+example: !include ../examples/updateableLicense.json
+properties:
+  LicenseNumber:
+    type: string
+    example: "475698P"
+    minLength: 7
+    maxLength: 9
+    required: false
+  IssuingState:
+    type: Basic.State
+    required: false
+  Effective:
+    type: Basic.EffectivePeriod
+    required: false
+  Terminated:
+    type: date-only
+    required: false
+  OnHold:
+    type: boolean
+    required: false
+  DEA:
+    type: object
+    required: false
+    properties:
+      DEANumber:
+        type: string
+        pattern: ^\S{2}\d{7}$
+        example: AB1234567
+        required: false
+      Expiration:
+        type: date-only
+        required: false
+      MissingBecause:
+        type: string
+        enum: ["1", "2", "3"]
+        required: false
+        description: |
+          "1" -	Not Applicable
+          "2"	- No DEA Certificate
+          "3"	- Pending

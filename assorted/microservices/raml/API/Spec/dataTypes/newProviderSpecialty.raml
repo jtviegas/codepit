@@ -1,0 +1,27 @@
+#%RAML 1.0 DataType
+uses:
+  Basic: ../library/basicTypes.raml
+
+type: object
+example: !include ../examples/newProviderSpecialty.json
+properties:
+  Specialty:
+    type: !include specialtyType.raml
+  CertifyingBoard:
+    type: string
+    required: false
+  EffectiveFrom:
+    type: date-only
+    required: false
+  CertifiedFrom:
+    type: date-only
+    required: false
+  Renewal:
+    type: date-only
+    required: false
+  RenewalPeriod:
+    type: integer
+    required: false
+  Comments:
+    type: string
+    required: false

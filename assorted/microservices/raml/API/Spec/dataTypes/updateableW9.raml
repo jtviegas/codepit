@@ -1,0 +1,41 @@
+#%RAML 1.0 DataType
+uses:
+  Basic: ../library/basicTypes.raml
+
+example: !include ../examples/updateableW9.json
+type: object
+properties:
+  Tin:
+    type: Basic.Tin
+    required: false
+  Type:
+    enum: ["E", "S"]
+    required: false
+  IRSName:
+    description: E represents an EIN, S represents an SSN
+    type: string
+    required: false
+  SubmittedBy:
+    type: string
+    required: false
+  Received:
+    type: date-only
+    required: false
+  ByPhone:
+    type: date-only
+    required: false
+  Effective:
+    type: Basic.EffectivePeriod
+    required: false
+  CorporatePayment:
+    type: boolean
+    default: false
+    required: false
+  BackupWithholdingTax:
+    type: boolean
+    default: false
+    required: false
+  TaxExempt:
+    type: boolean
+    default: false
+    required: false

@@ -1,0 +1,15 @@
+#%RAML 1.0 DataType
+uses:
+  Basic: ../library/basicTypes.raml
+  Collection: ../library/collectionTypes.raml
+
+type: Collection.RelatedProvider
+properties:
+  Clinics:
+    type: Collection.RelatedClinic[]
+    description: Optional list of any clinics associated with this network
+    required: false
+  Networks:
+    type: Collection.RelatedNetwork[]
+    description: Optional list of any networks associated with this network
+    required: false

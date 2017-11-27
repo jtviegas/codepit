@@ -1,0 +1,22 @@
+#%RAML 1.0 DataType
+uses:
+  Basic: ../library/basicTypes.raml
+type: object
+example: !include ../examples/newProviderSanction.json
+properties:
+  Clinic:
+    type: !include clinicCollection.raml
+    required: false
+    description: |
+      If present, this sanction is only applicable for the provider at this location.
+  SanctionAgency:
+    type: string
+    required: true
+    description: The name of the sanctioning agency
+    example: OIG
+  SanctionCode:
+    type: string
+    required: true
+    description: The part of the code violated resulting in the sanction
+    example: Section 1128b8
+  Effective: Basic.EffectivePeriod

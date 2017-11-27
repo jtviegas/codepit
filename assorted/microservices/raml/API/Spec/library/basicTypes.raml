@@ -1,0 +1,155 @@
+#%RAML 1.0 Library
+usage: Used to specify basic shared type defintions.
+types:
+
+  Category:
+    type: object
+    example: !include ../examples/terminationLevel.json
+    description: |
+      Used to describe a data row category.  Typically a coded value used to
+      categorize the data in a database row.
+    properties:
+      Code:
+        type: string
+        description: |
+          unique identifier for a <<resourcePathName | !singularize | !uppercamelcase>>
+          i.e. the category's code
+      Description:
+        type: string
+        description: |
+          A text description of the purpose of this specific
+          <<resourcePathName | !singularize | !uppercamelcase>>. i.e. the
+          description of what the category code implies.
+        required: true
+
+  DataEntity:
+    type: object
+    properties:
+      Id:
+        type: integer
+        description: |
+          unique identifier for a <<resourcePathName | !singularize | !uppercamelcase>>
+      DataOwner:
+        type: string
+        description: |
+          One of the provider data owners:
+          [Anthem,Wellmark,Horizon,Dentemax,Diversified,DeCare,Empire,Government,Wellpoint,DHA]
+        required: false
+      Links:
+        type: Link[]
+        description: |
+          An array of one or more hypermedia links related to this data entity
+        required: false
+
+  EffectivePeriod:
+    type: object
+    properties:
+      From:
+        type: date-only
+        description: The initial or first date in an effective date period for some entity.
+        required: true
+        example: 2007-12-31
+      To:
+        type: date-only
+        description: |
+          The optional termination date for an effective date period for an entity.
+          If the date is not supplied the default value is null.  This implies an
+          open ended date period or effective, as of and including the "from" date.
+        required: false
+
+  Tin:
+    type: string
+    pattern: ^(\d{3}-\d{2}-\d{4})|(\d{2}-\d{7})$
+    description: Tax Identification Number
+    example: 000-00-0000
+
+  UUID:
+    type: string
+    description: Universally unique identifier format.
+    pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+    example: c3e8e75e-b00f-11e7-abc4-cec278b6b50a
+
+  GUID:
+    type: UUID
+    description: Globally unique identifier format.
+    example: 41d9e96c-ee55-471d-865f-543bb6f28164
+
+  ZIP:
+    type: string
+    description: US Mail service ZIP code
+    pattern: ^\d{5}(?:[-\s]\d{4})?$
+    examples:
+      five-digit: "30012"
+      nine-digit: "34766-2345"
+
+  State:
+    type: string
+    description: Validates US state abreviations used by the USPO
+    pattern: ^((A[LKZR])|(C[AOT])|(D[EC])|(FL)|(GA)|(HI)|(I[DLNA])|(K[SY])|(LA)|(M[EDAINSOT])|(N[EVHJMYCD])|(O[HKR])|(PA)|(RI)|(S[CD])|(T[NX])|(UT)|(V[TA])|(W[AVIY]))$
+    examples:
+      Minnesota: "MN"
+      Alaska: "AL"
+
+  Country:
+    type: string
+    description: validates to 3 letter ISO codes for a country.
+    pattern: ([A-Z][A-Z][A-Z]|)
+    default: USA
+    examples:
+      UnitedStates: USA
+      India: IND
+
+  PhoneCode:
+    type: string
+    pattern: ^[0-9]+$
+    example: "345"
+
+  CountryCode:
+    type: string
+    pattern:   ^999|998|997|996|995|994|993|992|991|990|979|978|977|976|975|974|973|972|971|970|969|968|967|966|965|964|963|962|961|960|899|898|897|896|895|894|893|892|891|890|889|888|887|886|885|884|883|882|881|880|879|878|877|876|875|874|873|872|871|870|859|858|857|856|855|854|853|852|851|850|839|838|837|836|835|834|833|832|831|830|809|808|807|806|805|804|803|802|801|800|699|698|697|696|695|694|693|692|691|690|689|688|687|686|685|684|683|682|681|680|679|678|677|676|675|674|673|672|671|670|599|598|597|596|595|594|593|592|591|590|509|508|507|506|505|504|503|502|501|500|429|428|427|426|425|424|423|422|421|420|389|388|387|386|385|384|383|382|381|380|379|378|377|376|375|374|373|372|371|370|359|358|357|356|355|354|353|352|351|350|299|298|297|296|295|294|293|292|291|290|289|288|287|286|285|284|283|282|281|280|269|268|267|266|265|264|263|262|261|260|259|258|257|256|255|254|253|252|251|250|249|248|247|246|245|244|243|242|241|240|239|238|237|236|235|234|233|232|231|230|229|228|227|226|225|224|223|222|221|220|219|218|217|216|215|214|213|212|211|210|98|95|94|93|92|91|90|86|84|82|81|66|65|64|63|62|61|60|58|57|56|55|54|53|52|51|49|48|47|46|45|44|43|41|40|39|36|34|33|32|31|30|27|20|7|1$
+    examples:
+      UnitedStates: "1"
+      Ireland: "353"
+      India: "91"
+    # Note: this is a little simplistic, however it's in keeping with the existing
+    # data model and sufficient I believe.
+
+  SimpleURL:
+    type: string
+    examples:
+      local: "/local/url"
+      remote: "https://test.com/now"
+
+  EmailAddress:
+    description: for email addresses as per RFC 5322 (99.99% accurate)
+    type: string
+    example: dg@rte.ie
+    pattern: (?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])
+
+  Link:
+    type: object
+    description: HATEOAS hypermedia links to further related details on a resource.
+    properties:
+      rel: string
+      href: SimpleURL
+
+  ShortTime:
+    type: string
+    pattern: ^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$
+    example: 08:35
+
+  OpeningHours:
+    type: object
+    description: Represents an instance of a provider or clinic's opening hours
+    properties:
+      DayOfWeek:
+        enum: [Mon, Tue, Wed, Thu, Fri, Sat, Sun]
+        description: The day of the week for which this set of opening
+          hours is operative.
+      OpeningTime:
+        type: ShortTime
+        description: The time from which business for the day commences.
+        example: 09:00
+      ClosingTime:
+        type: ShortTime
+        description: The time at which business is finished for the day.

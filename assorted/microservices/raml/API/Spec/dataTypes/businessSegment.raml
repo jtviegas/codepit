@@ -1,0 +1,30 @@
+#%RAML 1.0 DataType
+uses:
+  Basic: ../library/basicTypes.raml
+
+example: !include ../examples/businessSegment.json
+type: object
+description: refers to a business segment within Anthem.  This
+  is essentially analogous to a sales channel.  For provider data, business
+  segments are associated with fees.  Each business segment is typically associated
+  with one or more data owners.   Each data owner is essentially a source of "stock",
+  retaining the sales channel analogy.
+properties:
+  Id:
+    type: integer
+    description: |
+      unique identifier for a business segment within the application
+    required: true
+  DisplayName:
+    type: string
+    description: |
+      A short unique textual name for this business segment.
+    required: true
+  Description:
+    type: string
+    description: |
+      A text description of this business segment.
+    required: true
+  Links:
+    type: Basic.Link[]
+    required: false
