@@ -3,7 +3,14 @@ package org.aprestos.labs.jaxrs.jersey;
 import static org.junit.Assert.assertEquals;
 
 import java.net.URI;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -20,9 +27,37 @@ public class ItemsIntegrationTest {
 
   private WebTarget target;
 
+  private TrustManager[] getTrustManager() {
+    return new TrustManager[] { new X509TrustManager() {
+      @Override
+      public X509Certificate[] getAcceptedIssuers() {
+        return null;
+      }
+
+      @Override
+      public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+      }
+
+      @Override
+      public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+      }
+    } };
+  }
+
   @Before
   public void setUp() throws Exception {
-    this.client = ClientBuilder.newClient();
+
+    SSLContext sslContext = null;
+    try {
+      sslContext = SSLContext.getInstance("SSL");
+      // Create a new X509TrustManager
+      sslContext.init(null, getTrustManager(), null);
+    } catch (NoSuchAlgorithmException | KeyManagementException e) {
+      throw e;
+    }
+
+    this.client = ClientBuilder.newBuilder().hostnameVerifier((s, session) -> true).sslContext(sslContext).build();
+
   }
 
   @After
@@ -35,7 +70,7 @@ public class ItemsIntegrationTest {
   @Test
   public void testGetIt() {
 
-    URI builder = UriBuilder.fromPath("jerseyjaxrsjee/api").scheme("http").host("localhost").port(9080).build();
+    URI builder = UriBuilder.fromPath("jerseyjaxrsjee/api").scheme("https").host("localhost").port(9443).build();
     this.target = this.client.target(builder);
     assertEquals(Status.OK.getStatusCode(), this.target.path("items").request().get().getStatus());
 

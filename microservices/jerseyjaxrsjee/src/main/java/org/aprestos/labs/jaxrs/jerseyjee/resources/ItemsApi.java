@@ -23,8 +23,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Authorization;
 
-@Api(tags = { "item" })
+@Api(tags = { "item" }, authorizations = { @Authorization(value = "default") })
 @Path("/items")
 @Produces({ "application/json" })
 public class ItemsApi {
@@ -50,10 +51,10 @@ public class ItemsApi {
       "item", })
   @io.swagger.annotations.ApiResponses(value = {
       @ApiResponse(code = 200, message = "successful operation", response = Item.class, responseContainer = "List"),
-      @ApiResponse(code = 400, message = "Invalid status value", response = Item.class, responseContainer = "List") })
+      @ApiResponse(code = 400, message = "Invalid status value", response = void.class) })
   public Response findItems(
-      @ApiParam(value = "category value that need to be considered for filter", required = true) @QueryParam("cat") String cat,
-      @ApiParam(value = "subcategory value that need to be considered for filter", required = true) @QueryParam("subcat") String subcat,
+      @ApiParam(value = "category value that need to be considered for filter", required = false) @QueryParam("cat") String cat,
+      @ApiParam(value = "subcategory value that need to be considered for filter", required = false) @QueryParam("subcat") String subcat,
       @Context SecurityContext securityContext) throws NotFoundException {
     Response r = Response.ok().build();
     return r;
@@ -76,8 +77,8 @@ public class ItemsApi {
   @GET
   @ApiOperation(value = "Find item by ID", notes = "Returns a single item", response = Item.class, tags = { "item", })
   @ApiResponses(value = { @ApiResponse(code = 200, message = "successful operation", response = Item.class),
-      @ApiResponse(code = 400, message = "Invalid ID supplied", response = Item.class),
-      @ApiResponse(code = 404, message = "Item not found", response = Item.class) })
+      @ApiResponse(code = 400, message = "Invalid ID supplied", response = void.class),
+      @ApiResponse(code = 404, message = "Item not found", response = void.class) })
   public Response getItemById(@ApiParam(value = "ID of item to return", required = true) @PathParam("id") String id,
       @Context SecurityContext securityContext) throws NotFoundException {
     Response r = null;
