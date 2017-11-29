@@ -1,5 +1,7 @@
 package org.aprestos.labs.jaxrs.jerseyjee.resources;
 
+import java.util.Arrays;
+
 import javax.servlet.ServletConfig;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -14,9 +16,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.SecurityContext;
 
 import org.aprestos.labs.jaxrs.jerseyjee.model.Item;
+import org.aprestos.labs.jaxrs.jerseyjee.tests.UtilsTest;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -41,8 +45,7 @@ public class ItemsApi {
   public Response addItem(@ApiParam(value = "", required = true) @HeaderParam("api_key") String apiKey,
       @ApiParam(value = "item object that needs to be added to the store", required = true) Item body,
       @Context SecurityContext securityContext) throws NotFoundException {
-    Response r = null;
-    return r;
+    return Response.status(Status.CREATED).entity(UtilsTest.getRandomItemWithId()).build();
   }
 
   @GET
@@ -56,8 +59,8 @@ public class ItemsApi {
       @ApiParam(value = "category value that need to be considered for filter", required = false) @QueryParam("cat") String cat,
       @ApiParam(value = "subcategory value that need to be considered for filter", required = false) @QueryParam("subcat") String subcat,
       @Context SecurityContext securityContext) throws NotFoundException {
-    Response r = Response.ok().build();
-    return r;
+    return Response.ok().entity(Arrays.asList(UtilsTest.getRandomItemWithId(), UtilsTest.getRandomItemWithId(),
+        UtilsTest.getRandomItemWithId())).build();
   }
 
   @Path("/{id}")
@@ -69,8 +72,7 @@ public class ItemsApi {
   public Response deleteItem(@ApiParam(value = "", required = true) @HeaderParam("api_key") String apiKey,
       @ApiParam(value = "Item id to delete", required = true) @PathParam("id") String id,
       @Context SecurityContext securityContext) throws NotFoundException {
-    Response r = null;
-    return r;
+    return Response.status(Status.NO_CONTENT).build();
   }
 
   @Path("/{id}")
@@ -81,8 +83,7 @@ public class ItemsApi {
       @ApiResponse(code = 404, message = "Item not found", response = void.class) })
   public Response getItemById(@ApiParam(value = "ID of item to return", required = true) @PathParam("id") String id,
       @Context SecurityContext securityContext) throws NotFoundException {
-    Response r = null;
-    return r;
+    return Response.status(Status.OK).entity(UtilsTest.getRandomItemWithId()).build();
   }
 
   @Path("/{id}")
@@ -90,14 +91,14 @@ public class ItemsApi {
   @Consumes({ "application/json" })
   @Produces({ "application/json" })
   @ApiOperation(value = "Update an existing item", notes = "", response = void.class, tags = { "item", })
-  @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied", response = void.class),
+  @ApiResponses(value = { @ApiResponse(code = 200, message = "successful operation", response = Item.class),
+      @ApiResponse(code = 400, message = "Invalid ID supplied", response = void.class),
       @ApiResponse(code = 404, message = "Item not found", response = void.class),
       @ApiResponse(code = 405, message = "Validation exception", response = void.class) })
   public Response updateItem(@ApiParam(value = "", required = true) @HeaderParam("api_key") String apiKey,
       @ApiParam(value = "item object that needs to be added to the store", required = true) Item body,
       @Context SecurityContext securityContext) throws NotFoundException {
-    Response r = null;
-    return r;
+    return Response.status(Status.OK).entity(UtilsTest.getRandomItemWithId()).build();
   }
 
 }
