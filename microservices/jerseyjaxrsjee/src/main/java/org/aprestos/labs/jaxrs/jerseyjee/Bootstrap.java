@@ -14,13 +14,14 @@ import io.swagger.jaxrs.config.BeanConfig;
 public class Bootstrap extends Application {
 
   public Bootstrap() {
-
     BeanConfig beanConfig = new BeanConfig();
     beanConfig.setVersion("1.0.2");
-    beanConfig.setSchemes(new String[] { "http" });
-    beanConfig.setHost("localhost:9080");
-    beanConfig.setBasePath("/api");
+    beanConfig.setSchemes(new String[] { "https" });
+    beanConfig.setHost("localhost:9443");
+    beanConfig.setTitle("items API");
+    beanConfig.setBasePath("/jerseyjaxrsjee-0.0.1/api");
     beanConfig.setResourcePackage("org.aprestos.labs.jaxrs.jerseyjee.resources");
+    beanConfig.setPrettyPrint(true);
     beanConfig.setScan(true);
   }
 
