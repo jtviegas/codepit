@@ -21,7 +21,6 @@ install_if_missing <- function(p) {
   }
 }
 
-
 ### --- IO --- ###
 
 readCsv <- function(filepath, with_header=TRUE, separator=","){
@@ -36,32 +35,5 @@ hasTerm <- function(text, term){
   return(r)
 }
 
-
-
-classification_model_bayes_glm <- function(data, scores){
-  
-  #https://gist.github.com/primaryobjects/094d24084d1045c011b7
-  install_if_missing("caret")
-  library(caret)
-  install_if_missing("tm")
-  library(tm)
-  
-  # Training data.
-  corpus <- VCorpus(VectorSource(data))
-  # Create a document term matrix.
-  tdm <- DocumentTermMatrix(corpus, list(removePunctuation = TRUE, stopwords = TRUE, stemming = TRUE, removeNumbers = TRUE))
-  train <- as.matrix(tdm)
-  train <- cbind(train, scores)
-  colnames(train)[ncol(train)] <- 'classification'
-  train <- as.data.frame(train)
-  train$classification <- as.factor(train$classification)
-  
-  # Train.
-  model <- train(classification ~ ., data = train, method = 'bayesglm')
-  
-  return(model)
-
-  
-}
 
 
