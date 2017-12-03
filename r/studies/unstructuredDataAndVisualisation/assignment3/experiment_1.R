@@ -53,10 +53,10 @@ classifier_model = naiveBayes(data.dtm.train.reduced, data.raw.train$classificat
 data.raw.test.predicted = predict(classifier_model, data.dtm.test.reduced)
 
 outcome<-CrossTable(data.raw.test.predicted,
-           data.raw.test$classification,
-           prop.chisq = FALSE, # as before
-           prop.t     = FALSE, # eliminate cell proprtions
-           dnn        = c("predicted", "actual")) # relabels rows+cols
+                    data.raw.test$classification,
+                    prop.chisq = FALSE, # as before
+                    prop.t     = FALSE, # eliminate cell proprtions
+                    dnn        = c("predicted", "actual")) # relabels rows+cols
 
 totalCases <- length(data.raw.test$classification)
 falsePositives<-outcome$t[1,2]
