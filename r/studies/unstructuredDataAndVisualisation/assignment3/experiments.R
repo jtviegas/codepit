@@ -1,4 +1,5 @@
-source("/home/jtviegas/Documents/workspace/codepit/r/snippets/code.R")
+#source("/home/jtviegas/Documents/workspace/codepit/r/snippets/code.R")
+source("C:/dev/workspace/codepit/r/snippets/code.R")
 
 translate_classification <- function(x){
   x = ifelse( x == "spam", 1, 0)

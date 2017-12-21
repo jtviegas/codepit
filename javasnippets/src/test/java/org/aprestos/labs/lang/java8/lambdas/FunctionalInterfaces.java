@@ -1,14 +1,19 @@
 package org.aprestos.labs.lang.java8.lambdas;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class FunctionalInterfaces {
 
   @Test
-  public void test() {
+  public void one() {
 
     List<String> o = new ArrayList<String>();
     o.add("saDDADSDsadASFDAFRSF");
@@ -18,6 +23,20 @@ public class FunctionalInterfaces {
 
     ToBeSorted<String, Integer> o2 = new ToBeSorted<String, Integer>(o);
     o2.sortMeOrKindOf(comparator);
+  }
+
+  @Test
+  public void two() {
+    Map<Boolean, List<String>> o = Stream.of("jonathan", "maura", "mario", "richard", "nordis", "manpul", "firefighter")
+        .collect(Collectors.partitioningBy(s -> s.startsWith("m")));
+    Assert.assertEquals(o.get(true), Arrays.asList("maura", "mario", "manpul"));
+  }
+
+  @Test
+  public void three() {
+    List<Integer> o = Stream.of("jonathan", "maura", "mario", "richard", "nordis", "manpul", "firefighter")
+        .map(String::length).collect(Collectors.toList());
+    Assert.assertEquals(o.size(), 7);
   }
 
 }
