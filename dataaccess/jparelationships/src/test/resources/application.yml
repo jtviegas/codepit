@@ -4,9 +4,6 @@ logging:
     root: INFO
     org.hibernate.SQL: debug
   file: api.log
-#spring:
-#  profiles:
-#    active: oracle   
 spring:
   datasource:
     url: jdbc:oracle:thin:@localhost:1521/orcl
