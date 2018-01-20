@@ -1,3 +1,4 @@
+
 ### --- utils --- ###
 detach_package <- function(pkg, character.only = FALSE)
 {
