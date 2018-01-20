@@ -41,8 +41,8 @@ hasTerm <- function(text, term){
 classification_model_bayes_glm <- function(data, scores){
   
   #https://gist.github.com/primaryobjects/094d24084d1045c011b7
-  install_if_missing("caret")
-  library(caret)
+  #install_if_missing("caret")
+  #library(caret)
   install_if_missing("tm")
   library(tm)
   

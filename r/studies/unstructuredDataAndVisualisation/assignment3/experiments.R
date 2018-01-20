@@ -1,4 +1,6 @@
-source("/home/jtviegas/Documents/workspace/codepit/r/snippets/code.R")
+#source("/home/jtviegas/Documents/workspace/codepit/r/snippets/code.R")
+source("C:/Users/Rob-Dev/Desktop/joao/codepit/r/snippets/code.R")
+
 
 translate_classification <- function(x){
   x = ifelse( x == "spam", 1, 0)
@@ -10,7 +12,7 @@ training_set_factor <- 0.75
 FILE <- "newSpamFile.csv"
 data <- readCsv(FILE, with_header=FALSE)
 #let's apply some column naming
-data(sms) <- c("type","text")
+names(data) <- c("type","text")
 data$type = factor(data$type)
 data <- data.frame(apply(data[1],2, translate_classification), data[2])
 
