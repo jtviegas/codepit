@@ -8,14 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Entity(name = "Part")
-public class Part {
+public class LightPart {
 
   @Basic
   @Id
@@ -28,23 +26,17 @@ public class Part {
 
   private BigDecimal price;
 
-  @ManyToOne
-  @JoinColumn(name = "part_type_id")
-  private PartType partType;
+  @Column(name = "part_type_id")
+  private Long partTypeId;
 
-  public Part() {
+  public LightPart() {
   };
 
-  public Part(String name, BigDecimal price, PartType partType) {
+  public LightPart(String name, BigDecimal price, Long partTypeId) {
     this.name = name;
     this.price = price;
-    setPartType(partType);
+    this.partTypeId = partTypeId;
   };
-
-  /*
-   * public Part(String name, BigDecimal price, Long partTypeId) { this.name = name; this.price = price; this.partTypeId
-   * = partTypeId; };
-   */
 
   public Long getId() {
     return id;
@@ -70,12 +62,12 @@ public class Part {
     this.price = price;
   }
 
-  public PartType getPartType() {
-    return partType;
+  public Long getPartTypeId() {
+    return partTypeId;
   }
 
-  public void setPartType(PartType partType) {
-    this.partType = partType;
+  public void setPartTypeId(Long partTypeId) {
+    this.partTypeId = partTypeId;
   }
 
   @Override
@@ -94,7 +86,7 @@ public class Part {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    Part other = (Part) obj;
+    LightPart other = (LightPart) obj;
     if (id == null) {
       if (other.id != null)
         return false;

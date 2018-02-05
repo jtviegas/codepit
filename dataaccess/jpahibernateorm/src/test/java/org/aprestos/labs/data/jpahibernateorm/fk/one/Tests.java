@@ -2,8 +2,10 @@ package org.aprestos.labs.data.jpahibernateorm.fk.one;
 
 import java.math.BigDecimal;
 
+import org.aprestos.labs.data.jpahibernateorm.fk.one.model.LightPart;
 import org.aprestos.labs.data.jpahibernateorm.fk.one.model.Part;
 import org.aprestos.labs.data.jpahibernateorm.fk.one.model.PartType;
+import org.aprestos.labs.data.jpahibernateorm.fk.one.repository.LightPartRepository;
 import org.aprestos.labs.data.jpahibernateorm.fk.one.repository.PartRepository;
 import org.aprestos.labs.data.jpahibernateorm.fk.one.repository.PartTypeRepository;
 import org.junit.Assert;
@@ -26,26 +28,24 @@ public class Tests {
   @Autowired
   private PartRepository partRepository;
 
+  @Autowired
+  private LightPartRepository lightPartRepository;
+
   @Test
   public void test_00() {
 
     PartType t = partTypeRepository.save(new PartType("ahahah"));
-    Part p = partRepository.save(new Part("ahahah and more", BigDecimal.valueOf(5), t));
+    LightPart lp = lightPartRepository.save(new LightPart("ahahah and more...", BigDecimal.valueOf(5), t.getId()));
+    Part p2 = partRepository.findOne(lp.getId());
 
-    Assert.assertNotNull(p.getId());
-    Assert.assertEquals(t, p.getPartType());
-    Assert.assertNotNull(p.getPartTypeId());
+    Assert.assertNotNull(lp.getId());
+    Assert.assertNotNull(p2.getId());
 
-    p = new Part();
-    p.setName("ahahah and more");
-    p.setPrice(BigDecimal.valueOf(5));
-    p.setPartTypeId(t.getId());
+    Assert.assertEquals(t, p2.getPartType());
+    Assert.assertEquals(t.getId(), lp.getPartTypeId());
 
-    p = partRepository.save(p);
-
-    Assert.assertNotNull(p.getId());
-    Assert.assertEquals(t, p.getPartType());
-    Assert.assertNotNull(p.getPartTypeId());
+    Assert.assertNotNull(lp.getPartTypeId());
+    Assert.assertEquals(lp.getPartTypeId(), p2.getPartType().getId());
 
   }
 
