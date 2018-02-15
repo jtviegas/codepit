@@ -1,0 +1,18 @@
+# logging
+logging:
+  level:
+    root: INFO
+    org.hibernate.SQL: debug
+  file: api.log
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521/orcl
+    username: tests
+    password: passw0rd
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+  jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.Oracle10gDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: verify
