@@ -73,7 +73,7 @@ console.log(rest.join(', '))
 var morning = {breakfaslt: "oat", lunch: "omelete"}
 var dinner = "cabbage"
 
-var meals = { ...morning, dinner }
+var meals = { ...morning , dinner }
 console.log(meals)
 
 //promises
