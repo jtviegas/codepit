@@ -43,7 +43,7 @@ var tahoe = {
     }
 };
 
-tahoe.print();
+// tahoe.print();
 
 
 var tahoe = {
@@ -55,7 +55,7 @@ var tahoe = {
     }
 };
 
-tahoe.print();
+// tahoe.print();
 
 // spread operator
 var peaks = ["tallac", "ralston", "rose"]
@@ -151,13 +151,80 @@ class OtherThing extends Thing {
     const bs = assorted.filter(o => o.startsWith('b'))
     console.log(bs.join(' '))
 
+    const filterSchool = (list, school) => list.filter(s => s !== school)
+    console.log(filterSchool(assorted, 'six').join(' * '))
+
+    console.log(assorted.map(s => `${s} is an element`).join(' | '))
 
 
+    const ages = [21,18,45,65,32,12,89,74,43];
+    const maxAge = ages.reduce(
+        (max,age) => {
+            if(age > max)
+                return age
+            else
+                return max
+        } 
+     , 0)
+
+    console.log(maxAge)
+
+    //high order functions
+
+    const invokeIf = (condition, fnTrue, fnFalse) => {
+        condition ? fnTrue() : fnFalse()
+    }
+
+    const ok = () => console.log("ok")
+
+    const nok = () => console.log("not ok")
+
+    invokeIf(true, ok, nok)
+    invokeIf(false, ok, nok)
+
+    // currying
+
+    const userlog = user => message => console.log(`${user}: ${message}`)
+
+    const log = userlog('jonas')
+
+    log("oieee")
+
+    // recursion
+
+    const deeppick = (fields, object={}) => {
+        const [first, ...remaining] = fields.split(".")
+        return (remaining.length) ? deeppick( remaining.join("."), object[first] ) : object[first] 
+    }
+
+    var dan = {
+        type: "person"
+        , data: {
+            gender: "male"
+            , info: {
+                id: 22
+                , name: "jonathan"
+            }
+        }
+    }
 
 
+    console.log( deeppick("data.info.id", dan) )
+
+    // composition
+
+    const compose = (...fns) => (arg) => 
+        fns.reduce( 
+            (composed,f) => f(composed)
+            , arg 
+        ) 
 
 
+    var f1 = s => s.concat('a')
+    var f2 = s => s.concat('b')
+    
+    const both = compose(f1, f2)
 
-
+    console.log(both('0'))
 
 
