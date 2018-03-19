@@ -4,18 +4,30 @@ import PartsView from './PartsView';
 import Part from './Part';
 import Highlights from './Highlights';
 
+
 class Main extends React.Component {
+	constructor(props) {
+	    super(props);
+	  }
+	
 	render(){
 		const { data } = this.props;
-		return (
+		
+		switch(this.props.narrative){
+		case 'part':
+			return ( 
 				<div className="container">
-				
-				
-				<Highlights data={data} />
-					<PartsView data={data} />
-					<Part data={data} />
+					<Part data={this.props.data} />
 				</div>
-				)
+			)
+		default:
+			return ( 
+				<div className="container">
+					<Highlights data={this.props.data} />
+					<PartsView data={this.props.data} />
+				</div>
+			)
+		}
 	}
 };
 

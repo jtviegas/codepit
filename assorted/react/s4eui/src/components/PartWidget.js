@@ -5,7 +5,12 @@ import React from 'react';
 import Carousel from './Carousel';
 
 
-class Part extends React.Component {
+class PartWidget extends React.Component {
+	
+	constructor(props) {
+	    super(props);
+	  }
+	
 	render(){
 		const { name, notes, price, category, subcategory, images } = this.props;
 		var settings = {
@@ -62,4 +67,4 @@ class Part extends React.Component {
 	}
 };
 
-export default Part;
+export default PartWidget;

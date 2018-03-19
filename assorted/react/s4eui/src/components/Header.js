@@ -8,9 +8,8 @@ class Header extends React.Component {
 				<div className="container">
 					<header className="header">
 			        <div className="row justify-content-between align-items-center">
-			        
-			        	
 			          <div className="col-5 pt-1">
+
 				          <address>
 						    <strong>split4ever</strong><br></br>
 						    Praceta do fusca 69<br></br>
@@ -20,7 +19,7 @@ class Header extends React.Component {
 					    </address>
 			          </div>
 			          <div className="col-2 pt-1 justify-content-center align-self-center text-center">
-				        <img src="images/header.png" class="rounded" alt="..."/>
+				        <img src="images/header.png" className="rounded" alt="..."/>
 				        </div>
 			          <div className="col-5 justify-content-end align-self-center text-right">
 			          	<h4>
