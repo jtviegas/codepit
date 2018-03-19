@@ -10,6 +10,7 @@ class Footer extends React.Component {
 						<div className="col-5">
 
 						<p className="text-left">
+
 						call: 8734627868
 						<br></br><small>
 							email:  <a  href="mailto:info@split4ever.com"> info@split4ever.com</a>
