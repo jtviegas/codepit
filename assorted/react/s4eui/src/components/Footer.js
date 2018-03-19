@@ -8,6 +8,7 @@ class Footer extends React.Component {
 				<div className="container footer">
 					<div className="row align-items-end justify-content-between">
 						<div className="col-5">
+
 						<p class="text-left">
 						call: 8734627868
 						<br></br><small>
@@ -21,7 +22,7 @@ class Footer extends React.Component {
 								<br></br>
 								<small>peças clássicas VW: venda e compra<br></br>usadas | old stock | new old stock | recondicionadas </small>
 							</p>
-							
+
 						</div>
 					</div>
 				</div>

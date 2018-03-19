@@ -6,6 +6,7 @@ class PartsView extends React.Component {
 		const { data } = this.props;
 		return (
 				<div className="page-element">
+
 			        <div className="row justify-content-between align-items-center">
 			          		<div className="col-6 align-self-end">
 			          			<select className="form-control" placeholder="dasd">

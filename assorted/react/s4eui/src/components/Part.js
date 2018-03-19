@@ -4,6 +4,7 @@
 import React from 'react';
 import Carousel from './Carousel';
 
+
 class Part extends React.Component {
 	render(){
 		const { name, notes, price, category, subcategory, images } = this.props;
@@ -55,6 +56,7 @@ class Part extends React.Component {
 				    </div>			    
 				  </div>
 				</form>
+
 				</div>
 				)
 	}
