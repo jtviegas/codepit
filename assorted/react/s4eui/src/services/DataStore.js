@@ -5,6 +5,7 @@ import React from 'react';
 
 class DataStore {
 
+
 	constructor(props) {
 		this.props = props;
 	}
