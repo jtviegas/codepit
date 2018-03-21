@@ -1,81 +1,107 @@
 
 import React from 'react';
 import PartWidget from './PartWidget';
-import PartsService from '../services/PartsService';
+import DataStore from '../services/DataStore';
 
 class PartsView extends React.Component {
 	
 	constructor(props) {
 		super(props);
-		this.service = new PartsService();
+		this.service = new DataStore();
 		this.vars = {
 				batchSize: 20
 				, partsIndex : 0	
-		}
-		this.state = {
-				category: null
-				, subcategory: null
 		};
+		this.loadCategories = this.loadCategories.bind(this);
+		this.categoryChange = this.categoryChange.bind(this);
+		this.subcategoryChange = this.subcategoryChange.bind(this);
+		
+		this.state = {
+				categoryId: 1
+				, subcategoryId: 4
+				, categories: []
+				, subcategories: []
+		};
+		
 	  }
 	
+	loadCategories(){
+		console.log("going to load categories")
+		this.service.getCategories((err,os) => {
+			if(err)
+				console.log("there is a challenge loading categories", err);
+			else 
+				this.setState({categories: os})
+		});
+	}
+	
+	categoryChange(event){
+		event.preventDefault();
+		console.log("categoryId: %d", this.state.categoryId)
+		console.log("subcategoryId: %d", this.state.subcategoryId)
+		let id = parseInt(event.target.value);
+		console.log("new category id: %d", id)
+		this.setState({categoryId: id});
+		this.setState({subcategoryId: 0})
+		console.log("going to load subcategories from category %d", id)
+		this.service.getSubcategories(id, (err,os) => {
+			if(err)
+				console.log("there is a challenge loading subcategories", err);
+			else 
+				this.setState({subcategories: os})
+		});
+	}
+	
+	subcategoryChange(event){
+		event.preventDefault();
+		console.log("categoryId: %d", this.state.categoryId)
+		console.log("subcategoryId: %d", this.state.subcategoryId)
+		let id = parseInt(event.target.value);
+		this.setState({subcategoryId: id})
+		console.log("new subcategory: %d", id)
+
+
+	}
+	
+	componentWillMount() {
+		  this.loadCategories();
+		  if(0 < this.state.categoryId){
+			  this.service.getSubcategories(this.state.categoryId, (err,os) => {
+					if(err)
+						console.log("there is a challenge loading subcategories", err);
+					else 
+						this.setState({subcategories: os})
+				});
+		  }
+	}
+
+
 	
 	render(){
 		
-		const getPartsCallback = function(err,parts){
-			if(err){
-				return ( "there is a challenge loading parts" )
-			}
-			else {
-				parts.map( (p, i) => { 
-					this.vars.partsIndex = p.id;
-					return (<PartWidget key={i} {...p} /> ) 
-						} )
-			}
-				
-		};
-		
-		const getSelectItemCallback = function(err,os){
-			if(err){
-				return ( "there is a challenge loading categories" )
-			}
-			else {
-				os.map( (o, i) => { 
-					return (<option value="{o.id}">{o.name}</option> ) 
-						} )
-			}
-				
-		}
-
-		
 		return (
 				<div className="page-element">
-
 			        <div className="row justify-content-between align-items-center">
 			          		<div className="col-6 align-self-end">
-			          			<select className="form-control">
-			          			<option value="0">seleccione a categoria</option>
-			          			{ null === this.state.category ? this.service.getCategories(getSelectItemCallback) : ""}
+			          			<select className="form-control" value={this.state.categoryId} onChange={this.categoryChange}>
+			          			<option value={0}>seleccione a categoria</option>
+			          			{ this.state.categories.map( (o, i) => <option key={i} value={o.id}>{o.name}</option> ) } 
 						      	</select>
 			          		</div>
 			          		<div className="col-6 align-self-end">
-			          			<select className="form-control">
-			        			<option value="0">seleccione a subcategoria</option>
-			        			{ null !== this.state.subcategory ? this.service.getSubcategories(this.state.subcategory, getSelectItemCallback) : ""}
+			          			<select className="form-control" value={this.state.subcategoryId} onChange={this.subcategoryChange}>
+			        			<option value={0}>seleccione a subcategoria</option>
+			        			{ this.state.subcategories.map( (o, i) => <option key={i} value={o.id}>{o.name}</option> ) } 
 						      	</select>
 			          		</div>
-			      
-			          </div>
-			          
-			          <div className="row">
-			          	{
-			          		null !== this.state.category ? this.service.getParts(this.vars.partsIndex, this.vars.batchSize, getPartsCallback) : ""
-			          	}
 			          </div>
 				</div>
-				
-		
-				)
+
+			)
 	}
+	
+
+	
 };
 
 PartsView.defaultProps = { category:null, subcategory:null, selection:null, partsIndex: 0, batchSize: 20 };
