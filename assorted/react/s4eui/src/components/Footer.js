@@ -18,7 +18,7 @@ class Footer extends React.Component {
 						</p>
 						</div>
 						<div className="col-5">
-							<p className="text-right">
+							<p className="text-right">	
 								split4ever
 								<br></br>
 								<small>peças clássicas VW: venda e compra<br></br>usadas | old stock | new old stock | recondicionadas </small>

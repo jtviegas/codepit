@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
-import Page from './components/Page';
+import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<Page />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
