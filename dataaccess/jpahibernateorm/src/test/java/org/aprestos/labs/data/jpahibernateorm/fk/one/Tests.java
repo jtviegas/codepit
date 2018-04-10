@@ -16,6 +16,7 @@ import org.aprestos.labs.data.jpahibernateorm.fk.one.repository.LightPartReposit
 import org.aprestos.labs.data.jpahibernateorm.fk.one.repository.PartRepository;
 import org.aprestos.labs.data.jpahibernateorm.fk.one.repository.PartTypeRepository;
 import org.aprestos.labs.data.jpahibernateorm.fk.one.repository.TypeViewRepository;
+import org.assertj.core.util.Lists;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -23,6 +24,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
@@ -47,7 +51,7 @@ public class Tests {
 
     PartType t = partTypeRepository.save(new PartType("ahahah"));
     LightPart lp = lightPartRepository.save(new LightPart("ahahah and more...", BigDecimal.valueOf(5), t.getId()));
-    Part p2 = partRepository.findOne(lp.getId());
+    Part p2 = partRepository.findById(lp.getId()).get();
 
     Assert.assertNotNull(lp.getId());
     Assert.assertNotNull(p2.getId());
@@ -76,6 +80,26 @@ public class Tests {
         .collect(Collectors.toList());
 
     Assert.assertEquals(7, pvs.size());
+  }
+
+  @Test
+  public void test_02() {
+
+    PartType t = partTypeRepository.save(new PartType("ahahah"));
+    LightPart lp = lightPartRepository.save(new LightPart("ahahah and more...", BigDecimal.valueOf(5), t.getId()));
+    Part p2 = partRepository.findById(lp.getId()).get();
+
+    Part p2s = new Part();
+    p2s.setName("ahahah");
+
+    ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withIgnoreNullValues()
+        .withStringMatcher(StringMatcher.CONTAINING);
+
+    Example<Part> example = Example.of(p2s, matcher);
+
+    List<Part> ps = Lists.newArrayList(partRepository.findAll(example));
+    Assert.assertTrue(0 < ps.size());
+
   }
 
 }

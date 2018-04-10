@@ -3,12 +3,14 @@ package org.aprestos.labs.lang.java8.lambdas;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.OptionalInt;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.RandomUtils;
@@ -36,6 +38,15 @@ public class Streams {
         8);
 
     int[] vals = IntStream.of(1, 2, 3, 4, 5, 6, 7, 8).toArray();
+
+    List<LocalDate> dates = Stream.iterate(LocalDate.now(), d -> d.plusDays(1l)).limit(10).collect(Collectors.toList());
+    List<Double> ds = Stream.generate(Math::random).limit(10).collect(Collectors.toList());
+
+    // we have to use boxed(), or mapToObj otherwise it does not compile
+    List<Long> longs = LongStream.rangeClosed(10, 15).boxed().collect(Collectors.toList());
+    List<Long> longs2 = LongStream.rangeClosed(10, 15).mapToObj(Long::valueOf).collect(Collectors.toList());
+
+    int[] intArray = IntStream.of(3, 4, 5, 6, 2).toArray();
 
   }
 
