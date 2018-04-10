@@ -3,6 +3,8 @@ package org.aprestos.labs.json.beanmapping;
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class JustAClass implements Serializable {
@@ -51,6 +53,11 @@ public class JustAClass implements Serializable {
 
   public void setNums(List<Long> nums) {
     this.nums = nums;
+  }
+
+  @Override
+  public String toString() {
+    return ToStringBuilder.reflectionToString(this);
   }
 
   @Override
