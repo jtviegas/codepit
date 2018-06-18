@@ -3,23 +3,17 @@ package org.aprestos.labs.json.beanmapping.strategies.interfaces;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-public interface Entity extends NewEntity {
+@JsonDeserialize(as = EntityImpl.class)
+public interface Entity extends NewEntity, Identifiable {
 
-  @JsonProperty("id")
+  @JsonProperty("Active")
   @NotNull
-  String getId();
+  boolean isOn();
 
-  @JsonProperty("id")
+  @JsonProperty("Active")
   @NotNull
-  void setId(String id);
-
-  @JsonProperty("active")
-  @NotNull
-  boolean isActive();
-
-  @JsonProperty("active")
-  @NotNull
-  void setActive(boolean active);
+  void setOn(boolean on);
 
 }
