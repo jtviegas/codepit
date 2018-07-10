@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.aprestos.labs.lang.java8.testutils.TestUtils;
 import org.junit.Test;
@@ -50,8 +51,11 @@ public class UtilFunction {
   }
 
   @Test
-  public void functions() {
+  public void strings() {
 
+    String o1 = null, o2 = "", o3 = "cantao", o4 = "12";
+    String s = Stream.of(o3, o4, o1, o2).filter(o -> (null != o && (!o.isEmpty()))).collect(Collectors.joining(" "));
+    System.out.println(s);
   }
 
 }

@@ -2,12 +2,15 @@ package org.aprestos.labs.lang.java8.lambdas;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.aprestos.labs.lang.java8.testutils.Person;
 import org.aprestos.labs.lang.java8.testutils.TestUtils;
 import org.aprestos.labs.lang.java8.testutils.Wrapper;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class LambdaExpressions {
@@ -24,7 +27,8 @@ public class LambdaExpressions {
 
     File dir = new File("src/main/java/org/aprestos/labs/lang");
     String[] names = dir.list((d, n) -> n.endsWith(".java"));
-    System.out.println(Arrays.asList(names));
+    if (null != names)
+      System.out.println(Arrays.asList(names));
 
     Stream.of(4, 34, 5, 78, 9, 5, 33, 61).forEach(System.out::println);
 
@@ -40,6 +44,28 @@ public class LambdaExpressions {
 
     Person[] ps = Stream.of("abaner", "bivnr", "cv", "fudf").map(Person::new).toArray(Person[]::new);
 
+    List<String> o = Stream.of(4, 34, 5, 78, 9, 5, 33, 61).map(new MyTransf()).collect(Collectors.toList());
+    Assert.assertEquals(8, o.size());
+    o = Stream.of(4, 34, 5, 78, 9, 5, 33, 61).flatMap(new MyTransfStream()).collect(Collectors.toList());
+    Assert.assertEquals(8, o.size());
+
   }
 
+}
+
+class MyTransfStream implements Function<Integer, Stream<String>> {
+
+  @Override
+  public Stream<String> apply(Integer t) {
+    return Stream.of(Integer.toString(t));
+  }
+
+}
+
+class MyTransf implements Function<Integer, String> {
+
+  @Override
+  public String apply(Integer value) {
+    return Integer.toString(value);
+  }
 }
