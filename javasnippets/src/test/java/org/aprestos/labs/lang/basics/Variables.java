@@ -17,5 +17,7 @@ public class Variables {
   class Dummy {
     char c;
   }
+  
+  
 
 }
