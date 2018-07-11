@@ -7,6 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Assert;
@@ -135,6 +136,21 @@ public class Tests {
   private void primesAsyncExecution(int poolsize, int parts) {
 
     // AsyncExecution<A, R>
+  }
+  
+  private static class PartitionA implements Function<List<String>,List<List<String>>>{
+
+	@Override
+	public List<List<String>> apply(List<String> t) {
+		List<List<String>> r = new ArrayList<List<String>>();
+		
+		for(int i=0,j=t.size()-1; i<=j; i++,j--) {
+			
+		}
+		
+		return r;
+	}
+	  
   }
 
 }
