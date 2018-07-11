@@ -58,8 +58,8 @@ class App extends React.Component {
 		return (
 				<div className="app">
 					<Header {this.state} />
-					<Main {this.state} />	
-					<Footer {this.state} />
+					<Main />	
+					<Footer />
 				</div>
 				)
 	}
