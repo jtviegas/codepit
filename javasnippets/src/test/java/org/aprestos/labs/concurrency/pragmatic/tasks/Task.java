@@ -1,7 +1,9 @@
 package org.aprestos.labs.concurrency.pragmatic.tasks;
 
+import java.util.Map;
+
 public interface Task {
 
-  int run();
+  void run(Map<String,Object> context);
 
 }

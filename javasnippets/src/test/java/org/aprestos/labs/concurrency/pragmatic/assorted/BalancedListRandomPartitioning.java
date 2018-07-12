@@ -1,4 +1,4 @@
-package org.aprestos.labs.concurrency.pragmatic;
+package org.aprestos.labs.concurrency.pragmatic.assorted;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package org.aprestos.labs.concurrency.pragmatic;
+package org.aprestos.labs.concurrency.pragmatic.assorted;
 
 public class Primes {
 

@@ -1,4 +1,4 @@
-package org.aprestos.labs.concurrency.pragmatic;
+package org.aprestos.labs.concurrency.pragmatic.assorted;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;

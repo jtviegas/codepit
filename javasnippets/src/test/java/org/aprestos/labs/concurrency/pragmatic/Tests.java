@@ -10,6 +10,9 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.aprestos.labs.concurrency.pragmatic.assorted.BalancedListRandomPartitioning;
+import org.aprestos.labs.concurrency.pragmatic.assorted.Exchange;
+import org.aprestos.labs.concurrency.pragmatic.assorted.Primes;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
