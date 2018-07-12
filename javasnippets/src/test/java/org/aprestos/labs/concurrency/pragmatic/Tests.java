@@ -1,13 +1,13 @@
 package org.aprestos.labs.concurrency.pragmatic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Assert;
@@ -133,24 +133,13 @@ public class Tests {
     Assert.assertTrue(true);
   }
 
-  private void primesAsyncExecution(int poolsize, int parts) {
+  @Test
+  public void test_sss() throws Exception {
 
-    // AsyncExecution<A, R>
-  }
-  
-  private static class PartitionA implements Function<List<String>,List<List<String>>>{
+    BalancedListRandomPartitioning<Integer> p = new BalancedListRandomPartitioning<>(3);
+    System.out.print(p.apply(Arrays.asList(2, 3, 1, 7, 8, 9, 0, 4, 5, 6, 7)));
 
-	@Override
-	public List<List<String>> apply(List<String> t) {
-		List<List<String>> r = new ArrayList<List<String>>();
-		
-		for(int i=0,j=t.size()-1; i<=j; i++,j--) {
-			
-		}
-		
-		return r;
-	}
-	  
+    Assert.assertTrue(true);
   }
 
 }
