@@ -1,8 +1,9 @@
 package org.aprestos.labs.concurrency.pragmatic.executions;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
@@ -12,11 +13,9 @@ import org.aprestos.labs.concurrency.pragmatic.works.Work;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
+public class CompletableFuturesExecution implements Execution {
 
-public class ThreadPoolExecution implements Execution {
-
-  private static final Logger logger = LoggerFactory.getLogger(ThreadPoolExecution.class);
+  private static final Logger logger = LoggerFactory.getLogger(CompletableFuturesExecution.class);
 
   private Work work;
 
@@ -24,7 +23,8 @@ public class ThreadPoolExecution implements Execution {
 
   private final Supplier<Pair<Integer, Integer>> consumer;
 
-  public ThreadPoolExecution(double blockingCoefficient, Work work) {
+  public CompletableFuturesExecution(double blockingCoefficient, Work work) {
+
     if (1 < blockingCoefficient || 0 > blockingCoefficient)
       throw new RuntimeException("blockingCoefficient should be in between [0.0,1.0]");
     // one decimal only
@@ -38,23 +38,34 @@ public class ThreadPoolExecution implements Execution {
   @Override
   public Pair<Integer, Integer> execute() {
     logger.info("[execute|in] poolsize: {}", poolSize);
-    final ExecutorService executorPool = Executors.newFixedThreadPool(poolSize,
-        new ThreadFactoryBuilder().setDaemon(true).setNameFormat("ThreadPoolExecution-pool-%d").build());
+
+    ForkJoinPool pool = null;
     try {
-      final List<Future<Void>> results = executorPool.invokeAll(work.getWork(), 1000, TimeUnit.SECONDS);
-      executorPool.shutdown();
+      pool = new ForkJoinPool(poolSize);
+
+      for(final Callable<Void> w: work.getWork()) {
+        CompletableFuture.runAsync(new Runnable() {
+          @Override
+          public void run() {
+            w.call();
+          }}, pool);
+      }
+      
+      CompletableFuture.allOf(cfs)
+      
+      List<Future<Void>> results = pool.invokeAll(work.getWork(), 1000, TimeUnit.SECONDS);
       for (final Future<Void> f : results)
         f.get();
-      logger.info("all threads have shutdown");
+      logger.info("all threads work terminated");
+
     } catch (Exception e) {
       logger.error("ops", e);
-      if (!executorPool.isTerminated())
-        try {
-          logger.info("executorPool not yet terminated...");
-          executorPool.shutdownNow();
-        } catch (Exception e1) {
-          logger.error("ops", e1);
-        }
+    } finally {
+      try {
+        if (null != pool)
+          pool.shutdown();
+      } catch (Exception ignore) {
+      }
     }
 
     Pair<Integer, Integer> outcome = this.consumer.get();
