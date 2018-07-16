@@ -43,16 +43,22 @@ public class CompletableFuturesExecution implements Execution {
     try {
       pool = new ForkJoinPool(poolSize);
 
-      for(final Callable<Void> w: work.getWork()) {
+      for (final Callable<Void> w : work.getWork()) {
         CompletableFuture.runAsync(new Runnable() {
           @Override
           public void run() {
-            w.call();
-          }}, pool);
+            try {
+              w.call();
+            } catch (Exception e) {
+              // TODO Auto-generated catch block
+              e.printStackTrace();
+            }
+          }
+        }, pool);
       }
-      
-      CompletableFuture.allOf(cfs)
-      
+
+      // CompletableFuture.allOf(cfs)
+
       List<Future<Void>> results = pool.invokeAll(work.getWork(), 1000, TimeUnit.SECONDS);
       for (final Future<Void> f : results)
         f.get();
