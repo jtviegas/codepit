@@ -1,64 +1,48 @@
 package org.aprestos.labs.concurrency.pragmatic.executions;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Supplier;
 
-import org.apache.commons.lang3.tuple.Pair;
-import org.aprestos.labs.concurrency.pragmatic.works.Work;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DedicatedForkPoolExecution implements Execution {
+public class DedicatedForkPoolExecution extends AbstractExecution {
 
   private static final Logger logger = LoggerFactory.getLogger(DedicatedForkPoolExecution.class);
 
-  private Work work;
-
-  private final int poolSize;
-
-  private final Supplier<Pair<Integer, Integer>> consumer;
-
-  public DedicatedForkPoolExecution(double blockingCoefficient, Work work) {
-
-    if (1 < blockingCoefficient || 0 > blockingCoefficient)
-      throw new RuntimeException("blockingCoefficient should be in between [0.0,1.0]");
-    // one decimal only
-    blockingCoefficient = ((int) (blockingCoefficient / 0.1)) * 0.1;
-    poolSize = (int) (blockingCoefficient == 1.0 ? Runtime.getRuntime().availableProcessors() * 10
-        : Runtime.getRuntime().availableProcessors() / (1 - blockingCoefficient));
-    this.work = work;
-    this.consumer = new DefaultExecutionOutcomeConsumer(work);
+  public DedicatedForkPoolExecution(double blockingCoefficient, List<Callable<Void>> tasks, Callable<Void> callback) {
+    super(blockingCoefficient, tasks, callback);
   }
 
   @Override
-  public Pair<Integer, Integer> execute() {
+  public void execute() {
     logger.info("[execute|in] poolsize: {}", poolSize);
 
     ForkJoinPool pool = null;
     try {
       pool = new ForkJoinPool(poolSize);
 
-      List<Future<Void>> results = pool.invokeAll(work.getWork(), 1000, TimeUnit.SECONDS);
+      final List<Future<Void>> results = pool.invokeAll(tasks, 300, TimeUnit.SECONDS);
       for (final Future<Void> f : results)
         f.get();
-      logger.info("all threads work terminated");
-
+      logger.info("[execute] all threads work terminated");
+      callback.call();
     } catch (Exception e) {
-      logger.error("ops", e);
+      logger.error("[execute] ops", e);
     } finally {
       try {
-        if (null != pool)
+        if (null != pool) {
           pool.shutdown();
+          logger.info("[execute] pool has shutdown");
+        }
       } catch (Exception ignore) {
       }
     }
 
-    Pair<Integer, Integer> outcome = this.consumer.get();
-    logger.info("[execute|out] {}", outcome);
-    return outcome;
+    logger.info("[execute|out]");
   }
 
 }

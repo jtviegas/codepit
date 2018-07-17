@@ -1,4 +1,0 @@
-private static final List<String> sites = Arrays.asList("https://news.google.com", "https://www.amazon.co.uk/",
-      "https://www.theguardian.com/international", "https://www.thetimes.co.uk/", "https://www.ft.com",
-      "https://www1.folha.uol.com.br/internacional/en/", "https://elpais.com/", "http://www.lavanguardia.com",
-      "http://www.elmundo.es/", "https://www.lequipe.fr/");
