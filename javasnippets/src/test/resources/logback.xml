@@ -41,6 +41,7 @@
   
   <!-- Turn on debug logging for our HikariCP connection pool. -->
   <logger name="org.aprestos.labs" level="INFO" />
+  <logger name="org.apache.http.client.protocol.ResponseProcessCookies" level="ERROR" />
 
 
 </configuration>

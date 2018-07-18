@@ -7,14 +7,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 public class CompletableFuturesExecution extends AbstractExecution {
-
-  private static final Logger logger = LoggerFactory.getLogger(CompletableFuturesExecution.class);
 
   private final ExecutorService pool;
 
@@ -28,6 +23,7 @@ public class CompletableFuturesExecution extends AbstractExecution {
   public void execute() {
     logger.info("[execute|in] poolsize: {}", poolSize);
     try {
+
       List<CompletableFuture<Void>> wrappedTasks = tasks.stream().map(t -> CompletableFuture.runAsync(new Runnable() {
         @Override
         public void run() {
@@ -50,7 +46,7 @@ public class CompletableFuturesExecution extends AbstractExecution {
                 e.printStackTrace();
               }
             }
-          });
+          }, pool);
 
       futures.join();
       logger.info("[execute] all threads have terminated");
