@@ -3,6 +3,7 @@ package org.aprestos.labs.concurrency.pragmatic.executions;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 public class DedicatedForkPoolExecution extends AbstractExecution {
@@ -19,8 +20,14 @@ public class DedicatedForkPoolExecution extends AbstractExecution {
     try {
       pool = new ForkJoinPool(poolSize);
 
-      pool.invokeAll(tasks, 300, TimeUnit.SECONDS);
-
+      List<Future<Void>> futures = pool.invokeAll(tasks, 1000, TimeUnit.SECONDS);
+      futures.parallelStream().forEach(p -> {
+        try {
+          p.get();
+        } catch (Exception e) {
+          logger.error("oopps on checking futures", e);
+        }
+      });
       logger.info("[execute] all threads work terminated");
       callback.call();
     } catch (Exception e) {

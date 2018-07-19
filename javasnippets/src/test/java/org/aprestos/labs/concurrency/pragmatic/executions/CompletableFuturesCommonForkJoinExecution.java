@@ -42,7 +42,7 @@ public class CompletableFuturesCommonForkJoinExecution extends AbstractExecution
           }
         }
       });
-      ForkJoinPool.commonPool().awaitQuiescence(300, TimeUnit.SECONDS);
+      ForkJoinPool.commonPool().awaitQuiescence(1000, TimeUnit.SECONDS);
 
       logger.info("[execute] all threads have terminated");
     } catch (Exception e) {

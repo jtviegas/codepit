@@ -8,3 +8,6 @@ gradle
 repos
 gradlew
 gradlew.bat
+node_modules
+target
+
