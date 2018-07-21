@@ -1,11 +1,10 @@
 package org.aprestos.labs.assorted;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.IntStream;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class DoSomething {
@@ -13,35 +12,16 @@ public class DoSomething {
 	@Test
 	public void test_00() {
 
-		int[] u = new int[] { 80, 80, 1000000000, 80, 80, 80, 80, 80, 80, 123456789 };
-		solution(u);
+		int[][] u = new int[][] { { 4, 8, 2 }, { 4, 5, 7 }, { 6, 1, 6 } };
+		Assert.assertEquals(3, magicSquare(u));
 
 	}
 
-	public int solution(int[] T) {
-		Set<Integer> map = new HashSet<Integer>();
-		int[] mine = new int[T.length / 2];
-		int[] his = new int[T.length / 2];
-		int mineIndex = 0;
-		int hisIndex = 0;
-
-		for (int i : T) {
-			if (!map.contains(i) && mineIndex < T.length / 2) {
-				mine[mineIndex++] = i;
-				map.add(i);
-			} else
-				his[hisIndex++] = i;
-
-		}
-
-		return mine.length;
-	}
-
-	public char sol(String s) {
+	public Integer sol(String s) {
 
 		Integer r = null;
 
-		final Map<Integer, Integer> sink = new HashMap<Integer, Integer>();
+		final Map<Integer, Integer> sink = new LinkedHashMap<Integer, Integer>();
 		IntStream intStream1 = s.codePoints();
 
 		intStream1.forEach(c -> {
@@ -61,6 +41,40 @@ public class DoSomething {
 
 		}
 
+		return r;
+	}
+
+	private int sum(int[] s) {
+		int r = 0;
+		for (int i = 0; i < s.length; i++)
+			r += s[i];
+		return r;
+	}
+
+	private int[] findMissing(int[][] s) {
+		int[] r = new int[s[0].length];
+
+		return r;
+	}
+
+	private int[] findDuplicates(int[][] s) {
+		int[] r = new int[s[0].length];
+
+		return r;
+	}
+
+	public int magicSquare(int[][] s) {
+		int r = 0;
+
+		int n = s[0].length;
+
+		int[] sample = new int[n];
+		for (int i = 1, j = 0; i <= n; i++, j++)
+			sample[j] = i;
+
+		int lineValue = (n * (n ^ 2 + 1)) / 2;
+
+		return r;
 	}
 
 }
