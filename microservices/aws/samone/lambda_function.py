@@ -1,8 +1,18 @@
 import os
-import os
 import json
 import boto3
-votes_table = boto3.resource('dynamodb').Table(os.getenv('TABLE_NAME'))
+
+# if os.getenv("AWS_SAM_LOCAL"):
+#     votes_table = boto3.resource(
+#         'dynamodb',
+#         endpoint_url="http://localhost:8000/"
+#     ).Table("spaces-tabs-votes")
+# else:
+#     votes_table = boto3.resource('dynamodb').Table(os.getenv('TABLE_NAME'))
+
+votes_table = boto3.resource('dynamodb', endpoint_url='http://192.168.0.11:8000/').Table('spaces-tabs-votes')
+if votes_table is not None:
+    print('table is ok')
 
 
 def lambda_handler(event, context):
@@ -15,6 +25,7 @@ def lambda_handler(event, context):
             body = json.loads(event['body'])
         except:
             return {'statusCode': 400, 'body': 'malformed json input'}
+
         if 'vote' not in body:
             return {'statusCode': 400, 'body': 'missing vote in request body'}
         if body['vote'] not in ['spaces', 'tabs']:

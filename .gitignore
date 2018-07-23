@@ -11,3 +11,4 @@ gradlew.bat
 node_modules
 target
 
+.idea
