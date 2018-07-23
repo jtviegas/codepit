@@ -18,3 +18,8 @@ Resources:
           Properties:
             Path: /
             Method: post
+        Query:
+          Type: Api
+          Properties:
+            Path: /
+            Method: get
