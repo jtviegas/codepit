@@ -28,6 +28,7 @@ public class Tests {
     } else {
       int initial_01 = s[0][1], initial_10 = s[1][0], initial_21 = s[2][1], initial_12 = s[1][2];
 
+      // s[0][0] = s[0]
       s[1][0] = s[1][1] + s[2][2] - s[2][0];
       s[0][1] = s[1][0] + s[2][0] - s[0][2];
 
@@ -50,6 +51,7 @@ public class Tests {
     Assert.assertEquals(1, cost(s2));
 
     int[][] s3 = { { 4, 5, 8 }, { 2, 4, 1 }, { 1, 9, 7 } };
+
     Assert.assertEquals(14, cost(s3));
 
   }
