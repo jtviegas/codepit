@@ -1,80 +1,67 @@
 package org.aprestos.labs.assorted;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.stream.IntStream;
-
-import org.junit.Assert;
 import org.junit.Test;
 
 public class DoSomething {
 
-	@Test
-	public void test_00() {
+  @Test
+  public void test_00() {
 
-		int[][] u = new int[][] { { 4, 8, 2 }, { 4, 5, 7 }, { 6, 1, 6 } };
-		Assert.assertEquals(3, magicSquare(u));
+    int[][] u = new int[][] { { 4, 8, 2 }, { 4, 5, 7 }, { 6, 1, 6 } };
 
-	}
+    System.out.println(createMagicSquare(3));
 
-	public Integer sol(String s) {
+  }
 
-		Integer r = null;
+  private int nextPosition(int n, int position, int val, int[][] m) {
+    int r = -1;
 
-		final Map<Integer, Integer> sink = new LinkedHashMap<Integer, Integer>();
-		IntStream intStream1 = s.codePoints();
+    int row = position / 3;
+    int column = position % n;
 
-		intStream1.forEach(c -> {
-			Integer k = sink.get(c);
-			if (null == k)
-				sink.put(new Integer(c), new Integer(1));
-			else
-				sink.put(new Integer(c), k++);
-		});
+    int next_row = row - 1;
+    int next_column = column + 1;
 
-		Integer comparison = new Integer(1);
-		for (Map.Entry<Integer, Integer> entry : sink.entrySet()) {
-			if (comparison.equals(entry.getValue())) {
-				r = entry.getKey();
-				break;
-			}
+    boolean changing = true;
+    while (changing) {
+      if (next_row < 0 && next_column == n) {
+        next_row = n-1;
+        next_column = column;
+      } else if ( next_column == n ) {
+        next_column = 0;
+      }
+      else if( next_row < 0 ) {
+        next_row = n - 1;
+      }
+      else if (0 != (m[next_row][next_column]) && val > m[next_row][next_column]) {
+        next_row = row + 1;
+        next_column = column;
+      }
+      else
+        changing = false;
+    }
+    r = n * next_row + next_column;
+    return r;
+  }
 
-		}
+  public int[][] createMagicSquare(int n) {
+    if (n % 2 == 0)
+      throw new RuntimeException("we can only create odd squares");
 
-		return r;
-	}
+    int[][] r = new int[n][n];
 
-	private int sum(int[] s) {
-		int r = 0;
-		for (int i = 0; i < s.length; i++)
-			r += s[i];
-		return r;
-	}
+    int value = 0;
+    int column = n / 2;
+    int row = 0;
+    r[row][column] = ++value;
+    int position = n * row + column;
 
-	private int[] findMissing(int[][] s) {
-		int[] r = new int[s[0].length];
+    do {
+      position = nextPosition(n, position, value, r);
+      r[position / 3][position % n] = ++value;
+    } while ((n*n) > value);
 
-		return r;
-	}
-
-	private int[] findDuplicates(int[][] s) {
-		int[] r = new int[s[0].length];
-
-		return r;
-	}
-
-	public int magicSquare(int[][] s) {
-		int r = 0;
-
-		int n = s[0].length;
-
-		int[] sample = new int[n];
-		for (int i = 1, j = 0; i <= n; i++, j++)
-			sample[j] = i;
-
-		int lineValue = (n * (n ^ 2 + 1)) / 2;
-
-		return r;
-	}
+    return r;
+  }
 
 }
