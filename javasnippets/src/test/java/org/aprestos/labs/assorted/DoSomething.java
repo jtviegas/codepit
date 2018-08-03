@@ -13,6 +13,47 @@ public class DoSomething {
 
   }
 
+  
+  
+  private int findFirstElement(int [][] m) {
+    
+    int n = m[0].length;
+    int northpos = -1, pos = -1;
+    
+    for (int i =0; i<n; i++) {
+      for(int j = 0; j<n; j++) {
+        int val = m[i][j];
+        if( 1 == val ) {
+          
+        }
+      }
+    }
+    
+    if( i == 0 && n/2] )
+      return 1;
+    else if( 1 == m[n/2][0] )
+      return 2;
+    else if ( 1 == m[n-1][n/2] )
+      return 3;
+    else if ( 1 == m[n/2][n-1] )
+      return 4;
+      
+    return 0;
+  }
+  
+  private int[][] rotate(int[][] m){
+    int n = m[0].length;
+    int[][] r = new int[n][n];
+    
+    for( int i=0; i<n; i++ ) {
+      System.arraycopy(m[i], 0, r[i], 0, n);
+    }
+
+    
+    
+    return r;
+  }
+  
   private int nextPosition(int n, int position, int val, int[][] m) {
     int r = -1;
 
