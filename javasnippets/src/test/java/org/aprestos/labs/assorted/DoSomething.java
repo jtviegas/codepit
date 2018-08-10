@@ -4,16 +4,40 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.IntStream;
 
-import org.junit.Assert;
 import org.junit.Test;
 
-public class DoSomething {
+public final class DoSomething {
+
+	class D {
+		public int x = 6;
+
+		D() {
+			DoSomething.this.sol("s");
+		}
+	}
 
 	@Test
 	public void test_00() {
 
-		int[][] u = new int[][] { { 4, 8, 2 }, { 4, 5, 7 }, { 6, 1, 6 } };
-		Assert.assertEquals(3, magicSquare(u));
+		// int[][] u = new int[][] { { 4, 8, 2 }, { 4, 5, 7 }, { 6, 1, 6 } };
+		// Assert.assertEquals(3, magicSquare(u));
+		/*
+		 * String ar[] = { "", "e" }; ar[1] = "k"; D f = new D();
+		 * System.out.println(f.x);
+		 * 
+		 * PriorityQueue<String> o = new PriorityQueue<>(Comparator.naturalOrder());
+		 * o.add("a"); o.add("b"); o.offer("c"); o.offer("c");
+		 * System.out.println(o.peek()); System.out.println(o.poll());
+		 * 
+		 * Map<String, Integer> g = new HashMap<>();
+		 * 
+		 * int t = 4, v = 0; ; try { double b = t / v; } catch (Exception e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
+
+		int x = 3 & 5;
+		int y = 3 | 5;
+		System.out.println(x);
 
 	}
 
@@ -22,7 +46,12 @@ public class DoSomething {
 		Integer r = null;
 
 		final Map<Integer, Integer> sink = new LinkedHashMap<Integer, Integer>();
+		Integer fr = sink.get(1), ft = sink.get(2);
+
 		IntStream intStream1 = s.codePoints();
+		short rd = 6;
+		Short r3 = new Short(rd);
+		int u = r3;
 
 		intStream1.forEach(c -> {
 			Integer k = sink.get(c);
