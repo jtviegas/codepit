@@ -3,17 +3,24 @@ package org.aprestos.labs.json.beanmapping;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+
 import org.aprestos.labs.json.beanmapping.strategies.interfaces.Entity;
 import org.junit.Test;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.BeanDescription;
 import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.BeanPropertyDefinition;
 
@@ -184,6 +191,27 @@ public class MappingTests {
 
     o = om.convertValue(c, JustAClass.class);
     assertEquals(o, o2);
+  }
+  
+  @Test
+  public void test_jsonValidation() throws JsonParseException, JsonMappingException, IOException {
+    
+    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+    Validator  validator  = factory.getValidator();
+    String o = "{ \"id\":123, \"name\": \"maria\", \"feeling\":\"good\" }";
+    
+     ObjectMapper om = new ObjectMapper();
+     ClassWithNotNull c = om.readValue(o, ClassWithNotNull.class);
+     validator.validate(c);
+     
+     Map<String, Object> map = om.convertValue(c, new TypeReference<Map<String, Object>>() {
+      });
+     map.put("name", null);
+     
+     validator.validate(om.readValue(om.writeValueAsString(map), ClassWithNotNull.class));
+     
+     
+        
   }
 
 }
