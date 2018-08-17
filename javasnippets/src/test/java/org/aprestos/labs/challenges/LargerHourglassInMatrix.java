@@ -1,4 +1,4 @@
-package org.aprestos.labs.assorted;
+package org.aprestos.labs.challenges;
 
 import org.junit.Assert;
 import org.junit.FixMethodOrder;

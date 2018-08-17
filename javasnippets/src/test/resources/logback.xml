@@ -35,7 +35,7 @@
   There are a few ways you can change logging levels on the fly in a running app.
   This could be a better solution than over logging.
   -->
-  <root level="WARN">
+  <root level="INFO">
     <appender-ref ref="ASYNC" />
   </root>
   
