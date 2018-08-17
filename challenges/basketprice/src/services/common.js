@@ -1,8 +1,38 @@
+"use strict";
+
+var config = require('../../config.js');
+var winston = require('winston');
 const uuid = require('uuid');
 const fs = require('fs');
 
-var CustomUtils = function() {
+var Common = function() {
 
+	//default levels: { error: 0, warn: 1, info: 2, verbose: 3, debug: 4, silly: 5 }
+	// info: test message my 123 {}
+	//logger.log('info', 'test message %d', 123);
+	// info: test message first second {number: 123}
+	//logger.log('info', 'test message %s, %s', 'first', 'second', { number: 123 });
+
+	var logger = new(winston.Logger)({
+		transports: [
+			new(winston.transports.Console)({
+				level: config.log.level,
+				colorize: false,
+				'timestamp': true
+			})
+			, new(winston.transports.File)({
+				filename: config.log.filename,
+				level: config.log.level,
+				timestamp: true,
+				json: false,
+				maxsize: config.log.filesize,
+				maxFiles: config.log.filenum,
+				prettyPrint: true,
+				colorize: false
+			})
+		]
+	});
+		
     var findPropertyIndexInArrayObj = function(arr, property, value){
 
         for( var i=0; i<arr.length; i++){
@@ -143,8 +173,9 @@ var CustomUtils = function() {
         , fileToBase64: fileToBase64
         , createRandomObj: createRandomObj
         , createNewRandomObj: createNewRandomObj
+        , logger: logger
     };
 
 }();
 
-module.exports = CustomUtils;
+module.exports = Common;

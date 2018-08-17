@@ -7,6 +7,12 @@ var Config = function() {
     var app = {
         name: 'split4ever'
     };
+    
+    var services = {
+    	currency: {
+    		apikey: '6e24d718d139a3041d027b6506dca7b8'
+    	}	
+    };
 
     var dbNameSuffix = "_" + ( process.env.MODE ? process.env.MODE.toLowerCase() : "prod" );
 
@@ -68,6 +74,7 @@ var Config = function() {
     return {
         app: app
         , database: database
+        , services: services
         , log: log
     };
 

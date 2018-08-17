@@ -2,13 +2,11 @@
 
 module.exports = function(grunt) {
 
-        // Time how long tasks take. Can help when optimizing build times
+	grunt.loadNpmTasks('grunt-mocha-test');
+    
+    // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
 
-    // Automatically load required Grunt tasks
-    require('jit-grunt')(grunt, {
-        cafemocha: 'grunt-cafe-mocha'
-    });
     // Configurable paths for the application
     var appConfig = {
         dist: 'dist'
@@ -17,7 +15,7 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json')
-        , cafemocha: {
+        , mochatest: {
             unit: {
                 src: 'test/*_unit.js',
                 options: {
@@ -73,11 +71,11 @@ module.exports = function(grunt) {
 
     // Default task(s).
     grunt.registerTask('default', [ 'copy', 'watch', 
-        'jshint', 'clean', 'cafemocha:unit' ]);
+        'jshint', 'clean', 'mochatest:unit' ]);
 
     grunt.registerTask('test', [
-        'cafemocha:unit'
-        , 'cafemocha:integration'
+        'mochatest:unit'
+        , 'mochatest:integration'
       ]);
     
     grunt.registerTask('travisbuild', [
@@ -86,7 +84,7 @@ module.exports = function(grunt) {
       ]);
 
     grunt.registerTask('build', [
-        'cafemocha:unit'
+        'mochatest:unit'
         , 'clean'
         , 'copy'
       ]);

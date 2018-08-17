@@ -10,7 +10,7 @@ var cors = require('cors');
 
 //custom modules
 var logger = require('./services/common/apputils').logger;
-var parts = require('./resources/parts/route.js');
+var price = require('./resources/price/route.js');
 
 //CONSTANTS
 process.env.PORT = process.env.PORT || 3000;
@@ -22,7 +22,7 @@ logger.info('[index.js] starting in mode: %s [dataStore: %s][frontend dir: %s]',
 
 var cookieSessionProps = {
   name: 'session',
-  keys: ['split4ever', 'split4ever, ever'],
+  keys: ['basketprice'],
   cookie: {
 	  // 30 days cookies
     maxAge : 30*24*60*60*1000
@@ -34,14 +34,6 @@ app.use(cookieSession(cookieSessionProps));
 app.use(cookieParser());
 
 app.set('port', process.env.PORT);
-
-var options = {
-  dotfiles: 'ignore',
-  etag: false,
-   extensions: ['png', 'html'],
-  //index: false,
-  redirect: false
-};
 
 if( 'PROD' === process.env.MODE ){
   app.use(function(req, res, next){
@@ -62,8 +54,7 @@ if( 'TEST' === process.env.MODE ){
 
 
 //app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use('/api/parts', parts);
-app.use('/', express.static(frontendDir, options));
+app.use('/api/price', price);
 
 // custom 404 page
 app.use(function(req, res){
@@ -82,8 +73,8 @@ app.use(function(err, req, res, next){
 });
 
 httpsOpts = {
-  key: fs.readFileSync(__dirname + '/split4ever.pem')
-  , cert: fs.readFileSync(__dirname + '/split4ever.crt')
+  key: fs.readFileSync(__dirname + '/sslkey.pem')
+  , cert: fs.readFileSync(__dirname + '/sslcert.crt')
 }
 
 https.createServer(httpsOpts, app).listen(app.get('port'), function() {

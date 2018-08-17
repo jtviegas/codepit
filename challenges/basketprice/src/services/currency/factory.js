@@ -1,16 +1,18 @@
 "use strict";
+
 const fs = require('fs');
 
-var logger = require('../common/apputils').logger;
+var logger = require('../common').logger;
 
-const dataStoreFactory = (function(){
+const CurrencyServiceFactory = (function(){
 
-    var stores = {};
+    var services = {};
 
     var init = function(){
-        fs.readdir(__dirname, (e,files)=>{
+        
+    	fs.readdir(__dirname, (e,files)=>{
             files.forEach(f => {
-                logger.debug('[dataStoreFactory.init] processing file %s', f);
+                logger.debug('[CurrencyServiceFactory.init] processing file %s', f);
                 let moduleFile = 'index.js';
                 let storetype = f;
                 let storetypeFolder = __dirname + '/' + storetype;
@@ -54,4 +56,4 @@ const dataStoreFactory = (function(){
 
 })();
 
-module.exports = dataStoreFactory;
+module.exports = CurrencyServiceFactory;
