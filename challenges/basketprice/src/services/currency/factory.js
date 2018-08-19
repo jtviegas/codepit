@@ -4,55 +4,55 @@ const fs = require('fs');
 
 var logger = require('../common').logger;
 
-const CurrencyServiceFactory = (function(){
+var CurrencyServiceFactory = (function() {
 
-    var services = {};
+	var modules = {};
 
-    var init = function(){
-        
-    	fs.readdir(__dirname, (e,files)=>{
-            files.forEach(f => {
-                logger.debug('[CurrencyServiceFactory.init] processing file %s', f);
-                let moduleFile = 'index.js';
-                let storetype = f;
-                let storetypeFolder = __dirname + '/' + storetype;
-                fs.stat( storetypeFolder , (e,s) => {
-                    if(!e && s.isDirectory()){
-                        logger.debug('[dataStoreFactory.init] processing store %s', storetype);
-                        fs.stat( storetypeFolder + '/' + moduleFile , (e,s) => {
-                            if(!e && s.isFile()){
-                                logger.info('[dataStoreFactory.init] loading store %s', storetype);
-                                let store = require(storetypeFolder);
+	var init = function() {
 
-                                stores[storetype.toLowerCase()] = store;
-                                logger.info('[dataStoreFactory.init] loaded %s store', storetype);
-                            }
-                        });
-                    }
-                });
-            });
-        });
-    }
+		fs.readdirSync(__dirname).forEach(f => {
+			logger.debug('[CurrencyServiceFactory.init] processing file %s', f);
+			let moduletype = f;
+			let moduleFolder = __dirname + '/' + moduletype;
+			let s = fs.statSync(moduleFolder);
+			if (s.isDirectory()) {
+				logger.debug('[CurrencyServiceFactory.init] processing module %s', moduletype);
+				if (fs.statSync(moduleFolder + '/' + 'index.js').isFile()) {
+					logger.info('[CurrencyServiceFactory.init] loading module %s from ', moduletype, moduleFolder);
+					let module = require(moduleFolder);
+					console.log(module);
+					modules[moduletype.toLowerCase()] = module;
+					console.log('modules', modules);
+					logger.info('[CurrencyServiceFactory.init] loaded %s module', moduletype);
 
-    var get = function() {
-        logger.debug('[dataStoreFactory.get] IN');
+				}
+			}
 
-        let storeType = 'mock';
-        if(process.env.STORE)
-            storeType = process.env.STORE.toLowerCase();
 
-        if(!stores[storeType]) 
-             throw "!!! couldn't find store " + storeType + " !!!"; 
+		});
 
-        logger.debug('[dataStoreFactory.get] OUT');
-        return stores[storeType];
-    };
+	};
 
-    init();
+	var get = function() {
+		logger.debug('[CurrencyServiceFactory.get] IN');
 
-    return {
-        get: get
-    };
+		let moduletype = 'base';
+		if (process.env.MODE && process.env.MODE == 'TEST')
+			moduletype = 'mock';
+
+		console.log("modules:", modules);
+		if (!modules[moduletype])
+			throw new Error("!!! couldn't find module " + moduletype + " !!!");
+
+		logger.debug('[CurrencyServiceFactory.get] OUT');
+		return modules[moduletype];
+	};
+
+	init();
+
+	return {
+		get : get
+	};
 
 })();
 
