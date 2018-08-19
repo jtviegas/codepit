@@ -1,16 +1,37 @@
 "use strict";
 
-var logger = require('./common').logger;
-var config = require('../config');
+var logger = require('../../common').logger;
+var config = require('../../../config');
+const SourceCurrencyNotSupportedError = require('../../../representations/errors').SourceCurrencyNotSupportedError;
+const EndCurrencyNotSupportedError = require('../../../representations/errors').EndCurrencyNotSupportedError;
 
-var CurrencyService = function(){
+var MockCurrencyService = function(){
 
 
-    var getRate = function(srcCurrency, endCurrency, callback){
-        logger.debug('[CurrencyService.getRate] IN');
-        callback(null, 1.07);
-        logger.debug('[CurrencyService.getRate] OUT');
+    var getRate = function(fromCur, toCur, callback){
+        logger.debug('[MockCurrencyService.getRate] IN');
+        try {
+        	checkCurrencies(fromCur, toCur);
+        	if( toCur === fromCur )
+        		callback(null, 1.00);
+        	else
+        		callback(null, 1.07);
+        }
+        catch(e){
+        	callback(e);
+        }
+        finally {
+        	logger.debug('[MockCurrencyService.getRate] OUT');	
+        }
+        
     };
+    
+    var checkCurrencies = function(src, end){
+    	if( -1 == config.services.currency.currencies.from.indexOf(src.toUpperCase()) )
+    	 throw new SourceCurrencyNotSupportedError(src.toUpperCase());
+    	if( -1 == config.services.currency.currencies.to.indexOf(end.toUpperCase()) )
+       	 throw new EndCurrencyNotSupportedError(end.toUpperCase());
+    }
 
     return {
         getRate: getRate
@@ -18,4 +39,4 @@ var CurrencyService = function(){
 
 }();
 
-module.exports = CurrencyService;
+module.exports = MockCurrencyService;
