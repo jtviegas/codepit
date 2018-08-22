@@ -9,7 +9,7 @@ import org.junit.runners.MethodSorters;
 public class LinkedLists {
 
 
-  
+
 
   @Test
   public void test() throws Exception {
