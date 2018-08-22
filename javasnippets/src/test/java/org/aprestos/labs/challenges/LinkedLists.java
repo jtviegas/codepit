@@ -8,6 +8,7 @@ import org.junit.runners.MethodSorters;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LinkedLists {
 
+
   private Node deleteNode(Node head, int d) {
     Node n = head;
 
@@ -103,6 +104,16 @@ public class LinkedLists {
      Assert.assertEquals(new Node(6).appendToTail(7), 
         getNthToLast_2_2(new Node(1).appendToTail(2).appendToTail(1).appendToTail(2).appendToTail(4).appendToTail(7).appendToTail(6).appendToTail(7), 2));
      
+        Node n = new Node(6);
+    Node n2 = new Node(4);
+    Node n3 = new Node(3).appendToTail(2);
+    n.next = n2;
+    n2.next = n3;
+    Node n4 = new Node(6);
+    n4.next = n3;
+    deleteNodeInListWithAccessToThatOneOnly_2_3(n2);
+    Assert.assertEquals(n, n4);
+    
      Assert.assertEquals(new Node(8).appendToTail(0).appendToTail(8), 
         getNodesInvertedSum_2_4(new Node(3).appendToTail(1).appendToTail(5), new Node(5).appendToTail(9).appendToTail(2), 0));
 
@@ -133,6 +144,15 @@ public class LinkedLists {
     return result;
   }
   
+    private Node deleteNodeInListWithAccessToThatOneOnly_2_3(Node node) {
+
+    Node next = node.next;
+    node.data = next.data;
+    node.next = next.next;
+
+    return node;
+  }
+    
   private Node getNthToLast_2_2(Node head, int n) {
     
     Node p1 = head;
@@ -181,5 +201,6 @@ public class LinkedLists {
     
     return head;
   }
+
 
 }

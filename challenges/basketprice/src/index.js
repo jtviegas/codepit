@@ -9,16 +9,14 @@ var cors = require('cors');
 //var swaggerUi = require('swagger-ui-express'), swaggerDocument = require('./swagger.json');
 
 //custom modules
-var logger = require('./services/common/apputils').logger;
+var logger = require('./services/common').logger;
 var price = require('./resources/price/route.js');
 
 //CONSTANTS
 process.env.PORT = process.env.PORT || 3000;
 process.env.MODE = process.env.MODE || 'PROD';
-process.env.STORE = process.env.STORE || 'REAL';
-var frontendDir = __dirname + '/static';
 
-logger.info('[index.js] starting in mode: %s [dataStore: %s][frontend dir: %s]', process.env.MODE, process.env.STORE, frontendDir);
+logger.info('[index.js] starting in mode: %s', process.env.MODE);
 
 var cookieSessionProps = {
   name: 'session',
@@ -35,7 +33,7 @@ app.use(cookieParser());
 
 app.set('port', process.env.PORT);
 
-if( 'PROD' === process.env.MODE ){
+/*if( 'PROD' === process.env.MODE ){
   app.use(function(req, res, next){
     if( 'https' === req.headers['x-forwarded-proto'] )
       next();
@@ -46,7 +44,7 @@ if( 'PROD' === process.env.MODE ){
       res.send(msg);
     }
   });
-}
+}*/
 
 if( 'TEST' === process.env.MODE ){
   app.use(cors({origin: 'http://localhost:3000'}));
@@ -78,7 +76,7 @@ httpsOpts = {
 }
 
 https.createServer(httpsOpts, app).listen(app.get('port'), function() {
-  logger.info(util.format('split4ever started on https://localhost:%s', app.get('port')));
+  logger.info(util.format('app started on https://localhost:%s', app.get('port')));
 });
 
 module.exports = app;

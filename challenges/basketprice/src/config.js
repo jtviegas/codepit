@@ -5,63 +5,27 @@ var fs = require('fs');
 var Config = function() {
 
     var app = {
-        name: 'split4ever'
+        name: 'basketprice'
     };
     
     var services = {
     	currency: {
-    		apikey: '6e24d718d139a3041d027b6506dca7b8'
-    	}	
+    		api: 'http://apilayer.net/api/live?access_key=6e24d718d139a3041d027b6506dca7b8&format=1&currencies=EUR,GBP,CAD,PLN&source=USD'
+    		, currencies: {
+    			from: [ 'USD']
+    			, to:[ 'EUR', 'GBP', 'USD' ]		 
+    		}
+    	}
+    	, store: {
+    		items: [
+    			{name: "Soup", price: 0.65 }
+    			, {name: "Bread", price: 0.80}
+    			, {name: "Milk", price: 1.15, discount: { name: "Milk 50% off when 3", discount: 0.50, condition: {type: "quantity", value: 3} } }
+    			, {name: "Apples", price: 1.00, discount: { name: "Apples 10% off", discount: 0.10, condition: {type: "quantity", value: 1} } }
+    		]
+    		, currency: 'USD'
+    	}
     };
-
-    var dbNameSuffix = "_" + ( process.env.MODE ? process.env.MODE.toLowerCase() : "prod" );
-
-    var database = {
-        "instances": {
-            "part" : {
-                "name": "part" + dbNameSuffix
-                , "designDoc": {
-                    "_id": "_design/" + "part" + dbNameSuffix
-                    , "language": "javascript"
-                    , "views": {
-                        "categories" : {
-                            "map": "function(doc) { \
-                                if(doc.category && Array.isArray(doc.category)){ \
-                                    for(var i=0; i<doc.category.length; i++){ \
-                                        emit(doc.category[i], 1); } }}"
-                            , "reduce": "_count"
-                        }
-                        , "models" : {
-                            "map": "function(doc) { \
-                                if(doc.model && Array.isArray(doc.model)){ \
-                                    for(var i=0; i<doc.model.length; i++){ \
-                                        emit(doc.model[i], 1); } }}"
-                            , "reduce": "_count"
-                        }
-                        , "numOf" : {
-                            "map": "function(doc) { \
-                                    emit(doc._id, 1); \
-                                }"
-                            , "reduce": "function (keys, values, rereduce) { var result = 0; for(var i=0; i<values.length; i++){ result += values[i]; } return result; }"
-
-                        }
-                    }
-                }
-            }
-        }
-        , "replicationDelay": 24*60*60*1000
-
-    };
-
-    if(fs.existsSync(__dirname + "/credentials.PWD")) {
-        database.credentials = require(__dirname + "/credentials.PWD");
-    }
-    else  {
-        database.credentials = {
-            "user": process.env.DB_USER
-            , "pswd": process.env.DB_PASSWD
-        }
-    }
 
     var log = {
         dir: process.env.LOG_DIR || './logs'
@@ -73,7 +37,6 @@ var Config = function() {
 
     return {
         app: app
-        , database: database
         , services: services
         , log: log
     };
