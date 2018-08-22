@@ -18,7 +18,6 @@ public class Example {
   public void test() throws Exception {
     int[][] s = { { 4, 8, 2 }, { 4, 5, 7 }, { 6, 1, 6 } };
     Assert.assertEquals(4, doSomething(s));
-
   }
 
 }

@@ -102,9 +102,36 @@ public class LinkedLists {
      
      Assert.assertEquals(new Node(6).appendToTail(7), 
         getNthToLast_2_2(new Node(1).appendToTail(2).appendToTail(1).appendToTail(2).appendToTail(4).appendToTail(7).appendToTail(6).appendToTail(7), 2));
+     
+     Assert.assertEquals(new Node(8).appendToTail(0).appendToTail(8), 
+        getNodesInvertedSum_2_4(new Node(3).appendToTail(1).appendToTail(5), new Node(5).appendToTail(9).appendToTail(2), 0));
 
   }
-
+  
+  private Node getNodesInvertedSum_2_4(Node n1, Node n2, int carry) {
+    
+    if(null == n1 && null == n2) return null;
+    
+    int r = carry;
+    if(null != n1) {
+      r += n1.data;
+    }
+    if(null != n2) {
+      r += n2.data;
+    }
+    
+    if( 9 < r) {
+      carry = r/10;
+      r = r%10;
+    }
+    else
+      carry = 0;
+    
+    Node result = new Node(r);
+    result.next = getNodesInvertedSum_2_4(n1.next,n2.next, carry);
+    
+    return result;
+  }
   
   private Node getNthToLast_2_2(Node head, int n) {
     
