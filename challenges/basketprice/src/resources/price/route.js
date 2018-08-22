@@ -2,7 +2,7 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
-var logger = require('../../services/common/apputils').logger;
+var logger = require('../../services/common').logger;
 var auth = require('../auth');
 
 var functions = require('./functions');

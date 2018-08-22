@@ -1,6 +1,6 @@
 "use strict";
 
-var config = require('../../config.js');
+var config = require('../config');
 var winston = require('winston');
 const uuid = require('uuid');
 const fs = require('fs');
@@ -32,7 +32,7 @@ var Common = function() {
 			})
 		]
 	});
-		
+
     var findPropertyIndexInArrayObj = function(arr, property, value){
 
         for( var i=0; i<arr.length; i++){
@@ -153,12 +153,15 @@ var Common = function() {
         p.images = []
         return p;
     }
-
     
+    var roundToTwoDecimals = function (num) {
+		return +(Math.round(num + "e+2") + "e-2");
+	}
+
+	
     return {
         getPropertyNames: getPropertyNames
         , getPropertyArray: getPropertyArray
-        , getPropertyNames: getPropertyNames
         , getPropertyValues: getPropertyValues
         , zeroPad: zeroPad
         , formatWeekOfYear: formatWeekOfYear
@@ -174,6 +177,7 @@ var Common = function() {
         , createRandomObj: createRandomObj
         , createNewRandomObj: createNewRandomObj
         , logger: logger
+        , roundToTwoDecimals: roundToTwoDecimals
     };
 
 }();

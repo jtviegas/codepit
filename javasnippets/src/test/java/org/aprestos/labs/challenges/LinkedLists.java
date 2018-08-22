@@ -8,83 +8,8 @@ import org.junit.runners.MethodSorters;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LinkedLists {
 
-  private Node deleteNode(Node head, int d) {
-    Node n = head;
 
-    if (n.data == d)
-      return n.next;
-
-    while (null != n.next) {
-      if (n.next.data == d) {
-        n.next = n.next.next;
-        return head;
-      }
-      n = n.next;
-    }
-
-    return head;
-  }
-
-  class Node {
-
-    Node next = null;
-
-    int data;
-
-    public Node(int d) {
-      this.data = d;
-    }
-
-    Node appendToTail(int d) {
-      Node n = new Node(d);
-      Node _next = this;
-      
-      while (null != _next.next) {
-        _next = _next.next;
-      }
-        
-      _next.next = n;
-      return this;
-    }
-
-    @Override
-    public int hashCode() {
-      final int prime = 31;
-      int result = 1;
-      result = prime * result + getOuterType().hashCode();
-      result = prime * result + data;
-      result = prime * result + ((next == null) ? 0 : next.hashCode());
-      return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-      if (this == obj)
-        return true;
-      if (obj == null)
-        return false;
-      if (getClass() != obj.getClass())
-        return false;
-      Node other = (Node) obj;
-      if (!getOuterType().equals(other.getOuterType()))
-        return false;
-      if (data != other.data)
-        return false;
-      if (next == null) {
-        if (other.next != null)
-          return false;
-      } else if (!next.equals(other.next))
-        return false;
-      return true;
-    }
-
-    private LinkedLists getOuterType() {
-      return LinkedLists.this;
-    }
-    
-    
-
-  }
+  
 
   @Test
   public void test() throws Exception {
@@ -103,9 +28,25 @@ public class LinkedLists {
      Assert.assertEquals(new Node(6).appendToTail(7), 
         getNthToLast_2_2(new Node(1).appendToTail(2).appendToTail(1).appendToTail(2).appendToTail(4).appendToTail(7).appendToTail(6).appendToTail(7), 2));
      
+        Node n = new Node(6);
+    Node n2 = new Node(4);
+    Node n3 = new Node(3).appendToTail(2);
+    n.next = n2;
+    n2.next = n3;
+    Node n4 = new Node(6);
+    n4.next = n3;
+    deleteNodeInListWithAccessToThatOneOnly_2_3(n2);
+    Assert.assertEquals(n, n4);
+    
      Assert.assertEquals(new Node(8).appendToTail(0).appendToTail(8), 
         getNodesInvertedSum_2_4(new Node(3).appendToTail(1).appendToTail(5), new Node(5).appendToTail(9).appendToTail(2), 0));
 
+  }
+  
+  // TODO
+  @SuppressWarnings("unused")
+  private void getBeginningOfLoop_2_4(Node n1) {
+    
   }
   
   private Node getNodesInvertedSum_2_4(Node n1, Node n2, int carry) {
@@ -133,6 +74,15 @@ public class LinkedLists {
     return result;
   }
   
+    private Node deleteNodeInListWithAccessToThatOneOnly_2_3(Node node) {
+
+    Node next = node.next;
+    node.data = next.data;
+    node.next = next.next;
+
+    return node;
+  }
+    
   private Node getNthToLast_2_2(Node head, int n) {
     
     Node p1 = head;
@@ -181,5 +131,6 @@ public class LinkedLists {
     
     return head;
   }
+
 
 }

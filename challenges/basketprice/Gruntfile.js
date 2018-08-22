@@ -3,90 +3,47 @@
 module.exports = function(grunt) {
 
 	grunt.loadNpmTasks('grunt-mocha-test');
-    
     // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
 
-    // Configurable paths for the application
-    var appConfig = {
-        dist: 'dist'
-    };
-
-    // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json')
-        , mochatest: {
-            unit: {
-                src: 'test/*_unit.js',
-                options: {
-                    ui: 'tdd'
-                    , reporter: 'spec'
-                    , bail: false
-                }
-            }
-            , integration: {
-                src: 'test/*_integration.js',
-                options: {
-                    ui: 'tdd'
-                    , reporter: 'spec'
-                    , bail: false
-                }
-            }
-        }
-        , clean: {
-            js: [ 'dist' ]
-        }
-        , jshint: {
-                // define the files to lint
-                files: ['Gruntfile.js', 'src/**/*.js']
-                // configure JSHint (documented at http://www.jshint.com/docs/)
-                , options: {
-                // more options here if you want to override JSHint defaults
-                 globals: {
-                  jQuery: true,
-                  console: true,
-                  module: true
-                }
-            }
-        }
-        , copy: {
-            main: {
-                files: [
-                    { expand: true, cwd: 'src/',  src: ['**'], dest: 'dist/'}
-                    ,{ expand: true, cwd: './',  src: ['package.json'], dest: 'dist/'}
-                ]
-            }
-        }
-        , watch: {
-                src: {
-                    files: ['src/**/*.js'],
-                    tasks: ['clean', 'copy'],
-                    options: {
-                            spawn: false
-                    }
-                }
-        }
-
+        , mochaTest: {
+  	      unit: {
+  	        options: {
+  	          reporter: 'spec',
+  	          captureFile: 'tests.txt', // Optionally capture the reporter output to a file
+  	          quiet: false, // Optionally suppress output to standard out (defaults to false)
+  	          clearRequireCache: false, // Optionally clear the require cache before running tests (defaults to false)
+  	          clearCacheFilter: (key) => true, // Optionally defines which files should keep in cache
+  	          noFail: false // Optionally set to not fail on failed tests (will still fail on other errors)
+  	        },
+  	        src: ['test/*_unit.js']
+  	      }
+    	, integration: {
+	        options: {
+	  	          reporter: 'spec',
+	  	          captureFile: 'tests.txt', // Optionally capture the reporter output to a file
+	  	          quiet: false, // Optionally suppress output to standard out (defaults to false)
+	  	          clearRequireCache: false, // Optionally clear the require cache before running tests (defaults to false)
+	  	          clearCacheFilter: (key) => true, // Optionally defines which files should keep in cache
+	  	          noFail: false // Optionally set to not fail on failed tests (will still fail on other errors)
+	  	        },
+	  	        src: ['test/*_integration.js']
+	  	      }
+  	    }
     });
 
     // Default task(s).
-    grunt.registerTask('default', [ 'copy', 'watch', 
-        'jshint', 'clean', 'mochatest:unit' ]);
+    grunt.registerTask('default', [ 'mochaTest:unit','mochaTest:integration' ]);
 
     grunt.registerTask('test', [
-        'mochatest:unit'
-        , 'mochatest:integration'
+        'mochaTest:unit'
       ]);
     
-    grunt.registerTask('travisbuild', [
-        'clean'
-        , 'copy'
+    grunt.registerTask('integration', [
+        'mochaTest:integration'
       ]);
 
-    grunt.registerTask('build', [
-        'mochatest:unit'
-        , 'clean'
-        , 'copy'
-      ]);
 
 };
