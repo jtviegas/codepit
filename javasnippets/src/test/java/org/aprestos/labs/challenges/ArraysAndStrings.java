@@ -38,9 +38,33 @@ public class ArraysAndStrings {
     
     Assert.assertEquals(true, isSubstring_1_8("waterbottle", "erbottlewat"));
     Assert.assertEquals(false, isSubstring_1_8("waterbottle", "erbottlewadt"));
+    
+    Assert.assertArrayEquals(new int[] {5,1,2,3,4}, leftRotateArray(new int[] {1,2,3,4,5}, 4));
+    Assert.assertArrayEquals(new int[] {77, 97, 58, 1, 86, 58, 26, 10, 86, 51, 41, 73, 89, 7, 10, 1, 59, 58, 84, 77}, 
+        leftRotateArray(new int[] {41, 73, 89, 7, 10, 1, 59, 58, 84, 77, 77, 97, 58, 1, 86, 58, 26, 10, 86,51}, 10));
 
   }
 
+  private int[] leftRotateArray(int[] a,int n) {
+    
+    if(n == a.length)
+      return a;
+    
+    int l = a.length;
+    int i = 0;
+    int val = a[i];
+    do {
+      int newI = (i+n)%l;
+      int newval = a[newI];
+      a[newI] = val;
+      val = newval;
+      i=newI;
+    }
+    while(i != 0);
+    
+    return a;
+  }
+  
   private boolean isSubstring_1_8(String s1, String s2) {
     boolean r = false;
 
