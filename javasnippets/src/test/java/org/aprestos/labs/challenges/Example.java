@@ -7,17 +7,15 @@ import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class Example {
- 
 
-  @Test
-  public void test() throws Exception {
-    
-    Assert.assertEquals(true, doit());
-  }
-  
-  private boolean doit() {
-    return true;
-  }
+	@Test
+	public void test() throws Exception {
 
+		Assert.assertEquals(true, doit());
+	}
+
+	private boolean doit() {
+		return true;
+	}
 
 }
