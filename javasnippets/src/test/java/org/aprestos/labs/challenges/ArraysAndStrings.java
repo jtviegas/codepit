@@ -61,7 +61,64 @@ public class ArraysAndStrings {
 		input = "1 2 5 3 4 7 8 6";
 		Assert.assertEquals(4, newYearChaos2(strToIntArray(input)));
 		
+		input = "1 2 5 3 4 7 8 6";
+    Assert.assertArrayEquals(strToIntArray("1 2 3 4 5 6 7 8"), sortIt(strToIntArray(input)));
+    
+    Assert.assertEquals(3, minSwapsToSort(strToIntArray("4 3 1 2")));
+    Assert.assertEquals(3, minSwapsToSort(strToIntArray("2 3 4 1 5")));
+    Assert.assertEquals(3, minSwapsToSort(strToIntArray("1 3 5 2 4 6 8")));
+		
 	}
+	
+	private int minSwapsToSort(int[] arr) {
+	  
+	  int r = 0;
+	  sort(arr, 0, arr.length-1);
+	  
+	  
+	  return r;
+	}
+	
+	private int[] sortIt(int[] a) {
+	  
+	  sort(a, 0, a.length-1);
+	  return a;
+	  
+	}
+	
+	private void sort(int[] a, int lo, int hi) {
+	  
+	  if( lo>=hi )
+	    return;
+	  
+	  int v = a[lo];
+	  int l = lo, i = lo;
+	  int h = hi;
+	  
+	  while( h >= i) {
+	    
+	    if( a[i] < v ) {
+	      int o = a[i];
+        a[i] = a[l];
+        a[l] = o;
+	      i++;l++;
+	    }
+	    else if ( a[i] > v ) {
+	      int o = a[h];
+	      a[h] = a[i];
+	      a[i] = o;
+	      h--;
+	    }
+	    else 
+	      i++;
+	  }
+	  
+	  sort(a, lo, l-1);
+	  sort(a, h+1, hi);
+	  
+	}
+	
+	
 	
 	private int[] strToIntArray(String s) {
 	  
