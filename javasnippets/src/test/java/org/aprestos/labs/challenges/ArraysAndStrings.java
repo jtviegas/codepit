@@ -78,6 +78,129 @@ public class ArraysAndStrings {
 		Assert.assertEquals(3, minSwapsToSort(strToIntArray("2 3 4 1 5")));
 		Assert.assertEquals(3, minSwapsToSort(strToIntArray("1 3 5 2 4 6 8")));
 
+		Assert.assertArrayEquals(
+				new int[][] { { 1, 3 }, { 2, 4 }, { 3, 5 }, { 4, 6 }, { 5, 7 }, { 6, 0 }, { 7, 2 }, { 8, 1 } },
+				sortItAndKeepInitialIndexes(strToIntArray("6 8 7 1 2 3 4 5")));
+
+		Assert.assertEquals(46, minSwapsToSort(strToIntArray(
+				"2 31 1 38 29 5 44 6 12 18 39 9 48 49 13 11 7 27 14 33 50 21 46 23 15 26 8 47 40 3 32 22 34 42 16 41 24 10 4 28 36 30 37 35 20 17 45 43 25 19")));
+
+	}
+
+	private int minSwapsToSort(int[] arr) {
+
+		int steps = 0;
+		int[][] r = sortItAndKeepInitialIndexes(arr);
+
+		int[] oldIndexMap = new int[arr.length];
+		for (int i = 0; i < oldIndexMap.length; i++)
+			oldIndexMap[i] = i;
+
+		for (int i = 0; i < r.length; i++) {
+			int val = r[i][0];
+			int ipos = r[i][1];
+
+			if (arr[i] != val) {
+
+				swap1(arr, oldIndexMap[ipos], i);
+				oldIndexMap[i] = oldIndexMap[ipos];
+				// oldIndexMap[ipos] = i;
+
+				steps++;
+			}
+		}
+
+		return steps;
+	}
+
+	private int[] sortIt(int[] a) {
+
+		sort(a, 0, a.length - 1);
+		return a;
+
+	}
+
+	private int[][] sortItAndKeepInitialIndexes(int[] a) {
+
+		int[][] r = new int[a.length][];
+
+		for (int i = 0; i < a.length; i++) {
+			r[i] = new int[] { a[i], i };
+		}
+
+		sortAndKeepScore(r, 0, a.length - 1);
+		return r;
+
+	}
+
+	private void sortAndKeepScore(int[][] a, int lo, int hi) {
+
+		if (lo >= hi)
+			return;
+
+		int v = a[lo][0];
+		int l = lo, i = lo;
+		int h = hi;
+
+		while (h >= i) {
+
+			if (a[i][0] < v) {
+				swap2(a, i, l);
+				i++;
+				l++;
+			} else if (a[i][0] > v) {
+				swap2(a, i, h);
+				h--;
+			} else
+				i++;
+		}
+
+		sortAndKeepScore(a, lo, l - 1);
+		sortAndKeepScore(a, h + 1, hi);
+
+	}
+
+	private void swap1(int[] a, int i, int j) {
+		int v = a[i];
+		a[i] = a[j];
+		a[j] = v;
+	}
+
+	private void swap2(int[][] a, int i, int j) {
+		int[] v = a[i];
+		a[i] = a[j];
+		a[j] = v;
+	}
+
+	private void sort(int[] a, int lo, int hi) {
+
+		if (lo >= hi)
+			return;
+
+		int v = a[lo];
+		int l = lo, i = lo;
+		int h = hi;
+
+		while (h >= i) {
+
+			if (a[i] < v) {
+				int o = a[i];
+				a[i] = a[l];
+				a[l] = o;
+				i++;
+				l++;
+			} else if (a[i] > v) {
+				int o = a[h];
+				a[h] = a[i];
+				a[i] = o;
+				h--;
+			} else
+				i++;
+		}
+
+		sort(a, lo, l - 1);
+		sort(a, h + 1, hi);
+
 	}
 
 	private int[] swap(int[] a, int i, int j) {
@@ -116,52 +239,6 @@ public class ArraysAndStrings {
 		steps += sortnow(a, h + 1, hi);
 
 		return steps;
-	}
-
-	private int minSwapsToSort(int[] arr) {
-
-		int r = 0;
-		sort(arr, 0, arr.length - 1);
-
-		return r;
-	}
-
-	private int[] sortIt(int[] a) {
-
-		sort(a, 0, a.length - 1);
-		return a;
-
-	}
-
-	private void sort(int[] a, int lo, int hi) {
-
-		if (lo >= hi)
-			return;
-
-		int v = a[lo];
-		int l = lo, i = lo;
-		int h = hi;
-
-		while (h >= i) {
-
-			if (a[i] < v) {
-				int o = a[i];
-				a[i] = a[l];
-				a[l] = o;
-				i++;
-				l++;
-			} else if (a[i] > v) {
-				int o = a[h];
-				a[h] = a[i];
-				a[i] = o;
-				h--;
-			} else
-				i++;
-		}
-
-		sort(a, lo, l - 1);
-		sort(a, h + 1, hi);
-
 	}
 
 	private int[] strToIntArray(String s) {
