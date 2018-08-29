@@ -1,6 +1,7 @@
 package org.challenges.norcom.indexer;
 
 import java.nio.file.Paths;
+import java.util.Map;
 
 import org.challenges.norcom.indexer.tasks.FileProcessor;
 import org.junit.Test;
@@ -9,6 +10,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ActiveProfiles("test")
 @SpringBootTest
@@ -25,11 +29,11 @@ public class IndexerTests {
 	}
 
 	@Test
-	public void assorted() {
+	public void assorted() throws JsonProcessingException {
 		FileProcessor o = new FileProcessor();
 
-		o.handle(Paths.get(IndexerTests.class.getClassLoader().getResource("msg1.txt").getPath()));
-
+		 Map<String,Object> o2 = o.apply(Paths.get(IndexerTests.class.getClassLoader().getResource("msg1.txt").getPath()));
+		 System.out.println(new ObjectMapper().writeValueAsString(o2));
 	}
 
 }
