@@ -4,15 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
-import java.util.stream.Collectors;
 
-import org.challenges.norcom.indexer.components.Unzipper;
-import org.challenges.norcom.indexer.sources.mailboxes.MailboxHandler;
+import org.challenges.norcom.indexer.services.unzipper.UnzipperImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
@@ -65,22 +60,7 @@ public class Indexer {
 		}
 	}
 
-	Path createBulkFiles(final String folder) {
 
-		Path outputFolder = Paths.get(String.format("%s%s%s", System.getProperty("java.io.tmpdir"),
-				System.getProperty("file.separator"), UUID.randomUUID().toString()));
-		outputFolder.toFile().mkdirs();
-
-		List<CompletableFuture<Void>> tasks = Arrays.asList(Paths.get(folder).toFile().listFiles()).stream()
-				.filter(o -> o.isDirectory())
-				.map(d -> CompletableFuture
-						.runAsync(new MailboxHandler(Paths.get(d.getAbsolutePath()), outputFolder, metadata), executor))
-				.collect(Collectors.toList());
-		CompletableFuture<Void> futures = CompletableFuture.allOf(tasks.toArray(new CompletableFuture<?>[] {}));
-
-		futures.join();
-		return outputFolder;
-	}
 
 	public void listFilesForFolder(final File folder) {
 		for (final File fileEntry : folder.listFiles()) {
@@ -99,11 +79,12 @@ public class Indexer {
 		File folder = new File(destinationFolder);
 		folder.mkdirs();
 
-		new Unzipper(file, Paths.get(destinationFolder)).unzip();
+		new UnzipperImpl(file, Paths.get(destinationFolder)).unzip();
 		return destinationFolder;
 	}
 
 	private void bulkPost(Path f, String url) {
+	  
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", "application/json");
 		headers.setContentType(MediaType.APPLICATION_JSON);

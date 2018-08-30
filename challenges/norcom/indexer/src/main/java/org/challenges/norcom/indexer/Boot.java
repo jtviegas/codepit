@@ -10,7 +10,7 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
+import org.challenges.norcom.indexer.services.unzipper.UnzipperImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,8 +33,8 @@ public class Boot {
 
 	@Bean
 	public CommandLineRunner run(@Value("${org.challenges.norcom.indexer.url:#{null}}") final String url) {
-		logger.info("[run|in] url: {}", url);
-		logger.trace("[run|out]");
+		logger.trace("[run|in] url: {}", url);
+		
 		return (args) -> {
 			Options options = new Options();
 			try {
@@ -62,6 +62,16 @@ public class Boot {
 			}
 
 		};
+		logger.trace("[run|out]");
+	}
+	
+	
+	private void doit(Path file) {
+	    
+	  new Indexer().index( new  BulkFilesCreator ( new UnzipperImpl(file).unzip() ).create() );
+	  
+	  
+	    
 	}
 
 }

@@ -1,4 +1,4 @@
-package org.challenges.norcom.indexer.sources.mailboxes;
+package org.challenges.norcom.indexer.services.bulkfiles.mailbox;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class EmailFileProcessor implements Function<Path, String> {
+class EmailFileProcessor implements Function<Path, String> {
 
 	private static final Logger logger = LoggerFactory.getLogger(EmailFileProcessor.class);
 	private static final ObjectMapper jsonMapper = new ObjectMapper();

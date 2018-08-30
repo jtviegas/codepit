@@ -1,4 +1,4 @@
-package org.challenges.norcom.indexer.sources.mailboxes;
+package org.challenges.norcom.indexer.services.bulkfiles.mailbox;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -14,7 +14,7 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MailboxHandler implements Runnable {
+class MailboxHandler implements Runnable {
 
 	private static final Logger logger = LoggerFactory.getLogger(MailboxHandler.class);
 	private final Path source;

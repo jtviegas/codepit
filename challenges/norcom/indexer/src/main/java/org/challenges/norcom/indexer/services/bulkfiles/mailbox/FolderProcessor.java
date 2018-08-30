@@ -1,4 +1,4 @@
-package org.challenges.norcom.indexer.sources.mailboxes;
+package org.challenges.norcom.indexer.services.bulkfiles.mailbox;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-public class FolderProcessor implements Function<Path, List<String>> {
+class FolderProcessor implements Function<Path, List<String>> {
 
 	private static final Logger logger = LoggerFactory.getLogger(FolderProcessor.class);
 
