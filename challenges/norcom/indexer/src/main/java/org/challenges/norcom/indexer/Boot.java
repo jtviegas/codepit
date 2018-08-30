@@ -48,7 +48,7 @@ public class Boot {
 						throw new IllegalArgumentException(
 								String.format("Cannot find file: %s", file.toAbsolutePath().toString()));
 					logger.info("going to index file: {}", filePath);
-					new Indexer().handle(file, url);
+					// new Indexer().handle(file, url);
 				} else {
 					new HelpFormatter().printHelp("indexer", options);
 				}

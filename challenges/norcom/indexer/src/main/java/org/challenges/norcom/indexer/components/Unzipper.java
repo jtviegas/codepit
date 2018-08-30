@@ -1,4 +1,4 @@
-package org.challenges.norcom.indexer;
+package org.challenges.norcom.indexer.components;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,18 +33,24 @@ public class Unzipper {
 		ZipInputStream zis = new ZipInputStream(new FileInputStream(file));
 		try {
 			ZipEntry zipEntry = zis.getNextEntry();
+
 			while (zipEntry != null) {
 				String fileName = zipEntry.getName();
 				File newFile = new File(folder.getAbsolutePath() + System.getProperty("file.separator") + fileName);
-				FileOutputStream fos = new FileOutputStream(newFile);
-				int len;
-				try {
-					while ((len = zis.read(buffer)) > 0) {
-						fos.write(buffer, 0, len);
+				if (zipEntry.isDirectory()) {
+					newFile.mkdirs();
+				} else {
+					FileOutputStream fos = new FileOutputStream(newFile);
+					int len;
+					try {
+						while ((len = zis.read(buffer)) > 0) {
+							fos.write(buffer, 0, len);
+						}
+					} finally {
+						fos.close();
 					}
-				} finally {
-					fos.close();
 				}
+
 				zipEntry = zis.getNextEntry();
 			}
 			zis.closeEntry();

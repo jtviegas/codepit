@@ -4,8 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.stream.Collectors;
 
+import org.challenges.norcom.indexer.components.Unzipper;
+import org.challenges.norcom.indexer.sources.mailboxes.MailboxHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
@@ -29,9 +36,12 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 public class Indexer {
 
 	private static final Logger logger = LoggerFactory.getLogger(Indexer.class);
-	/* private RestClient client; */
+	private final ExecutorService executor;
+	private final String metadata;
 
-	public Indexer() {
+	public Indexer(ExecutorService executor, String metadata) {
+		this.executor = executor;
+		this.metadata = metadata;
 		/* this.client = restClient; */
 
 		/*
@@ -45,6 +55,8 @@ public class Indexer {
 	public void handle(Path f, String url) {
 
 		try {
+			String srcFolder = unzip(f);
+			Path outputFolder = createBulkFiles(srcFolder);
 
 		} catch (IllegalArgumentException ia) {
 			throw ia;
@@ -53,13 +65,34 @@ public class Indexer {
 		}
 	}
 
-	private String createBulkFiles(String folder) {
+	Path createBulkFiles(final String folder) {
 
-		// File[] listingAllFiles = filePath.listFiles();
-		return null;
+		Path outputFolder = Paths.get(String.format("%s%s%s", System.getProperty("java.io.tmpdir"),
+				System.getProperty("file.separator"), UUID.randomUUID().toString()));
+		outputFolder.toFile().mkdirs();
+
+		List<CompletableFuture<Void>> tasks = Arrays.asList(Paths.get(folder).toFile().listFiles()).stream()
+				.filter(o -> o.isDirectory())
+				.map(d -> CompletableFuture
+						.runAsync(new MailboxHandler(Paths.get(d.getAbsolutePath()), outputFolder, metadata), executor))
+				.collect(Collectors.toList());
+		CompletableFuture<Void> futures = CompletableFuture.allOf(tasks.toArray(new CompletableFuture<?>[] {}));
+
+		futures.join();
+		return outputFolder;
 	}
 
-	private String unzip(Path file) throws IOException {
+	public void listFilesForFolder(final File folder) {
+		for (final File fileEntry : folder.listFiles()) {
+			if (fileEntry.isDirectory()) {
+				listFilesForFolder(fileEntry);
+			} else {
+				System.out.println(fileEntry.getName());
+			}
+		}
+	}
+
+	String unzip(Path file) throws IOException {
 
 		String destinationFolder = String.format("%s%s%s", System.getProperty("java.io.tmpdir"),
 				System.getProperty("file.separator"), UUID.randomUUID().toString());

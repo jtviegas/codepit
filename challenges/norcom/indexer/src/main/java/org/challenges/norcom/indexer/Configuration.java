@@ -1,10 +1,14 @@
 package org.challenges.norcom.indexer;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 @ComponentScan
 @EnableAutoConfiguration
@@ -15,7 +19,7 @@ public class Configuration {
 	private double blockingCoefficient;
 
 	@Bean
-	public ThreadPoolTaskExecutor threadPoolTaskExecutor() {
+	public ExecutorService executorService() {
 
 		if (1 < blockingCoefficient || 0 > blockingCoefficient)
 			throw new RuntimeException("blockingCoefficient should be in between [0.0,1.0]");
@@ -27,13 +31,9 @@ public class Configuration {
 		int maxPoolSize = (int) (blockingCoefficient == 1.0 ? corePoolSize * 10
 				: corePoolSize / (1 - blockingCoefficient));
 
-		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(corePoolSize);
-		executor.setMaxPoolSize(maxPoolSize);
-		executor.setThreadNamePrefix("csloganalyzer-pool-");
-		executor.setWaitForTasksToCompleteOnShutdown(true);
-		executor.initialize();
-		executor.setDaemon(true);
-		return executor;
+		ExecutorService pool = Executors.newFixedThreadPool(maxPoolSize,
+				new ThreadFactoryBuilder().setDaemon(true).setNameFormat("Indexer-pool-%d").build());
+
+		return pool;
 	}
 }
