@@ -1,4 +1,4 @@
-# elastic search exercise
+# elasticsearch exercise
 
 
 ## notes
