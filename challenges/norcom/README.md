@@ -10,7 +10,7 @@ This is still an ongoing development, there is still the UI to be developed and 
 ## running the solution
 
 1. load elasticsearch docker container (requires docker machine): `$./load_elasticsearch.sh`
-2. load both projects, indexer and backend, into eclipse(or any other ide) as maven projects;
-3. run indexer tests - will load the enron.zip into elastic search; all configuration can be changed in application.properties, if needed be we can use custom ones outside the jar;
-4. run backend project and test the search query in the swagger-ui;
+2. load both projects, _indexer_ and _backend_, into eclipse(or any other ide) as maven projects;
+3. run indexer tests - will load the `enron.zip` into elasticsearch; all configuration can be changed in `application.properties`, if needed be we can use custom ones outside the jar;
+4. run _backend_ project and test the search query in `http://localhost:8080/swagger-ui.html`;
 
