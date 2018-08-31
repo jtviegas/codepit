@@ -17,26 +17,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestContextManager;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
-@ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class BootTests {
 
 	private RestTemplate client;
 	private HttpHeaders headers;
 
-	private TestContextManager testContextManager;
-
 	@Test
 	public void test_01_query_paper() {
 
-		ResponseEntity<List<Map<String, Object>>> response = client.exchange("localhost:8080/api/query?query=paper",
-				HttpMethod.GET, new HttpEntity<>(headers), new ParameterizedTypeReference<List<Map<String, Object>>>() {
+		ResponseEntity<List<Map<String, Object>>> response = client.exchange(
+				"http://localhost:8080/api/query?query=paper", HttpMethod.GET, new HttpEntity<>(headers),
+				new ParameterizedTypeReference<List<Map<String, Object>>>() {
 				});
 
 		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -46,8 +42,6 @@ public class BootTests {
 	@Before
 	public void setUp() throws Exception {
 
-		this.testContextManager = new TestContextManager(getClass());
-		this.testContextManager.prepareTestInstance(this);
 		headers = new HttpHeaders();
 		headers.set("Accept", "application/json");
 		headers.setContentType(MediaType.APPLICATION_JSON);

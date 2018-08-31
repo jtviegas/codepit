@@ -12,7 +12,7 @@ import javax.annotation.PreDestroy;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
@@ -48,7 +48,7 @@ public class ElasticSearchQueryImpl implements ElasticSearchQuery {
 				.setQuery(QueryBuilders.termQuery("body", query)).get();
 
 		for (SearchHit hit : response.getHits())
-			r.add(hit.getSource());
+			r.add(hit.getSourceAsMap());
 
 		logger.trace("[query|out] size: {}", r.size());
 		return r;
@@ -59,7 +59,7 @@ public class ElasticSearchQueryImpl implements ElasticSearchQuery {
 	private void init() throws IOException {
 		logger.trace("[init|in]");
 		client = new PreBuiltTransportClient(Settings.EMPTY)
-				.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(host), port));
+				.addTransportAddress(new TransportAddress(InetAddress.getByName(host), port));
 		logger.trace("[init|out]");
 	}
 
