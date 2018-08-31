@@ -18,30 +18,30 @@ import org.springframework.stereotype.Service;
 @Service
 public class UnzipperImpl implements Unzipper {
 
-  private static final Logger logger = LoggerFactory.getLogger(UnzipperImpl.class);
-  
-	private File file;
+	private static final Logger logger = LoggerFactory.getLogger(UnzipperImpl.class);
+
 	private Path folder;
 
-	public UnzipperImpl(Path zipFile) throws IOException {
-	  logger.trace("[ () ] in - zipFile: {}", zipFile.toString());
+	public UnzipperImpl() throws IOException {
+		logger.trace("[ () ] in");
+
+		String destinationFolder = String.format("%s%s%s", System.getProperty("java.io.tmpdir"),
+				System.getProperty("file.separator"), UUID.randomUUID().toString());
+		folder = Paths.get(destinationFolder);
+		folder.toFile().mkdirs();
+
+		logger.trace("[ () ] out");
+	}
+
+	@Override
+	public Path unzip(Path zipFile) throws IOException {
+		logger.trace("[ unzip ] in - zipFile: {}", zipFile.toString());
+
 		if (!Files.probeContentType(zipFile).equalsIgnoreCase("application/zip"))
 			throw new IllegalArgumentException("not a zip file");
 
-		String destinationFolder = String.format("%s%s%s", System.getProperty("java.io.tmpdir"),
-        System.getProperty("file.separator"), UUID.randomUUID().toString());
-    folder = Paths.get(destinationFolder);
-    folder.toFile().mkdirs();
-    file = zipFile.toFile();
-    logger.trace("[ () ] out");
-	}
+		final File file = zipFile.toFile();
 
-	/* (non-Javadoc)
-   * @see org.challenges.norcom.indexer.services.unzipper.Unzipper#unzip()
-   */
-	@Override
-  public Path unzip() throws IOException {
-	  logger.trace("[ unzip ] in");
 		byte[] buffer = new byte[1024];
 		ZipInputStream zis = new ZipInputStream(new FileInputStream(file));
 		try {
@@ -49,7 +49,8 @@ public class UnzipperImpl implements Unzipper {
 
 			while (zipEntry != null) {
 				String fileName = zipEntry.getName();
-				File newFile = new File(folder.toFile().getAbsolutePath() + System.getProperty("file.separator") + fileName);
+				File newFile = new File(
+						folder.toFile().getAbsolutePath() + System.getProperty("file.separator") + fileName);
 				if (zipEntry.isDirectory()) {
 					newFile.mkdirs();
 				} else {
@@ -71,7 +72,7 @@ public class UnzipperImpl implements Unzipper {
 			return folder;
 		} finally {
 			zis.close();
-			 logger.trace("[ unzip ] out");
+			logger.trace("[ unzip ] out");
 		}
 
 	}

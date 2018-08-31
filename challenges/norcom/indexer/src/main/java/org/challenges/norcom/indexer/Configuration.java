@@ -1,5 +1,7 @@
 package org.challenges.norcom.indexer;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -8,6 +10,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 @ComponentScan
@@ -35,5 +39,18 @@ public class Configuration {
 				new ThreadFactoryBuilder().setDaemon(true).setNameFormat("Indexer-pool-%d").build());
 
 		return pool;
+	}
+
+	@Bean(name = "metadata")
+	public String metadata(@Value("${org.challenges.norcom.indexer.index.type}") String indexType,
+			@Value("${org.challenges.norcom.indexer.index.name}") String indexName) throws JsonProcessingException {
+
+		Map<String, Object> index = new HashMap<>();
+		index.put("_index", indexName);
+		index.put("_type", indexType);
+		Map<String, Object> metadata = new HashMap<>();
+		metadata.put("index", index);
+		return new ObjectMapper().writeValueAsString(metadata);
+
 	}
 }

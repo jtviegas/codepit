@@ -5,6 +5,6 @@ import java.nio.file.Path;
 
 public interface Unzipper {
 
-  Path unzip() throws IOException;
+	Path unzip(Path file) throws IOException;
 
 }
