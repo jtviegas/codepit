@@ -4,13 +4,14 @@
 ## notes
 
 This is still an ongoing development, there is still the UI to be developed and there are quite a few things to brush up:
-- backend tests are having a class loading issue, have to sort it out, but for the meantime we can use the swagger UI (`http://localhost:8080/swagger-ui.html`) to test the api;
-- indexer is interpreting zip files, example is the enron.zip file in the root of the project, use this one instead of e json file;
+- backend needs custom exception handling;
+- indexer is interpreting zip files, example is the enron.zip file in the root of the project, use this one instead of the json file;
 
 ## running the solution
 
 1. load elasticsearch docker container (requires docker machine): `$./load_elasticsearch.sh`
 2. load both projects, _indexer_ and _backend_, into eclipse(or any other ide) as maven projects;
-3. run indexer tests - will load the `enron.zip` into elasticsearch; all configuration can be changed in `application.properties`, if needed be we can use custom ones outside the jar;
-4. run _backend_ project and test the search query in `http://localhost:8080/swagger-ui.html`;
+3. run indexer tests (just one so far) - will load the `enron.zip` into elasticsearch; all configuration can be changed in `application.properties`, if needed be we can use custom ones outside the jar;
+4. run backend tests (just one so far), it will check the retieval of a set of documents;
+4. run _backend_ project and test any search query in `http://localhost:8080/swagger-ui.html`;
 
