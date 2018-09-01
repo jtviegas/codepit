@@ -1,5 +1,8 @@
 package org.aprestos.labs.challenges;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -74,43 +77,98 @@ public class ArraysAndStrings {
 
 		// Assert.assertEquals(3, sortSteps(strToIntArray("4 3 1 2")));
 
-		Assert.assertEquals(3, minSwapsToSort(strToIntArray("4 3 1 2")));
-		Assert.assertEquals(3, minSwapsToSort(strToIntArray("2 3 4 1 5")));
-		Assert.assertEquals(3, minSwapsToSort(strToIntArray("1 3 5 2 4 6 8")));
-
 		Assert.assertArrayEquals(
 				new int[][] { { 1, 3 }, { 2, 4 }, { 3, 5 }, { 4, 6 }, { 5, 7 }, { 6, 0 }, { 7, 2 }, { 8, 1 } },
 				sortItAndKeepInitialIndexes(strToIntArray("6 8 7 1 2 3 4 5")));
 
-		Assert.assertEquals(46, minSwapsToSort(strToIntArray(
+		Assert.assertArrayEquals(strToIntArray("1 2 3 4"), minSwapsToSortSortRationale(strToIntArray("4 3 1 2")));
+		Assert.assertArrayEquals(strToIntArray("1 2 3 4 5"), minSwapsToSortSortRationale(strToIntArray("2 3 4 1 5")));
+		Assert.assertArrayEquals(strToIntArray("1 2 3 4 5 6 8"),
+				minSwapsToSortSortRationale(strToIntArray("1 3 5 2 4 6 8")));
+
+		Assert.assertArrayEquals(
+				new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+						26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
+						50 },
+				minSwapsToSortSortRationale(strToIntArray(
+						"2 31 1 38 29 5 44 6 12 18 39 9 48 49 13 11 7 27 14 33 50 21 46 23 15 26 8 47 40 3 32 22 34 42 16 41 24 10 4 28 36 30 37 35 20 17 45 43 25 19")));
+
+		Assert.assertEquals(46, minSwapsToSortSort2(strToIntArray(
 				"2 31 1 38 29 5 44 6 12 18 39 9 48 49 13 11 7 27 14 33 50 21 46 23 15 26 8 47 40 3 32 22 34 42 16 41 24 10 4 28 36 30 37 35 20 17 45 43 25 19")));
 
 	}
 
-	private int minSwapsToSort(int[] arr) {
+	private int minSwapsToSortSort2(int[] arr) {
+
+		int steps = 0;
+		Map<Integer, Integer> r = sortItAndKeepInitialIndexes2(arr);
+
+		int index = 0;
+		for (Map.Entry<Integer, Integer> entry : r.entrySet()) {
+
+			if (arr[index] != entry.getKey().intValue()) {
+
+				swap(arr, entry.getValue(), index);
+				int swappedValue = arr[entry.getValue()];
+				r.put(new Integer(swappedValue), entry.getValue());
+				steps++;
+			}
+
+			index++;
+		}
+		return steps;
+	}
+
+	private int minSwapsToSortSort(int[] arr) {
 
 		int steps = 0;
 		int[][] r = sortItAndKeepInitialIndexes(arr);
 
-		int[] oldIndexMap = new int[arr.length];
-		for (int i = 0; i < oldIndexMap.length; i++)
-			oldIndexMap[i] = i;
-
 		for (int i = 0; i < r.length; i++) {
-			int val = r[i][0];
-			int ipos = r[i][1];
 
-			if (arr[i] != val) {
+			int value = r[i][0];
+			int origin = r[i][1];
 
-				swap1(arr, oldIndexMap[ipos], i);
-				oldIndexMap[i] = oldIndexMap[ipos];
-				// oldIndexMap[ipos] = i;
+			if (arr[i] != value) {
 
+				swap(arr, origin, i);
+				// but now arr[i] is in origin
+				for (int j = i; j < r.length; j++) {
+					if (r[j][0] == arr[origin]) {
+						r[j][1] = origin;
+						break;
+					}
+				}
 				steps++;
 			}
 		}
 
 		return steps;
+	}
+
+	private int[] minSwapsToSortSortRationale(int[] arr) {
+
+		int[][] r = sortItAndKeepInitialIndexes(arr);
+
+		for (int i = 0; i < r.length; i++) {
+
+			int value = r[i][0];
+			int origin = r[i][1];
+
+			if (arr[i] != value) {
+
+				swap1(arr, origin, i);
+				// but now arr[i] is in origin
+				for (int j = i; j < r.length; j++) {
+					if (r[j][0] == arr[origin]) {
+						r[j][1] = origin;
+						break;
+					}
+				}
+			}
+		}
+
+		return arr;
 	}
 
 	private int[] sortIt(int[] a) {
@@ -129,7 +187,25 @@ public class ArraysAndStrings {
 		}
 
 		sortAndKeepScore(r, 0, a.length - 1);
+
 		return r;
+
+	}
+
+	private Map<Integer, Integer> sortItAndKeepInitialIndexes2(int[] a) {
+
+		int[][] r = new int[a.length][];
+
+		for (int i = 0; i < a.length; i++) {
+			r[i] = new int[] { a[i], i };
+		}
+
+		Map<Integer, Integer> m = new LinkedHashMap<>();
+		sortAndKeepScore(r, 0, a.length - 1);
+		for (int[] i : r)
+			m.put(i[0], i[1]);
+
+		return m;
 
 	}
 
