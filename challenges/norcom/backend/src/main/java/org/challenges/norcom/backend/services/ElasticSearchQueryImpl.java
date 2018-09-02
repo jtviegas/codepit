@@ -43,9 +43,7 @@ public class ElasticSearchQueryImpl implements ElasticSearchQuery {
 
 		List<Map<String, Object>> r = new ArrayList<Map<String, Object>>();
 
-		SearchResponse response = client.prepareSearch(index)
-				// .setQuery(QueryBuilders.multiMatchQuery(query, "body", "Subject")).get();
-				.setQuery(QueryBuilders.termQuery("body", query)).get();
+		SearchResponse response = client.prepareSearch(index).setQuery(QueryBuilders.termQuery("body", query)).get();
 
 		for (SearchHit hit : response.getHits())
 			r.add(hit.getSourceAsMap());
