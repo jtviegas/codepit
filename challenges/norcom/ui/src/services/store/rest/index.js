@@ -8,7 +8,7 @@ class datastore {
         this.url = props.api.url;
 	}
 
-	searchObjs(term, callback) {
+	find(term, callback) {
         axios.get(this.url + `/query?query=${term}`)
             .then(response => callback(null,response)).catch(error => callback(error));
 	};

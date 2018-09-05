@@ -6,16 +6,10 @@ class DataService {
         this.store = new DataStoreFactory(config.datastore).get();
 	}
 
-	search(term, cb) {
+	search(term, callback) {
 		console.log('[DataService|getObjs|in] term:', term);
 		console.log('[DataService|getObjs|out]');
-        return this.store.searchObjs(term, cb);
-    };
-    
-    getObj(id, cb) {
-		console.log('[DataService|getObj|in] id:', id);
-		console.log('[DataService|getObj|out]');
-        return this.store.getObj(id, cb);
+        return this.store.find(term, callback);
     };
 
 };
