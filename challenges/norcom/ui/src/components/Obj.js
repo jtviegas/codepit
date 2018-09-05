@@ -6,13 +6,17 @@ class Obj extends React.Component {
 	
 	constructor(props){
 		super(props)
-		console.log('[Obj|constructor|in] props:', props);
+		console.log('[Obj|constructor|in]');
 		this.state = props.state;
 		this.context = props.context;
 		console.log('[Obj|constructor|out]');
 	}
 	
 	render(){
+		console.log('[Obj|render|in]');
+		console.log("app", this.app);
+        console.log("state", this.state);
+        console.log('[Obj|render|out]');
 		return (
 			<section>
 				<div className="form-row">
