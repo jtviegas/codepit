@@ -38,19 +38,15 @@ class App extends React.Component {
 	
 	render(){
 		console.log('[App|render|in]');
-		console.log('objs', this.state.objs);
-		console.log('state', this.state);
 		console.log('[App|render|out]');
 
-		const { app, state } = this;
 		const functions = { search: this.search };
-		const objs = this.state.objs;
 		return (
             <section className="container-fluid">
-				<Header state={state} functions={functions} />
-				<section className="container">
+            	<Header functions={functions} />
+				<section className="container">	
 					<Switch>
-						<Route path='/objs/:id' render={(props) => <Obj {...props} state={state} app={app} />} />	
+						<Route path='/objs/:id' render={(props) => <Obj {...props} objs={this.state.objs} />} />	
 						<Route path='/objs' render={ (props) => <Objs {...props} objs={this.state.objs} /> } />
 						<Redirect from='/' to='/objs' />
 					</Switch>
