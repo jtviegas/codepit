@@ -1,4 +1,6 @@
-package org.aprestos.labs.challenges;
+package org.aprestos.labs.challenges.stacksandqueues;
+
+import org.aprestos.labs.challenges.Node;
 
 public class Queue {
   
