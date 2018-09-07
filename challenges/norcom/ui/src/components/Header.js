@@ -6,7 +6,7 @@ class Header extends React.Component {
 	
 	constructor(props){
 		super(props)
-		this.state = props.state;
+		console.log(props)
 		this.functions = props.functions;
 		this.submit = this.submit.bind(this);
 	}
@@ -19,12 +19,10 @@ class Header extends React.Component {
 	
 	render(){
 		console.log('[Header|render|in]');
-		console.log("functions", this.functions);
-        console.log("state", this.state);
         console.log('[Header|render|out]');
 
 		return (
-			    <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-12">
+			    <nav className="navbar navbar-expand-md navbar-dark mb-12">
 			      <a className="navbar-brand">indexer</a>
 			      <div className="collapse navbar-collapse" id="navbarCollapse">
 			        <form className="form-inline mt-2 mt-md-0" onSubmit={this.submit}>
