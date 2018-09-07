@@ -9,7 +9,7 @@ import org.junit.runners.MethodSorters;
 public class Example {
 
 	@Test
-	public void test() throws Exception {
+	public void testTree() throws Exception {
 	  
 	  Tree a = new Tree(2);
 	  Tree.insert(a, 1, null);
@@ -27,6 +27,18 @@ public class Example {
     Tree.delete(a, 7);
 	  
 		Assert.assertEquals(a, b);
+	}
+	
+	@Test
+  public void testGraph() throws Exception {
+	  int[][] s = new int[][] {{0,1}, {1,2}, {1,5}, {2,5}, {2,3}, {3,4}, {5,4}};
+	  
+	  Graph g = new Graph();
+	  g.read(s, false);
+	  g.print();
+	  
+	  
+	  
 	}
 
 

@@ -55,25 +55,21 @@ public class Heap {
   
   void bubbleDown(int order) {
     int index = getIndex(order);
-    
     int young = youngChildIndex(order);
+    
     if( n < young ) return;
     
+    int minIndex = index;
     
+    for( int i=young; i<=(young+1) && i<=n; i++ )
+      if( data[minIndex] > data[i] )
+        minIndex = i;
     
-    if( data[index] < data[young] ) {
-      swap(young, index);
-      bubbleDown(young+1);
+    if(minIndex != index) {
+      swap(minIndex, index);
+      bubbleDown(minIndex+1);
     }
-    else {
-      int old = oldChildIndex(order);
-      if( n < old ) return;
-      if ( data[index] > data[old] ) {
-        swap(old, index);
-        bubbleDown(old+1);
-      }  
-    }
-    
+   
   }
   
   int extractMin() {
