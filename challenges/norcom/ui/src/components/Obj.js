@@ -6,7 +6,7 @@ class Obj extends React.Component {
 	
 	constructor(props){
 		super(props)
-		console.log('[Obj|constructor|in] props:', props);		
+		console.log('[Obj|constructor|in] props:', props);
 		console.log('[Obj|constructor|out]');
 	}
 	
@@ -50,8 +50,9 @@ class Obj extends React.Component {
 				    	<textarea className="form-control" id="textBody" rows="7" readOnly value={this.state.obj.body}/>
 				    </div>
 			    </div>
-
+			    <a href="#/objs" className="btn btn-primary btn-lg" role="button" aria-disabled="false">back to search</a>
 			</section>
+			
 			)
 	}
 };

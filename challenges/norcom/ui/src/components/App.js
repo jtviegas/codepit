@@ -32,25 +32,25 @@ class App extends React.Component {
 	
 	search(term){
 		console.log('[App|search|in] term:', term);
-		this.app.services.data.search(term, (e,os) => { this.change(os) });	
+		this.app.services.data.search(term, (e,os) => { this.change(os.data) });	
 		console.log('[App|search|out]');
 	}
 	
 	render(){
-		console.log('[App|render|in]');
+		console.log('[App|render|in]', this.props);
 		console.log('[App|render|out]');
 
 		const functions = { search: this.search };
 		return (
-            <section className="container-fluid">
-            	<Header functions={functions} />
-				<section className="container">	
+            <section>
+            	<Header functions={functions} state={this.state} />
+            	<main role="main" className="container">	
 					<Switch>
 						<Route path='/objs/:id' render={(props) => <Obj {...props} objs={this.state.objs} />} />	
 						<Route path='/objs' render={ (props) => <Objs {...props} objs={this.state.objs} /> } />
 						<Redirect from='/' to='/objs' />
 					</Switch>
-				</section>
+				</main>
 			</section>
 		)
 	}

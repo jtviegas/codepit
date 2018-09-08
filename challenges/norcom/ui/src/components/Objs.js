@@ -21,23 +21,33 @@ class Objs extends React.Component {
 				<div className="table-responsive">
 		            <table className="table table-striped">
 	       				<thead>
-	       					<tr>
-	       					<th className="col-1">from</th>
-	       					<th className="col-1">to</th>
-	       					<th className="col-1">date</th>
-	       					<th className="col-2">subject</th>
-	       					<th className="col-7">body</th>
+	       					<tr className="row">
+	       						<th className="col-3">
+	       							<tr><th>from</th></tr>
+	       							<tr><th>to</th></tr>
+	       						</th>
+	       						<th className="col-4">
+	       							<tr><th>date</th></tr>
+	       							<tr><th>subject</th></tr>
+       							</th>
+		       					<th className="col-5">body</th>
 	       					</tr>
 	       				</thead>
 	       				<tbody>
 			            { this.props.objs.map( (obj, i) => 
-			            	<tr key={i}>
-			            	<td className="col-1">{obj.From}</td>
-			            	<td className="col-1">{obj.To}</td>
-			            	<td className="col-1">{obj.Date}</td>
-			            	<td className="col-2"><NavLink to={"/objs/" + obj["Message-ID"]} className="card-link">{obj.Subject}</NavLink></td>
-			            	<td className="col-7">{obj.body}</td>
-			            	</tr> ) }
+			            	<tr key={i} className="row">
+			            		<td className="col-3">
+			            			<tr><td>{obj.From}</td></tr>
+			            			<tr><td>{obj.To}</td></tr>
+			            		</td>
+			            		<td className="col-4">
+			            			<tr><td>{obj.Date}</td></tr>
+			            			<tr><td><NavLink to={"/objs/" + obj["Message-ID"]} className="card-link">{obj.Subject}</NavLink></td></tr>
+			            		</td>
+			            		<td className="col-5">{obj.body}</td>
+			            	</tr> 
+			            	
+			            ) }
 			            </tbody>
 		            </table>
 		        </div>

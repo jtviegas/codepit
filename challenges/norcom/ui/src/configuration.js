@@ -6,7 +6,7 @@ const configuration =  {
         url: "http://localhost:3000"
     }
     , datastore: {
-        mode: 'mock'
+        mode: 'rest'
         , defaultPageSize: 12
         , api: {
         	url: "http://localhost:8080/api"
