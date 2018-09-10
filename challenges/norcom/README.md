@@ -6,14 +6,14 @@
 This is still an ongoing development, there is still quite a few things to brush up:
 - backend needs custom exception handling;
 - indexer is interpreting zip files, example is the enron.zip file in the root of the project, use this one instead of the json file;
-- UI can benefit of loads of additional usability/design work, the focus was till now mainly on functionality;
+- UI can benefit of loads of additional usability/design work, the focus was until now mainly on functionality;
 
 ## running the solution
 
 1. load _elasticsearch_ docker container (requires docker machine): `$./load_elasticsearch.sh`
 2. load test set of documents into the _indexer_ ( requires java 8 ): `$./index_docs.sh`
 3. load _backend_ ( requires java 8, maven ): `$./load_backend.sh` , you can access swagger at `http://localhost:8080/swagger-ui.html`
-4. load _UI_ ( requires nodeNodeJS ^9.11, npm ^6.1 ): `$./load_ui.sh` , you can now access the UI app pointing the browser to `http://localhost:3000` . Try searching for `paper` for starters.
+4. load _UI_ ( requires node.js ^9.11 and npm ^6.1 ): `$./load_ui.sh` , you can now access the UI app pointing the browser to `http://localhost:3000` . Try searching for `paper` for starters.
 
 ## other features
 
