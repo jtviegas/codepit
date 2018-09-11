@@ -30,12 +30,13 @@ public class Graph {
   
   void insert(int x, int y, boolean directed) {
     
-    EdgeNode node = new EdgeNode();
-    node.weight = 0;
-    node.y = y;
-    node.next = edges[x];
+    //create a new edgenode and attach the other ones beneath
+    EdgeNode node = new EdgeNode(y, 0, edges[x] );
+   
     if(null == edges[x])
       nVertices++;
+    
+    // put itself on top of the linked list
     edges[x] = node;
     degree[x]++;
     
@@ -61,36 +62,54 @@ public class Graph {
   }
   
   void process_vertex_start(int v) {
-    
+   
   }
   
   void process_vertex_end(int v) {
-    
+    System.out.println(String.format("procesed vertex %d", v));
+  }
+  
+  void process_edge(int x, int y) {
+    System.out.println(String.format("processed edge %d<=>%d", x,y));
   }
   
   void bfs(int start) {
+    
     Queue<Integer> queue = Queues.newArrayDeque();
-    int v, y;
-    EdgeNode edge;
+    int x, y;
     boolean[] discovered = new boolean[MAX_VERTEX_NUMBER+1];
     boolean[] processed = new boolean[MAX_VERTEX_NUMBER+1];
     int[] parent = new int[MAX_VERTEX_NUMBER+1];
     
     queue.add(start);
     discovered[start] = true;
+    
     while(!queue.isEmpty()) {
-      v = queue.poll();
-      process_vertex_start(v);
-      EdgeNode p = edges[v];
+      x = queue.poll();
+      process_vertex_start(x);
+      processed[x] = true;
+      
+      EdgeNode p = edges[x];
       while(null != p) {
         y = p.y;
         
-        if( !processed[y] || directed )
-          discovered[y] = true;
-          
         
+        if( !processed[y] )
+          process_edge(x, y);
+        
+        if( !discovered[y] ) {
+          discovered[y] = true;
+          parent[y] = x;
+          queue.add(y);
+        }
+          
+        /*if( !processed[y] || directed )
+          discovered[y] = true;*/
+          
+        p = p.next;
       }
-      process_vertex_end(v);
+      processed[x] = true;
+      process_vertex_end(x);
     }
 
   }

@@ -36,6 +36,8 @@ public class Tests {
 		Graph g = new Graph();
 		g.read(s, false);
 		g.print();
+		
+		g.bfs(0);
 
 	}
 
