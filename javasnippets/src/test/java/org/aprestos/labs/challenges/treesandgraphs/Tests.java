@@ -1,5 +1,7 @@
 package org.aprestos.labs.challenges.treesandgraphs;
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -36,8 +38,9 @@ public class Tests {
 		Graph g = new Graph();
 		g.read(s, false);
 		g.print();
-		
-		g.bfs(0);
+
+		int[] parent = g.bfs(0);
+		System.out.println(Arrays.toString(g.find_path(2, 4, parent)));
 
 	}
 
