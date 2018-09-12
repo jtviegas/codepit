@@ -1,6 +1,6 @@
 package org.aprestos.labs.challenges.treesandgraphs;
 
-import java.util.Arrays;
+import java.lang.reflect.Array;
 import java.util.Queue;
 
 import com.google.common.collect.Queues;
@@ -21,7 +21,7 @@ public class Graph {
 	}
 
 	private int[] addToArray(int o, int index, int[] a) {
-		int[] r = null;
+		int[] r = a;
 		if (index >= a.length)
 			r = expandArray(a, index - a.length + 1);
 
@@ -30,28 +30,45 @@ public class Graph {
 		return r;
 
 	}
+	
+	private boolean[] addToArray(boolean o, int index, boolean[] a) {
+    boolean[] r = a;
+    if (index >= a.length)
+      r = expandArray(a, index - a.length + 1);
 
-	private <T> T[] addToObjArray(T o, int index, T[] a) {
-		T[] r = null;
+    r[index] = o;
+
+    return r;
+
+  }
+
+	private <T> T[] addToObjArray(Class<?> t, T o, int index, T[] a) {
+		T[] r = a;
 		if (index >= a.length)
-			r = expandObjArray(a, index - a.length + 1);
+			r = expandObjArray(t, a, index - a.length + 1);
 
 		r[index] = o;
 
 		return r;
-
 	}
 
 	private int[] expandArray(int[] a, int n) {
-		int[] r = new int[a.length + 1];
-		System.arraycopy(a, 0, r, 0, a.length + n);
+		int[] r = new int[a.length + n];
+		System.arraycopy(a, 0, r, 0, a.length);
 		return r;
 	}
+	
+	private boolean[] expandArray(boolean[] a, int n) {
+    boolean[] r = new boolean[a.length + n];
+    System.arraycopy(a, 0, r, 0, a.length);
+    return r;
+  }
 
-	private <T> T[] expandObjArray(T[] a, int n) {
+	private <T> T[] expandObjArray(Class<?> t, T[] a, int n) {
 		@SuppressWarnings("unchecked")
-		T[] r = (T[]) new Object[a.length + 1];
-		System.arraycopy(a, 0, r, 0, a.length + n);
+		
+		T[] r = (T[]) Array.newInstance(t, a.length + n);
+		System.arraycopy(a, 0, r, 0, a.length);
 		return r;
 	}
 
@@ -67,13 +84,13 @@ public class Graph {
 	void insert(int x, int y, boolean directed) {
 
 		// create a new edgenode and attach the other ones beneath
-		EdgeNode node = new EdgeNode(y, 0, edges[x]);
+		EdgeNode node = new EdgeNode(y, 0, edges.length > x ? edges[x] : null );
 
-		if (null == edges[x])
+		if (edges.length > x && null == edges[x])
 			nVertices++;
 
 		// put itself on top of the linked list
-		edges = addToObjArray(node, x, edges);
+		edges = addToObjArray(EdgeNode.class, node, x, edges);
 		if (x >= degree.length)
 			degree = addToArray(1, x, degree);
 		else
@@ -114,7 +131,7 @@ public class Graph {
 
 	int[] find_path(int start, int end, int[] parent) {
 		int count = 0;
-		int[] r = new int[MAX_VERTEX_NUMBER + 1];
+		int[] r = new int[] {};
 		int v = end;
 
 		r[count++] = v;
@@ -130,18 +147,17 @@ public class Graph {
 
 		Queue<Integer> queue = Queues.newArrayDeque();
 		int x, y;
-		boolean[] discovered = new boolean[MAX_VERTEX_NUMBER + 1];
-		boolean[] processed = new boolean[MAX_VERTEX_NUMBER + 1];
-		int[] parent = new int[MAX_VERTEX_NUMBER + 1];
-		Arrays.fill(parent, -1);
+		boolean[] discovered = new boolean[] {};
+		boolean[] processed = new boolean[] {};
+		int[] parent = new int[] {};
 
 		queue.add(start);
-		discovered[start] = true;
+		parent = addToArray(-1, start, parent);
+		discovered = addToArray(true, start, discovered);
 
 		while (!queue.isEmpty()) {
 			x = queue.poll();
 			process_vertex_start(x);
-			processed[x] = true;
 
 			EdgeNode p = edges[x];
 			while (null != p) {
@@ -151,8 +167,8 @@ public class Graph {
 					process_edge(x, y);
 
 				if (!discovered[y]) {
-					discovered[y] = true;
-					parent[y] = x;
+					discovered = addToArray(true, y, discovered);
+					parent = addToArray(x, y, parent);
 					queue.add(y);
 				}
 
@@ -162,7 +178,7 @@ public class Graph {
 
 				p = p.next;
 			}
-			processed[x] = true;
+			processed = addToArray(true, x, processed);
 			process_vertex_end(x);
 		}
 
