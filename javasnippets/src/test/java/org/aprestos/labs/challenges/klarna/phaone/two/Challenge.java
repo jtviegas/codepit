@@ -1,4 +1,4 @@
-package org.aprestos.labs.challenges.klarna.two;
+package org.aprestos.labs.challenges.klarna.phaone.two;
 
 import static org.junit.Assert.assertEquals;
 

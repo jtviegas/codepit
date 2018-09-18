@@ -1,4 +1,4 @@
-package org.aprestos.labs.challenges.klarna.three;
+package org.aprestos.labs.challenges.klarna.phaone.three;
 
 import static org.junit.Assert.assertEquals;
 

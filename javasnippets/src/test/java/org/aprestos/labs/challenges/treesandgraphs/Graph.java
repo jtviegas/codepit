@@ -1,117 +1,107 @@
 package org.aprestos.labs.challenges.treesandgraphs;
 
 import java.lang.reflect.Array;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.google.common.collect.Queues;
 
 public class Graph {
-	/*
-	 * private static final int MAX_VERTEX_NUMBER = 1000;
-	 */
 
-	EdgeNode[] edges = new EdgeNode[] {};
-	int[] degree = new int[] {};
-	int nVertices;
-	int nEdges;
+	List<Integer>[] edges;
 	boolean directed;
+	int numEdge;
+	// helping hands
+	boolean[] discovered;
+	boolean[] processed;
+	int[] parent;
 
-	private void init(boolean directed) {
+	@SuppressWarnings("unchecked")
+	Graph(int n, boolean directed) {
 		this.directed = directed;
+		this.edges = (List<Integer>[]) Array.newInstance(List.class, n);
 	}
 
-	private int[] addToArray(int o, int index, int[] a) {
-		int[] r = a;
-		if (index >= a.length)
-			r = expandArray(a, index - a.length + 1);
+	static Graph read(int[][] def, int n, boolean directed) {
 
-		r[index] = o;
-
-		return r;
-
-	}
-	
-	private boolean[] addToArray(boolean o, int index, boolean[] a) {
-    boolean[] r = a;
-    if (index >= a.length)
-      r = expandArray(a, index - a.length + 1);
-
-    r[index] = o;
-
-    return r;
-
-  }
-
-	private <T> T[] addToObjArray(Class<?> t, T o, int index, T[] a) {
-		T[] r = a;
-		if (index >= a.length)
-			r = expandObjArray(t, a, index - a.length + 1);
-
-		r[index] = o;
-
-		return r;
-	}
-
-	private int[] expandArray(int[] a, int n) {
-		int[] r = new int[a.length + n];
-		System.arraycopy(a, 0, r, 0, a.length);
-		return r;
-	}
-	
-	private boolean[] expandArray(boolean[] a, int n) {
-    boolean[] r = new boolean[a.length + n];
-    System.arraycopy(a, 0, r, 0, a.length);
-    return r;
-  }
-
-	private <T> T[] expandObjArray(Class<?> t, T[] a, int n) {
-		@SuppressWarnings("unchecked")
-		
-		T[] r = (T[]) Array.newInstance(t, a.length + n);
-		System.arraycopy(a, 0, r, 0, a.length);
-		return r;
-	}
-
-	void read(int[][] def, boolean directed) {
-
-		init(directed);
+		Graph r = new Graph(n, directed);
 
 		for (int i = 0; i < def.length; i++)
-			insert(def[i][0], def[i][1], directed);
+			r.insert(def[i][0], def[i][1], directed);
 
+		return r;
 	}
 
 	void insert(int x, int y, boolean directed) {
 
-		// create a new edgenode and attach the other ones beneath
-		EdgeNode node = new EdgeNode(y, 0, edges.length > x ? edges[x] : null );
+		List<Integer> al = null;
+		if (null == (al = edges[x])) {
+			al = new LinkedList<Integer>();
+			edges[x] = al;
+		}
 
-		if (edges.length > x && null == edges[x])
-			nVertices++;
-
-		// put itself on top of the linked list
-		edges = addToObjArray(EdgeNode.class, node, x, edges);
-		if (x >= degree.length)
-			degree = addToArray(1, x, degree);
-		else
-			degree[x]++;
-
+		al.add(y);
+		numEdge++;
 		if (!directed)
 			insert(y, x, true);
-		else
-			nEdges++;
 
 	}
 
-	void print() {
+	boolean isThereEdge(int x, int y) {
+		boolean r = false;
 
-		for (int i = 0; i < nVertices; i++) {
+		List<Integer> al = null;
+		if (null != (al = edges[x])) {
+			al = new LinkedList<Integer>();
+			r = al.contains(y);
+		}
+
+		return r;
+	}
+
+	int[] findSuccessors(int x) {
+		int[] r = new int[0];
+		List<Integer> al = null;
+		if (null != (al = edges[x])) {
+			al = new LinkedList<Integer>();
+			r = new int[al.size()];
+			int index = 0;
+			for (Integer i : al)
+				r[index++] = i;
+		}
+
+		return r;
+	}
+
+	void remove(int x, int y) {
+
+		List<Integer> al = null;
+		if (null != (al = edges[x])) {
+			al = new LinkedList<Integer>();
+			al.remove(y);
+			if (!directed)
+				remove(y, x);
+			numEdge--;
+		}
+
+	}
+
+	boolean isTherePath(int x, int y) {
+		return 0 < find_path(x, y, bfs(0)).length;
+	}
+
+	void print() {
+		System.out.println(String.format("vertex: %d", edges.length));
+		for (int i = 0; i < edges.length; i++) {
 			System.out.print(String.format("%d: ", i));
-			EdgeNode p = edges[i];
-			while (null != p) {
-				System.out.print(String.format(" %d", p.y));
-				p = p.next;
-			}
+			List<Integer> al = null;
+			if (null != (al = edges[i]))
+				for (Integer edge : al)
+					System.out.print(String.format(" %d", edge));
 			System.out.print(System.getProperty("line.separator"));
 		}
 
@@ -130,59 +120,106 @@ public class Graph {
 	}
 
 	int[] find_path(int start, int end, int[] parent) {
-		int count = 0;
-		int[] r = new int[] {};
+		List<Integer> r = new LinkedList<Integer>();
 		int v = end;
+		boolean found = false;
 
-		r[count++] = v;
-		while (-1 < parent[v])
-			r[count++] = (v = parent[v]);
+		r.add(v);
+		while (-1 < parent[v]) {
+			v = parent[v];
+			r.add(v);
+			if (v == start) {
+				found = true;
+				break;
+			}
+		}
 
-		int[] o = new int[count];
-		System.arraycopy(r, 0, o, 0, count);
+		int[] o = null;
+		if (found) {
+			o = new int[r.size()];
+
+			for (int i = 0; i < r.size(); i++)
+				o[i] = r.get(i);
+		} else
+			o = new int[0];
+
 		return o;
 	}
 
 	int[] bfs(int start) {
 
 		Queue<Integer> queue = Queues.newArrayDeque();
-		int x, y;
-		boolean[] discovered = new boolean[] {};
-		boolean[] processed = new boolean[] {};
-		int[] parent = new int[] {};
+		discovered = new boolean[edges.length];
+		processed = new boolean[edges.length];
+		parent = new int[edges.length];
+
+		int x;
 
 		queue.add(start);
-		parent = addToArray(-1, start, parent);
-		discovered = addToArray(true, start, discovered);
+		parent[start] = -1;
+		discovered[start] = true;
 
 		while (!queue.isEmpty()) {
 			x = queue.poll();
 			process_vertex_start(x);
 
-			EdgeNode p = edges[x];
-			while (null != p) {
-				y = p.y;
+			List<Integer> al = null;
+			if (null != (al = edges[x]))
+				for (Integer y : al) {
+					if (!processed[y])
+						process_edge(x, y);
 
-				if (!processed[y])
-					process_edge(x, y);
+					if (!discovered[y]) {
+						discovered[y] = true;
+						parent[y] = x;
+						queue.add(y);
+					}
 
-				if (!discovered[y]) {
-					discovered = addToArray(true, y, discovered);
-					parent = addToArray(x, y, parent);
-					queue.add(y);
 				}
-
-				/*
-				 * if( !processed[y] || directed ) discovered[y] = true;
-				 */
-
-				p = p.next;
-			}
-			processed = addToArray(true, x, processed);
+			processed[x] = true;
 			process_vertex_end(x);
 		}
 
 		return parent;
+	}
+
+	int[] do_dfs(int start) {
+
+		Stack<Integer> st = new Stack<Integer>();
+		discovered = new boolean[edges.length];
+		processed = new boolean[edges.length];
+		parent = new int[edges.length];
+
+		discovered[start] = true;
+		parent[start] = -1;
+		st.add(start);
+		dfs(st);
+
+		return parent;
+	}
+
+	void dfs(Stack<Integer> st) {
+
+		Integer o = st.pop();
+		System.out.println(String.format("dfs'ing %d", o));
+		List<Integer> al = null;
+		if (null != (al = edges[o])) {
+			for (Integer e : al) {
+				if (!discovered[e]) {
+					discovered[e] = true;
+					st.add(e);
+					parent[e] = o;
+					dfs(st);
+				}
+			}
+		}
+		processed[o] = true;
+
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

@@ -1,4 +1,4 @@
-package org.aprestos.labs.challenges.klarna.three;
+package org.aprestos.labs.challenges.klarna.phaone.three;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
