@@ -36,7 +36,7 @@ public class Tests {
 	public void test_01() throws Exception {
 		scheduler.Set_timer2(1000, CB.create("S"));
 		scheduler.Set_timer2(300, CB.create("A"));
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		Assert.assertEquals("AS", stdOut.toString());
 	}
 
@@ -45,7 +45,7 @@ public class Tests {
 		scheduler.Set_timer2(1000, CB.create("S"));
 		Thread.sleep(1001);
 		scheduler.Set_timer2(300, CB.create("A"));
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		Assert.assertEquals("SA", stdOut.toString());
 	}
 
@@ -56,7 +56,7 @@ public class Tests {
 		scheduler.Set_timer2(1020, CB.create("C"));
 		scheduler.Set_timer2(1001, CB.create("b"));
 		scheduler.Set_timer2(100, CB.create("a"));
-		Thread.sleep(8000);
+		Thread.sleep(12000);
 		Assert.assertEquals("aAbBC", stdOut.toString());
 	}
 

@@ -57,7 +57,7 @@ public class Scheduler {
 
 		while (on) {
 			try {
-				Thread.sleep(250);
+				Thread.sleep(100);
 			} catch (InterruptedException ignoreMe) {
 			}
 			Task task = null;

@@ -40,7 +40,7 @@ public class OS {
 				}
 			}
 			try {
-				Thread.sleep(500);
+				Thread.sleep(100);
 			} catch (InterruptedException ignoreMe) {
 			}
 		}
