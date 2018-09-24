@@ -1,4 +1,4 @@
-package org.aprestos.labs.challenges.stacksandqueues;
+package org.aprestos.labs.challenges.cci.stacksandqueues;
 
 public class Heap {
 

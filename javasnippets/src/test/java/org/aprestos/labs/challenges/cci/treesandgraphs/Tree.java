@@ -1,4 +1,4 @@
-package org.aprestos.labs.challenges.treesandgraphs;
+package org.aprestos.labs.challenges.cci.treesandgraphs;
 
 public class Tree {
 

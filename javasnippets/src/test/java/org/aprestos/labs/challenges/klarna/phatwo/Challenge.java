@@ -1,5 +1,10 @@
 package org.aprestos.labs.challenges.klarna.phatwo;
 
+
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -8,11 +13,10 @@ import org.junit.runners.MethodSorters;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class Challenge {
 
-	Solution o = new Solution();
-
 	@Test
 	public void test() throws Exception {
-		Assert.assertEquals(0, o.solution(new int[] {}));
+	  Assert.assertEquals(2, Solution.maxProfit(new int[] {1,2,3}));
+		Assert.assertEquals(12, Solution.maxProfit(new int[] {1,2,3,2,4,6,4,13,5,6}));
 	}
 
 }
@@ -20,17 +24,29 @@ public class Challenge {
 class Solution {
 
 	public static int maxProfit(int[] prices) {
-		int r;
 
-		int lp = 0;
-		int hp = prices.length - 1;
-		int diff = prices[hp] - prices[lp];
-
-		for (int i = 0; i < prices.length - 1; i++) {
-
+		List<Integer> yields = new LinkedList<Integer>();
+		int buy = Integer.MAX_VALUE;
+		int yield = 0;
+		
+		for (int i = 0; i < prices.length; i++) {
+		  if( prices[i] < buy ) {
+		    if(yield > 0)
+		      yields.add(yield);
+		    buy = prices[i];
+		    yield = 0;
+		  } 
+		  else if( (prices[i] - buy) > yield ) {
+		    yield = prices[i] - buy;
+		  }
 		}
-
-		return r;
+		
+		if(yield > 0)
+          yields.add(yield);
+		if( 0 < yields.size())
+		  return Collections.max(yields);
+		else
+		  return 0;
 	}
 
 	public static int maxProfitDumb(int[] prices) {
