@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 class CsvStatementProcessor implements StatementProcessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(CsvStatementProcessor.class);
-	
+
 	private final StatementValidator validator;
 	private final StatementTransformer<String> transformer;
 
@@ -47,10 +47,9 @@ class CsvStatementProcessor implements StatementProcessor {
 			while ((line = reader.readLine()) != null && 0 < line.length()) {
 				logger.trace("[process] processing line: {}", line);
 				Statement statement = transformer.toStatement(line);
-				if (!validator.validate(statement)) {
+				if (!validator.validate(statement))
 					notvalid.add(String.format("%d,%s", statement.getReference(), statement.getDescription()));
-					//TODO
-				}
+
 			}
 
 		} catch (IOException e1) {
@@ -60,7 +59,7 @@ class CsvStatementProcessor implements StatementProcessor {
 				try {
 					reader.close();
 				} catch (IOException e2) {
-					logger.error("[handle]...when trying to close the reader...", e2);
+					logger.error("[process]...when trying to close the reader...", e2);
 				}
 		}
 
