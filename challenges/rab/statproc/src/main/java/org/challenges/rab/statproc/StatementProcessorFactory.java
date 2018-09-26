@@ -1,5 +1,6 @@
 package org.challenges.rab.statproc;
 
+import org.challenges.rab.statproc.transformers.LineToStatement;
 import org.challenges.rab.statproc.validator.StatementValidatorFactory;
 
 public final class StatementProcessorFactory {
@@ -16,7 +17,7 @@ public final class StatementProcessorFactory {
 			result = new XmlStatementProcessor(StatementValidatorFactory.get());
 			break;
 		default:
-			result = new CsvStatementProcessor(StatementValidatorFactory.get());
+			result = new CsvStatementProcessor(StatementValidatorFactory.get(), new LineToStatement());
 		}
 
 		return result;

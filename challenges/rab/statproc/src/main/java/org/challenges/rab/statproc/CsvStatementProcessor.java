@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.challenges.rab.statproc.exceptions.StatementFormatException;
 import org.challenges.rab.statproc.exceptions.StatementProcessorException;
 import org.challenges.rab.statproc.statement.Statement;
+import org.challenges.rab.statproc.transformers.StatementTransformer;
 import org.challenges.rab.statproc.validator.StatementValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,27 +18,13 @@ import org.slf4j.LoggerFactory;
 class CsvStatementProcessor implements StatementProcessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(CsvStatementProcessor.class);
+	
 	private final StatementValidator validator;
+	private final StatementTransformer<String> transformer;
 
-	public CsvStatementProcessor(StatementValidator validator) {
+	public CsvStatementProcessor(StatementValidator validator, StatementTransformer<String> transformer) {
 		this.validator = validator;
-	}
-
-	private Statement fromLine(String line) throws StatementFormatException {
-
-		String[] s = line.split(",");
-		Statement o = new Statement();
-		try {
-			o.setReference(Integer.parseInt(s[0].trim()));
-			o.setAccountNumber(s[1].trim());
-			o.setDescription(s[2].trim());
-			o.setStartBalance(Double.parseDouble(s[3].trim()));
-			o.setMutation(Double.parseDouble(s[4].trim()));
-			o.setEndBalance(Double.parseDouble(s[5].trim()));
-		} catch (Exception e) {
-			throw new StatementFormatException(e);
-		}
-		return o;
+		this.transformer = transformer;
 	}
 
 	@Override
@@ -60,9 +46,11 @@ class CsvStatementProcessor implements StatementProcessor {
 			reader.readLine();// don't mind the first line
 			while ((line = reader.readLine()) != null && 0 < line.length()) {
 				logger.trace("[process] processing line: {}", line);
-				Statement statement = fromLine(line);
-				if (!validator.validate(statement))
+				Statement statement = transformer.toStatement(line);
+				if (!validator.validate(statement)) {
 					notvalid.add(String.format("%d,%s", statement.getReference(), statement.getDescription()));
+					//TODO
+				}
 			}
 
 		} catch (IOException e1) {

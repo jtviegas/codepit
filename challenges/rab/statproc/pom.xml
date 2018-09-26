@@ -17,8 +17,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<candidateName>joao.viegas</candidateName>
 		<version.junit>4.12</version.junit>
-		<version.mockito>2.22.0</version.mockito>
+		<version.mockito>2.15.0</version.mockito>
 		<version.java>1.8</version.java>
+		<version.commons.lang3>3.7</version.commons.lang3>
+		<version.logback>1.2.3</version.logback>
+		<version.slf4j>1.7.25</version.slf4j>
 	</properties>
 
 	<dependencies>
@@ -27,25 +30,25 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.8.1</version>
+			<version>${version.commons.lang3}</version>
 		</dependency>
 
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.25</version>
+			<version>${version.slf4j}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.2.3</version>
+			<version>${version.logback}</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
-			<version>1.2.3</version>
+			<version>${version.logback}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
@@ -73,7 +76,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+
 				<configuration>
 					<source>${version.java}</source>
 					<target>${version.java}</target>
