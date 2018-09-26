@@ -1,0 +1,72 @@
+<records>
+  <record reference="136069">
+    <accountNumber>NL74ABNA0248990274</accountNumber>
+    <description>Candy for Jan King</description>
+    <startBalance>14</startBalance>
+    <mutation>+43.23</mutation>
+    <endBalance>57.23</endBalance>
+  </record>
+  <record reference="156360">
+    <accountNumber>NL90ABNA0585647886</accountNumber>
+    <description>Candy for Jan King</description>
+    <startBalance>5429</startBalance>
+    <mutation>-939</mutation>
+    <endBalance>6368</endBalance>
+  </record>
+  <record reference="152624">
+    <accountNumber>NL46ABNA0625805417</accountNumber>
+    <description>Candy from Peter Dekker</description>
+    <startBalance>19.46</startBalance>
+    <mutation>-49.39</mutation>
+    <endBalance>-29.93</endBalance>
+  </record>
+  <record reference="100368">
+    <accountNumber>NL91RABO0315273637</accountNumber>
+    <description>Subscription from Peter King</description>
+    <startBalance>39.31</startBalance>
+    <mutation>-21.7</mutation>
+    <endBalance>17.61</endBalance>
+  </record>
+  <record reference="111932">
+    <accountNumber>NL74ABNA0248990274</accountNumber>
+    <description>Subscription from Rik Theuß</description>
+    <startBalance>84.85</startBalance>
+    <mutation>-27.47</mutation>
+    <endBalance>57.38</endBalance>
+  </record>
+  <record reference="167943">
+    <accountNumber>NL69ABNA0433647324</accountNumber>
+    <description>Subscription for Jan King</description>
+    <startBalance>85.68</startBalance>
+    <mutation>-38.35</mutation>
+    <endBalance>47.33</endBalance>
+  </record>
+  <record reference="143915">
+    <accountNumber>NL91RABO0315273637</accountNumber>
+    <description>Subscription for Rik Dekker</description>
+    <startBalance>10.1</startBalance>
+    <mutation>-0.3</mutation>
+    <endBalance>9.8</endBalance>
+  </record>
+  <record reference="195103">
+    <accountNumber>NL74ABNA0248990274</accountNumber>
+    <description>Subscription for Willem Bakker</description>
+    <startBalance>51.93</startBalance>
+    <mutation>-17.87</mutation>
+    <endBalance>34.06</endBalance>
+  </record>
+  <record reference="115256">
+    <accountNumber>NL69ABNA0433647324</accountNumber>
+    <description>Candy from Rik Theuß</description>
+    <startBalance>3980</startBalance>
+    <mutation>+1000</mutation>
+    <endBalance>4981</endBalance>
+  </record>
+  <record reference="105838">
+    <accountNumber>NL43AEGO0773393871</accountNumber>
+    <description>Flowers for Jan Theuß</description>
+    <startBalance>26.66</startBalance>
+    <mutation>+5.86</mutation>
+    <endBalance>32.52</endBalance>
+  </record>
+</records>
