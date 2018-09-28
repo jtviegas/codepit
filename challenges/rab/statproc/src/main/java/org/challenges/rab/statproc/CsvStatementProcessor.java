@@ -23,8 +23,10 @@ class CsvStatementProcessor implements StatementProcessor {
 	private final StatementTransformer<String> transformer;
 
 	public CsvStatementProcessor(StatementValidator validator, StatementTransformer<String> transformer) {
+		logger.trace("[()|in]");
 		this.validator = validator;
 		this.transformer = transformer;
+		logger.trace("[()|out]");
 	}
 
 	@Override
@@ -52,6 +54,10 @@ class CsvStatementProcessor implements StatementProcessor {
 
 			}
 
+			String[] r = notvalid.toArray(new String[] {});
+			logger.info("[process]...finished processing statements. Error report: {}", Arrays.toString(r));
+			return r;
+
 		} catch (IOException e1) {
 			throw new StatementProcessorException(e1);
 		} finally {
@@ -61,11 +67,9 @@ class CsvStatementProcessor implements StatementProcessor {
 				} catch (IOException e2) {
 					logger.error("[process]...when trying to close the reader...", e2);
 				}
+			logger.trace("[process|out]");
 		}
 
-		String[] r = notvalid.toArray(new String[] {});
-		logger.trace("[process|out] r: {}", Arrays.toString(r));
-		return r;
 	}
 
 }

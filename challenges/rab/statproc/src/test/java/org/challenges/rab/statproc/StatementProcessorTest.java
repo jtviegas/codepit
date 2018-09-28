@@ -8,9 +8,12 @@ import org.challenges.rab.statproc.StatementProcessorFactory.FileType;
 import org.challenges.rab.statproc.exceptions.StatementFormatException;
 import org.challenges.rab.statproc.exceptions.StatementProcessorException;
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
-public class StatementProcessorTests {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class StatementProcessorTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void test_null_csv() throws Exception {
@@ -45,7 +48,7 @@ public class StatementProcessorTests {
 
 		StatementProcessor processor = StatementProcessorFactory.getStatementProcessor(FileType.CSV);
 		Path records = Paths
-				.get(StatementProcessorTests.class.getClassLoader().getResource("records_valid.csv").toURI());
+				.get(StatementProcessorTest.class.getClassLoader().getResource("records_valid.csv").toURI());
 		String[] expected = new String[] {};
 		String[] actual = processor.process(records);
 		Assert.assertArrayEquals(expected, actual);
@@ -57,7 +60,7 @@ public class StatementProcessorTests {
 
 		StatementProcessor processor = StatementProcessorFactory.getStatementProcessor(FileType.CSV);
 		Path records = Paths
-				.get(StatementProcessorTests.class.getClassLoader().getResource("records_notvalid.csv").toURI());
+				.get(StatementProcessorTest.class.getClassLoader().getResource("records_notvalid.csv").toURI());
 
 		String[] expected = new String[] { "156360,Candy for Jan King" };
 		String[] actual = processor.process(records);
@@ -70,8 +73,8 @@ public class StatementProcessorTests {
 
 		StatementProcessor processor = StatementProcessorFactory.getStatementProcessor(FileType.CSV);
 
-		Path records = Paths.get(StatementProcessorTests.class.getClassLoader()
-				.getResource("records_notvalid_duplicated.csv").toURI());
+		Path records = Paths.get(
+				StatementProcessorTest.class.getClassLoader().getResource("records_notvalid_duplicated.csv").toURI());
 
 		String[] expected = new String[] { "112806,Clothes from Peter de Vries", "112806,Clothes for Daniel Theue" };
 		String[] actual = processor.process(records);
@@ -83,7 +86,7 @@ public class StatementProcessorTests {
 	public void test_csv_bad() throws Exception {
 
 		StatementProcessor processor = StatementProcessorFactory.getStatementProcessor(FileType.CSV);
-		Path records = Paths.get(StatementProcessorTests.class.getClassLoader().getResource("bad.csv").toURI());
+		Path records = Paths.get(StatementProcessorTest.class.getClassLoader().getResource("bad.csv").toURI());
 		processor.process(records);
 		Assert.fail();
 	}
@@ -91,7 +94,7 @@ public class StatementProcessorTests {
 	@Test
 	public void test_csv_empty() throws Exception {
 		StatementProcessor processor = StatementProcessorFactory.getStatementProcessor(FileType.CSV);
-		Path records = Paths.get(StatementProcessorTests.class.getClassLoader().getResource("empty.csv").toURI());
+		Path records = Paths.get(StatementProcessorTest.class.getClassLoader().getResource("empty.csv").toURI());
 		String[] expected = new String[] {};
 		String[] actual = processor.process(records);
 		Assert.assertArrayEquals(expected, actual);
@@ -102,7 +105,7 @@ public class StatementProcessorTests {
 	public void test_csv_empty_really() throws Exception {
 		StatementProcessor processor = StatementProcessorFactory.getStatementProcessor(FileType.CSV);
 		Path records = Paths
-				.get(StatementProcessorTests.class.getClassLoader().getResource("really_empty.csv").toURI());
+				.get(StatementProcessorTest.class.getClassLoader().getResource("really_empty.csv").toURI());
 		String[] expected = new String[] {};
 		String[] actual = processor.process(records);
 		Assert.assertArrayEquals(expected, actual);
@@ -114,7 +117,7 @@ public class StatementProcessorTests {
 
 		StatementProcessor processor = StatementProcessorFactory.getStatementProcessor(FileType.XML);
 		Path records = Paths
-				.get(StatementProcessorTests.class.getClassLoader().getResource("records_valid.xml").toURI());
+				.get(StatementProcessorTest.class.getClassLoader().getResource("records_valid.xml").toURI());
 		String[] expected = new String[] {};
 		String[] actual = processor.process(records);
 		Assert.assertArrayEquals(expected, actual);
@@ -125,7 +128,7 @@ public class StatementProcessorTests {
 
 		StatementProcessor processor = StatementProcessorFactory.getStatementProcessor(FileType.XML);
 		Path records = Paths
-				.get(StatementProcessorTests.class.getClassLoader().getResource("records_notvalid.xml").toURI());
+				.get(StatementProcessorTest.class.getClassLoader().getResource("records_notvalid.xml").toURI());
 		String[] expected = new String[] { "156360,Candy for Jan King", "115256,Candy from Rik Theuß" };
 		String[] actual = processor.process(records);
 		Assert.assertArrayEquals(expected, actual);
@@ -135,31 +138,28 @@ public class StatementProcessorTests {
 	public void test_xml_bad() throws Exception {
 
 		StatementProcessor processor = StatementProcessorFactory.getStatementProcessor(FileType.XML);
-		Path records = Paths.get(StatementProcessorTests.class.getClassLoader().getResource("bad.xml").toURI());
+		Path records = Paths.get(StatementProcessorTest.class.getClassLoader().getResource("bad.xml").toURI());
 		processor.process(records);
 		Assert.fail();
-		;
-
 	}
 
 	@Test
 	public void test_xml_empty() throws Exception {
 		StatementProcessor processor = StatementProcessorFactory.getStatementProcessor(FileType.XML);
-		Path records = Paths.get(StatementProcessorTests.class.getClassLoader().getResource("empty.xml").toURI());
+		Path records = Paths.get(StatementProcessorTest.class.getClassLoader().getResource("empty.xml").toURI());
 		String[] expected = new String[] {};
 		String[] actual = processor.process(records);
 		Assert.assertArrayEquals(expected, actual);
 
 	}
 
-	@Test
+	@Test(expected = StatementFormatException.class)
 	public void test_xml_empty_really() throws Exception {
 		StatementProcessor processor = StatementProcessorFactory.getStatementProcessor(FileType.XML);
 		Path records = Paths
-				.get(StatementProcessorTests.class.getClassLoader().getResource("really_empty.xml").toURI());
-		String[] expected = new String[] {};
-		String[] actual = processor.process(records);
-		Assert.assertArrayEquals(expected, actual);
+				.get(StatementProcessorTest.class.getClassLoader().getResource("really_empty.xml").toURI());
+		processor.process(records);
+		Assert.fail();
 
 	}
 
