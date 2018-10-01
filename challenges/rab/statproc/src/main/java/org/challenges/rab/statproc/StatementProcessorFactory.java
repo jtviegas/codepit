@@ -5,7 +5,7 @@ import org.challenges.rab.statproc.validator.StatementValidatorFactory;
 
 public final class StatementProcessorFactory {
 
-	public static enum FileType {
+	public enum FileType {
 		CSV, XML
 	};
 

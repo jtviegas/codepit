@@ -1,5 +1,6 @@
 package org.challenges.rab.statproc.validator;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,8 +28,12 @@ class StatementValidatorImpl implements StatementValidator {
 			r = false;
 		else {
 			statements.add(s.getReference());
-			double endBalance = Math.round((s.getStartBalance() + s.getMutation()) * 100.00) / 100.00;
-			r &= (0 == Double.compare(endBalance, s.getEndBalance()));
+			BigDecimal finalBalance = s.getStartBalance().add(s.getMutation());
+
+			//finalBalance.compareTo(balance);
+			//double endBalance = Math.round((s.getStartBalance() + s.getMutation()) * 100.00) / 100.00;
+			//r &= (0 == Double.compare(endBalance, s.getEndBalance()));
+			r &= (0 == finalBalance.compareTo(s.getEndBalance()));
 		}
 
 		logger.trace("[validate|out] => {}", r);

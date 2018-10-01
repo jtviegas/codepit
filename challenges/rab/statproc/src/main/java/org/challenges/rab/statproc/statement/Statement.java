@@ -1,5 +1,7 @@
 package org.challenges.rab.statproc.statement;
 
+import java.math.BigDecimal;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class Statement {
@@ -7,9 +9,9 @@ public class Statement {
 	private int reference;
 	private String accountNumber;
 	private String description;
-	private double startBalance;
-	private double mutation;
-	private double endBalance;
+	private BigDecimal startBalance;
+	private BigDecimal mutation;
+	private BigDecimal endBalance;
 
 	public Statement() {
 	}
@@ -38,27 +40,27 @@ public class Statement {
 		this.description = description;
 	}
 
-	public double getStartBalance() {
+	public BigDecimal getStartBalance() {
 		return startBalance;
 	}
 
-	public void setStartBalance(double startBalance) {
+	public void setStartBalance(BigDecimal startBalance) {
 		this.startBalance = startBalance;
 	}
 
-	public double getMutation() {
+	public BigDecimal getMutation() {
 		return mutation;
 	}
 
-	public void setMutation(double mutation) {
+	public void setMutation(BigDecimal mutation) {
 		this.mutation = mutation;
 	}
 
-	public double getEndBalance() {
+	public BigDecimal getEndBalance() {
 		return endBalance;
 	}
 
-	public void setEndBalance(double endBalance) {
+	public void setEndBalance(BigDecimal endBalance) {
 		this.endBalance = endBalance;
 	}
 
@@ -67,51 +69,57 @@ public class Statement {
 		return ToStringBuilder.reflectionToString(this);
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((accountNumber == null) ? 0 : accountNumber.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(endBalance);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(mutation);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + reference;
-		temp = Double.doubleToLongBits(startBalance);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
-	}
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((accountNumber == null) ? 0 : accountNumber.hashCode());
+    result = prime * result + ((description == null) ? 0 : description.hashCode());
+    result = prime * result + ((endBalance == null) ? 0 : endBalance.hashCode());
+    result = prime * result + ((mutation == null) ? 0 : mutation.hashCode());
+    result = prime * result + reference;
+    result = prime * result + ((startBalance == null) ? 0 : startBalance.hashCode());
+    return result;
+  }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Statement other = (Statement) obj;
-		if (accountNumber == null) {
-			if (other.accountNumber != null)
-				return false;
-		} else if (!accountNumber.equals(other.accountNumber))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (Double.doubleToLongBits(endBalance) != Double.doubleToLongBits(other.endBalance))
-			return false;
-		if (Double.doubleToLongBits(mutation) != Double.doubleToLongBits(other.mutation))
-			return false;
-		if (reference != other.reference)
-			return false;
-		if (Double.doubleToLongBits(startBalance) != Double.doubleToLongBits(other.startBalance))
-			return false;
-		return true;
-	}
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Statement other = (Statement) obj;
+    if (accountNumber == null) {
+      if (other.accountNumber != null)
+        return false;
+    } else if (!accountNumber.equals(other.accountNumber))
+      return false;
+    if (description == null) {
+      if (other.description != null)
+        return false;
+    } else if (!description.equals(other.description))
+      return false;
+    if (endBalance == null) {
+      if (other.endBalance != null)
+        return false;
+    } else if (!endBalance.equals(other.endBalance))
+      return false;
+    if (mutation == null) {
+      if (other.mutation != null)
+        return false;
+    } else if (!mutation.equals(other.mutation))
+      return false;
+    if (reference != other.reference)
+      return false;
+    if (startBalance == null) {
+      if (other.startBalance != null)
+        return false;
+    } else if (!startBalance.equals(other.startBalance))
+      return false;
+    return true;
+  }
+
 
 }

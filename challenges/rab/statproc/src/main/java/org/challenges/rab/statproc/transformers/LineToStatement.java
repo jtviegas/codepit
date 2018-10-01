@@ -1,5 +1,7 @@
 package org.challenges.rab.statproc.transformers;
 
+import java.math.BigDecimal;
+
 import org.challenges.rab.statproc.exceptions.StatementFormatException;
 import org.challenges.rab.statproc.statement.Statement;
 import org.slf4j.Logger;
@@ -19,9 +21,10 @@ public class LineToStatement implements StatementTransformer<String> {
 			o.setReference(Integer.parseInt(s[0].trim()));
 			o.setAccountNumber(s[1].trim());
 			o.setDescription(s[2].trim());
-			o.setStartBalance(Double.parseDouble(s[3].trim()));
-			o.setMutation(Double.parseDouble(s[4].trim()));
-			o.setEndBalance(Double.parseDouble(s[5].trim()));
+			
+			o.setStartBalance(new BigDecimal(s[3].trim()));
+			o.setMutation(new BigDecimal(s[4].trim()));
+			o.setEndBalance(new BigDecimal(s[5].trim()));
 			return o;
 		} catch (Exception e) {
 			throw new StatementFormatException(e);

@@ -1,5 +1,6 @@
 package org.challenges.rab.statproc;
 
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -46,9 +47,9 @@ class XmlStatementProcessor implements StatementProcessor {
 		functionMap = new HashMap<String, BiConsumer<Statement, String>>();
 		functionMap.put("accountNumber", (r, o) -> r.setAccountNumber(o));
 		functionMap.put("description", (r, o) -> r.setDescription(o));
-		functionMap.put("startBalance", (r, o) -> r.setStartBalance(Double.parseDouble(o)));
-		functionMap.put("mutation", (r, o) -> r.setMutation(Double.parseDouble(o)));
-		functionMap.put("endBalance", (r, o) -> r.setEndBalance(Double.parseDouble(o)));
+		functionMap.put("startBalance", (r, o) -> r.setStartBalance(new BigDecimal(o)));
+		functionMap.put("mutation", (r, o) -> r.setMutation(new BigDecimal(o)));
+		functionMap.put("endBalance", (r, o) -> r.setEndBalance(new BigDecimal(o)));
 		logger.trace("[init|out]");
 	}
 
