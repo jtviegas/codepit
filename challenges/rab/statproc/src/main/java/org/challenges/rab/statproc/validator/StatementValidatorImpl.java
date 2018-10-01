@@ -8,9 +8,15 @@ import org.challenges.rab.statproc.statement.Statement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * One simple implementation for the StatementValidator interface
+ * 
+ * @author jtviegas
+ *
+ */
 class StatementValidatorImpl implements StatementValidator {
 
-	private Set<Integer> statements;
+	private final Set<Integer> statements;
 	private static final Logger logger = LoggerFactory.getLogger(StatementValidatorImpl.class);
 
 	public StatementValidatorImpl() {
@@ -22,11 +28,8 @@ class StatementValidatorImpl implements StatementValidator {
 	@Override
 	public boolean validate(Statement s) {
 		logger.trace("[validate|in] statement:{}", s);
-		boolean r = true;
-
-		if (statements.contains(s.getReference()))
-			r = false;
-		else {
+		boolean r = false;
+		if (!statements.contains(s.getReference())) {
 			statements.add(s.getReference());
 			BigDecimal finalBalance = s.getStartBalance().add(s.getMutation());
 
@@ -34,6 +37,7 @@ class StatementValidatorImpl implements StatementValidator {
 			//double endBalance = Math.round((s.getStartBalance() + s.getMutation()) * 100.00) / 100.00;
 			//r &= (0 == Double.compare(endBalance, s.getEndBalance()));
 			r &= (0 == finalBalance.compareTo(s.getEndBalance()));
+
 		}
 
 		logger.trace("[validate|out] => {}", r);
