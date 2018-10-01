@@ -5,6 +5,7 @@ public class StatementProcessorException extends Exception {
 	private static final long serialVersionUID = 1L;
 
 	public StatementProcessorException() {
+	  super();
 	}
 
 	public StatementProcessorException(String arg0) {

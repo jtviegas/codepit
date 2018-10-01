@@ -4,21 +4,18 @@ import org.challenges.rab.statproc.transformers.LineToStatement;
 import org.challenges.rab.statproc.validator.StatementValidatorFactory;
 
 public final class StatementProcessorFactory {
-
+  
 	public enum FileType {
 		CSV, XML
 	};
 
-	public static StatementProcessor getStatementProcessor(FileType type) {
+	public StatementProcessor getStatementProcessor(final FileType type) {
 		StatementProcessor result = null;
-
-		switch (type) {
-		case XML:
-			result = new XmlStatementProcessor(StatementValidatorFactory.get());
-			break;
-		default:
-			result = new CsvStatementProcessor(StatementValidatorFactory.get(), new LineToStatement());
-		}
+		
+		if(type.equals(FileType.XML))
+		  result = new XmlStatementProcessor(new StatementValidatorFactory().get());
+		else if(type.equals(FileType.CSV))
+		  result = new CsvStatementProcessor(new StatementValidatorFactory().get(), new LineToStatement());
 
 		return result;
 	}

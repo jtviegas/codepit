@@ -13,14 +13,11 @@ public class Statement {
 	private BigDecimal mutation;
 	private BigDecimal endBalance;
 
-	public Statement() {
-	}
-
 	public int getReference() {
 		return reference;
 	}
 
-	public void setReference(int reference) {
+	public void setReference(final int reference) {
 		this.reference = reference;
 	}
 
@@ -28,7 +25,7 @@ public class Statement {
 		return accountNumber;
 	}
 
-	public void setAccountNumber(String accountNumber) {
+	public void setAccountNumber(final String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
 
@@ -36,7 +33,7 @@ public class Statement {
 		return description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
 
@@ -44,7 +41,7 @@ public class Statement {
 		return startBalance;
 	}
 
-	public void setStartBalance(BigDecimal startBalance) {
+	public void setStartBalance(final BigDecimal startBalance) {
 		this.startBalance = startBalance;
 	}
 
@@ -52,7 +49,7 @@ public class Statement {
 		return mutation;
 	}
 
-	public void setMutation(BigDecimal mutation) {
+	public void setMutation(final BigDecimal mutation) {
 		this.mutation = mutation;
 	}
 
@@ -60,7 +57,7 @@ public class Statement {
 		return endBalance;
 	}
 
-	public void setEndBalance(BigDecimal endBalance) {
+	public void setEndBalance(final BigDecimal endBalance) {
 		this.endBalance = endBalance;
 	}
 

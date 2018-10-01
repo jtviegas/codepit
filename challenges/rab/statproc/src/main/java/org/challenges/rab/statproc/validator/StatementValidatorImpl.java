@@ -17,36 +17,36 @@ import org.slf4j.LoggerFactory;
 class StatementValidatorImpl implements StatementValidator {
 
 	private final Set<Integer> statements;
-	private static final Logger logger = LoggerFactory.getLogger(StatementValidatorImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(StatementValidatorImpl.class);
 
 	public StatementValidatorImpl() {
-		logger.trace("[()|in]");
+		LOGGER.trace("[()|in]");
 		statements = new HashSet<Integer>();
-		logger.trace("[()|out]");
+		LOGGER.trace("[()|out]");
 	}
 
 	@Override
-	public boolean validate(Statement s) {
-		logger.trace("[validate|in] statement:{}", s);
-		boolean r = true;
+	public boolean validate(final Statement statement) {
+		LOGGER.trace("[validate|in] statement:{}", statement);
+		boolean result = true;
 		
-		if (!statements.contains(s.getReference())) {
-			statements.add(s.getReference());
-			BigDecimal finalBalance = s.getStartBalance().add(s.getMutation());
-			r &= (0 == finalBalance.compareTo(s.getEndBalance()));
+		if (!statements.contains(statement.getReference())) {
+			statements.add(statement.getReference());
+			BigDecimal finalBalance = statement.getStartBalance().add(statement.getMutation());
+			result &= 0 == finalBalance.compareTo(statement.getEndBalance());
 		}
 		else
-		  r = false;
+		  result = false;
 
-		logger.trace("[validate|out] => {}", r);
-		return r;
+		LOGGER.trace("[validate|out] => {}", result);
+		return result;
 	}
 
 	@Override
 	public void reset() {
-		logger.trace("[reset|in]");
+		LOGGER.trace("[reset|in]");
 		statements.clear();
-		logger.trace("[reset|out]");
+		LOGGER.trace("[reset|out]");
 	}
 
 }

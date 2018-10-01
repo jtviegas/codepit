@@ -1,8 +1,8 @@
 package org.challenges.rab.statproc.validator;
 
 public final class StatementValidatorFactory {
-
-	public static StatementValidator get() {
+  
+	public StatementValidator get() {
 		return new StatementValidatorImpl();
 	}
 
