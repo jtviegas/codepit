@@ -95,8 +95,8 @@ class XmlStatementProcessor implements StatementProcessor {
 		XMLStreamReader streamReader = null;
 		try {
 
-			XMLInputFactory factory = XMLInputFactory.newInstance();
-
+			final XMLInputFactory factory = XMLInputFactory.newInstance();
+			
 			// validate the xml, we just have to, even if it means opening another reader
 			validateXml(factory, file);
 

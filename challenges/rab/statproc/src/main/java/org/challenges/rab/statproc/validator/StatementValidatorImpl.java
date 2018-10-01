@@ -28,17 +28,15 @@ class StatementValidatorImpl implements StatementValidator {
 	@Override
 	public boolean validate(Statement s) {
 		logger.trace("[validate|in] statement:{}", s);
-		boolean r = false;
+		boolean r = true;
+		
 		if (!statements.contains(s.getReference())) {
 			statements.add(s.getReference());
 			BigDecimal finalBalance = s.getStartBalance().add(s.getMutation());
-
-			//finalBalance.compareTo(balance);
-			//double endBalance = Math.round((s.getStartBalance() + s.getMutation()) * 100.00) / 100.00;
-			//r &= (0 == Double.compare(endBalance, s.getEndBalance()));
 			r &= (0 == finalBalance.compareTo(s.getEndBalance()));
-
 		}
+		else
+		  r = false;
 
 		logger.trace("[validate|out] => {}", r);
 		return r;
