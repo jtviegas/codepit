@@ -5,5 +5,5 @@ import org.challenges.rab.statproc.statement.Statement;
 
 @FunctionalInterface
 public interface StatementTransformer<T> {
-    Statement toStatement(T t) throws StatementFormatException;
+    Statement toStatement(T source) throws StatementFormatException;
 }

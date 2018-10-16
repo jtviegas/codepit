@@ -75,27 +75,22 @@
 				<artifactId>maven-pmd-plugin</artifactId>
 				<version>3.10.0</version>
 				<executions>
-                    <execution>
-                        <!-- results in target/pmd.xml and target/site/pmd.html -->
-                        <id>check pmd and fail</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-<!-- 				<configuration>
-					<linkXref>true</linkXref>
-					<sourceEncoding>utf-8</sourceEncoding>
-					<minimumTokens>100</minimumTokens>
-					<targetJdk>1.8</targetJdk>
-					<excludes>
-						<exclude>**/*Bean.java</exclude>
-					</excludes>
-					<excludeRoots>
-						<excludeRoot>target/generated-sources/stubs</excludeRoot>
-					</excludeRoots>
-				</configuration> -->
+					<execution>
+						<!-- results in target/pmd.xml and target/site/pmd.html -->
+						<id>check pmd and fail</id>
+						<phase>package</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<failOnViolation>true</failOnViolation>
+					<printFailingErrors>true</printFailingErrors>
+					<rulesets>
+						<ruleset>ruleset.xml</ruleset>
+					</rulesets>
+				</configuration>
 			</plugin>
 			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>findbugs-maven-plugin</artifactId> 
 				<version>3.0.4</version> <configuration> <effort>Max</effort> </configuration> 
@@ -146,18 +141,10 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
 				<version>3.10.0</version>
-<!-- 				<configuration>
-					<linkXref>true</linkXref>
-					<sourceEncoding>utf-8</sourceEncoding>
-					<minimumTokens>100</minimumTokens>
-					<targetJdk>1.8</targetJdk>
-					<excludes>
-						<exclude>**/*Bean.java</exclude>
-					</excludes>
-					<excludeRoots>
-						<excludeRoot>target/generated-sources/stubs</excludeRoot>
-					</excludeRoots>
-				</configuration> -->
+				<!-- <configuration> <linkXref>true</linkXref> <sourceEncoding>utf-8</sourceEncoding> 
+					<minimumTokens>100</minimumTokens> <targetJdk>1.8</targetJdk> <excludes> 
+					<exclude>**/*Bean.java</exclude> </excludes> <excludeRoots> <excludeRoot>target/generated-sources/stubs</excludeRoot> 
+					</excludeRoots> </configuration> -->
 			</plugin>
 		</plugins>
 

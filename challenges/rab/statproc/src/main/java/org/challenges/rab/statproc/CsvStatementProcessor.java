@@ -17,21 +17,22 @@ import org.slf4j.LoggerFactory;
 
 class CsvStatementProcessor implements StatementProcessor {
 
-	private static final Logger logger = LoggerFactory.getLogger(CsvStatementProcessor.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(CsvStatementProcessor.class);
+
 
 	private final StatementValidator validator;
 	private final StatementTransformer<String> transformer;
 
-	public CsvStatementProcessor(StatementValidator validator, StatementTransformer<String> transformer) {
-		logger.trace("[()|in]");
+	public CsvStatementProcessor(final StatementValidator validator, final StatementTransformer<String> transformer) {
+		LOGGER.trace("[()|in]");
 		this.validator = validator;
 		this.transformer = transformer;
-		logger.trace("[()|out]");
+		LOGGER.trace("[()|out]");
 	}
 
 	@Override
-	public String[] process(Path file) throws StatementProcessorException {
-		logger.trace("[process|in] file: {}", (null != file ? file.toString() : "null"));
+	public String[] process(final Path file) throws StatementProcessorException {
+		LOGGER.trace("[process|in] file: {}", null != file ? file.toString() : "null");
 
 		if (null == file)
 			throw new IllegalArgumentException("must provide file parameter");
@@ -47,16 +48,16 @@ class CsvStatementProcessor implements StatementProcessor {
 			validator.reset();
 			reader.readLine();// don't mind the first line
 			while ((line = reader.readLine()) != null && 0 < line.length()) {
-				logger.trace("[process] processing line: {}", line);
+				LOGGER.trace("[process] processing line: {}", line);
 				Statement statement = transformer.toStatement(line);
 				if (!validator.validate(statement))
 					notvalid.add(String.format("%d,%s", statement.getReference(), statement.getDescription()));
 
 			}
 
-			String[] r = notvalid.toArray(new String[] {});
-			logger.info("[process]...finished processing statements. Error report: {}", Arrays.toString(r));
-			return r;
+			String[] result = notvalid.toArray(new String[] {});
+			LOGGER.info("[process]...finished processing statements. Error report: {}", Arrays.toString(result));
+			return result;
 
 		} catch (IOException e1) {
 			throw new StatementProcessorException(e1);
@@ -65,9 +66,9 @@ class CsvStatementProcessor implements StatementProcessor {
 				try {
 					reader.close();
 				} catch (IOException e2) {
-					logger.error("[process]...when trying to close the reader...", e2);
+					LOGGER.error("[process]...when trying to close the reader...", e2);
 				}
-			logger.trace("[process|out]");
+			LOGGER.trace("[process|out]");
 		}
 
 	}
