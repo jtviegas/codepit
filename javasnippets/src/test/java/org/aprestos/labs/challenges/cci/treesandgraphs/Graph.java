@@ -108,11 +108,11 @@ public class Graph {
 	}
 
 	void process_vertex_start(int v) {
-
+	  System.out.println(String.format("starting processing vertex %d", v));
 	}
 
 	void process_vertex_end(int v) {
-		System.out.println(String.format("procesed vertex %d", v));
+		System.out.println(String.format("processed vertex %d", v));
 	}
 
 	void process_edge(int x, int y) {
@@ -146,6 +146,11 @@ public class Graph {
 		return o;
 	}
 
+	/**
+	 * Breadth First search
+	 * @param start
+	 * @return
+	 */
 	int[] bfs(int start) {
 
 		Queue<Integer> queue = Queues.newArrayDeque();
@@ -163,21 +168,21 @@ public class Graph {
 			x = queue.poll();
 			process_vertex_start(x);
 
-			List<Integer> al = null;
-			if (null != (al = edges[x]))
-				for (Integer y : al) {
-					if (!processed[y])
-						process_edge(x, y);
+			List<Integer> adjacentEdges = null;
+			if (null != (adjacentEdges = edges[x]))
+				for (Integer edge : adjacentEdges) {
+					if (!processed[edge])
+						process_edge(x, edge); // do any processing that might be needed
 
-					if (!discovered[y]) {
-						discovered[y] = true;
-						parent[y] = x;
-						queue.add(y);
+					if (!discovered[edge]) {
+						discovered[edge] = true;
+						parent[edge] = x;
+						queue.add(edge);
 					}
 
 				}
 			processed[x] = true;
-			process_vertex_end(x);
+			process_vertex_end(x);// do any processing that might be needed
 		}
 
 		return parent;
@@ -202,13 +207,13 @@ public class Graph {
 
 		Integer o = st.pop();
 		System.out.println(String.format("dfs'ing %d", o));
-		List<Integer> al = null;
-		if (null != (al = edges[o])) {
-			for (Integer e : al) {
-				if (!discovered[e]) {
-					discovered[e] = true;
-					st.add(e);
-					parent[e] = o;
+		List<Integer> adjacentEdges = null;
+		if (null != (adjacentEdges = edges[o])) {
+			for (Integer edge : adjacentEdges) {
+				if (!discovered[edge]) {
+					discovered[edge] = true;
+					st.add(edge);
+					parent[edge] = o;
 					dfs(st);
 				}
 			}
