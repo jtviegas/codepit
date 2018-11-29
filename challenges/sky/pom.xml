@@ -1,0 +1,104 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.bskyb.internettv</groupId>
+	<artifactId>parental-control-service-coding-test</artifactId>
+	<version>1.0-SNAPSHOT</version>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<candidateName>joao.viegas</candidateName>
+		<version.junit>4.12</version.junit>
+		<version.mockito>2.22.0</version.mockito>
+		<version.java>1.8</version.java>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.25</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${version.junit}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${version.mockito}</version>
+			<scope>test</scope>
+		</dependency>
+
+
+	</dependencies>
+	<build>
+		<plugins>
+		<!-- Set a compiler level -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${version.java}</source>
+					<target>${version.java}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<!--Do not remove -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.4.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<createDependencyReducedPom>false</createDependencyReducedPom>
+				</configuration>
+			</plugin>
+			<plugin>
+				<!--Do not remove -->
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.5.3</version>
+				<configuration>
+					<finalName>${candidateName}</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
+					<descriptor>src/assembly/zip_src.xml</descriptor>
+				</configuration>
+				<executions>
+					<execution>
+						<id>create-archive</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
