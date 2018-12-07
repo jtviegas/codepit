@@ -1,6 +1,10 @@
 package org.aprestos.labs.challenges.hackerrank.dictionaries_and_hashmaps;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.junit.Assert;
@@ -21,7 +25,7 @@ public class SherlockAndAnagrams {
 		Assert.assertEquals(4, solution("abba"));
 	}
   
-  public static int solution(String s) {
+  public static int solution2(String s) {
     
     int result = 0;
     char[] text = s.toCharArray();
@@ -42,8 +46,66 @@ public class SherlockAndAnagrams {
       }
     }
     
+    return result;
+  }
+  
+  public static int solution(String s) {
+    
+    int result = 0;
+    
+    bruteforce(s);
     
     return result;
+  }
+  
+  private static boolean inArray(char c, char[] text) {
+    boolean r = false;
+    for(char o: text) {
+      if( o == c ) {
+        r = true;
+        break;
+      }
+    }
+    return r;
+  }
+  
+  private static int bruteforce(String s) {
+    int r = 0;
+    char[] text = s.toCharArray();
+    // get repeating chars
+    final char[] repeatingChars = findRepeatingChars(text) ;
+    // find sequences of repeating chars
+    List<String> sequences = new ArrayList<String>();
+    int pointer = -1;
+    for( int i=0; i < s.length();i++ ) {
+      if( inArray(text[i], repeatingChars)  ) {
+        if (-1 == pointer) 
+          pointer = i;
+      }  
+      else {
+        if (-1 < pointer) {
+          sequences.add(s.substring(pointer, i));
+          pointer = -1;
+        }
+      }
+        
+    }
+    
+    if (-1 < pointer) {
+      sequences.add(s.substring(pointer));
+    }
+    // for every sequence of repeating find all combinations of chars
+    Map<Integer, Set<String>> combinations = new HashMap<>();
+    for(int i=1; i<text.length; i++) {
+      for(int j=0;j+i<=text.length;j++) {
+        if( !combinations.containsKey(i) ) combinations.put(i, new HashSet<String>());
+        combinations.get(i).add(s.substring(j, j+i));
+      }
+    }
+    // go through the sets and find pairs of anagrams
+    
+   
+    return r;
   }
   
   static boolean madeOfChars(char[] universe, char[] test) {
