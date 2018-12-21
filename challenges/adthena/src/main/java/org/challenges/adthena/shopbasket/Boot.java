@@ -7,7 +7,7 @@ import org.challenges.adthena.shopbasket.exceptions.InputException;
 import org.challenges.adthena.shopbasket.model.Basket;
 import org.challenges.adthena.shopbasket.services.BasketPrinter;
 import org.challenges.adthena.shopbasket.services.PriceEngine;
-import org.challenges.adthena.shopbasket.services.PromotionEngine;
+import org.challenges.adthena.shopbasket.services.promotions.PromotionEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

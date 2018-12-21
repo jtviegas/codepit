@@ -3,7 +3,7 @@ package org.challenges.adthena.shopbasket;
 import org.challenges.adthena.shopbasket.model.Basket;
 import org.challenges.adthena.shopbasket.services.BasketPrinter;
 import org.challenges.adthena.shopbasket.services.PriceEngine;
-import org.challenges.adthena.shopbasket.services.PromotionEngine;
+import org.challenges.adthena.shopbasket.services.promotions.PromotionEngine;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

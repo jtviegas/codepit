@@ -1,4 +1,4 @@
-package org.challenges.adthena.shopbasket.services;
+package org.challenges.adthena.shopbasket.services.promotions;
 
 import java.util.function.Function;
 
