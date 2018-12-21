@@ -1,4 +1,8 @@
-package org.challenges.adthena.shopbasket.services;
+package org.challenges.adthena.shopbasket.services.promotions;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
 
 import org.challenges.adthena.shopbasket.model.BasketItem;
 import org.springframework.stereotype.Service;
@@ -15,14 +19,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class PromotionEngineImpl implements PromotionEngine {
 
+	List<Consumer<BasketItem>> promotions;
+
 	public PromotionEngineImpl() {
-		// TODO Auto-generated constructor stub
+		promotions = Arrays.asList(new ApplesPromotion(), new SoupPromotion());
 	}
 
 	@Override
-	public BasketItem apply(BasketItem t) {
-		// TODO Auto-generated method stub
-		return null;
+	public BasketItem apply(BasketItem item) {
+		promotions.forEach(a -> a.accept(item));
+		return item;
 	}
 
 }

@@ -4,12 +4,18 @@ import java.math.BigDecimal;
 
 class BasketItemImpl implements BasketItem {
 
-	public BasketItemImpl() {
-		// TODO Auto-generated constructor stub
-	}
+	private BigDecimal value;
 
 	@Override
 	public void setValue(BigDecimal value) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void setName(String name) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
@@ -20,6 +26,12 @@ class BasketItemImpl implements BasketItem {
 
 	@Override
 	public BigDecimal getValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getName() {
 		// TODO Auto-generated method stub
 		return null;
 	}

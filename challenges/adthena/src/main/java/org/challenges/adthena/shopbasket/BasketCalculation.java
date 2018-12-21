@@ -5,7 +5,7 @@ import java.util.Arrays;
 import org.challenges.adthena.shopbasket.model.Basket;
 import org.challenges.adthena.shopbasket.model.BasketFactory;
 import org.challenges.adthena.shopbasket.services.PriceEngine;
-import org.challenges.adthena.shopbasket.services.PromotionEngine;
+import org.challenges.adthena.shopbasket.services.promotions.PromotionEngine;
 
 public class BasketCalculation {
 
