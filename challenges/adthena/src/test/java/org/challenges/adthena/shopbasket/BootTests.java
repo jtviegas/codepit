@@ -9,17 +9,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @ActiveProfiles("test")
+@Import(Config.class)
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
 public class BootTests {
-
-	/*
-	 * private TestContextManager testContextManager = new
-	 * TestContextManager(getClass());
-	 */
 
 	@Autowired
 	private PriceEngine priceEngine;
@@ -28,10 +26,6 @@ public class BootTests {
 	@Autowired
 	private BasketPrinter printer;
 
-	/*
-	 * @Before public void setUp() throws Exception {
-	 * this.testContextManager.prepareTestInstance(this); }
-	 */
 
 	@Test
 	public void initial_example() {

@@ -1,7 +1,7 @@
 package org.challenges.adthena.shopbasket.model;
 
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
 public interface Basket {
 
@@ -11,6 +11,6 @@ public interface Basket {
 
 	BigDecimal getTotal();
 
-	Set<String> getPromotionDetails();
+	List<String> getPromotionDetails();
 
 }

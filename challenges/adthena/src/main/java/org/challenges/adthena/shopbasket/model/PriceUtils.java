@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class PriceUtils {
 
-	private static final String POUND_PATTERN = "%.2f£", PENCE_PATTERN = "%dp";
+	private static final String POUND_PATTERN = "£%.2f", PENCE_PATTERN = "%dp";
 
 	public static String toString(BigDecimal price) {
 		String result = null;

@@ -21,15 +21,16 @@ public class PriceEngineImpl implements PriceEngine {
 	}
 
 	@Override
-	public BasketItem apply(String arg0) {
+	public BasketItem apply(String name) {
 		BasketItem result = null;
 		BigDecimal price = null;
 
-		if (null != (price = items.get(arg0))) {
+		if (null != (price = items.get(name))) {
 			result = BasketFactory.createItem();
 			result.setValue(price);
+			result.setName(name);
 		} else
-			throw new InputException(String.format("item not found in store: %d", arg0));
+			throw new InputException(String.format("item not found in store: %d", name));
 
 		return result;
 	}

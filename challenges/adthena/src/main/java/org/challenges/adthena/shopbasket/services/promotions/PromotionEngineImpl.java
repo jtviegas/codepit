@@ -11,15 +11,15 @@ import org.springframework.stereotype.Service;
  * 
  * this promotion engine would normally in production code implement some rule
  * engine to properly define the promotion rules that would not have to be
- * implemented in code. Open-Closed principle.
+ * implemented/hard-coded in here. Open-Closed principle.
  * 
- * This is a dumb one just for the sake of brevity.
+ * This is a dumb approach just for the sake of brevity.
  *
  */
 @Service
 public class PromotionEngineImpl implements PromotionEngine {
 
-	List<Consumer<BasketItem>> promotions;
+	private final List<Consumer<BasketItem>> promotions;
 
 	public PromotionEngineImpl() {
 		promotions = Arrays.asList(new ApplesPromotion(), new SoupPromotion());
