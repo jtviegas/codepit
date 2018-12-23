@@ -1,11 +1,12 @@
 package org.challenges.adthena.shopbasket.services;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
+import org.challenges.adthena.shopbasket.exceptions.ConfigException;
 import org.challenges.adthena.shopbasket.exceptions.InputException;
-import org.challenges.adthena.shopbasket.model.BasketFactory;
+import org.challenges.adthena.shopbasket.model.BasketHelper;
 import org.challenges.adthena.shopbasket.model.BasketItem;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PriceEngineImpl implements PriceEngine {
 
-	private Map<String, BigDecimal> items = new HashMap<String, BigDecimal>();
+	final private Map<String, BigDecimal> items = new ConcurrentHashMap<String, BigDecimal>();
 
 	public PriceEngineImpl(@Value("${shopbasket.items.name}") String[] itemNames,
 			@Value("${shopbasket.items.price}") String[] itemPrices) {
@@ -26,11 +27,11 @@ public class PriceEngineImpl implements PriceEngine {
 		BigDecimal price = null;
 
 		if (null != (price = items.get(name))) {
-			result = BasketFactory.createItem();
+			result = BasketHelper.createItem();
 			result.setValue(price);
 			result.setName(name);
 		} else
-			throw new InputException(String.format("item not found in store: %d", name));
+			throw new InputException(String.format("item not found in store: %s", name));
 
 		return result;
 	}
@@ -40,7 +41,7 @@ public class PriceEngineImpl implements PriceEngine {
 			for (int i = 0; i < itemNames.length; i++)
 				items.put(itemNames[i].trim(), BigDecimal.valueOf(Double.parseDouble(itemPrices[i].trim())));
 		} catch (Exception e) {
-			throw new RuntimeException("couldn't load items");
+			throw new ConfigException("couldn't load items", e);
 		}
 
 	}

@@ -9,12 +9,12 @@ public class PriceUtils {
 	public static String toString(BigDecimal price) {
 		String result = null;
 
-		price = price.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+		BigDecimal roundedPrice = price.setScale(2, BigDecimal.ROUND_HALF_EVEN);
 
-		if (-1 == price.abs().compareTo(BigDecimal.ONE))
-			result = String.format(PENCE_PATTERN, price.multiply(new BigDecimal(100.0)).intValue());
+		if (-1 == roundedPrice.abs().compareTo(BigDecimal.ONE))
+			result = String.format(PENCE_PATTERN, roundedPrice.multiply(new BigDecimal("100.0")).intValue());
 		else
-			result = String.format(POUND_PATTERN, price.doubleValue());
+			result = String.format(POUND_PATTERN, roundedPrice.doubleValue());
 
 		return result;
 	}

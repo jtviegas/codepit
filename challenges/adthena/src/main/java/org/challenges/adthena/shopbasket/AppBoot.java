@@ -19,11 +19,11 @@ import org.springframework.context.annotation.Profile;
 
 @Profile("!test")
 @SpringBootApplication
-public class Boot {
+public class AppBoot {
 
 	private static final String MSG_NO_ITEMS = "no items input provided";
 	private static final String MSG_USAGE = "usage: java -jar shopbasket.jar itemOne itemTwo ...";
-	private static final Logger logger = LoggerFactory.getLogger(Boot.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AppBoot.class);
 
 	@Autowired
 	private PriceEngine priceEngine;
@@ -33,12 +33,12 @@ public class Boot {
 	private BasketPrinter printer;
 
 	public static void main(String[] args) {
-		SpringApplication.run(Boot.class, args);
+		SpringApplication.run(AppBoot.class, args);
 	}
 
 	@Bean
 	public CommandLineRunner run() {
-		logger.trace("[run|in]");
+		LOGGER.trace("[run|in]");
 		return (args) -> {
 			try {
 
@@ -47,26 +47,26 @@ public class Boot {
 
 				doit(args);
 			} catch (InputException ie) {
-				logger.error("[run]", ie.getMessage());
-				logger.info(MSG_USAGE);
+				LOGGER.error("[run] {}", ie.getMessage());
+				LOGGER.info(MSG_USAGE);
 			} catch (AppException ae) {
-				logger.error("[run]", ae.getMessage());
+				LOGGER.error("[run] {}", ae.getMessage());
 			} catch (Exception e) {
-				logger.error("[run]", e);
+				LOGGER.error("[run]", e);
 			} finally {
-				logger.trace("[run|out]");
+				LOGGER.trace("[run|out]");
 			}
 
 		};
 
 	}
 
-	private void doit(String[] args) throws AppException {
-		logger.trace("[doit|in] file: {}", Arrays.toString(args));
+	private void doit(String... args) throws AppException {
+		LOGGER.trace("[doit|in] file: {}", Arrays.toString(args));
 		BasketCalculation calculation = new BasketCalculation(priceEngine, promotionEngine);
 		Basket basket = calculation.calculate(args);
 		printer.print(basket, System.out);
-		logger.trace("[doit|out]");
+		LOGGER.trace("[doit|out]");
 	}
 
 }
