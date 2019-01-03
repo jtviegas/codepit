@@ -5,6 +5,7 @@ public class InputException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
 	public InputException() {
+		super();
 	}
 
 	public InputException(String arg0) {

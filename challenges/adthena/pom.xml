@@ -40,6 +40,28 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.10.0</version>
+				<executions>
+					<execution>
+						<!-- results in target/pmd.xml and target/site/pmd.html -->
+						<id>check pmd and fail</id>
+						<phase>package</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<failOnViolation>true</failOnViolation>
+					<printFailingErrors>true</printFailingErrors>
+					<rulesets>
+						<ruleset>ruleset.xml</ruleset>
+					</rulesets>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

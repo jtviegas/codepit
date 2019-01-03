@@ -2,6 +2,12 @@ package org.challenges.adthena.shopbasket.model;
 
 import java.math.BigDecimal;
 
+/**
+ * element of a basket
+ * 
+ * @author jtviegas
+ *
+ */
 public interface BasketItem {
 
 	void setValue(BigDecimal value);

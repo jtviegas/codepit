@@ -1,6 +1,6 @@
 package org.challenges.adthena.shopbasket.model;
 
-public class BasketFactory {
+public class BasketHelper {
 
 	public static Basket create() {
 		return new BasketImpl();
