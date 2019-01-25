@@ -15,3 +15,4 @@ target
 .pmd
 .tern-project
 *.log
+.vscode
