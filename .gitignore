@@ -16,3 +16,4 @@ target
 .tern-project
 *.log
 .vscode
+.DS_Store

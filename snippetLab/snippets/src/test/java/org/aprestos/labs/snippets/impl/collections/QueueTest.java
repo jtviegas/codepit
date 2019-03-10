@@ -1,6 +1,8 @@
 package org.aprestos.labs.snippets.impl.collections;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 import org.junit.Assert;
@@ -55,6 +57,7 @@ public class QueueTest {
 	    Assert.assertTrue(o.poll().equals("b"));
 	    Assert.assertTrue(o.poll().equals("c"));
 	}
+
 
 	
 }
