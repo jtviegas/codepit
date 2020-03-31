@@ -1,20 +1,16 @@
 package org.aprestos.labs.snippets.impl.collections;
 
-import com.google.common.collect.Sets;
-import org.apache.commons.collections.ArrayStack;
+import org.carrot2.shaded.guava.common.collect.Sets;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 /**
  * Unit test for simple App.
  */
 public class SplitTest {
 
-
-	
 	@Test
 	public void simpleTest1() throws Exception {
 

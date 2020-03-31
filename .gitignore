@@ -17,3 +17,5 @@ target
 *.log
 .vscode
 .DS_Store
+*.iml
+*.log.*

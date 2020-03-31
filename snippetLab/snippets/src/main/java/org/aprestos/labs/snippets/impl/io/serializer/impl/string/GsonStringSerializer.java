@@ -1,10 +1,9 @@
 package org.aprestos.labs.snippets.impl.io.serializer.impl.string;
 
+import com.google.gson.Gson;
 import org.aprestos.labs.snippets.impl.io.serializer.exceptions.SerializerException;
 import org.aprestos.labs.snippets.impl.io.serializer.interfaces.StringSerializer;
 import org.aprestos.labs.snippets.impl.io.serializer.objects.StringListOperation;
-
-import com.google.gson.Gson;
 
 public class GsonStringSerializer implements StringSerializer<StringListOperation> {
 
