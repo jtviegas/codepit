@@ -1,8 +1,0 @@
-{ "index" : { "_index" : "consumer", "_type" : "_doc" } }
-{ "name": "John Doe" }
-{ "index" : { "_index" : "consumer", "_type" : "_doc" } }
-{ "name": "John Doez" }
-{ "index" : { "_index" : "consumer", "_type" : "_doc" } }
-{ "name": "John Does" }
-{ "index" : { "_index" : "consumer", "_type" : "_doc" } }
-{ "name": "John Doea" }
