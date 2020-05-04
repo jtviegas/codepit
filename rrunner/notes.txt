@@ -1,0 +1,17 @@
+
+apt-get install openjdk-7-jdk
+
+update-alternatives --remove-all "java"
+update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/java-7-openjdk-amd64/bin/java" 1
+update-alternatives --remove-all "jar"
+update-alternatives --install "/usr/bin/jar" "jar"  "/usr/lib/jvm/java-7-openjdk-amd64/bin/jar" 1
+update-alternatives --remove-all "javac"
+update-alternatives --install "/usr/bin/javac" "javac"  "/usr/lib/jvm/java-7-openjdk-amd64/bin/javac" 1
+update-alternatives --remove-all "javah"
+update-alternatives --install "/usr/bin/javah" "javah"  "/usr/lib/jvm/java-7-openjdk-amd64/bin/javah" 1
+
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+export JAVA_LD_LIBRARY_PATH=$JAVA_HOME/jre/lib/amd64/server
+export LD_LIBRARY_PATH=/usr/lib/R/lib:/usr/lib/x86_64-linux-gnu:$JAVA_HOME/jre/lib/amd64/server
+export JAVA=$JAVA_HOME/bin/java
+apt-get install r-cran-rjava

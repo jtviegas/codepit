@@ -1,0 +1,72 @@
+
+{
+	"collection_name": "c",
+	"documents": [{
+		"identifier": {
+			"name": "Luis",
+			"surname": "Johnson"
+		},
+		"eyes": "Brown",
+		"city": "Madrid",
+		"likes": [{
+			"sport": "Football",
+			"score": 10
+		}, {
+			"sport": "Basketball",
+			"score": 6
+		}, {
+			"sport": "Tennis",
+			"score": 5
+		}]
+	}, {
+		"identifier": {
+			"name": "John",
+			"surname": "Rossi"
+		},
+		"eyes": "Blue",
+		"city": "Paris",
+		"likes": [{
+			"sport": "Football",
+			"score": 8
+		}, {
+			"sport": "Basketball",
+			"score": 4
+		}]
+	}, {
+		"identifier": {
+			"name": "Francesca",
+			"surname": "Depardieu"
+		},
+		"eyes": "Blue",
+		"city": "London",
+		"likes": [{
+			"sport": "Tennis",
+			"score": 8
+		}, {
+			"sport": "Basketball",
+			"score": 7
+		}]
+	}, {
+		"identifier": {
+			"name": "Laurant",
+			"surname": "Muller"
+		},
+		"eyes": "Green",
+		"city": "Paris",
+		"likes": [{
+			"sport": "Tennis",
+			"score": 1
+		}]
+	}, {
+		"identifier": {
+			"name": "Gertrud",
+			"surname": "Gonzalez"
+		},
+		"eyes": "Green",
+		"city": "Dublin",
+		"likes": [{
+			"sport": "Rugby",
+			"score": 10
+		}]
+	}]
+}

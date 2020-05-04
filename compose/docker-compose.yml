@@ -1,0 +1,85 @@
+version: '2'
+services:
+  zookeeper:
+    image: kakicode/zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+      - "2888:2888"
+      - "3888:3888"
+  kafka:
+    image: kakicode/kafka
+    container_name: kafka
+    depends_on: 
+      - zookeeper
+    links:
+      - "zookeeper:zookeeper"
+    ports:
+      - "9092:9092"
+#  influxdb:
+#    image: kakicode/influxdb
+#    container_name: influxdb
+#    ports:
+#      - "8086:8086"
+#    volumes:
+#      - /tmp/influxdb:/var/lib/influxdb
+#  flume:
+#    image: kakicode/flume
+#    container_name: flume
+#    depends_on: 
+#      - kafka
+#    links:
+#      - "zookeeper:zookeeper"
+#      - "influxdb:influxdb"
+#    environment:
+#      - DEBUG_PORT=6006
+#      - AGENT_NAME=kaki-agent
+#      - KEYWORDS=tesla,amazon
+#      - TICKERS=TSLA,AMZN
+#      - QUERY_DELAY=60000
+#      - DATA_INTERVAL=1min
+#    ports:
+#      - "6006:6006"
+#  streams-tweets:
+#    image: kakicode/streams
+#    container_name: streams-tweets
+#    depends_on: 
+#      - kafka
+#    links:
+#      - "kafka:kafka"
+#      - "zookeeper:zookeeper"
+#    environment:
+#      - DEBUG_PORT=6008
+#      - KAFKA_CONFIG=kafka:9092
+#      - SOURCE_TOPIC=tweets
+#      - SINK_TOPIC=tweets-s
+#      - PROCESSOR_CLASS=org.aprestos.labs.data.kafka.streams.processor.topologies.TwitterProcessor
+#      - INTERVAL_IN_MILLIS=10000
+#    ports:
+#      - "6008:6008"
+#  grafana:
+#    image: kakicode/grafana
+#    container_name: grafana
+#    depends_on: 
+#      - influxdb
+#    links:
+#      - "influxdb:influxdb"
+#    environment:
+#      - GF_SECURITY_ADMIN_USER=root
+#      - GF_SECURITY_ADMIN_PASSWORD=password
+#    ports:
+#      - "3000:3000"
+#  rservices:
+#    image: kakicode/rservices
+#    container_name: rservices
+#    depends_on: 
+#      - kafka
+#    links:
+#      - "kafka:kafka"
+#      - "zookeeper:zookeeper"
+#    environment:
+#      - TOPIC_IN=tickers
+#      - TOPIC_OUT=tickers-r
+#      - ZOOKEEPER=zookeeper
+#      - KAFKA=kafka
+#      - STRATEGY=analysisOne

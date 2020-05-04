@@ -1,0 +1,10 @@
+NAME=kafka
+IMAGE=kaki-$NAME
+IMAGE_VERSION=latest
+CONTAINER=$NAME
+HOST=$CONTAINER
+
+ZK_HOST=zookeeper
+ZK_CONTAINER=zookeeper
+
+DOCKER_HUB_IMG=kakicode/$NAME

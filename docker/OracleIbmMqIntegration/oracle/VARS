@@ -1,0 +1,6 @@
+NAME=oracledb
+VERSION=12.1.0.2
+BUNDLE=ee
+BUNDLE_BUILD_SWITCH=-e
+DB_PSWD=passw0rd
+DB_SID=oracledb

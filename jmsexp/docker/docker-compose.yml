@@ -1,0 +1,27 @@
+version: '2'
+services:
+  broker:
+    image: caquicode/activemq:0.0.1
+    container_name: broker
+    ports:
+      - "8161:8161"
+      - "61616:61616"
+  queueconsumer:
+    image: caquicode/jmsqueueconsumer:0.0.1
+    container_name: queueconsumer
+    depends_on: 
+      - broker
+    links:
+      - "broker:broker"
+    environment:
+      - queue=testQueue
+  queueproducer:
+    image: caquicode/jmsqueueproducer:0.0.1
+    container_name: queueproducer
+    depends_on: 
+      - broker
+    links:
+      - "broker:broker"
+    environment:
+      - queue=testQueue
+      

@@ -1,0 +1,103 @@
+---
+title: "Apple shares dumb forecasting investment strategy (or how to invest, and then again, maybe not... )"
+output: 
+  flexdashboard::flex_dashboard:
+    storyboard: true
+    social: menu
+    source: embed
+---
+
+```{r setup, include=FALSE}
+source("../include.R")
+if (!require("flexdashboard")) {
+  install.packages("flexdashboard", type = "source")
+  library(flexdashboard)
+}
+d <- getSymbolPrices("AAPL", c("1980-01-01","2018-12-01"))
+d$forecast <- getWindowForecasts(d$close, 28, 7)
+d$position <- getPositions(d, "close", "forecast", 29, 7)
+d$balance <- getBalance(d, "close", "position")
+```
+
+### shares historical daily data overview
+
+```{r}
+
+    chartSeries(d, theme = "white", name = "Apple")
+
+```
+
+***
+
+here we can have an overview of historical data:
+
+- daily close prices
+
+- daily trading volumes
+
+
+
+### shares historical daily data drill down
+
+```{r}
+
+    ts_plot(d[,c("close", "volume")], Xgrid = TRUE, Ygrid = TRUE, slider = TRUE)
+
+```
+
+***
+
+here we can inspect and drill down into historical data:
+
+- daily close prices
+
+- daily trading volumes
+
+We can zoom into the historical data.
+
+
+### shares daily close price and forecast
+
+```{r}
+
+     ts_plot(d[,c("close", "forecast")], type = "single", Xgrid = TRUE, Ygrid = TRUE, Ytitle = "share price",slider = TRUE, line.mode = "lines+markers")
+
+```
+
+***
+
+here we can see a close price forecast:
+
+- arima model automatically determined;
+
+- training window = 28 days;
+
+- forecasting window = 7 days;
+
+There is an initial training period and a forecast of a set of points, in this case 7 days, the forecasting window. 
+After that the training period aligns in order to forecast into the following forecasting windows after those initial 7 days.
+
+### dumb investment position simulation and related balance, based on forecast
+
+```{r}
+
+     ts_plot(d[,c("position", "balance")], Xgrid = TRUE, Ygrid = TRUE, line.mode = "lines+markers", slider = TRUE)
+
+```
+
+***
+
+here we can analyse the outcome of a dumb investment strategy:
+
+- at every end of training window we have a forecast for the next 7 days;
+
+- if the close price in 7 days, provided by forecast, is above the current close price, we buy;
+
+- if it is lower than the current close price, we sell;
+
+- the simulation operation, buy or sell, is to be executed on a single share;
+
+
+
+
+

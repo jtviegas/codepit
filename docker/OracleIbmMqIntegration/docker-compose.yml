@@ -1,0 +1,38 @@
+version: '2'
+services:
+  ibmmq:
+    image: ibmcom/mq
+    container_name: ibmmq
+    ports:
+      - "1414:1414"
+      - "9443:9443"
+    environment:
+      - LICENSE=accept
+      - MQ_QMGR_NAME=ibmmq
+  oracledb:
+    image: oracle/database:12.1.0.2-ee
+    container_name: oracledb
+    depends_on: 
+      - ibmmq
+    links:
+      - "ibmmq:ibmmq"
+    ports:
+      - "1521:1521"
+      - "5500:5500"
+    environment:
+      - ORACLE_SID=oracledb
+      - ORACLE_PWD=passw0rd
+    volumes:
+      - /opt/oracle/scripts/startup
+    depends_on:
+      - ibmmq
+  ibmmqjmsclient:
+    image: ibmmqjmsclient
+    container_name: ibmmqjmsclient
+    links:
+      - "ibmmq:ibmmq"
+    environment:
+      - IBMMQ_HOST=ibmmq
+    depends_on:
+      - ibmmq
+
