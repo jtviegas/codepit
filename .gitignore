@@ -19,3 +19,7 @@ target
 .DS_Store
 *.iml
 *.log.*
+
+venv
+__pycache__
+
