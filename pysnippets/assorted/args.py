@@ -52,7 +52,7 @@ Usage: thingy [OPTIONS]
 assorted()
 comprehensions.doit()
 print(comprehensions.__name__)
-print('comprehensions qualname: {}'.format(comprehensions.__qualname__))
+# print('comprehensions qualname: {}'.format(comprehensions.__name__))
 print(sys.path)
 print(dir(comprehensions))
 print(dir(builtins))
