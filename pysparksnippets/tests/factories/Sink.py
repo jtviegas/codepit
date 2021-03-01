@@ -12,6 +12,7 @@ class Sink(ABC):
     def put(self, *args, **kwargs):
         pass
 
+    @staticmethod
     def factory(name):
         return Sink.implementations[name]()
 
