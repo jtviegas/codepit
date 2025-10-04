@@ -17,4 +17,3 @@ install_if_missing("roxygen2")
 }
 \keyword{install}
 \keyword{package}
-

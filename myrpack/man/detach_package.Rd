@@ -18,4 +18,3 @@ detach_package("roxygen2")
 \keyword{detach}
 \keyword{package}
 \keyword{unload}
-
